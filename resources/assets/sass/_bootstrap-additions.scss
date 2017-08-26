@@ -1,0 +1,178 @@
+//////////////////////////
+// Other customizations //
+//////////////////////////
+a,
+.btn {
+  @include _transition(all, 400ms, ease-out);
+
+  cursor: pointer;
+
+  &:hover {
+    @include _transition(all, 150ms, linear);
+  }
+}
+
+.btn-bar {
+  > .btn {
+    margin-bottom: 5px;
+  }
+
+  .form-control {
+    margin-bottom: 5px !important;
+  }
+}
+
+.nav-bar {
+  > li {
+    margin-bottom: 5px;
+  }
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+a.unstyled {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-spacer {
+  padding-left: 5px;
+  padding-right: 2px;
+
+  &:after {
+    content: '\b7\a0';
+  }
+}
+
+.btn {
+  &.btn-link {
+    &.btn-delete {
+      margin-top: -2px;
+      padding: 0 7px 1px;
+      color: saturate(theme-color("danger"), 30%);
+    }
+  }
+
+  &.btn-plain {
+    &:hover, &:focus {
+      color: theme-color("primary");
+      border: 1px solid lighten(theme-color("primary"), 30%);
+      background-color: transparent !important;
+    }
+  }
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.breadcrumb {
+  overflow: auto;
+}
+
+.img-fit {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-xlg {
+  $line-height-xlarge: 1.1111111 !default;
+  $font-size-xlarge: ceil(($font-size-base * 1.4)) !default;
+  $btn-border-radius-xlarge: 0;
+  $padding-xlarge-vertical: 13px !default;
+  $padding-xlarge-horizontal: 17px !default;
+
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-xlarge-vertical, $padding-xlarge-horizontal, $font-size-xlarge, $line-height-xlarge, $btn-border-radius-xlarge);
+}
+
+.btn-jump-to-top {
+  @include _transition(all, 0.5s, ease-in);
+
+  font-size: $font-size-base * 1.75;
+  padding: 5px 12px 5px 12px;
+  color: $white;
+  background-color: $gray-300;
+  border: none;
+
+  &:hover {
+    background-color: $gray-600;
+  }
+}
+
+a.navbar-brand {
+  //color: $gray-200 !important;
+}
+
+a {
+  &.media {
+    padding: 5px 10px;
+    display: block;
+
+    &:hover {
+      text-decoration: none;
+      background-color: lighten(theme-color("primary"), 40%);
+    }
+  }
+}
+
+.low-opacity {
+  opacity: 0.7;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+}
+
+@media (max-width: map-get($container-max-widths, sm)) {
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.badge {
+  &.badge-link {
+    color: theme-color("primary");
+    border: 1px solid theme-color("primary");
+
+    &:hover,
+    &:focus {
+      color: $white;
+      background-color: lighten(theme-color("primary"), 10%);
+      text-decoration: none;
+    }
+  }
+}
+
+li.active > a.dropdown-item {
+  color: $dropdown-link-active-color;
+  background-color: $dropdown-link-active-bg;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.2rem;
+
+  > a {
+    color: $link-color !important;
+  }
+}
+
+.progress-bar {
+  transition: width .6s ease;
+}
