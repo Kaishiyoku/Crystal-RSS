@@ -4,6 +4,7 @@ index:
     title: Feeds
     no_unread_items: No unread items.
   update_feeds: Update feeds
+  mark_all_as_read: Mark all as read
 update_feeds:
   success: Feeds updated.
 history:
@@ -11,3 +12,5 @@ history:
   no_items: No items.
   unread: Unread
   read: Read
+mark_all_as_read:
+  success: All items marked as read.

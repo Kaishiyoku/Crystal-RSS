@@ -46,6 +46,21 @@ class HomeController extends Controller
         return redirect()->to('/');
     }
 
+    public function markAllAsRead()
+    {
+        $unreadFeedItems = auth()->user()->feedItems()->unread();
+
+        foreach ($unreadFeedItems->get() as $unreadFeedItem) {
+            $unreadFeedItem->is_read = true;
+
+            $unreadFeedItem->save();
+        }
+
+        flash()->success(trans('home.mark_all_as_read.success'));
+
+        return redirect()->back();
+    }
+
     public function markFeedItemAsRead($id)
     {
         $feedItem = auth()->user()->feedItems()->findOrFail($id);

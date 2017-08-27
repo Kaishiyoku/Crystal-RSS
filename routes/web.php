@@ -10,6 +10,7 @@ Route::group(['middleware' => ['menus']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::resource('manage_feeds', 'FeedManagerController', ['except' => 'show']);
         Route::put('update_feeds', 'HomeController@updateFeeds')->name('home.update_feeds');
+        Route::put('mark_all_as_read', 'HomeController@markAllAsRead')->name('home.mark_all_as_read');
         Route::put('mark_feed_item_as_read/{id}', 'HomeController@markFeedItemAsRead')->name('home.mark_feed_item_as_read');
         Route::get('history', 'HomeController@history')->name('home.history');
     });
