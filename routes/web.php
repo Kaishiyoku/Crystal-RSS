@@ -8,7 +8,7 @@ Route::group(['middleware' => ['menus']], function () {
      * Logged on users *
      **************** */
     Route::group(['middleware' => ['auth']], function () {
-
+        Route::resource('manage_feeds', 'FeedManagerController', ['except' => 'show']);
     });
 
     Auth::routes();

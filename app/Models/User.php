@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * App\Models\User
@@ -30,6 +30,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User administrator()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsAdministrator($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
  */
 class User extends Authenticatable
 {
@@ -61,5 +62,10 @@ class User extends Authenticatable
     public function scopeAdministrator($query)
     {
         return $query->where('is_administrator', true);
+    }
+
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
     }
 }

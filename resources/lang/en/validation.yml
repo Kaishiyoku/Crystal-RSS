@@ -72,3 +72,7 @@ custom:
   attribute-name:
     rule-name: custom-message
 attributes:
+  feed_url: Feed Url
+  site_url: Site url
+  title: Title
+  site_or_feed_url: Site or feed url
