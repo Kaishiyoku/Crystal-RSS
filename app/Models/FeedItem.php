@@ -24,6 +24,10 @@ class FeedItem extends Model
 
     ];
 
+    protected $dates = [
+        'date'
+    ];
+
     public $timestamps = false;
 
     public function scopeUnread($query)

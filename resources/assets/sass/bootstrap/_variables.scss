@@ -84,8 +84,8 @@ $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
-// http://www.colourlovers.com/palette/2632806/Crystal_Lights
-$primary: #1DCBD6 !default;
+// http://www.colourlovers.com/palette/586608/Crystal_Seas
+$primary: #1DAABF !default;
 
 $colors: (
         blue: $blue,
@@ -107,7 +107,7 @@ $theme-colors: (
         primary: $primary,
         secondary: $gray-600,
         success: $green,
-        info: $cyan,
+        info: desaturate(lighten($cyan, 30%), 10%),
         warning: $yellow,
         danger: $red,
         light: $gray-100,
@@ -166,7 +166,7 @@ $body-color:    $gray-900 !default;
 //
 // Style anchor elements.
 
-$link-color:            theme-color("primary") !default;
+$link-color:            darken(theme-color("primary"), 5%) !default;
 $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;

@@ -16,6 +16,12 @@ $(document).ready(function () {
 
     Waves.init();
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('[data-type="submit"]').click(function () {
         $(this).closest('form').submit();
     });
@@ -57,4 +63,25 @@ $(document).ready(function () {
             $($this.attr('data-click')).submit();
         });
     });
+
+    $('[data-mark-as-read]').each(function () {
+        let $this = $(this);
+
+        $this.click(function (event) {
+           event.preventDefault();
+
+            $.ajax({
+                method: 'PUT',
+                url: $this.attr('data-mark-as-read'),
+            }).done(function () {
+                $($this.attr('data-target')).addClass('low-opacity');
+
+                $this.remove();
+            }).fail(function () {
+                console.error('Could not mark the feed item as read.');
+            });
+        });
+    });
+
+    $('[data-toggle="tooltip"]').tooltip();
 });

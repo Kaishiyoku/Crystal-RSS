@@ -37,4 +37,14 @@ class HomeController extends Controller
 
         return redirect()->to('/');
     }
+
+    public function markFeedItemAsRead($id)
+    {
+        $feedItem = auth()->user()->feedItems()->findOrFail($id);
+
+        $feedItem->is_read = true;
+        $feedItem->save();
+
+        return response()->json();
+    }
 }
