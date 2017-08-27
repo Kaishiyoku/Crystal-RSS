@@ -76,3 +76,4 @@ attributes:
   site_url: Site url
   title: Title
   site_or_feed_url: Site or feed url
+  last_checked_at: Last checked at

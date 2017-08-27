@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUserId($value)
  * @mixin \Eloquent
+ * @property string $site_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereSiteUrl($value)
  */
 class Feed extends Model
 {
@@ -42,6 +44,15 @@ class Feed extends Model
      */
     protected $hidden = [
 
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'last_checked_at'
     ];
 
     public function user()

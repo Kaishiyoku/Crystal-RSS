@@ -18,6 +18,7 @@
             <thead>
             <tr>
                 <th>{{ trans('validation.attributes.title') }}</th>
+                <th>{{ trans('validation.attributes.last_checked_at') }}</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -26,6 +27,7 @@
             @foreach ($feeds->get() as $feed)
                 <tr>
                     <td>{{ $feed->title }}</td>
+                    <td>{{ $feed->last_checked_at->format(DATETIME) }}</td>
                     <td>
                         @include('shared._delete_link', ['route' => ['manage_feeds.destroy', $feed->id]])
                     </td>
