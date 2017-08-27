@@ -14,7 +14,5 @@
 
     <p>
         {{ trans('auth.emails.register.click_here_to_activate_the_user') }}:
-
-        {{ Html::linkRoute('admin.users.index') }}
     </p>
 @endsection

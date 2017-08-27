@@ -3,5 +3,9 @@
 @section('title', trans('home.index.title'))
 
 @section('content')
-    <h1>{{ trans('home.index.title') }}</h1>
+    @if (auth()->check())
+        @include('home._index_user')
+    @else
+        @include('home._index_guest')
+    @endif
 @endsection

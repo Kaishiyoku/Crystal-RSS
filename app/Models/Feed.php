@@ -59,4 +59,9 @@ class Feed extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function feedItems()
+    {
+        return $this->hasMany(FeedItem::class);
+    }
 }

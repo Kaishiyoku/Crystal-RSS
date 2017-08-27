@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\UpdateFeeds;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\UpdateFeeds::class
     ];
 
     /**
@@ -24,8 +25,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        switch (env('UPDATE_INTERVAL')) {
+            case '5_MINUTES':
+                $schedule->command(UpdateFeeds::class)->everyFiveMinutes()->sendOutputTo('storage/logs/feed_updates.log');
+                break;
+            case '10_MINUTES':
+                $schedule->command(UpdateFeeds::class)->everyTenMinutes()->sendOutputTo('storage/logs/feed_updates.log');
+                break;
+            case '30_MINUTES':
+                $schedule->command(UpdateFeeds::class)->everyThirtyMinutes()->sendOutputTo('storage/logs/feed_updates.log');
+                break;
+            case 'HOURLY':
+                $schedule->command(UpdateFeeds::class)->hourlyAt(0)->sendOutputTo('storage/logs/feed_updates.log');
+                break;
+            default:
+                $schedule->command(UpdateFeeds::class)->everyThirtyMinutes()->sendOutputTo('storage/logs/feed_updates.log');
+        }
     }
 
     /**

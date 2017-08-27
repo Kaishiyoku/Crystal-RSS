@@ -23,7 +23,7 @@ class FeedManagerController extends Controller
      */
     public function index()
     {
-        $feeds = Feed::orderBy('title');
+        $feeds = auth()->user()->feeds()->orderBy('title');
 
         return view('feed_manager.index', compact('feeds'));
     }
@@ -86,7 +86,7 @@ class FeedManagerController extends Controller
      */
     public function edit($id)
     {
-        $feed = auth()->user()->feeds()->find($id);
+        $feed = auth()->user()->feeds()->findOrFail($id);
 
         return view('feed_manager.edit', compact('feed'));
     }
@@ -100,7 +100,7 @@ class FeedManagerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $feed = auth()->user()->feeds()->find($id);
+        $feed = auth()->user()->feeds()->findOrFail($id);
 
         $validator = $this->validator($request->all(), $feed->id);
 
@@ -140,7 +140,7 @@ class FeedManagerController extends Controller
      */
     public function destroy($id)
     {
-        $feed = auth()->user()->feeds()->find($id);
+        $feed = auth()->user()->feeds()->findOrFail($id);
 
         $feed->delete();
 

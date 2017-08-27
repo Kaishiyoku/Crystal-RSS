@@ -1,2 +1,8 @@
 index:
   title: Welcome
+  feed:
+    title: Feeds
+    no_unread_items: No unread items.
+  update_feeds: Update feeds
+update_feeds:
+  success: Feeds updated.

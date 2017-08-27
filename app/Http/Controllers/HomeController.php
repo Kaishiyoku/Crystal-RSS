@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Artisan;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
 use Vinelab\Rss\Rss;
@@ -15,23 +16,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*try {
+        $data = [];
 
-            $reader = new Reader;
-            $resource = $reader->discover('https://alistapart.com/');
+        if (auth()->check()) {
+            $unreadFeedItems = auth()->user()->feedItems()->unread();
 
-            $parser = $reader->getParser(
-                $resource->getUrl(),
-                $resource->getContent(),
-                $resource->getEncoding()
-            );
-
-            $feed = $parser->execute();
-            dd($feed);
+            $data = compact('unreadFeedItems');
         }
-        catch (PicoFeedException $e) {
-        }*/
 
-        return view('home.index');
+        return view('home.index', $data);
+    }
+
+    public function updateFeeds()
+    {
+        $exitCode = Artisan::call('feeds:update', [
+            'user' => auth()->user()->id
+        ]);
+
+        flash()->success(trans('home.update_feeds.success'));
+
+        return redirect()->to('/');
     }
 }
