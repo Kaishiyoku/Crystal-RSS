@@ -6,3 +6,8 @@ index:
   update_feeds: Update feeds
 update_feeds:
   success: Feeds updated.
+history:
+  title: Feed history
+  no_items: No items.
+  unread: Unread
+  read: Read

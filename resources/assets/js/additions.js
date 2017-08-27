@@ -8,6 +8,15 @@ $(document).ready(function () {
     Waves.attach('.btn-light', ['waves-dark']);
     Waves.attach('.btn-dark', ['waves-light']);
 
+    Waves.attach('.btn-outline-primary', ['waves-light']);
+    Waves.attach('.btn-outline-secondary', ['waves-light']);
+    Waves.attach('.btn-outline-success', ['waves-light']);
+    Waves.attach('.btn-outline-danger', ['waves-light']);
+    Waves.attach('.btn-outline-warning', ['waves-light']);
+    Waves.attach('.btn-outline-info', ['waves-light']);
+    Waves.attach('.btn-outline-light', ['waves-dark']);
+    Waves.attach('.btn-outline-dark', ['waves-light']);
+
     Waves.attach('.dropdown-item.active', ['waves-light']);
     Waves.attach('.dropdown-item', ['waves-dark']);
     Waves.attach('.nav-item.active > .nav-link', ['waves-light']);

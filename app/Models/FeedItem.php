@@ -30,6 +30,11 @@ class FeedItem extends Model
 
     public $timestamps = false;
 
+    public function scopeRead($query)
+    {
+        return $query->where('is_read', true);
+    }
+
     public function scopeUnread($query)
     {
         return $query->where('is_read', false);

@@ -46,6 +46,7 @@ class Menus
             Menu::register('user', [
                 Menu::dropdown([
                     Menu::link('manage_feeds.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.manage_feeds'), [], [], ['manage_feeds.create', 'manage_feeds.edit']),
+                    Menu::link('home.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
                     Menu::dropdownDivider(),
                     Menu::link('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . trans('common.nav.logout'), [], ['data-click' => '#logout-form'])
 

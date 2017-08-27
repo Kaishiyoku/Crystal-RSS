@@ -27,6 +27,14 @@ class HomeController extends Controller
         return view('home.index', $data);
     }
 
+    public function history()
+    {
+        $readFeedItems = auth()->user()->feedItems()->read();
+        $unreadFeedItems = auth()->user()->feedItems()->unread();
+
+        return view('home.history', compact('readFeedItems', 'unreadFeedItems'));
+    }
+
     public function updateFeeds()
     {
         $exitCode = Artisan::call('feeds:update', [

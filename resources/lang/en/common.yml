@@ -4,6 +4,7 @@ nav:
   register: Register
   logout: Logout
   manage_feeds: Manage feeds
+  history: History
 add: Add
 delete: Delete
 edit: Edit
