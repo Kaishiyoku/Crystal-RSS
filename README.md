@@ -1,6 +1,8 @@
 # Crystal-RSS
 Simple web-based RSS feed reader.
 
+![Logo](https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Logo-thumbnail.png)
+
 Table of contents
 =================
   * [License](#license)
