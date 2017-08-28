@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string $site_url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereSiteUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
  */
 class Feed extends Model
 {

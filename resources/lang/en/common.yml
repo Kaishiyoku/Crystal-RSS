@@ -11,6 +11,3 @@ delete: Delete
 edit: Edit
 save: Save
 are_you_sure: Are you sure?
-feed:
-  updating_feeds_for_user: Updating feeds for user ":name"
-  number_of_items: Number of items

@@ -3,7 +3,10 @@
 @section('title', trans('feed.index.title'))
 
 @section('content')
-    <h1>{{ trans('feed.index.title') }}</h1>
+    <h1>
+        {{ trans('feed.index.title') }}
+        <small class="text-muted">{{ $unreadFeedItems->count() }}</small>
+    </h1>
 
     <p>
         {{ Form::open(['route' => 'feed.update_feed', 'method' => 'put', 'role' => 'form', 'class' => 'd-inline']) }}

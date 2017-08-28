@@ -3,7 +3,10 @@
 @section('title', trans('feed_manager.index.title'))
 
 @section('content')
-    <h1>{{ trans('feed_manager.index.title') }}</h1>
+    <h1>
+        {{ trans('feed_manager.index.title') }}
+        <small class="text-muted">{{ $feeds->count() }}</small>
+    </h1>
 
     <p>
         {{ Html::linkRoute('feed.manage.create', trans('feed_manager.create.title'), [], ['class' => 'btn btn-primary']) }}

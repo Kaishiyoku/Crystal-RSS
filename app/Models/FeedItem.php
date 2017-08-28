@@ -4,6 +4,35 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\FeedItem
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $feed_id
+ * @property int $is_read
+ * @property string $url
+ * @property string $title
+ * @property string $author
+ * @property string $content
+ * @property string|null $image_url
+ * @property \Carbon\Carbon|null $date
+ * @property-read \App\Models\Feed $feed
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem read()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unread()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereAuthor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFeedId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereIsRead($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
+ * @mixin \Eloquent
+ */
 class FeedItem extends Model
 {
     /**

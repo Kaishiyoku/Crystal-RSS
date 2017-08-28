@@ -10,14 +10,14 @@ use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
 
-class UpdateFeeds extends Command
+class UpdateFeed extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'feeds:update {user? : The ID of the user}';
+    protected $signature = 'feed:update {user? : The ID of the user}';
 
     /**
      * The console command description.
@@ -59,7 +59,7 @@ class UpdateFeeds extends Command
         $ouputTableRows = [];
 
         foreach ($users as $user) {
-            $this->comment(trans('common.feed.updating_feeds_for_user', ['name' => $user->name]));
+            $this->comment(trans('feed.updating_feed_for_user', ['name' => $user->name]));
             $this->info(null);
 
             foreach ($user->feeds()->get() as $feed) {
@@ -101,7 +101,7 @@ class UpdateFeeds extends Command
                 }
             }
 
-            $this->table([trans('validation.attributes.title'), trans('validation.attributes.last_checked_at'), trans('common.feed.number_of_items')], $ouputTableRows);
+            $this->table([trans('validation.attributes.title'), trans('validation.attributes.last_checked_at'), trans('feed.number_of_items')], $ouputTableRows);
 
             $this->info(null);
             $this->line('-----');

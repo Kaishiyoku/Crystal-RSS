@@ -9,9 +9,8 @@ class FeedController extends Controller
     public function history()
     {
         $readFeedItems = auth()->user()->feedItems()->read();
-        $unreadFeedItems = auth()->user()->feedItems()->unread();
 
-        return view('feed.history', compact('readFeedItems', 'unreadFeedItems'));
+        return view('feed.history', compact('readFeedItems'));
     }
 
     public function updateFeed()

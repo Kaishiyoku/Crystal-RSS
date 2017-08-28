@@ -142,6 +142,10 @@ class FeedManagerController extends Controller
     {
         $feed = auth()->user()->feeds()->findOrFail($id);
 
+        foreach ($feed->feedItems()->get() as $feedItem) {
+            $feedItem->delete();
+        }
+
         $feed->delete();
 
         flash()->success(trans('feed_manager.destroy.success'));
