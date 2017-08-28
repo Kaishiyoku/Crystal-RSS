@@ -6,6 +6,7 @@ use App\Models\FeedItem;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
 
@@ -42,6 +43,10 @@ class UpdateFeeds extends Command
      */
     public function handle()
     {
+        $config = new Config();
+        $config->setClientTimeout(120);
+        $config->setGrabberTimeout(120);
+
         $users = collect();
 
         if (empty($this->argument('user'))) {
@@ -59,7 +64,7 @@ class UpdateFeeds extends Command
 
             foreach ($user->feeds()->get() as $feed) {
                 try {
-                    $reader = new Reader();
+                    $reader = new Reader($config);
                     $resource = $reader->download($feed->feed_url);
                     $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
                     $rssFeed = $parser->execute();

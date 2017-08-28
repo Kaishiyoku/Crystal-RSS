@@ -5,7 +5,7 @@
 @section('content')
     <h1>{{ trans('feed_manager.create.title') }}</h1>
 
-    {{ Form::open(['route' => 'manage_feeds.store', 'method' => 'post', 'role' => 'form']) }}
+    {{ Form::open(['route' => 'feed.manage.store', 'method' => 'post', 'role' => 'form']) }}
         <div class="form-group row">
             {{ Form::label('site_or_feed_url', trans('validation.attributes.site_or_feed_url'), ['class' => 'col-lg-2 col-form-label']) }}
 

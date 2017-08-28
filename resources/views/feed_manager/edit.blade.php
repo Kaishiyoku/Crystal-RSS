@@ -5,7 +5,7 @@
 @section('content')
     <h1>{{ trans('feed_manager.edit.title', ['title' => $feed->title]) }}</h1>
 
-    {{ Form::open(['route' => ['manage_feeds.update', $feed->id], 'method' => 'put', 'role' => 'form']) }}
+    {{ Form::open(['route' => ['feed.manage.update', $feed->id], 'method' => 'put', 'role' => 'form']) }}
         <div class="form-group row">
             {{ Form::label('title', trans('validation.attributes.title'), ['class' => 'col-lg-2 col-form-label']) }}
 

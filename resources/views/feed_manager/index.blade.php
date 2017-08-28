@@ -6,7 +6,7 @@
     <h1>{{ trans('feed_manager.index.title') }}</h1>
 
     <p>
-        {{ Html::linkRoute('manage_feeds.create', trans('feed_manager.create.title'), [], ['class' => 'btn btn-primary']) }}
+        {{ Html::linkRoute('feed.manage.create', trans('feed_manager.create.title'), [], ['class' => 'btn btn-primary']) }}
     </p>
 
     @if ($feeds->count() == 0)
@@ -29,9 +29,9 @@
                     <td>{{ $feed->title }}</td>
                     <td>{{ $feed->last_checked_at->format(DATETIME) }}</td>
                     <td>
-                        @include('shared._delete_link', ['route' => ['manage_feeds.destroy', $feed->id]])
+                        @include('shared._delete_link', ['route' => ['feed.manage.destroy', $feed->id]])
                     </td>
-                    <td>{{ Html::linkRoute('manage_feeds.edit', trans('common.edit'), [$feed->id]) }}</td>
+                    <td>{{ Html::linkRoute('feed.manage.edit', trans('common.edit'), [$feed->id]) }}</td>
                 </tr>
             @endforeach
             </tbody>

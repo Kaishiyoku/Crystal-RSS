@@ -5,6 +5,7 @@ nav:
   logout: Logout
   manage_feeds: Manage feeds
   history: History
+  feed: Feed
 add: Add
 delete: Delete
 edit: Edit

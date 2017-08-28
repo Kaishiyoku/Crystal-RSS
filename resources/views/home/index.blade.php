@@ -3,9 +3,9 @@
 @section('title', trans('home.index.title'))
 
 @section('content')
-    @if (auth()->check())
-        @include('home._index_user')
-    @else
-        @include('home._index_guest')
-    @endif
+    <div class="d-flex justify-content-center mb-5">
+        <img src="{{ asset('img/logo.svg') }}" class="logo"/>
+    </div>
+
+    @include('shared._login')
 @endsection

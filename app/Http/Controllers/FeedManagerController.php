@@ -14,7 +14,7 @@ class FeedManagerController extends Controller
     /**
      * @var string
      */
-    private $redirectRoute = 'manage_feeds.index';
+    private $redirectRoute = 'feed.manage.index';
 
     /**
      * Display a listing of the resource.

@@ -38,15 +38,19 @@ class Menus
     {
         Menu::setConfig(Config::forBootstrap4());
 
+        $indexPage = auth()->check()
+            ? Menu::link('home.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>')
+            : Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.landing_page') . '</span>');
+
         Menu::registerDefault([
-            Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.landing_page') . '</span>'),
+            $indexPage
         ], ['class' => 'navbar-nav mr-auto']);
 
         if ($this->auth->check()) {
             Menu::register('user', [
                 Menu::dropdown([
-                    Menu::link('manage_feeds.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.manage_feeds'), [], [], ['manage_feeds.create', 'manage_feeds.edit']),
-                    Menu::link('home.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
+                    Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.manage_feeds'), [], [], ['feed.manage.create', 'feed.manage.edit']),
+                    Menu::link('feed.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
                     Menu::dropdownDivider(),
                     Menu::link('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . trans('common.nav.logout'), [], ['data-click' => '#logout-form'])
 
