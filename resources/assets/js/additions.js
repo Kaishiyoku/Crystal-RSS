@@ -73,7 +73,7 @@ $(document).ready(function () {
         });
     });
 
-    $('[data-mark-as-read]').each(function () {
+    $('[data-toggle-status]').each(function () {
         let $this = $(this);
 
         $this.click(function (event) {
@@ -81,11 +81,15 @@ $(document).ready(function () {
 
             $.ajax({
                 method: 'PUT',
-                url: $this.attr('data-mark-as-read'),
-            }).done(function () {
-                $($this.attr('data-target')).addClass('low-opacity');
-
-                $this.remove();
+                url: $this.attr('data-toggle-status'),
+            }).done(function (response) {
+                if (response.isRead) {
+                    $this.html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+                    $($this.attr('data-target')).addClass('low-opacity');
+                } else {
+                    $this.html('<i class="fa fa-eye" aria-hidden="true"></i>');
+                    $($this.attr('data-target')).removeClass('low-opacity');
+                }
             }).fail(function () {
                 console.error('Could not mark the feed item as read.');
             });

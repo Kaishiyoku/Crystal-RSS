@@ -10,7 +10,7 @@
                     <div class="col-lg-1 col-2">
                         {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i>', [
                             'class' => 'btn btn-outline-primary btn-sm',
-                            'data-mark-as-read' => URL::route('home.mark_feed_item_as_read', [$feedItem->id]), 'data-target' => '#feed-item-' . $feedItem->id]) }}
+                            'data-toggle-status' => URL::route('home.toggle_status', [$feedItem->id]), 'data-target' => '#feed-item-' . $feedItem->id]) }}
                     </div>
                 @endif
                 <div class="col-lg-{{ $showActions ? '8' : '9' }} col-{{ $showActions ? '10' : '12' }}">

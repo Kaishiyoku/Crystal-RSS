@@ -61,13 +61,13 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function markFeedItemAsRead($id)
+    public function toggleFeedItemStatus($id)
     {
         $feedItem = auth()->user()->feedItems()->findOrFail($id);
 
-        $feedItem->is_read = true;
+        $feedItem->is_read = !$feedItem->is_read;
         $feedItem->save();
 
-        return response()->json();
+        return response()->json(['isRead' => $feedItem->is_read]);
     }
 }
