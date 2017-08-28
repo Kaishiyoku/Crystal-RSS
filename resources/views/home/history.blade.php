@@ -14,40 +14,14 @@
             {{ Form::close() }}
         </p>
 
-        <table class="table table-striped table-hover">
-            <tbody>
-            @foreach ($unreadFeedItems->get() as $feedItem)
-                <tr class="{{ !$feedItem->is_read ? 'font-weight-bold' : '' }}" id="feed-item-{{ $feedItem->id }}">
-                    <td>
-                        @if (!$feedItem->is_read)
-                            {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i>', [
-                                'class' => 'btn btn-outline-primary btn-sm',
-                                'data-mark-as-read' => URL::route('home.mark_feed_item_as_read', [$feedItem->id]), 'data-target' => '#feed-item-' . $feedItem->id]) }}
-                        @endif
-                    </td>
-                    <td>{{ Html::link($feedItem->url, $feedItem->title) }}</td>
-                    <td class="text-right">{{ $feedItem->date->format(DATETIME) }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        @include('shared._feed_item_list', ['feedItems' => $unreadFeedItems->get(), 'showActions' => true])
     @endif
 
-    <h2>{{ trans('home.history.read') }}</h2>
+    <h2 class="pt-4">{{ trans('home.history.read') }}</h2>
 
     @if ($readFeedItems->count() == 0)
         <p class="lead"><i>{{ trans('home.history.no_items') }}</i></p>
     @else
-        <table class="table table-striped table-hover">
-            <tbody>
-            @foreach ($readFeedItems->get() as $feedItem)
-                <tr class="{{ !$feedItem->is_read ? 'font-weight-bold' : '' }}" id="feed-item-{{ $feedItem->id }}">
-                    <td></td>
-                    <td>{{ Html::link($feedItem->url, $feedItem->title) }}</td>
-                    <td class="text-right">{{ $feedItem->date->format(DATETIME) }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        @include('shared._feed_item_list', ['feedItems' => $readFeedItems->get()])
     @endif
 @endsection
