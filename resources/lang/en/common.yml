@@ -3,7 +3,7 @@ nav:
   login: Login
   register: Register
   logout: Logout
-  manage_feeds: Manage feeds
+  manage_feeds: Manage feed
   history: History
   feed: Feed
 add: Add

@@ -2,6 +2,10 @@
 
 @section('title', trans('feed_manager.edit.title'))
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('feed.manage.edit', $feed) !!}
+@endsection
+
 @section('content')
     <h1>{{ trans('feed_manager.edit.title', ['title' => $feed->title]) }}</h1>
 
