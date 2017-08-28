@@ -15,7 +15,7 @@ class FeedController extends Controller
 
     public function updateFeed()
     {
-        $exitCode = Artisan::call('feeds:update', [
+        $exitCode = Artisan::call('feed:update', [
             'user' => auth()->user()->id
         ]);
 
