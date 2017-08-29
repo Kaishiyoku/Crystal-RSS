@@ -1,13 +1,19 @@
 nav:
+  general: General
+  manage: Manage
   landing_page: Landing page
   login: Login
   register: Register
   logout: Logout
-  manage_feeds: Manage feed
   history: History
   feed: Feed
+  categories: Categories
+  manage_feed: Manage feed
+  manage_categories: Manage categories
 add: Add
 delete: Delete
 edit: Edit
 save: Save
 are_you_sure: Are you sure?
+create: Create
+update: Update

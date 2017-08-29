@@ -18,6 +18,9 @@ Route::group(['middleware' => ['menus']], function () {
             // Manage feed
             Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
         });
+
+        // Categories
+        Route::resource('/categories', 'CategoryController', ['except' => 'show']);
     });
 
     Auth::routes();

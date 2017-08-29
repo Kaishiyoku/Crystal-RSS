@@ -49,8 +49,11 @@ class Menus
         if ($this->auth->check()) {
             Menu::register('user', [
                 Menu::dropdown([
-                    Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.manage_feeds'), [], [], ['feed.manage.create', 'feed.manage.edit']),
+                    Menu::dropdownHeader(trans('common.nav.general')),
                     Menu::link('feed.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
+                    Menu::dropdownHeader(trans('common.nav.manage')),
+                    Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
+                    Menu::link('categories.index', '<i class="fa fa-folder" aria-hidden="true"></i> ' . trans('common.nav.categories')),
                     Menu::dropdownDivider(),
                     Menu::link('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . trans('common.nav.logout'), [], ['data-click' => '#logout-form'])
 
