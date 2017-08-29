@@ -24,7 +24,10 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary z-m-b-25">
         <div class="container">
-            {{ Html::linkRoute('home.index', config('app.name', 'Laravel'), [], ['class' => 'navbar-brand']) }}
+            <a class="navbar-brand" href="{{ URL::route('home.index') }}">
+                <img src="{{ asset('img/logo_small.png') }}" height="30" class="d-inline-block align-top mr-1"/>
+                {{ config('app.name', 'Laravel') }}
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
