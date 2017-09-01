@@ -17,9 +17,11 @@
         "davejamesmiller/laravel-breadcrumbs": "4.1.0",
         "albertcht/invisible-recaptcha": "1.6",
         "fguillot/picofeed": "0.1.35",
-        "spatie/laravel-paginateroute": "2.5.0"
+        "spatie/laravel-paginateroute": "2.5.0",
+        "fideloper/proxy": "~3.3"
     },
     "require-dev": {
+        "filp/whoops": "~2.0",
         "fzaninotto/faker": "1.7.1",
         "mockery/mockery": "0.9.9",
         "phpunit/phpunit": "6.3.0",
