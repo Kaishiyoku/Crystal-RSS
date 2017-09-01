@@ -173,6 +173,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
+        Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -239,6 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Menu' => Kaishiyoku\Menu\Facades\Menu::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
     ],
 
 ];

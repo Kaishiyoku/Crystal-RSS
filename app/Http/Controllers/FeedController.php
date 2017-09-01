@@ -8,9 +8,10 @@ class FeedController extends Controller
 {
     public function history()
     {
-        $readFeedItems = auth()->user()->feedItems()->read();
+        $totalCountReadFeedItems = auth()->user()->feedItems()->read()->count();
+        $readFeedItems = auth()->user()->feedItems()->read()->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
-        return view('feed.history', compact('readFeedItems'));
+        return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
 
     public function updateFeed()

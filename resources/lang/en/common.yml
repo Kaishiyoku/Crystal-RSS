@@ -17,3 +17,14 @@ save: Save
 are_you_sure: Are you sure?
 create: Create
 update: Update
+errors:
+  404:
+    title: .·´¯`(>▂<)´¯`·.
+    content: Die page you're looking for couldn't be found.
+  503:
+    title: (✖╭╮✖)
+    content: An error occurred. We are back shortly.
+  resource_not_found:
+    title: ¯\_(ツ)_/¯
+    content: The selected resource couldn't be found.
+back_to_landing_page: Back to landing page

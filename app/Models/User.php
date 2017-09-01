@@ -32,6 +32,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsAdministrator($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  */
 class User extends Authenticatable
 {

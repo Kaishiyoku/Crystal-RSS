@@ -26,8 +26,9 @@ class HomeController extends Controller
 
     private function indexAuth()
     {
-        $unreadFeedItems = auth()->user()->feedItems()->unread();
+        $totalCountUnreadFeedItems = auth()->user()->feedItems()->unread()->count();
+        $unreadFeedItems = auth()->user()->feedItems()->unread()->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
-        return view('feed.index', compact('unreadFeedItems'));
+        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems'));
     }
 }

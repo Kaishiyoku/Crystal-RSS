@@ -23,6 +23,8 @@ $(document).ready(function () {
     Waves.attach('.nav-item > .nav-link', ['waves-light']);
     Waves.attach('a.card-header', ['waves-light']);
 
+    Waves.attach('a.page-link', ['waves-dark']);
+
     Waves.init();
 
     $.ajaxSetup({

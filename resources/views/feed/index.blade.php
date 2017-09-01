@@ -5,7 +5,7 @@
 @section('content')
     <h1>
         {{ trans('feed.index.title') }}
-        <small class="text-muted">{{ $unreadFeedItems->count() }}</small>
+        <small class="text-muted">{{ $totalCountUnreadFeedItems }}</small>
     </h1>
 
     <p>
@@ -23,6 +23,8 @@
     @if ($unreadFeedItems->count() == 0)
         <p class="lead"><i>{{ trans('feed.index.no_unread_items') }}</i></p>
     @else
-        @include('shared._feed_item_list', ['feedItems' => $unreadFeedItems->get(), 'showActions' => true])
+        @include('shared._feed_item_list', ['feedItems' => $unreadFeedItems, 'showActions' => true])
+
+        @include('shared._pagination', ['items' => $unreadFeedItems])
     @endif
 @endsection

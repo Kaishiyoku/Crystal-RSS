@@ -26,7 +26,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container mt-5">
             @yield('content')
 
             @include('shared._footer')
