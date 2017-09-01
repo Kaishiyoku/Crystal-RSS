@@ -53,13 +53,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $data = $request->validate($this->getValidationRulesWithTitleUniqueness());
 
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
-
-        $category = new Category($request->only(['title']));
+        $category = new Category($data);
 
         auth()->user()->categories()->save($category);
 
@@ -88,13 +84,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $validator = $this->validator($request->all(), $category->id);
+        $data = $request->validate($this->getValidationRulesWithTitleUniqueness($category->id));
 
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
-
-        $category->fill($request->only(['title']));
+        $category->fill($data);
         $category->save();
 
         flash()->success(trans('category.edit.success'));
@@ -110,29 +102,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        /*if ($category->notes()->count() > 0) {
-            flash()->error(trans('section.destroy.notes_exist'));
-
-            return redirect()->route('sections.edit', [$section->getIdAndSlug()]);
-        } else {*/
+        if ($category->feeds()->count() > 0) {
+            flash()->error(trans('category.destroy.feeds_exist'));
+        } else {
             $category->delete();
 
             flash()->success(trans('category.destroy.success'));
+        }
 
-            return redirect()->route($this->redirectRoute);
-        //}
-    }
-
-    /**
-     * Get a validator for an incoming request.
-     *
-     * @param  array $data
-     * @param  int $id
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data, $id = null)
-    {
-        return Validator::make($data, $this->getValidationRulesWithTitleUniqueness($id));
+        return redirect()->route($this->redirectRoute);
     }
 
     /**

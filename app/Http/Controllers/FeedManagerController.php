@@ -6,6 +6,7 @@ use App\Models\Feed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
 
@@ -48,16 +49,12 @@ class FeedManagerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validator($request->all());
-
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
+        $data = $request->validate($this->getValidationRules());
 
         // discover feed
         try {
             $reader = new Reader();
-            $resource = $reader->discover($request->get('site_or_feed_url'));
+            $resource = $reader->discover($data['site_or_feed_url']);
             $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
             $rssFeed = $parser->execute();
 
@@ -72,9 +69,10 @@ class FeedManagerController extends Controller
 
             return redirect()->route($this->redirectRoute);
         } catch (PicoFeedException $e) {
-            $validator->getMessageBag()->add('site_or_feed_url', trans('feed_manager.feed_exception'));
+            $validator = Validator::make([], []);
+            $validator->getMessageBag()->add('feed_url', trans('feed_manager.feed_exception'));
 
-            $this->throwValidationException($request, $validator);
+            throw new ValidationException($validator);
         }
     }
 
@@ -102,22 +100,18 @@ class FeedManagerController extends Controller
     {
         $feed = auth()->user()->feeds()->findOrFail($id);
 
-        $validator = $this->validator($request->all(), $feed->id);
-
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
+        $data = $request->validate($this->getValidationRules($feed->id));
 
         // check feed
         try {
             $reader = new Reader();
-            $resource = $reader->download($request->get('feed_url'));
+            $resource = $reader->download($data['feed_url']);
             $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
 
             $feed->save();
-            $feed->title = $request->get('title');
-            $feed->feed_url = $request->get('feed_url');
-            $feed->site_url = $request->get('site_url');
+            $feed->title = $data['title'];
+            $feed->feed_url = $data['feed_url'];
+            $feed->site_url = $data['site_url'];
 
             $feed->save();
 
@@ -126,9 +120,10 @@ class FeedManagerController extends Controller
             return redirect()->route($this->redirectRoute);
         }
         catch (PicoFeedException $e) {
+            $validator = Validator::make([], []);
             $validator->getMessageBag()->add('feed_url', trans('feed_manager.feed_exception'));
 
-            $this->throwValidationException($request, $validator);
+            throw new ValidationException($validator);
         }
     }
 
@@ -166,17 +161,4 @@ class FeedManagerController extends Controller
             })]
         ];
     }
-
-    /**
-     * Get a validator for an incoming request.
-     *
-     * @param  array $data
-     * @param  int $id
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data, $id = null)
-    {
-        return Validator::make($data, $this->getValidationRules($id));
-    }
-
 }

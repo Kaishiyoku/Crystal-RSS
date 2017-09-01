@@ -10,3 +10,5 @@ edit:
   success: Category edited.
 destroy:
   success: Category deleted.
+  feeds_exist: Can’t delete category, there are stil feeds referencing to this category.
+default_title: Uncategorized

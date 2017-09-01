@@ -44,4 +44,9 @@ class Category extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function feeds()
+    {
+        return $this->belongsToMany(Feed::class);
+    }
 }
