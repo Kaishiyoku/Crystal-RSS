@@ -6,7 +6,7 @@ create:
   title: Add category
   success: Category created.
 edit:
-  title: Edit category “:title”
+  title: 'Edit category “:title”'
   success: Category edited.
 destroy:
   success: Category deleted.

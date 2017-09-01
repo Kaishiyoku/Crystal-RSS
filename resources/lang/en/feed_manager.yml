@@ -5,7 +5,7 @@ create:
   title: Add feed
   success: Feed added.
 edit:
-  title: Edit feed “:title”
+  title: 'Edit feed “:title”'
   success: Feed edited.
 feed_exception: Couldn’t find a valid feed under that url.
 destroy:

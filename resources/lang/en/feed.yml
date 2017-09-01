@@ -10,5 +10,5 @@ update_feed:
   success: Feed updated.
 mark_all_as_read:
   success: All items marked as read.
-updating_feed_for_user: Updating feed for user ":name"
+updating_feed_for_user: 'Updating feed for user “:name”'
 number_of_items: Number of items

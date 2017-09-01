@@ -170,7 +170,7 @@ return [
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Kaishiyoku\Menu\MenuServiceProvider::class,
-        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
