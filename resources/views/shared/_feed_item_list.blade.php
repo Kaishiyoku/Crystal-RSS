@@ -2,7 +2,7 @@
     $showActions = isset($showActions) ? $showActions : false;
 ?>
 
-<ul class="list-group">
+<ul class="list-group list-group-with-tabs">
     @foreach ($feedItems as $feedItem)
         <li class="list-group-item font-weight-bold" id="feed-item-{{ $feedItem->id }}">
             <div class="row">

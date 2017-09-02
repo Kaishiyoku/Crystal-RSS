@@ -6,6 +6,16 @@ use Illuminate\Support\Facades\Artisan;
 
 class FeedController extends Controller
 {
+    public function index()
+    {
+        return $this->baseIndex();
+    }
+
+    public function category($id)
+    {
+        return $this->baseIndex($id);
+    }
+
     public function history()
     {
         $totalCountReadFeedItems = auth()->user()->feedItems()->read()->count();
@@ -22,12 +32,12 @@ class FeedController extends Controller
 
         flash()->success(trans('feed.update_feed.success'));
 
-        return redirect()->to('/');
+        return redirect()->route('feed.index');
     }
 
-    public function markAllAsRead()
+    public function markAllAsRead($categoryId = null)
     {
-        $unreadFeedItems = auth()->user()->feedItems()->unread();
+        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
 
         foreach ($unreadFeedItems->get() as $unreadFeedItem) {
             $unreadFeedItem->is_read = true;
@@ -48,5 +58,34 @@ class FeedController extends Controller
         $feedItem->save();
 
         return response()->json(['isRead' => $feedItem->is_read]);
+    }
+
+    private function baseIndex($categoryId = null)
+    {
+        $unreadFeedItemsBase = $this->getUnreadFeedItems($categoryId);
+
+        $totalCountUnreadFeedItems = $unreadFeedItemsBase->count();
+        $unreadFeedItems = $unreadFeedItemsBase->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+
+        $categories = auth()->user()->categories();
+        $currentCategoryId = $categoryId;
+
+        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId'));
+    }
+
+    private function getUnreadFeedItems($categoryId = null)
+    {
+        $unreadFeedItemsBase = auth()->user()->feedItems()->unread();
+
+        if ($categoryId != null) {
+            $category = auth()->user()->categories()->findOrFail($categoryId);
+
+            $unreadFeedItemsBase = $unreadFeedItemsBase
+                                    ->select('feed_items.*', 'feeds.category_id')
+                                    ->join('feeds', 'feeds.id', '=', 'feed_items.feed_id')
+                                    ->where('category_id', '=', $category->id);
+        }
+
+        return $unreadFeedItemsBase;
     }
 }

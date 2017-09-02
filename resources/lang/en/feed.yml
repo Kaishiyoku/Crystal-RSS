@@ -3,6 +3,7 @@ index:
   update_feed: Update feed
   mark_all_as_read: Mark all as read
   no_unread_items: No unread items.
+  all_categories: All categories
 history:
   title: Feed history
   no_items: No items.

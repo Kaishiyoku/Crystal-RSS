@@ -20,7 +20,7 @@ update: Update
 errors:
   404:
     title: .·´¯`(>▂<)´¯`·.
-    content: Die page you're looking for couldn't be found.
+    content: The page you're looking for couldn't be found.
   503:
     title: (✖╭╮✖)
     content: An error occurred. We are back shortly.

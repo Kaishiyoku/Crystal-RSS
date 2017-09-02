@@ -38,13 +38,15 @@ class Menus
     {
         Menu::setConfig(Config::forBootstrap4());
 
-        $indexPage = auth()->check()
-            ? Menu::link('home.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>')
-            : Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.landing_page') . '</span>');
-
-        Menu::registerDefault([
-            $indexPage
-        ], ['class' => 'navbar-nav mr-auto']);
+        if ($this->auth->check()) {
+            Menu::registerDefault([
+                Menu::link('feed.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>')
+            ], ['class' => 'navbar-nav mr-auto']);
+        } else {
+            Menu::registerDefault([
+                Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.landing_page') . '</span>')
+            ], ['class' => 'navbar-nav mr-auto']);
+        }
 
         if ($this->auth->check()) {
             Menu::register('user', [
