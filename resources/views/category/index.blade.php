@@ -15,13 +15,13 @@
     @if ($categories->count() == 0)
         <p class="lead"><i>{{ trans('category.index.no_items') }}</i></p>
     @else
-        <table class="table table-striped">
+        <table class="table table-striped" data-provide="tablesorter">
             <thead>
             <tr>
                 <th>{{ trans('validation.attributes.title') }}</th>
                 <th>{{ trans('category.index.number_of_feeds') }}</th>
-                <th></th>
-                <th></th>
+                <th class="sorter-false"></th>
+                <th class="sorter-false"></th>
             </tr>
             </thead>
             <tbody>

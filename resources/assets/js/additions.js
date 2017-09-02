@@ -95,8 +95,18 @@ $(document).ready(function () {
             }).fail(function () {
                 console.error('Could not mark the feed item as read.');
             });
-        });
+        });t
     });
 
     $('[data-toggle="tooltip"]').tooltip();
+
+    $('[data-provide="tablesorter"]').each(function () {
+        $(this).tablesorter({
+            theme: 'bootstrap-custom',
+            widgets: ['columns'],
+            widgetOptions: {
+                columns: ['primary', 'secondary', 'tertiary']
+            }
+        });
+    })
 });

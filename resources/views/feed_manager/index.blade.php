@@ -17,14 +17,14 @@
             <i>{{ trans('feed_manager.index.no_feeds_yet') }}</i>
         </p>
     @else
-        <table class="table table-striped">
+        <table class="table table-striped" data-provide="tablesorter">
             <thead>
             <tr>
                 <th>{{ trans('validation.attributes.title') }}</th>
                 <th>{{ trans('validation.attributes.category_id') }}</th>
                 <th>{{ trans('validation.attributes.last_checked_at') }}</th>
-                <th></th>
-                <th></th>
+                <th class="sorter-false"></th>
+                <th class="sorter-false"></th>
             </tr>
             </thead>
             <tbody>

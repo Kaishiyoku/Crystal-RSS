@@ -8,5 +8,6 @@ window.Popper = Popper;
 require('bootstrap');
 window.Waves = require('node-waves');
 window.Prism = require('prismjs');
+require('tablesorter/dist/js/jquery.tablesorter.combined');
 
 require('./additions');

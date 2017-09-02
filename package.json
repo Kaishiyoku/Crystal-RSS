@@ -23,6 +23,7 @@
     "node-waves": "0.7.5",
     "popper.js": "1.12.3",
     "prismjs": "1.6.0",
+    "tablesorter": "2.28.15",
     "vue": "^2.1.10"
   }
 }
