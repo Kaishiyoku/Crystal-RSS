@@ -25,6 +25,20 @@
         </div>
 
         <div class="form-group row">
+            {{ Form::label('category_id', trans('validation.attributes.category_id'), ['class' => 'col-lg-2 col-form-label']) }}
+
+            <div class="col-lg-5">
+                {{ Form::select('category_id', $categories, old('category_id', $feed->category_id), ['class' => 'form-control' . ($errors->has('category_id') ? ' is-invalid' : '')]) }}
+
+                @if ($errors->has('category_id'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('category_id') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
             <div class="col-lg-10 ml-md-auto">
                 {{ Form::button(trans('common.add'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>

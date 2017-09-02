@@ -28,7 +28,7 @@
             @foreach ($categories->get() as $category)
                 <tr>
                     <td>{{ $category->title }}</td>
-                    <td></td>
+                    <td>{{ $category->feeds()->count() }}</td>
                     <td>
                         @include('shared._delete_link', ['route' => ['categories.destroy', $category->id]])
                     </td>

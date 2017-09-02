@@ -37,8 +37,9 @@ class FeedManagerController extends Controller
     public function create()
     {
         $feed = new Feed();
+        $categories = $this->getCategories();
 
-        return view('feed_manager.create', compact('feed'));
+        return view('feed_manager.create', compact('feed', 'categories'));
     }
 
     /**
@@ -62,6 +63,7 @@ class FeedManagerController extends Controller
             $feed->site_url = $rssFeed->getSiteUrl();
             $feed->feed_url = $rssFeed->getFeedUrl();
             $feed->title = $rssFeed->getTitle();
+            $feed->category_id = $data['category_id'];
 
             auth()->user()->feeds()->save($feed);
 
@@ -70,7 +72,7 @@ class FeedManagerController extends Controller
             return redirect()->route($this->redirectRoute);
         } catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
-            $validator->getMessageBag()->add('feed_url', trans('feed_manager.feed_exception'));
+            $validator->getMessageBag()->add('site_or_feed_url', trans('feed_manager.feed_exception'));
 
             throw new ValidationException($validator);
         }
@@ -85,8 +87,9 @@ class FeedManagerController extends Controller
     public function edit($id)
     {
         $feed = auth()->user()->feeds()->findOrFail($id);
+        $categories = $this->getCategories();
 
-        return view('feed_manager.edit', compact('feed'));
+        return view('feed_manager.edit', compact('feed', 'categories'));
     }
 
     /**
@@ -112,6 +115,7 @@ class FeedManagerController extends Controller
             $feed->title = $data['title'];
             $feed->feed_url = $data['feed_url'];
             $feed->site_url = $data['site_url'];
+            $feed->category_id = $data['category_id'];
 
             $feed->save();
 
@@ -154,11 +158,25 @@ class FeedManagerController extends Controller
     private function getValidationRules($id = null)
     {
         return [
+            'site_or_feed_url' => ['sometimes', 'max:191'],
             'title' => ['sometimes', 'max:191'],
             'site_url' => ['sometimes', 'url', 'max:191'],
-            'feed_url' => ['sometimes', 'url', 'max:191', Rule::unique('feeds')->ignore($id)->where(function ($query) {
-                $query->where('user_id', auth()->user()->id);
-            })]
+            'feed_url' => [
+                'sometimes',
+                'url',
+                'max:191',
+                Rule::unique('feeds')->ignore($id)->where(function ($query) {
+                    $query->where('user_id', auth()->user()->id);
+                })
+            ],
+            'category_id' => [
+                Rule::in($this->getCategories()->keys()->all()),
+            ]
         ];
+    }
+
+    private function getCategories()
+    {
+        return auth()->user()->categories()->pluck('title', 'id');
     }
 }

@@ -48,6 +48,6 @@ class Category extends Model
 
     public function feeds()
     {
-        return $this->belongsToMany(Feed::class);
+        return $this->hasMany(Feed::class);
     }
 }

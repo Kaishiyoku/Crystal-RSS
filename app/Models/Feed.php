@@ -65,4 +65,9 @@ class Feed extends Model
     {
         return $this->hasMany(FeedItem::class)->orderBy('is_read')->orderBy('date', 'desc');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
