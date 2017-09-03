@@ -1,5 +1,5 @@
 @if ($items->lastPage() > 1)
-    <ul class="pagination mt-4">
+    <ul class="pagination mt-4 mr-2 d-inline-flex">
         @if (PaginateRoute::hasPreviousPage())
             <li class="page-item">
                 {{ Html::link(PaginateRoute::previousPageUrl(), '&laquo;', ['class' => 'page-link']) }}
@@ -11,14 +11,22 @@
                 </a>
             </li>
         @endif
+    </ul>
 
-        @for ($i = 1; $i <= $items->lastPage(); $i++)
-            <li class="page-item{{ ($items->currentPage() == $i) ? ' active' : '' }}">
-                {{ Html::link(PaginateRoute::pageUrl($i), $i, ['class' => 'page-link']) }}
-            </li>
-        @endfor
+    @foreach ($ranges = getPageRanges($items->currentPage(), $items->lastPage()) as $a => $range)
+        <ul class="pagination mt-4 d-inline-flex">
+            @for ($i = $range['start']; $i <= $range['end']; $i++)
+                @include('shared._page_link', ['isActive' => $items->currentPage() == $i, 'i' => $i])
+            @endfor
+        </ul>
 
-        @if(PaginateRoute::hasNextPage($items))
+        @if ($a != count($ranges) - 1)
+            ...
+        @endif
+    @endforeach
+
+    <ul class="pagination mt-4 ml-2 d-inline-flex">
+        @if (PaginateRoute::hasNextPage($items))
             <li class="page-item">
                 {{ Html::link(PaginateRoute::nextPageUrl($items), '&raquo;', ['class' => 'page-link']) }}
             </li>
