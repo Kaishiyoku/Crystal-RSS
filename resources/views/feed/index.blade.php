@@ -20,7 +20,7 @@
         @endif
     </p>
 
-    <ul class="nav nav-tabs mt-5">
+    <ul class="nav nav-pills mt-5">
         <li class="nav-item">
             {!! Html::decode(Html::linkRoute('feed.index', trans('feed.index.all_categories') . ' <span class="badge badge-secondary">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'nav-link'. ($currentCategoryId == null ? ' active' : '')])) !!}
         </li>
