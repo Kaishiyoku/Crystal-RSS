@@ -43,6 +43,9 @@ class UpdateFeed extends Command
      */
     public function handle()
     {
+        $this->info(trans('feed.updating_at', ['date' => Carbon::now()]));
+        $this->info(null);
+
         $config = new Config();
         $config->setClientTimeout(120);
         $config->setGrabberTimeout(120);
