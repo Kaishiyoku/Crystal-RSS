@@ -64,7 +64,7 @@ class FeedController extends Controller
     {
         $unreadFeedItemsBase = $this->getUnreadFeedItems($categoryId);
 
-        $totalCountUnreadFeedItems = $unreadFeedItemsBase->count();
+        $totalCountUnreadFeedItems = $categoryId == null ? $unreadFeedItemsBase->count() : $this->getUnreadFeedItems()->count();
         $unreadFeedItems = $unreadFeedItemsBase->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         $categories = auth()->user()->categories();
