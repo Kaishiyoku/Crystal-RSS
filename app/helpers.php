@@ -19,9 +19,9 @@ if (! function_exists('getUnreadFeedItemCountForCategory')) {
 if (! function_exists('getPageRanges')) {
     function getPageRanges($currentPage, $lastPage)
     {
-        $pageOffset = 4;
+        $pageOffset = env('PAGINATION_PAGE_OFFSET');
         $numberOfPages = $pageOffset + 1;
-        $maxOverflow = 2;
+        $maxOverflow = env('PAGINATION_MAX_OVERFLOW');
         $numberOfPagesWithMaxOverflow = $numberOfPages + $maxOverflow;
         $ranges = [];
 
