@@ -69,7 +69,7 @@ class FeedManagerController extends Controller
 
             flash()->success(trans('feed_manager.create.success'));
 
-            return redirect()->route($this->redirectRoute);
+            return redirect()->route('feed.manage.edit', [$feed->id]);
         } catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
             $validator->getMessageBag()->add('site_or_feed_url', trans('feed_manager.feed_exception'));
