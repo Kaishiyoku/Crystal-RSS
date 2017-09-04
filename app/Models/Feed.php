@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $site_url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereSiteUrl($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
+ * @property int|null $category_id
+ * @property-read \App\Models\Category|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
  */
 class Feed extends Model
 {

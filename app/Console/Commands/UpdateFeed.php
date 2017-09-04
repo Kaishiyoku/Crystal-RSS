@@ -59,41 +59,53 @@ class UpdateFeed extends Command
         }
 
         $newLastCheckedAt = Carbon::now();
-        $ouputTableRows = [];
 
         foreach ($users as $user) {
+            $totalNumberOfNewUnreadFeedItemsForUser = 0;
+
             $this->comment(trans('feed.updating_feed_for_user', ['name' => $user->name]));
             $this->info(null);
 
             foreach ($user->feeds()->get() as $feed) {
                 try {
                     $reader = new Reader($config);
-                    $resource = $reader->download($feed->feed_url);
+                    $resource = $reader->discover($feed->feed_url);
                     $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
                     $rssFeed = $parser->execute();
-                    $newRssItems = array_filter($rssFeed->items, function ($item) use ($feed) {
-                        $date = Carbon::instance($item->getDate());
 
-                        return $date->gt($feed->last_checked_at) && $feed->feedItems()->where('url', '=', $item->getUrl())->count() == 0;
-                    });
+                    $numberOfNewUnreadFeedItems = 0;
 
-                    $ouputTableRows[] = [
-                        $feed->title,
-                        $feed->last_checked_at->format(DATETIME),
-                        count($newRssItems)
-                    ];
+                    foreach ($rssFeed->getItems() as $item) {
+                        if ($item->getId() && $item->getUrl()) {
+                            $existingFeedItem = FeedItem::whereFeedId($feed->id)->whereChecksum($item->getId())->first();
+                            $newFeedItem = $existingFeedItem == null ? new FeedItem() : $existingFeedItem;
 
-                    foreach ($newRssItems as $item) {
-                        $feedItem = new FeedItem();
-                        $feedItem->feed_id = $feed->id;
-                        $feedItem->url = $item->getUrl();
-                        $feedItem->title = $item->getTitle();
-                        $feedItem->author = $item->getAuthor();
-                        $feedItem->content = $item->getContent();
-                        $feedItem->image_url = $item->getEnclosureUrl();
-                        $feedItem->date = $item->getDate();
+                            if ($existingFeedItem == null) {
+                                $newFeedItem->checksum = $item->getId();
 
-                        $user->feedItems()->save($feedItem);
+                                $numberOfNewUnreadFeedItems++;
+                            }
+
+                            $newFeedItem->feed_id = $feed->id;
+                            $newFeedItem->url = $item->getUrl();
+                            $newFeedItem->title = $item->getTitle();
+                            $newFeedItem->author = $item->getAuthor();
+                            $newFeedItem->content = $item->getContent();
+                            $newFeedItem->image_url = $item->getEnclosureUrl();
+                            $newFeedItem->date = $item->getDate();
+
+                            $user->feedItems()->save($newFeedItem);
+                        }
+                    }
+
+                    $totalNumberOfNewUnreadFeedItemsForUser = $totalNumberOfNewUnreadFeedItemsForUser + $numberOfNewUnreadFeedItems;
+
+                    $feedPrintOut = '  ' . $feed->title . ': ' . $numberOfNewUnreadFeedItems;
+
+                    if ($numberOfNewUnreadFeedItems == 0) {
+                        $this->line($feedPrintOut);
+                    } else {
+                        $this->info($feedPrintOut);
                     }
 
                     $feed->last_checked_at = $newLastCheckedAt;
@@ -104,7 +116,7 @@ class UpdateFeed extends Command
                 }
             }
 
-            $this->table([trans('validation.attributes.title'), trans('validation.attributes.last_checked_at'), trans('feed.number_of_items')], $ouputTableRows);
+            $this->info('Total: ' . $totalNumberOfNewUnreadFeedItemsForUser . ' new items.');
 
             $this->info(null);
             $this->line('-----');
