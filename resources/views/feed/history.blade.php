@@ -11,7 +11,7 @@
     @if ($readFeedItems->count() == 0)
         <p class="lead"><i>{{ trans('feed.history.no_items') }}</i></p>
     @else
-        @include('shared._feed_item_list', ['feedItems' => $readFeedItems])
+        @include('feed._list', ['feedItems' => $readFeedItems])
 
         @include('shared._pagination', ['items' => $readFeedItems])
     @endif

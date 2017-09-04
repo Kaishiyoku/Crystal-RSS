@@ -33,12 +33,12 @@ $(document).ready(function () {
         }
     });
 
-    $('[data-type="submit"]').click(function () {
+    $('[data-type="submit"]').on('click', function () {
         $(this).closest('form').submit();
     });
 
     $('[data-type="scroll-top"]').each(function () {
-        $(this).click(function () {
+        $(this).on('click', function () {
             $('html, body').animate({ scrollTop: 0 }, 600);
         })
     });
@@ -46,14 +46,14 @@ $(document).ready(function () {
     $('[data-scroll-to-element]').each(function () {
         let $this = $(this);
 
-        $this.click(function () {
+        $this.on('click', function () {
             let scrollElement = $($this.attr('data-scroll-to-element'));
 
             $('html, body').animate({scrollTop: scrollElement.offset().top}, 'slow');
         });
     });
 
-    $('[data-confirm]').click(function () {
+    $('[data-confirm]').on('click', function () {
         let confirmationText = $(this).attr('data-confirm');
 
         if (_.isEmpty(confirmationText) || confirmationText == 1) {
@@ -68,33 +68,31 @@ $(document).ready(function () {
     $('[data-click]').each(function () {
         let $this = $(this);
 
-        $this.click(function (event) {
+        $this.on('click', function (event) {
             event.preventDefault();
 
             $($this.attr('data-click')).submit();
         });
     });
 
-    $('[data-toggle-status]').each(function () {
+    $(document).on('click', '[data-toggle-status]', function (event) {
+        event.preventDefault();
+
         let $this = $(this);
 
-        $this.click(function (event) {
-           event.preventDefault();
-
-            $.ajax({
-                method: 'PUT',
-                url: $this.attr('data-toggle-status'),
-            }).done(function (response) {
-                if (response.isRead) {
-                    $this.html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
-                    $($this.attr('data-target')).addClass('low-opacity');
-                } else {
-                    $this.html('<i class="fa fa-eye" aria-hidden="true"></i>');
-                    $($this.attr('data-target')).removeClass('low-opacity');
-                }
-            }).fail(function () {
-                console.error('Could not mark the feed item as read.');
-            });
+        $.ajax({
+            method: 'PUT',
+            url: $this.attr('data-toggle-status'),
+        }).done(function (response) {
+            if (response.isRead) {
+                $this.html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+                $($this.attr('data-target')).addClass('low-opacity');
+            } else {
+                $this.html('<i class="fa fa-eye" aria-hidden="true"></i>');
+                $($this.attr('data-target')).removeClass('low-opacity');
+            }
+        }).fail(function () {
+            console.error('Could not mark the feed item as read.');
         });
     });
 
@@ -108,5 +106,32 @@ $(document).ready(function () {
                 columns: ['primary', 'secondary', 'tertiary']
             }
         });
-    })
+    });
+
+    $('[data-load-more]').each(function () {
+        let $this = $(this);
+        let button = $($this.attr('data-button'));
+
+        button.on('click', function () {
+            event.preventDefault();
+
+            let url = $this.attr('data-load-more');
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+            }).done(function (response) {
+                let nextUrl = response.nextUrl;
+
+                $this.append(response.content);
+                $this.attr('data-load-more', nextUrl);
+
+                if (!response.hasAnotherPage) {
+                    button.remove();
+                }
+            }).fail(function () {
+                console.error('Could not fetch more unread feed items.');
+            });
+        });
+    });
 });
