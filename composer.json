@@ -10,7 +10,7 @@
         "laravel/tinker": "1.0.2",
         "kaishiyoku/yaml-translation": "5.5.1",
         "kaishiyoku/laravel-menu": "1.4.1",
-        "kaishiyoku/laravel-sendinblue": "5.5.0",
+        "webup/laravel-sendinblue": "1.1.0",
         "laravelcollective/html": "5.5.1",
         "doctrine/dbal": "2.5.9",
         "laracasts/flash": "3.0.2",
