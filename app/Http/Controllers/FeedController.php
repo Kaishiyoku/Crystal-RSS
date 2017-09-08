@@ -9,7 +9,8 @@ class FeedController extends Controller
 {
     public function index()
     {
-        return $this->baseIndex();
+        //return $this->baseIndex();
+        return view('feed.index_react');
     }
 
     public function category($id)

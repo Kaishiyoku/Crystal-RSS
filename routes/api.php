@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/api/login', 'Api\AuthController@login')->name('api.auth.login');
+
+Route::middleware('auth:api')->as('api.')->group(function () {
+    Route::get('/user', function (\Illuminate\Http\Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/feed/unread', 'Api\FeedController@unread')->name('feed.unread');
 });

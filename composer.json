@@ -18,7 +18,8 @@
         "albertcht/invisible-recaptcha": "1.6",
         "fguillot/picofeed": "0.1.35",
         "spatie/laravel-paginateroute": "2.5.0",
-        "fideloper/proxy": "~3.3"
+        "fideloper/proxy": "~3.3",
+        "laravel/passport": "4.0.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

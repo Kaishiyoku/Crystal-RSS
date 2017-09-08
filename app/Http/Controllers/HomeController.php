@@ -17,10 +17,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) {
-            return redirect()->route('feed.index');
-        }
-
-        return view('home.index');
+        return view('app');
     }
 }
