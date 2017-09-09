@@ -6,22 +6,45 @@ import Login from "../controllers/Login";
 import Logout from "../controllers/Logout";
 import _ from "lodash";
 
-function PrivateRoute(Component, ...rest) {
-    return (
-        <Route
-            {...rest}
-            render={(props) => !_.isEmpty(localStorage.getItem('token'))
-                ? <Component {...props} />
-                : <Redirect to={{pathname: '/', state: {from: props.location}}} />}
-        />
-    )
+function isLoggedIn() {
+    return !_.isEmpty(localStorage.getItem('token'));
+}
+
+class RouteAuth extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    static propTypes = {
+        canAccess: React.PropTypes.bool,
+        component: React.PropTypes.func,
+        path: React.PropTypes.string,
+        name: React.PropTypes.string,
+        exact: React.PropTypes.bool,
+        strict: React.PropTypes.bool
+    };
+
+    render() {
+        let {component, path, name, exact, strict} = this.props;
+        let routeProps = {
+            path,
+            component,
+            name,
+            exact,
+            strict
+        };
+
+        return isLoggedIn() ? <Route {...routeProps} /> : <Redirect to="/" />;
+    }
 }
 
 export const Main = () => (
     <Switch>
         <Route exact path="/" component={Login}/>
-        <PrivateRoute exact path="/feed" component={Feed}/>
-        <Route exact path="/logout" component={Logout}/>
+
+        <RouteAuth exact path="/logout" component={Logout}/>
+        <RouteAuth exact path="/feed" component={Feed}/>
+
         <Route component={NotFound}/>
     </Switch>
 );

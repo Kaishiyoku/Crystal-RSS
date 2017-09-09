@@ -2,13 +2,23 @@ import React from "react";
 import Input from "../components/Input";
 import Formsy from 'formsy-react';
 import {post} from "../base/request";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import SubmitButton from "../components/SubmitButton";
 
 class Login extends React.Component {
     constructor() {
         super();
 
-        this.state = {email: '', password: '', canSubmit: false, errorMessages: {email: [], password: []}};
+        this.state = {
+            email: '',
+            password: '',
+            canSubmit: false,
+            errorMessages: {
+                email: [],
+                password: []
+            },
+            isRedirect: false
+        };
     }
 
     enableButton = () => {
@@ -26,27 +36,56 @@ class Login extends React.Component {
     submit = (model) => {
         post('/api/login', model, (response) => {
             localStorage.setItem('token', response.data.token);
+
+            this.setState((prevState, props) => {
+               return Object.assign(prevState, {
+                   isRedirect: true
+               })
+            });
         }, (error) => {
             this.setState((prevState, props) => {
-               return Object.assign(prevState, {errorMessages: {email: error.response.data.errors.email, password: error.response.data.errors.password}})
+               return Object.assign(prevState, {
+                   errorMessages: {
+                       email: error.response.data.errors.email,
+                       password: error.response.data.errors.password
+                   }
+               })
             });
         });
     };
 
     render() {
-        let error = this.state.errorMessage ? (
-            <div className="alert alert-danger">{this.state.errorMessage}</div>
-        ) : '';
+        let redirect = this.state.isRedirect ? <Redirect to="/feed"/> : '';
 
         return (
             <div>
-                {error}
+                <div className="d-flex justify-content-center">
+                    <img src="img/logo.svg" className="logo"/>
+                </div>
 
-                <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
-                    <Input name="email" label="E-Mail" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
-                    <Input name="password" type="password" label="Pasword" errorMessages={this.state.errorMessages.password} value={this.state.password} required/>
-                    <button className="btn btn-primary" type="submit" disabled={!this.state.canSubmit}>Submit</button>
-                </Formsy.Form>
+                <div className="d-flex justify-content-center mb-5">
+                    <img src="img/lettering.svg" className="lettering img-fluid"/>
+                </div>
+
+                <div className="row justify-content-md-center">
+                    <div className="col col-lg-8">
+                        <div className="card border-primary">
+                            <h4 className="card-header text-white bg-primary">
+                                Login
+                            </h4>
+
+                            <div className="card-body">
+                                <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
+                                    <Input name="email" label="Email" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
+                                    <Input name="password" type="password" label="Password" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.password} value={this.state.password} required/>
+                                    <SubmitButton label="Login" colClass="col-lg-8" disabled={!this.state.canSubmit}/>
+                                </Formsy.Form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {redirect}
             </div>
         );
     }
