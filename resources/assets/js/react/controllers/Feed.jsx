@@ -10,11 +10,9 @@ class Feed extends React.Component {
 
     loadData = () => {
         get('/api/feed/unread', {}, (response) => {
-            console.debug("RESPONSE", response);
-
             this.setState({feedItems: response.data})
         }, (error) => {
-            console.error("ERROR", error);
+            // TODO: handle error
         });
     };
 

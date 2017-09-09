@@ -1,19 +1,29 @@
 import axios from 'axios';
+import $loading from "./stores/$loading";
 
-export function get(url, params = {}, successCallback = () => {}, errorCallback = () => {}) {
-    axios.get(url, {
+function baseRequest(method, url, data = {}, params = {}, successCallback = () => {}, errorCallback = () => {}) {
+    $loading.next(true);
+
+    axios({
+        method,
+        url,
+        data: data,
         params: Object.assign({}, params, {api_token: localStorage.getItem('token')})
-    }).then(function (response) {
+    }).then((response) => {
         successCallback(response);
-    }).catch(function (error) {
+
+        $loading.next(false);
+    }).catch((error) => {
         errorCallback(error);
+
+        $loading.next(false);
     });
 }
 
+export function get(url, params = {}, successCallback = () => {}, errorCallback = () => {}) {
+    baseRequest('get', url, {}, params, successCallback, errorCallback);
+}
+
 export function post(url, data = {}, successCallback = () => {}, errorCallback = () => {}) {
-    axios.post(url, Object.assign({}, data, {api_token: localStorage.getItem('token')})).then((response) => {
-        successCallback(response);
-    }).catch((error) => {
-        errorCallback(error);
-    });
+    baseRequest('post', url, data, {}, successCallback, errorCallback);
 }
