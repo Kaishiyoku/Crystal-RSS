@@ -11,7 +11,9 @@
 |
 */
 
-Route::post('/api/login', 'Api\AuthController@login')->name('api.auth.login');
+Route::middleware('api')->as('api.')->group(function () {
+    Route::post('/login', 'Auth\LoginController@login')->name('auth.login');
+});
 
 Route::middleware('auth:api')->as('api.')->group(function () {
     Route::get('/user', function (\Illuminate\Http\Request $request) {
