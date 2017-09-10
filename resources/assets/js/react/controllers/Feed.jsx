@@ -144,7 +144,7 @@ class Feed extends React.Component {
         return (
             <div>
                 <h1>
-                    Feed
+                    {trans('feed.title')}
                     {_.isNull(this.state.totalNumberOfItems) ? '' : <small className="text-muted">&nbsp;{this.state.totalNumberOfItems}</small>}
                 </h1>
 

@@ -18,6 +18,7 @@ let translations = {
         backToLandingPage: 'Back to landing page'
     },
     feed: {
+        title: 'Feed',
         refreshCompleteList: 'Refresh complete list',
         noUnreadItems: 'No unread items.',
         markAllAsRead: 'Mark all as read',
@@ -31,4 +32,4 @@ let translations = {
     }
 };
 
-export default translations;
+export {translations};
