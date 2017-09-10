@@ -63,13 +63,17 @@ class Feed extends React.Component {
     };
 
     markAllAsRead = (event) => {
-        put('/api/feed/mark_all_as_read', {}, (response) => {
-            this.setState((prevState, props) => {
-               return Object.assign(prevState, {feedItems: [], hasAnotherPage: false, totalNumberOfItems: 0});
+        let isConfirmed = confirm('Are you sure?');
+
+        if (isConfirmed) {
+            put('/api/feed/mark_all_as_read', {}, (response) => {
+                this.setState((prevState, props) => {
+                    return Object.assign(prevState, {feedItems: [], hasAnotherPage: false, totalNumberOfItems: 0});
+                });
+            }, (error) => {
+                // TODO: handle error
             });
-        }, (error) => {
-            // TODO: handle error
-        });
+        }
     };
 
     refresh = (event) => {
@@ -123,11 +127,18 @@ class Feed extends React.Component {
             </ul>
         ) : <p className="lead font-italic">No unread items.</p>;
 
-        return {loadMoreButton, feed};
+        let markAllAsReadButton = this.state.feedItems.length > 0 ? (
+            <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
+                <i className="fa fa-eye" aria-hidden="true"></i>
+                &nbsp;Mark all as read
+            </button>
+        ) : '';
+
+        return {loadMoreButton, feed, markAllAsReadButton};
     }
 
     render() {
-        let {loadMoreButton, feed} = this.getRenderOptions();
+        let {loadMoreButton, feed, markAllAsReadButton} = this.getRenderOptions();
 
         return (
             <div>
@@ -142,10 +153,7 @@ class Feed extends React.Component {
                         &nbsp;Refresh complete list
                     </button>
                     &nbsp;
-                    <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
-                        <i className="fa fa-eye" aria-hidden="true"></i>
-                        &nbsp;Mark all as read
-                    </button>
+                    {markAllAsReadButton}
                 </p>
 
                 {feed}
