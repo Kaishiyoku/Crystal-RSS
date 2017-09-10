@@ -27,3 +27,7 @@ export function get(url, params = {}, successCallback = () => {}, errorCallback 
 export function post(url, data = {}, successCallback = () => {}, errorCallback = () => {}) {
     baseRequest('post', url, data, {}, successCallback, errorCallback);
 }
+
+export function put(url, data = {}, successCallback = () => {}, errorCallback = () => {}) {
+    baseRequest('put', url, data, {}, successCallback, errorCallback);
+}

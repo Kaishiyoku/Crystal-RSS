@@ -59,6 +59,10 @@ class FeedItem extends Model
         'date'
     ];
 
+    protected $casts = [
+        'is_read' => 'boolean'
+    ];
+
     public $timestamps = false;
 
     public function scopeRead($query)

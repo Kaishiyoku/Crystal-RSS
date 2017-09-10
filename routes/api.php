@@ -21,4 +21,5 @@ Route::middleware('auth:api')->as('api.')->group(function () {
     });
 
     Route::get('/feed/unread', 'Api\FeedController@unread')->name('feed.unread');
+    Route::put('/feed/toggle_status', 'Api\FeedController@toggleFeedItemStatus')->name('feed.toggle_status');
 });

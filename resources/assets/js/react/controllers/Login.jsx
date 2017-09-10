@@ -76,7 +76,7 @@ class Login extends React.Component {
 
                             <div className="card-body">
                                 <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
-                                    <Input name="email" label="Email" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
+                                    <Input name="email" type="email" label="Email" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
                                     <Input name="password" type="password" label="Password" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.password} value={this.state.password} required/>
                                     <SubmitButton label="Login" colClass="col-lg-8" disabled={!this.state.canSubmit}/>
                                 </Formsy.Form>
