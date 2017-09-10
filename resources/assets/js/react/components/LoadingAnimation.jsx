@@ -1,4 +1,5 @@
 import React from "react";
+import trans from "../base/translate";
 
 class LoadingAnimation extends React.Component {
     render() {
@@ -8,7 +9,7 @@ class LoadingAnimation extends React.Component {
             <div className={`loading-container ${visibilityClass}`}>
                 <div className="spinner">
                     <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                    <span className="sr-only">Loading...</span>
+                    <span className="sr-only">{trans('common.loading')}</span>
                 </div>
             </div>
         );

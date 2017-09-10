@@ -4,6 +4,7 @@ import Formsy from 'formsy-react';
 import {post} from "../base/request";
 import {Link, Redirect} from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
+import trans from "../base/translate";
 
 class Login extends React.Component {
     constructor() {
@@ -71,14 +72,14 @@ class Login extends React.Component {
                     <div className="col col-lg-8">
                         <div className="card border-primary">
                             <h4 className="card-header text-white bg-primary">
-                                Login
+                                {trans('login.title')}
                             </h4>
 
                             <div className="card-body">
                                 <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
-                                    <Input name="email" type="email" label="Email" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
-                                    <Input name="password" type="password" label="Password" labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.password} value={this.state.password} required/>
-                                    <SubmitButton label="Login" colClass="col-lg-8" disabled={!this.state.canSubmit}/>
+                                    <Input name="email" type="email" label={trans('attributes.email')} labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.email} value={this.state.email} required/>
+                                    <Input name="password" type="password" label={trans('attributes.password')} labelColClass="col-lg-4" inputColClass="col-lg-6" errorMessages={this.state.errorMessages.password} value={this.state.password} required/>
+                                    <SubmitButton label={trans('login.submit')} colClass="col-lg-8" disabled={!this.state.canSubmit}/>
                                 </Formsy.Form>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import {get, put} from '../base/request';
+import trans from "../base/translate";
 
 class Feed extends React.Component {
     constructor() {
@@ -84,7 +85,7 @@ class Feed extends React.Component {
         let loadMoreButton = this.state.hasAnotherPage ? (
             <p className="mt-3">
                 <button type="button" className="btn btn-primary" onClick={this.loadMore}>
-                    Load more
+                    {trans('feed.loadMore')}
                 </button>
             </p>
         ) : '';
@@ -125,12 +126,12 @@ class Feed extends React.Component {
             <ul className="list-group">
                 {feedItems}
             </ul>
-        ) : <p className="lead font-italic">No unread items.</p>;
+        ) : <p className="lead font-italic">{trans('feed.noUnreadItems')}</p>;
 
         let markAllAsReadButton = this.state.feedItems.length > 0 ? (
             <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
                 <i className="fa fa-eye" aria-hidden="true"></i>
-                &nbsp;Mark all as read
+                &nbsp;{trans('feed.markAllAsRead')}
             </button>
         ) : '';
 
@@ -150,7 +151,7 @@ class Feed extends React.Component {
                 <p>
                     <button type="button" className="btn btn-primary" onClick={this.refresh}>
                         <i className="fa fa-refresh" aria-hidden="true"></i>
-                        &nbsp;Refresh complete list
+                        &nbsp;{trans('feed.refreshCompleteList')}
                     </button>
                     &nbsp;
                     {markAllAsReadButton}
