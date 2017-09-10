@@ -6,16 +6,20 @@ class Feed extends React.Component {
         super();
 
         this.state = {
-            totalNumberOfItems: 0,
+            nextOffset: 0,
+            totalNumberOfItems: null,
+            hasAnotherPage: false,
             feedItems: []
         };
     }
 
     componentDidMount() {
-        get('/api/feed/unread', {}, (response) => {
+        get('/api/feed/unread', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     totalNumberOfItems: response.data.totalNumberOfItems,
+                    hasAnotherPage: response.data.hasAnotherPage,
+                    nextOffset: response.data.nextOffset,
                     feedItems: response.data.items
                 });
             })
@@ -29,7 +33,7 @@ class Feed extends React.Component {
             this.setState((prevState, props) => {
                return Object.assign({prevState, feedItems: prevState.feedItems.map((obj) => {
                    if (obj.id === id) {
-                       obj.is_read = response.data.is_read;
+                       obj.is_read = response.data.isRead;
                    }
 
                    return obj;
@@ -40,7 +44,33 @@ class Feed extends React.Component {
         });
     };
 
+    loadMore = (event) => {
+        get('/api/feed/more_unread', [this.state.nextOffset], (response) => {
+            this.setState((prevState, props) => {
+               return Object.assign(prevState, {
+                   hasAnotherPage: response.data.hasAnotherPage,
+                   nextOffset: response.data.nextOffset,
+                   feedItems: prevState.feedItems.concat(response.data.items)
+               });
+            });
+        }, (error) => {
+            // TODO: handle error
+        });
+    };
+
+    renderOptions() {
+
+    }
+
     render() {
+        let loadMoreButton = this.state.hasAnotherPage ? (
+            <p className="mt-3">
+                <button type="button" className="btn btn-primary" onClick={this.loadMore}>
+                    Load more
+                </button>
+            </p>
+        ) : '';
+
         let feedItems = this.state.feedItems.map((obj) => {
             let lowOpacityClass = obj.is_read ? 'low-opacity' : '';
             let eyeClass = obj.is_read ? 'fa-eye-slash' : 'fa-eye';
@@ -77,12 +107,14 @@ class Feed extends React.Component {
             <div>
                 <h1>
                     Feed
-                    <small className="text-muted">{this.state.totalNumberOfItems}</small>
+                    {_.isNull(this.state.totalNumberOfItems) ? '' : <small className="text-muted">{this.state.totalNumberOfItems}</small>}
                 </h1>
 
                 <ul className="list-group">
                     {feedItems}
                 </ul>
+
+                {loadMoreButton}
             </div>
         );
     }

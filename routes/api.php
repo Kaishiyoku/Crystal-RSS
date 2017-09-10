@@ -22,4 +22,5 @@ Route::middleware('auth:api')->as('api.')->group(function () {
 
     Route::get('/feed/unread', 'Api\FeedController@unread')->name('feed.unread');
     Route::put('/feed/toggle_status', 'Api\FeedController@toggleFeedItemStatus')->name('feed.toggle_status');
+    Route::get('/feed/more_unread/{offset?}/{categoryId?}', 'Api\FeedController@moreUnread')->name('feed.more_unread');
 });

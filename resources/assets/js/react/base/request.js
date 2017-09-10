@@ -1,14 +1,18 @@
 import axios from 'axios';
 import $loading from "./stores/$loading";
 
-function baseRequest(method, url, data = {}, params = {}, successCallback = () => {}, errorCallback = () => {}) {
+function getUrlWithParams(url, urlParams = []) {
+    return `${url}/${urlParams.join('/')}`;
+}
+
+function baseRequest(method, url, data = {}, urlParams = {}, successCallback = () => {}, errorCallback = () => {}) {
     $loading.next(true);
 
     axios({
         method,
-        url,
+        url: getUrlWithParams(url, urlParams),
         data: data,
-        params: Object.assign({}, params, {api_token: localStorage.getItem('token')})
+        params: {api_token: localStorage.getItem('token')}
     }).then((response) => {
         successCallback(response);
 
@@ -20,14 +24,14 @@ function baseRequest(method, url, data = {}, params = {}, successCallback = () =
     });
 }
 
-export function get(url, params = {}, successCallback = () => {}, errorCallback = () => {}) {
-    baseRequest('get', url, {}, params, successCallback, errorCallback);
+export function get(url, urlParams = {}, successCallback = () => {}, errorCallback = () => {}) {
+    baseRequest('get', url, {}, urlParams, successCallback, errorCallback);
 }
 
 export function post(url, data = {}, successCallback = () => {}, errorCallback = () => {}) {
-    baseRequest('post', url, data, {}, successCallback, errorCallback);
+    baseRequest('post', url, data, [], successCallback, errorCallback);
 }
 
 export function put(url, data = {}, successCallback = () => {}, errorCallback = () => {}) {
-    baseRequest('put', url, data, {}, successCallback, errorCallback);
+    baseRequest('put', url, data, [], successCallback, errorCallback);
 }
