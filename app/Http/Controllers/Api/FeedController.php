@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\URL;
 
 class FeedController extends Controller
 {
@@ -31,9 +29,9 @@ class FeedController extends Controller
         return response()->json(['isRead' => $feedItem->is_read]);
     }
 
-    public function moreUnread($offset = null, $categoryId = null)
+    public function moreUnread($offset = null)
     {
-        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
+        $unreadFeedItems = $this->getUnreadFeedItems();
         $totalCount = $unreadFeedItems->count();
 
         if ($offset) {
@@ -47,6 +45,13 @@ class FeedController extends Controller
             'nextOffset' => $offset + env('NUMBER_OF_ITEMS_PER_PAGE'),
             'items' => $unreadFeedItems->get()
         ]);
+    }
+
+    public function markAllAsRead()
+    {
+        auth()->user()->feedItems()->unread()->update(['is_read' => true]);
+
+        return response()->json();
     }
 
     private function getUnreadFeedItems()

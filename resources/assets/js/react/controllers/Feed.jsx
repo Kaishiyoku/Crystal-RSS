@@ -14,6 +14,10 @@ class Feed extends React.Component {
     }
 
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
         get('/api/feed/unread', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
@@ -58,11 +62,21 @@ class Feed extends React.Component {
         });
     };
 
-    renderOptions() {
+    markAllAsRead = (event) => {
+        put('/api/feed/mark_all_as_read', {}, (response) => {
+            this.setState((prevState, props) => {
+               return Object.assign(prevState, {feedItems: [], hasAnotherPage: false, totalNumberOfItems: 0});
+            });
+        }, (error) => {
+            // TODO: handle error
+        });
+    };
 
-    }
+    refresh = (event) => {
+        this.loadData();
+    };
 
-    render() {
+    getRenderOptions() {
         let loadMoreButton = this.state.hasAnotherPage ? (
             <p className="mt-3">
                 <button type="button" className="btn btn-primary" onClick={this.loadMore}>
@@ -103,16 +117,38 @@ class Feed extends React.Component {
             );
         });
 
+        let feed = this.state.feedItems.length > 0 ? (
+            <ul className="list-group">
+                {feedItems}
+            </ul>
+        ) : <p className="lead">No unread items.</p>;
+
+        return {loadMoreButton, feed};
+    }
+
+    render() {
+        let {loadMoreButton, feed} = this.getRenderOptions();
+
         return (
             <div>
                 <h1>
                     Feed
-                    {_.isNull(this.state.totalNumberOfItems) ? '' : <small className="text-muted">{this.state.totalNumberOfItems}</small>}
+                    {_.isNull(this.state.totalNumberOfItems) ? '' : <small className="text-muted">&nbsp;{this.state.totalNumberOfItems}</small>}
                 </h1>
 
-                <ul className="list-group">
-                    {feedItems}
-                </ul>
+                <p>
+                    <button type="button" className="btn btn-primary" onClick={this.refresh}>
+                        <i className="fa fa-refresh" aria-hidden="true"></i>
+                        &nbsp;Refresh complete list
+                    </button>
+                    &nbsp;
+                    <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
+                        <i className="fa fa-eye" aria-hidden="true"></i>
+                        &nbsp;Mark all as read
+                    </button>
+                </p>
+
+                {feed}
 
                 {loadMoreButton}
             </div>
