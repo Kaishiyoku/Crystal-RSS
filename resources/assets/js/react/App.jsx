@@ -4,6 +4,7 @@ import {Main} from "./components/Main";
 import Footer from "./components/Footer";
 import LoadingAnimation from "./components/LoadingAnimation";
 import $loading from "./base/stores/$loading";
+import {withRouter} from 'react-router-dom'
 
 class App extends React.Component {
     constructor() {
@@ -13,13 +14,15 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.subscription = $loading.subscribe((isLoading) => {
-            this.setState({isLoading})
+        this.loadingSubscription = $loading.subscribe((isLoading) => {
+            this.setState((prevState, props) => {
+                return Object.assign(prevState, {isLoading});
+            });
         });
     }
 
     componentWillUnmount() {
-        this.subscription.unsubscribe();
+        this.loadingSubscription.unsubscribe();
     }
 
     render() {
@@ -37,4 +40,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);

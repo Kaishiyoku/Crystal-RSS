@@ -2,7 +2,6 @@ import React from "react";
 import Input from "../components/Input";
 import Formsy from 'formsy-react';
 import {post} from "../base/request";
-import {Link, Redirect} from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import trans from "../base/translate";
 
@@ -17,8 +16,7 @@ class Login extends React.Component {
             errorMessages: {
                 email: [],
                 password: []
-            },
-            isRedirect: false
+            }
         };
     }
 
@@ -38,11 +36,7 @@ class Login extends React.Component {
         post('/api/login', model, (response) => {
             localStorage.setItem('token', response.data.token);
 
-            this.setState((prevState, props) => {
-               return Object.assign(prevState, {
-                   isRedirect: true
-               })
-            });
+            this.props.history.push('/feed');
         }, (error) => {
             this.setState((prevState, props) => {
                return Object.assign(prevState, {
@@ -56,8 +50,6 @@ class Login extends React.Component {
     };
 
     render() {
-        let redirect = this.state.isRedirect ? <Redirect to="/feed"/> : '';
-
         return (
             <div>
                 <div className="d-flex justify-content-center">
@@ -85,8 +77,6 @@ class Login extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                {redirect}
             </div>
         );
     }
