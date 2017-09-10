@@ -1,0 +1,15 @@
+index:
+  title: Feed
+  update_feed: Feed aktualisieren
+  mark_all_as_read: Alles als gelesen markieren
+  no_unread_items: Keine ungelesenen Einträge.
+  all_categories: Alle Kategorien
+history:
+  title: Feedverlauf
+  no_items: Keine Einträge.
+update_feed:
+  success: Feed geändert.
+mark_all_as_read:
+  success: Alle Einträge als gelesen markiert.
+updating_feed_for_user: 'Updating feed for user ":name"'
+updating_at: '--- Feed updating at :date ---'

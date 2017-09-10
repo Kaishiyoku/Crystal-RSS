@@ -1,0 +1,15 @@
+failed: Diese Zugangsdaten wurden nicht in unserer Datenbank gefunden.
+throttle: 'Zu viele Loginversuche. Versuchen Sie es bitte in :seconds Sekunden nochmal.'
+registered: Registrierung erfolgreich. Ein Administrator muss Ihren Account noch aktivieren bevor Sie sich einloggen können. Sie werden eine E-Mail erhalten, sobald Sie sich einloggen können.
+emails:
+  register:
+    title: Neuer Benutzer registriert
+    a_new_user_registered: Ein neuer Benutzer hat sich regisrtiert
+    click_here_to_activate_the_user: Klicken Sie hier zum Aktivieren des Benutzers.
+  activation:
+    title: Ihr Account wurde aktiviert
+    your_account_has_been_activated: 'Hallo :name, Ihr Account wurde von einem Administrator aktiviert.'
+    you_may_login_now: Sie können sich jetzt einloggen
+  deactivation:
+    title: Ihr Account wurde deaktiviert
+    your_account_has_been_deactivated: 'Hallo :name, Ihr Account wurde von einem Administrator deaktiviert.'

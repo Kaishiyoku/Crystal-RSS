@@ -1,0 +1,31 @@
+nav:
+  general: Allgemein
+  manage: Verwalten
+  landing_page: Startseite
+  login: Login
+  register: Registrieren
+  logout: Logout
+  history: Verlauf
+  feed: Feed
+  categories: Kategorien
+  manage_feed: Feed verwalten
+  manage_categories: Kategorien verwalten
+add: Hinzufügen
+delete: Löschen
+edit: Ändern
+save: Speichern
+are_you_sure: Sind Sie sicher?
+create: Erstellen
+update: Ändern
+errors:
+  404:
+    title: .·´¯`(>▂<)´¯`·.
+    content: Die Seite, nach der Sie suchen, konnte leider nicht gefunden werden.
+  503:
+    title: (✖╭╮✖)
+    content: Es ist ein Fehler aufgetreten, wir sind gleich zurück.
+  resource_not_found:
+    title: ¯\_(ツ)_/¯
+    content: Die angegebene Ressource konnte nicht gefunden werden.
+back_to_landing_page: Zurück zur Startseite
+load_more: Mehr laden

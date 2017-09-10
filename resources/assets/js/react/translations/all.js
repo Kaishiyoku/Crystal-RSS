@@ -1,9 +1,9 @@
 import * as en from "./en";
-
-console.debug(en.translations);
+import * as de from "./de";
 
 let allTranslations = {
-    en: en.translations
+    en: en.translations,
+    de: de.translations
 };
 
 export default allTranslations;
