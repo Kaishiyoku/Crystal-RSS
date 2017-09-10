@@ -121,7 +121,7 @@ class Feed extends React.Component {
             <ul className="list-group">
                 {feedItems}
             </ul>
-        ) : <p className="lead">No unread items.</p>;
+        ) : <p className="lead font-italic">No unread items.</p>;
 
         return {loadMoreButton, feed};
     }
