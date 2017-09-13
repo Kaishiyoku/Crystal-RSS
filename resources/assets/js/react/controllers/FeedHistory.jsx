@@ -4,7 +4,7 @@ import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
 
-class Feed extends React.Component {
+class FeedHistory extends React.Component {
     constructor() {
         super();
 
@@ -19,7 +19,7 @@ class Feed extends React.Component {
     }
 
     loadData() {
-        get('/api/feed/unread', [], (response) => {
+        get('/api/feed/read', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     items: response.data.items
@@ -29,36 +29,6 @@ class Feed extends React.Component {
             // TODO: handle error
         });
     }
-
-    toggleItemStatus = (id) => (event) => {
-        put('/api/feed/toggle_status', {id}, (response) => {
-            this.setState((prevState, props) => {
-               return Object.assign({prevState, items: prevState.items.map((obj) => {
-                   if (obj.id === id) {
-                       obj.is_read = response.data.isRead;
-                   }
-
-                   return obj;
-               })})
-            });
-        }, (error) => {
-            // TODO: handle error
-        });
-    };
-
-    markAllAsRead = (event) => {
-        let isConfirmed = confirm('Are you sure?');
-
-        if (isConfirmed) {
-            put('/api/feed/mark_all_as_read', {}, (response) => {
-                this.setState((prevState, props) => {
-                    return Object.assign(prevState, {items: []});
-                });
-            }, (error) => {
-                // TODO: handle error
-            });
-        }
-    };
 
     refresh = (event) => {
         this.loadData();
@@ -75,18 +45,10 @@ class Feed extends React.Component {
         let itemEnd = itemStart + APP_CONFIG.pagination.itemsPerPage;
 
         let items = this.state.items.slice(itemStart, itemEnd).map((obj) => {
-            let lowOpacityClass = obj.is_read ? 'low-opacity' : '';
-            let eyeClass = obj.is_read ? 'fa-eye-slash' : 'fa-eye';
-
             return (
-                <li className={`list-group-item font-weight-bold ${lowOpacityClass}`} key={`feed-item-${obj.id}`}>
+                <li className="list-group-item font-weight-bold" key={`feed-item-${obj.id}`}>
                     <div className="row">
-                        <div className="col-lg-1 col-2">
-                            <button className="btn btn-outline-primary btn-sm" type="button" onClick={this.toggleItemStatus(obj.id)}>
-                                <i className={`fa ${eyeClass}`} aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        <div className="col-lg-8 col-10">
+                        <div className="col-lg-9 col-12">
                             <div><a href={obj.url}>{obj.title}</a></div>
 
                             <div className="row">
@@ -110,14 +72,7 @@ class Feed extends React.Component {
             <ul className="list-group">
                 {items}
             </ul>
-        ) : <p className="lead font-italic">{trans('feed.noUnreadItems')}</p>;
-
-        let markAllAsReadButton = this.state.items.length > 0 ? (
-            <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
-                <i className="fa fa-eye" aria-hidden="true"></i>
-                &nbsp;{trans('feed.markAllAsRead')}
-            </button>
-        ) : '';
+        ) : <p className="lead font-italic">{trans('feedHistory.noReadItems')}</p>;
 
         let pageCount = this.state.items.length / APP_CONFIG.pagination.itemsPerPage;
 
@@ -143,29 +98,20 @@ class Feed extends React.Component {
             />
         ) : '';
 
-        return {feed, markAllAsReadButton, pagination};
+        return {feed, pagination};
     }
 
     render() {
-        let {feed, markAllAsReadButton, pagination} = this.getRenderOptions();
+        let {feed, pagination} = this.getRenderOptions();
 
         return (
             <div>
                 <h1>
-                    {trans('feed.title')}
+                    {trans('feedHistory.title')}
                     {this.state.items.length === 0 ? '' : <small className="text-muted">&nbsp;{this.state.items.length}</small>}
                 </h1>
 
-                <p className="pb-4">
-                    <button type="button" className="btn btn-primary" onClick={this.refresh}>
-                        <i className="fa fa-refresh" aria-hidden="true"></i>
-                        &nbsp;{trans('feed.refreshCompleteList')}
-                    </button>
-                    &nbsp;
-                    {markAllAsReadButton}
-                </p>
-
-                <div className="mb-4">
+                <div className="mt-4 mb-4">
                     {pagination}
                 </div>
 
@@ -179,4 +125,4 @@ class Feed extends React.Component {
     }
 }
 
-export default Feed;
+export default FeedHistory;

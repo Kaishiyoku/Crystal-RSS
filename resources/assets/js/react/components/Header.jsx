@@ -6,10 +6,11 @@ class Header extends React.Component {
     render() {
         let isLoggedIn = localStorage.getItem('token');
 
-        let landingPageLink = !isLoggedIn ? <li className="nav-item"><NavLink to="/" className="nav-link"><i className="fa fa-home"></i> {trans('navigation.landingPage')}</NavLink></li> : '';
+        let landingPageLink = !isLoggedIn ? <li className="nav-item"><NavLink exact to="/" className="nav-link"><i className="fa fa-home"></i> {trans('navigation.landingPage')}</NavLink></li> : '';
 
-        let feedLink = isLoggedIn ? <li className="nav-item"><NavLink to="/feed" className="nav-link"><i className="fa fa-rss" aria-hidden="true"></i> {trans('navigation.feed')}</NavLink></li> : '';
-        let logoutLink = isLoggedIn ? <li className="nav-item"><NavLink to="/logout" className="nav-link"><i className="fa fa-sign-out"></i> {trans('navigation.logout')}</NavLink></li> : '';
+        let feedLink = isLoggedIn ? <li className="nav-item"><NavLink exact to="/feed" className="nav-link"><i className="fa fa-rss" aria-hidden="true"></i> {trans('navigation.feed')}</NavLink></li> : '';
+        let logoutLink = isLoggedIn ? <li className="nav-item"><NavLink exact to="/logout" className="nav-link"><i className="fa fa-sign-out"></i> {trans('navigation.logout')}</NavLink></li> : '';
+        let feedHistoryLink = isLoggedIn ? <li className="nav-item"><NavLink exact to="/feed/history" className="nav-link"><i className="fa fa-history" aria-hidden="true"></i> {trans('navigation.feedHistory')}</NavLink></li> : '';
 
         return <nav className="navbar navbar-expand-lg navbar-dark bg-primary z-m-b-25">
             <div className="container">
@@ -29,6 +30,7 @@ class Header extends React.Component {
                     </ul>
 
                     <ul className="navbar-nav">
+                        {feedHistoryLink}
                         {logoutLink}
                     </ul>
                 </div>

@@ -31,4 +31,13 @@ class FeedController extends Controller
 
         return response()->json();
     }
+
+    public function read()
+    {
+        $readFeedItems = auth()->user()->feedItems()->read()->with('feed');
+
+        return response()->json([
+            'items' => $readFeedItems->get()
+        ]);
+    }
 }

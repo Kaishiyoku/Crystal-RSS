@@ -4,6 +4,7 @@ import React from "react";
 import NotFound from "../controllers/NotFound";
 import Login from "../controllers/Login";
 import Logout from "../controllers/Logout";
+import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
 
 function isLoggedIn() {
@@ -72,6 +73,7 @@ export const Main = () => (
 
         <RouteAuth exact path="/logout" component={Logout}/>
         <RouteAuth exact path="/feed" component={Feed}/>
+        <RouteAuth exact path="/feed/history" component={FeedHistory}/>
 
         <Route component={NotFound}/>
     </Switch>

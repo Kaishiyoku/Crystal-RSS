@@ -10,7 +10,8 @@ let translations = {
     navigation: {
         landingPage: 'Startseite',
         feed: 'Feed',
-        logout: 'Logout'
+        logout: 'Logout',
+        feedHistory: 'Feed-Verlauf'
     },
     common: {
         appName: 'Crystal RSS',
@@ -23,6 +24,10 @@ let translations = {
         noUnreadItems: 'Keine ungelesenen Einträge.',
         markAllAsRead: 'Alle als gelesen markieren',
         loadMore: 'Mehr laden'
+    },
+    feedHistory: {
+        title: 'Feed-Verlauf',
+        noReadItems: 'Keine gelesenen Einträge.'
     },
     errorPages: {
         404: {
