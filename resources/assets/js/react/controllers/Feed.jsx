@@ -1,13 +1,16 @@
 import React from "react";
 import {get, put} from '../base/request';
 import trans from "../base/translate";
+import ReactPaginate from 'react-paginate';
+import APP_CONFIG from "../app-config";
 
 class Feed extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            items: []
+            items: [],
+            activePage: 1
         };
     }
 
@@ -61,8 +64,17 @@ class Feed extends React.Component {
         this.loadData();
     };
 
+    handlePageChange = (event) => {
+        this.setState((prevState, props) => {
+            return Object.assign(prevState, {activePage: event.selected + 1});
+        })
+    };
+
     getRenderOptions() {
-        let items = this.state.items.map((obj) => {
+        let itemStart = (this.state.activePage - 1) * APP_CONFIG.pagination.itemsPerPage;
+        let itemEnd = itemStart + APP_CONFIG.pagination.itemsPerPage;
+
+        let items = this.state.items.slice(itemStart, itemEnd).map((obj) => {
             let lowOpacityClass = obj.is_read ? 'low-opacity' : '';
             let eyeClass = obj.is_read ? 'fa-eye-slash' : 'fa-eye';
 
@@ -107,11 +119,35 @@ class Feed extends React.Component {
             </button>
         ) : '';
 
-        return {feed, markAllAsReadButton};
+        let pageCount = this.state.items.length / APP_CONFIG.pagination.itemsPerPage;
+
+        let pagination = (
+            <ReactPaginate
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                previousLabel="«"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                nextLabel="»"
+                breakLabel="..."
+                breakClassName={"page-break-item"}
+                forcePage={this.state.activePage - 1}
+                pageCount={pageCount}
+                marginPagesDisplayed={APP_CONFIG.pagination.marginPagesDisplayed}
+                pageRangeDisplayed={APP_CONFIG.pagination.pageRangeDisplayed}
+                onPageChange={this.handlePageChange}
+                containerClassName={"pagination"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                activeClassName={"active"}
+            />
+        );
+
+        return {feed, markAllAsReadButton, pageCount, pagination};
     }
 
     render() {
-        let {feed, markAllAsReadButton} = this.getRenderOptions();
+        let {feed, markAllAsReadButton, pageCount, pagination} = this.getRenderOptions();
 
         return (
             <div>
@@ -120,7 +156,7 @@ class Feed extends React.Component {
                     {this.state.items.length === 0 ? '' : <small className="text-muted">&nbsp;{this.state.items.length}</small>}
                 </h1>
 
-                <p>
+                <p className="pb-4">
                     <button type="button" className="btn btn-primary" onClick={this.refresh}>
                         <i className="fa fa-refresh" aria-hidden="true"></i>
                         &nbsp;{trans('feed.refreshCompleteList')}
@@ -129,7 +165,15 @@ class Feed extends React.Component {
                     {markAllAsReadButton}
                 </p>
 
+                <div className="mb-4">
+                    {pagination}
+                </div>
+
                 {feed}
+
+                <div className="mt-4">
+                    {pagination}
+                </div>
             </div>
         );
     }
