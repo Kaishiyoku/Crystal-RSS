@@ -7,10 +7,7 @@ class Feed extends React.Component {
         super();
 
         this.state = {
-            nextOffset: 0,
-            totalNumberOfItems: null,
-            hasAnotherPage: false,
-            feedItems: []
+            items: []
         };
     }
 
@@ -22,10 +19,7 @@ class Feed extends React.Component {
         get('/api/feed/unread', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
-                    totalNumberOfItems: response.data.totalNumberOfItems,
-                    hasAnotherPage: response.data.hasAnotherPage,
-                    nextOffset: response.data.nextOffset,
-                    feedItems: response.data.items
+                    items: response.data.items
                 });
             })
         }, (error) => {
@@ -36,7 +30,7 @@ class Feed extends React.Component {
     toggleItemStatus = (id) => (event) => {
         put('/api/feed/toggle_status', {id}, (response) => {
             this.setState((prevState, props) => {
-               return Object.assign({prevState, feedItems: prevState.feedItems.map((obj) => {
+               return Object.assign({prevState, items: prevState.items.map((obj) => {
                    if (obj.id === id) {
                        obj.is_read = response.data.isRead;
                    }
@@ -49,27 +43,13 @@ class Feed extends React.Component {
         });
     };
 
-    loadMore = (event) => {
-        get('/api/feed/more_unread', [this.state.nextOffset], (response) => {
-            this.setState((prevState, props) => {
-               return Object.assign(prevState, {
-                   hasAnotherPage: response.data.hasAnotherPage,
-                   nextOffset: response.data.nextOffset,
-                   feedItems: prevState.feedItems.concat(response.data.items)
-               });
-            });
-        }, (error) => {
-            // TODO: handle error
-        });
-    };
-
     markAllAsRead = (event) => {
         let isConfirmed = confirm('Are you sure?');
 
         if (isConfirmed) {
             put('/api/feed/mark_all_as_read', {}, (response) => {
                 this.setState((prevState, props) => {
-                    return Object.assign(prevState, {feedItems: [], hasAnotherPage: false, totalNumberOfItems: 0});
+                    return Object.assign(prevState, {items: []});
                 });
             }, (error) => {
                 // TODO: handle error
@@ -82,15 +62,7 @@ class Feed extends React.Component {
     };
 
     getRenderOptions() {
-        let loadMoreButton = this.state.hasAnotherPage ? (
-            <p className="mt-3">
-                <button type="button" className="btn btn-primary" onClick={this.loadMore}>
-                    {trans('feed.loadMore')}
-                </button>
-            </p>
-        ) : '';
-
-        let feedItems = this.state.feedItems.map((obj) => {
+        let items = this.state.items.map((obj) => {
             let lowOpacityClass = obj.is_read ? 'low-opacity' : '';
             let eyeClass = obj.is_read ? 'fa-eye-slash' : 'fa-eye';
 
@@ -122,30 +94,30 @@ class Feed extends React.Component {
             );
         });
 
-        let feed = this.state.feedItems.length > 0 ? (
+        let feed = this.state.items.length > 0 ? (
             <ul className="list-group">
-                {feedItems}
+                {items}
             </ul>
         ) : <p className="lead font-italic">{trans('feed.noUnreadItems')}</p>;
 
-        let markAllAsReadButton = this.state.feedItems.length > 0 ? (
+        let markAllAsReadButton = this.state.items.length > 0 ? (
             <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
                 <i className="fa fa-eye" aria-hidden="true"></i>
                 &nbsp;{trans('feed.markAllAsRead')}
             </button>
         ) : '';
 
-        return {loadMoreButton, feed, markAllAsReadButton};
+        return {feed, markAllAsReadButton};
     }
 
     render() {
-        let {loadMoreButton, feed, markAllAsReadButton} = this.getRenderOptions();
+        let {feed, markAllAsReadButton} = this.getRenderOptions();
 
         return (
             <div>
                 <h1>
                     {trans('feed.title')}
-                    {_.isNull(this.state.totalNumberOfItems) ? '' : <small className="text-muted">&nbsp;{this.state.totalNumberOfItems}</small>}
+                    {this.state.items.length === 0 ? '' : <small className="text-muted">&nbsp;{this.state.items.length}</small>}
                 </h1>
 
                 <p>
@@ -158,8 +130,6 @@ class Feed extends React.Component {
                 </p>
 
                 {feed}
-
-                {loadMoreButton}
             </div>
         );
     }
