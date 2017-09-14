@@ -73,4 +73,9 @@ class Feed extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function updateErrors()
+    {
+        return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
+    }
 }
