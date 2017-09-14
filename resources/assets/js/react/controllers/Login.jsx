@@ -1,9 +1,10 @@
 import React from "react";
 import Input from "../components/Input";
 import Formsy from 'formsy-react';
-import {post} from "../base/request";
+import {get, post} from "../base/request";
 import SubmitButton from "../components/SubmitButton";
 import trans from "../base/translate";
+import $user from "../base/stores/$user";
 
 class Login extends React.Component {
     constructor() {
@@ -33,10 +34,16 @@ class Login extends React.Component {
     };
 
     submit = (model) => {
-        post('/api/login', model, (response) => {
-            localStorage.setItem('token', response.data.token);
+        post('/api/login', model, (loginResponse) => {
+            get('/api/user', [], (userResponse) => {
+                $user.next(userResponse.data);
 
-            this.props.history.push('/feed');
+                localStorage.setItem('token', loginResponse.data.token);
+
+                history.push('/feed');
+            }, (error) => {
+                // TODO: handle error
+            }, loginResponse.data.token);
         }, (error) => {
             this.setState((prevState, props) => {
                return Object.assign(prevState, {

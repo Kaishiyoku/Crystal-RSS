@@ -1,17 +1,18 @@
 import _ from 'lodash';
 import allTranslations from "../translations/all";
-import $user from "./stores/$user";
 
 const fallbackLocale = 'en';
 
-function getLocale() {
-    let locale = null;
+export function setLocale(locale) {
+    if (_.isEmpty(localStorage.getItem('locale'))) {
+        locale = fallbackLocale;
+    }
 
-    $user.subscribe((state) => {
-        locale = state.locale;
-    });
+    localStorage.setItem('locale', locale.substr(0, 2));
+}
 
-    return locale;
+export function getLocale() {
+    return localStorage.getItem('locale');
 }
 
 export default function trans(lookupKey) {

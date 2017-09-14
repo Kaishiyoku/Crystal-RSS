@@ -4,7 +4,6 @@ import {Main} from "./components/Main";
 import Footer from "./components/Footer";
 import LoadingAnimation from "./components/LoadingAnimation";
 import $loading from "./base/stores/$loading";
-import $user from "./base/stores/$user";
 import {withRouter} from 'react-router-dom'
 
 class App extends React.Component {

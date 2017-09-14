@@ -55,7 +55,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'is_active', 'is_administrator'
+        'password', 'remember_token', 'is_active', 'is_administrator', 'api_token'
     ];
 
     public function scopeActive($query)

@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import App from "./App";
 import {HashRouter} from "react-router-dom";
-import $user from "./base/stores/$user";
+import {setLocale} from "./base/translate";
+
+setLocale(navigator.language || navigator.userLanguage);
 
 const rootEl = document.getElementById('app');
 
@@ -22,7 +24,3 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
         render(App)
     });
 }
-
-let locale = navigator.language || navigator.userLanguage;
-
-$user.next({locale});

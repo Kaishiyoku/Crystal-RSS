@@ -3,6 +3,7 @@ import {get, put} from '../base/request';
 import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
+import $user from "../base/stores/$user";
 
 class Feed extends React.Component {
     constructor() {
