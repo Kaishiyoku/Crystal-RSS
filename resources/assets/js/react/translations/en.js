@@ -11,7 +11,8 @@ let translations = {
         landingPage: 'Landing page',
         feed: 'Feed',
         logout: 'Logout',
-        feedHistory: 'Feed history'
+        feedHistory: 'Feed history',
+        manage: 'Manage'
     },
     common: {
         appName: 'Crystal RSS',

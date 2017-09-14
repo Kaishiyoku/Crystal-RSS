@@ -6,6 +6,7 @@ import Login from "../controllers/Login";
 import Logout from "../controllers/Logout";
 import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
+import FeedManager from "../controllers/FeedManager";
 
 function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -74,6 +75,7 @@ export const Main = () => (
         <RouteAuth exact path="/logout" component={Logout}/>
         <RouteAuth exact path="/feed" component={Feed}/>
         <RouteAuth exact path="/feed/history" component={FeedHistory}/>
+        <RouteAuth exact path="/feed/manage" component={FeedManager}/>
 
         <Route component={NotFound}/>
     </Switch>

@@ -11,7 +11,8 @@ let translations = {
         landingPage: 'Startseite',
         feed: 'Feed',
         logout: 'Logout',
-        feedHistory: 'Feed-Verlauf'
+        feedHistory: 'Feed-Verlauf',
+        manage: 'Verwaltung'
     },
     common: {
         appName: 'Crystal RSS',
@@ -28,6 +29,9 @@ let translations = {
     feedHistory: {
         title: 'Feed-Verlauf',
         noReadItems: 'Keine gelesenen Einträge.'
+    },
+    feedManager: {
+      title: 'Feed verwalten'
     },
     errorPages: {
         404: {
