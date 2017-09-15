@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, NavLink} from "react-router-dom";
 import trans from "../base/translate";
-import $user from "../base/stores/$user";
+import user$ from "../base/stores/user$";
 
 class Header extends React.Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class Header extends React.Component {
             let showUserDropdownMenuClass = this.state.isUserDropdownOpen ? ' show': '';
             let user = {};
 
-            $user.subscribe((state) => {
+            user$.subscribe((state) => {
                 user = state;
             });
 

@@ -4,6 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\UpdateError
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $feed_id
+ * @property string $content
+ * @property \Carbon\Carbon|null $created_at
+ * @property-read \App\Models\Feed $feed
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereFeedId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUserId($value)
+ * @mixin \Eloquent
+ */
 class UpdateError extends Model
 {
     /**

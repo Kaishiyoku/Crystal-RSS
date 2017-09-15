@@ -8,7 +8,7 @@ import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
 import FeedManager from "../controllers/FeedManager";
 
-function isLoggedIn() {
+export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
 }
 

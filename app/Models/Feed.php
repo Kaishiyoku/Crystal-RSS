@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $category_id
  * @property-read \App\Models\Category|null $category
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
  */
 class Feed extends Model
 {
