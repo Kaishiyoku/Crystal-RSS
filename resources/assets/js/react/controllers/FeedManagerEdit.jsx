@@ -4,6 +4,7 @@ import trans from "../base/translate";
 import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
 import Select from "../components/Select";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 class FeedManagerEdit extends React.Component {
     constructor() {
@@ -86,14 +87,21 @@ class FeedManagerEdit extends React.Component {
             return {value: category.id, label: category.title};
         });
 
-        return {categoryOptions};
+        let breadcrumbLinks = _.isEmpty(this.state.item.title) ? [] : [
+            {to: '/feed/manage', label: trans('feedManager.title')},
+            {label: trans('feedManagerEdit.title', {title: this.state.item.title})}
+        ];
+
+        return {categoryOptions, breadcrumbLinks};
     }
 
     render() {
-        let {categoryOptions} = this.getRenderOptions();
+        let {categoryOptions, breadcrumbLinks} = this.getRenderOptions();
 
         return (
             <div>
+                <Breadcrumbs links={breadcrumbLinks}/>
+
                 <h1>
                     {_.isEmpty(this.state.item.title) ? '' :  trans('feedManagerEdit.title', {title: this.state.item.title})}
                 </h1>

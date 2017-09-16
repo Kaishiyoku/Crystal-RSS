@@ -5,6 +5,8 @@ import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
 import Select from "../components/Select";
 import _ from 'lodash';
+import {Link} from "react-router-dom";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 class FeedManagerCreate extends React.Component {
     constructor() {
@@ -71,14 +73,21 @@ class FeedManagerCreate extends React.Component {
             return {value: category.id, label: category.title};
         });
 
-        return {categoryOptions};
+        let breadcrumbLinks = [
+            {to: '/feed/manage', label: trans('feedManager.title')},
+            {label: trans('feedManagerCreate.title')}
+        ];
+
+        return {categoryOptions, breadcrumbLinks};
     }
 
     render() {
-        let {categoryOptions} = this.getRenderOptions();
+        let {categoryOptions, breadcrumbLinks} = this.getRenderOptions();
 
         return (
             <div>
+                <Breadcrumbs links={breadcrumbLinks}/>
+
                 <h1>
                     {trans('feedManagerCreate.title')}
                 </h1>
