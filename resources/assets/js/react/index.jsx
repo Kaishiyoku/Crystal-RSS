@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import App from "./App";
 import {HashRouter} from "react-router-dom";
 import {setLocale} from "./base/translate";
+import {initLogger} from "./base/logger";
 
 setLocale(navigator.language || navigator.userLanguage);
+
+initLogger();
 
 const rootEl = document.getElementById('app');
 

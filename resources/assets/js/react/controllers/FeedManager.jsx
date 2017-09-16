@@ -1,9 +1,8 @@
 import React from "react";
-import {del, get, put} from '../base/request';
+import {del, get} from '../base/request';
 import trans from "../base/translate";
-import ReactPaginate from 'react-paginate';
-import APP_CONFIG from "../app-config";
 import {Link} from "react-router-dom";
+import Logger from 'js-logger';
 
 class FeedManager extends React.Component {
     constructor() {

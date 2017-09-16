@@ -1,5 +1,6 @@
 import axios from 'axios';
 import loading$ from "./stores/loading$";
+import Logger from 'js-logger';
 
 function getUrlWithParams(url, urlParams = []) {
     return `${url}/${urlParams.join('/')}`;
@@ -14,10 +15,14 @@ function baseRequest(method, url, data = {}, urlParams = {}, successCallback = (
         data,
         params: {api_token: token || localStorage.getItem('token')}
     }).then((response) => {
+        Logger.debug(`Loaded ${getUrlWithParams(url, urlParams)}`, response.data);
+
         loading$.next(false);
 
         successCallback(response);
     }).catch((error) => {
+        Logger.error('Request failed', error);
+
         errorCallback(error);
 
         loading$.next(false);

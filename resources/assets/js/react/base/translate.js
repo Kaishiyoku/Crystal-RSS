@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import allTranslations from "../translations/all";
+import Logger from 'js-logger';
 
 const fallbackLocale = 'en';
 
@@ -26,6 +27,8 @@ export default function trans(lookupKey, params = {}) {
     let translatedStr = _.get(translations, lookupKey);
 
     if (_.isEmpty(translatedStr)) {
+        Logger.warn(`missing translation for key "${lookupKey}"`);
+
         return `[${lookupKey}]`;
     }
 

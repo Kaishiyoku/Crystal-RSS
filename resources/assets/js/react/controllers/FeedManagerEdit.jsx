@@ -68,8 +68,6 @@ class FeedManagerEdit extends React.Component {
         }, [this.state.item.id], (response) => {
             this.props.history.push('/feed/manage');
         }, (error) => {
-            console.error(error);
-
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     errorMessages: {
