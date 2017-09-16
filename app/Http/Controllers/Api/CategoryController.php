@@ -74,14 +74,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->feeds()->count() > 0) {
-            flash()->error(trans('category.destroy.feeds_exist'));
+            return response()->json(trans('category.destroy.feeds_exist'), 422);
         } else {
             $category->delete();
-
-            flash()->success(trans('category.destroy.success'));
         }
-
-        return redirect()->route($this->redirectRoute);
     }
 
     /**

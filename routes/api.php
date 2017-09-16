@@ -30,5 +30,5 @@ Route::middleware('auth:api')->as('api.')->group(function () {
     Route::delete('/store/clear', 'Api\StoreController@clear')->name('store.clear');
 
     Route::resource('/feed/manage', 'Api\FeedManagerController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-    Route::resource('/categories', 'Api\CategoryController', ['only' => ['index', 'show', 'store', 'update']]);
+    Route::resource('/categories', 'Api\CategoryController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 });
