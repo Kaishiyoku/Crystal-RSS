@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories();
+        $categories = auth()->user()->categories()->withCount('feeds');
 
         return response()->json($categories->get());
     }
@@ -41,10 +41,6 @@ class CategoryController extends Controller
         $category = new Category($data);
 
         auth()->user()->categories()->save($category);
-
-        flash()->success(trans('category.create.success'));
-
-        return redirect()->route($this->redirectRoute);
     }
 
     /**

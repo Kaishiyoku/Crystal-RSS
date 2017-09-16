@@ -1,62 +1,72 @@
 let translations = {
-    login: {
-        title: 'Login',
-        submit: 'Login'
-    },
     attributes: {
-        email: 'E-Mail',
-        password: 'Passwort',
-        title: 'Titel',
         category: 'Kategorie',
-        lastCheckedAt: 'Letzte Prüfung um',
-        siteUrl: 'Seiten-URL',
+        email: 'E-Mail',
         feedUrl: 'Feed-URL',
-        siteOrFeedUrl: 'Seiten- oder Feed-URL'
+        lastCheckedAt: 'Letzte Prüfung um',
+        password: 'Passwort',
+        siteOrFeedUrl: 'Seiten- oder Feed-URL',
+        siteUrl: 'Seiten-URL',
+        title: 'Titel'
     },
-    navigation: {
-        landingPage: 'Startseite',
-        feed: 'Feed',
-        logout: 'Logout',
-        feedHistory: 'Feed-Verlauf',
-        manage: 'Verwaltung'
+    categories: {
+        addCategory: 'Kategorie hinzufügen',
+        noCategoriesYet: 'Noch keine Kategorien vorhanden.',
+        numberOfFeeds: 'Anzahl Feeds',
+        title: 'Kategorien verwalten',
+    },
+    categoriesCreate: {
+        title: 'Kategorie hinzufügen'
     },
     common: {
         appName: 'Crystal RSS',
-        loading: 'Lade...',
+        areYouSure: 'Sind Sie sicher?',
         backToLandingPage: 'Zurück zur Startseite',
         delete: 'Löschen',
         edit: 'Ändern',
+        loading: 'Lade...',
         save: 'Speichern',
-        areYouSure: 'Sind Sie sicher?'
+    },
+    errorPages: {
+        404: {
+            subTitle: 'Die Seite, nach der Sie suchen, konnte leider nicht gefunden werden.',
+            title: '.·´¯`(>▂<)´¯`·.',
+        }
     },
     feed: {
-        title: 'Feed',
-        refreshCompleteList: 'Komplette Liste neu laden',
-        noUnreadItems: 'Keine ungelesenen Einträge.',
+        loadMore: 'Mehr laden',
         markAllAsRead: 'Alle als gelesen markieren',
-        loadMore: 'Mehr laden'
+        noUnreadItems: 'Keine ungelesenen Einträge.',
+        refreshCompleteList: 'Komplette Liste neu laden',
+        title: 'Feed',
     },
     feedHistory: {
+        noReadItems: 'Keine gelesenen Einträge.',
         title: 'Feed-Verlauf',
-        noReadItems: 'Keine gelesenen Einträge.'
     },
     feedManager: {
-        title: 'Feed verwalten',
         addFeed: 'Feed hinzufügen',
-        noFeedsYet: 'Noch keine Feeds vorhanden.'
-    },
-    feedManagerEdit: {
-        title: 'Feed „{:title}” ändern'
+        noFeedsYet: 'Noch keine Feeds vorhanden.',
+        title: 'Feed verwalten',
     },
     feedManagerCreate: {
         title: 'Feed hinzufügen'
     },
-    errorPages: {
-        404: {
-            title: '.·´¯`(>▂<)´¯`·.',
-            subTitle: 'Die Seite, nach der Sie suchen, konnte leider nicht gefunden werden.'
-        }
-    }
+    feedManagerEdit: {
+        title: 'Feed „{:title}” ändern'
+    },
+    login: {
+        submit: 'Login',
+        title: 'Login',
+    },
+    navigation: {
+        categories: 'Kategorien',
+        feed: 'Feed',
+        feedHistory: 'Feed-Verlauf',
+        landingPage: 'Startseite',
+        logout: 'Logout',
+        manage: 'Verwaltung',
+    },
 };
 
 export {translations};

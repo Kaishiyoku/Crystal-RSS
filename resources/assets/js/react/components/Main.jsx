@@ -6,6 +6,7 @@ import Login from "../controllers/Login";
 import Logout from "../controllers/Logout";
 import _ from "lodash";
 import FeedIndex from "../controllers/FeedIndex";
+import CategoriesIndex from "../controllers/CategoriesIndex";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -73,6 +74,7 @@ export const Main = () => (
 
         <RouteAuth exact path="/logout" component={Logout}/>
         <RouteAuth path="/feed" component={FeedIndex}/>
+        <RouteAuth path="/categories" component={CategoriesIndex}/>
 
         <Route component={NotFound}/>
     </Switch>

@@ -58,6 +58,10 @@ class Header extends React.Component {
                             <i className="fa fa-rss"></i>&nbsp;
                             {trans('navigation.feed')}
                         </NavLink>
+                        <NavLink to="/categories" className="dropdown-item" onClick={this.toggleUserDropdown}>
+                            <i className="fa fa-folder"></i>&nbsp;
+                            {trans('navigation.categories')}
+                        </NavLink>
                     </div>
                 </li>
             );
