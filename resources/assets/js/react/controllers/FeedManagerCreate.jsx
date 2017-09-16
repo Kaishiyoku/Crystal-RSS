@@ -26,11 +26,11 @@ class FeedManagerCreate extends React.Component {
     }
 
     componentDidMount() {
-        get('/api/categories', [], (categoriesResponse) => {
+        get('/api/categories', (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
-                    categories: categoriesResponse.data,
-                    category: _.first(categoriesResponse.data).id
+                    categories: response.data,
+                    category: _.first(response.data).id
                 });
             })
         }, (error) => {
@@ -51,10 +51,7 @@ class FeedManagerCreate extends React.Component {
     };
 
     submit = (model) => {
-        post('/api/feed/manage', {
-            site_or_feed_url: model.siteOrFeedUrl,
-            category_id: model.category,
-        }, (response) => {
+        post('/api/feed/manage', (response) => {
             this.props.history.push('/feed/manage');
         }, (error) => {
             this.setState((prevState, props) => {
@@ -65,6 +62,9 @@ class FeedManagerCreate extends React.Component {
                     }
                 })
             });
+        }, {
+            site_or_feed_url: model.siteOrFeedUrl,
+            category_id: model.category,
         });
     };
 

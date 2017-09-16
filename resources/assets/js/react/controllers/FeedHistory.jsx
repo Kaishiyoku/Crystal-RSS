@@ -19,7 +19,7 @@ class FeedHistory extends React.Component {
     }
 
     loadData() {
-        get('/api/feed/read', [], (response) => {
+        get('/api/feed/read', (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     items: response.data

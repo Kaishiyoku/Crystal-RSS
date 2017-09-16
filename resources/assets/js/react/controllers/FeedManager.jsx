@@ -18,7 +18,7 @@ class FeedManager extends React.Component {
     }
 
     loadData() {
-        get('/api/feed/manage', [], (response) => {
+        get('/api/feed/manage', (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     items: response.data
@@ -37,11 +37,11 @@ class FeedManager extends React.Component {
         let isConfirmed = confirm(trans('common.areYouSure'));
 
         if (isConfirmed) {
-            del('/api/feed/manage', [id], (response) => {
+            del('/api/feed/manage', (response) => {
                 this.loadData();
             }, (error) => {
                 // TODO: handle error
-            });
+            }, [id]);
         }
     };
 

@@ -28,8 +28,8 @@ class FeedManagerEdit extends React.Component {
     }
 
     componentDidMount() {
-        get('/api/feed/manage', [this.props.match.params.id], (feedManageResponse) => {
-            get('/api/categories', [], (categoriesResponse) => {
+        get('/api/feed/manage', (feedManageResponse) => {
+            get('/api/categories', (categoriesResponse) => {
                 this.setState((prevState, props) => {
                     return Object.assign(prevState, {
                         item: feedManageResponse.data,
@@ -45,7 +45,7 @@ class FeedManagerEdit extends React.Component {
             });
         }, (error) => {
             // TODO: handle error
-        });
+        }, [this.props.match.params.id]);
     }
 
     enableButton = () => {
@@ -61,12 +61,7 @@ class FeedManagerEdit extends React.Component {
     };
 
     submit = (model) => {
-        put('/api/feed/manage', {
-            title: model.title,
-            feed_url: model.feedUrl,
-            site_url: model.siteUrl,
-            category_id: model.category,
-        }, [this.state.item.id], (response) => {
+        put('/api/feed/manage', (response) => {
             this.props.history.push('/feed/manage');
         }, (error) => {
             this.setState((prevState, props) => {
@@ -79,7 +74,12 @@ class FeedManagerEdit extends React.Component {
                     }
                 })
             });
-        });
+        }, {
+            title: model.title,
+            feed_url: model.feedUrl,
+            site_url: model.siteUrl,
+            category_id: model.category,
+        }, [this.state.item.id]);
     };
 
     getRenderOptions() {

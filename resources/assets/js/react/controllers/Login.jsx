@@ -34,16 +34,14 @@ class Login extends React.Component {
     };
 
     submit = (model) => {
-        post('/api/login', model, (loginResponse) => {
-            get('/api/user', [], (userResponse) => {
+        post('/api/login', (loginResponse) => {
+            get('/api/user', (userResponse) => {
                 localStorage.setItem('token', loginResponse.data.token);
 
                 user$.next(userResponse.data);
-
-                this.props.history.push('/feed');
             }, (error) => {
                 // TODO: handle error
-            }, loginResponse.data.token);
+            }, null, loginResponse.data.token);
         }, (error) => {
             this.setState((prevState, props) => {
                return Object.assign(prevState, {
@@ -53,7 +51,7 @@ class Login extends React.Component {
                    }
                })
             });
-        });
+        }, model);
     };
 
     render() {

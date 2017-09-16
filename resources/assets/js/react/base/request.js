@@ -1,12 +1,21 @@
 import axios from 'axios';
 import loading$ from "./stores/loading$";
 import Logger from 'js-logger';
+import _ from 'lodash';
 
 function getUrlWithParams(url, urlParams = []) {
     return `${url}/${urlParams.join('/')}`;
 }
 
-function baseRequest(method, url, data = {}, urlParams = {}, successCallback = () => {}, errorCallback = () => {}, token = null) {
+function baseRequest(method, url, successCallback = () => {}, errorCallback = () => {}, data = {}, urlParams = [], token = null) {
+    if (_.isEmpty(data)) {
+        data = {};
+    }
+
+    if (_.isEmpty(urlParams)) {
+        urlParams = [];
+    }
+
     loading$.next(true);
 
     axios({
@@ -29,18 +38,18 @@ function baseRequest(method, url, data = {}, urlParams = {}, successCallback = (
     });
 }
 
-export function get(url, urlParams = [], successCallback = () => {}, errorCallback = () => {}, token = null) {
-    baseRequest('get', url, {}, urlParams, successCallback, errorCallback, token);
+export function get(url, successCallback = () => {}, errorCallback = () => {}, urlParams = [], token = null) {
+    baseRequest('get', url, successCallback, errorCallback, {}, urlParams, token);
 }
 
-export function post(url, data = {}, successCallback = () => {}, errorCallback = () => {}, token = null) {
-    baseRequest('post', url, data, [], successCallback, errorCallback, token);
+export function post(url, successCallback = () => {}, errorCallback = () => {}, data = {}, token = null) {
+    baseRequest('post', url, successCallback, errorCallback, data, [], token);
 }
 
-export function put(url, data = {}, urlParams = [], successCallback = () => {}, errorCallback = () => {}, token = null) {
-    baseRequest('put', url, data, urlParams, successCallback, errorCallback, token);
+export function put(url, successCallback = () => {}, errorCallback = () => {}, data = {}, urlParams = [], token = null) {
+    baseRequest('put', url, successCallback, errorCallback, data, urlParams, token);
 }
 
-export function del(url, urlParams = [], successCallback = () => {}, errorCallback = () => {}, token = null) {
-    baseRequest('delete', url, {}, urlParams, successCallback, errorCallback, token);
+export function del(url, successCallback = () => {}, errorCallback = () => {}, urlParams = [], token = null) {
+    baseRequest('delete', url, successCallback, errorCallback, {}, urlParams, token);
 }

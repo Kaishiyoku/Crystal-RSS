@@ -23,16 +23,16 @@ class App extends React.Component {
         });
 
         this.userSubscription = user$.subscribe((state) => {
-            put('/api/store/update', {user: state}, [], (response) => {
+            put('/api/store/update', (response) => {
 
             }, (error) => {
                 // TODO: handle error
-            })
+            }, {user: state})
         });
 
         // when logged repopulate stores saved with redis
         if (isLoggedIn()) {
-            get('/api/store/retrieve', [], (response) => {
+            get('/api/store/retrieve', (response) => {
                 user$.next(response.data.user);
             }, (error) => {
                 // TODO: handle error

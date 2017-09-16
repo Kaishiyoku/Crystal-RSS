@@ -9,7 +9,7 @@ class Logout extends React.Component {
     }
 
     componentDidMount() {
-        del('/api/store/clear', [], (response) => {
+        del('/api/store/clear', (response) => {
             localStorage.clear();
 
             this.props.history.push('/');

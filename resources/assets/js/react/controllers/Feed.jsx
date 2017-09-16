@@ -19,7 +19,7 @@ class Feed extends React.Component {
     }
 
     loadData() {
-        get('/api/feed/unread', [], (response) => {
+        get('/api/feed/unread', (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
                     items: response.data
@@ -31,7 +31,7 @@ class Feed extends React.Component {
     }
 
     toggleItemStatus = (id) => (event) => {
-        put('/api/feed/toggle_status', {id}, [], (response) => {
+        put('/api/feed/toggle_status', (response) => {
             this.setState((prevState, props) => {
                return Object.assign({prevState, items: prevState.items.map((obj) => {
                    if (obj.id === id) {
@@ -43,14 +43,14 @@ class Feed extends React.Component {
             });
         }, (error) => {
             // TODO: handle error
-        });
+        }, {id});
     };
 
     markAllAsRead = (event) => {
         let isConfirmed = confirm(trans('common.areYouSure'));
 
         if (isConfirmed) {
-            put('/api/feed/mark_all_as_read', {}, [], (response) => {
+            put('/api/feed/mark_all_as_read', (response) => {
                 this.setState((prevState, props) => {
                     return Object.assign(prevState, {items: []});
                 });
