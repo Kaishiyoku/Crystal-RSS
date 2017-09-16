@@ -4,7 +4,6 @@ Route::get('/', 'HomeController@index')->name('home.index');
 
 if (app()->environment() !== 'production') {
     Route::get('/redis/keys', function () {
-        Redis::set('A', 'basoipdja9isjdiasjd');
         $data = Redis::keys('*');
 
         return response()->json($data);
