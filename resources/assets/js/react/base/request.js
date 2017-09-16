@@ -3,6 +3,8 @@ import loading$ from "./stores/loading$";
 import Logger from 'js-logger';
 import _ from 'lodash';
 
+const HTTP_STATUS_422_UNPROCESSABLE_ENTITY = 422;
+
 function getUrlWithParams(url, urlParams = []) {
     return `${url}/${urlParams.join('/')}`;
 }
@@ -30,7 +32,9 @@ function baseRequest(method, url, successCallback = () => {}, errorCallback = ()
 
         successCallback(response);
     }).catch((error) => {
-        Logger.error('Request failed', error);
+        if (error.response.status !== HTTP_STATUS_422_UNPROCESSABLE_ENTITY) {
+            Logger.error('Request failed.', error.response.status);
+        }
 
         errorCallback(error);
 
