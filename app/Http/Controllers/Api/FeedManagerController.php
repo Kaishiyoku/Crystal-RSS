@@ -48,10 +48,6 @@ class FeedManagerController extends Controller
             $feed->category_id = $data['category_id'];
 
             auth()->user()->feeds()->save($feed);
-
-            flash()->success(trans('feed_manager.create.success'));
-
-            return redirect()->route('feed.manage.edit', [$feed->id]);
         } catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
             $validator->getMessageBag()->add('site_or_feed_url', trans('feed_manager.feed_exception'));
@@ -86,8 +82,6 @@ class FeedManagerController extends Controller
             $feed->category_id = $data['category_id'];
 
             $feed->save();
-
-            flash()->success(trans('feed_manager.edit.success'));
         }
         catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
@@ -118,10 +112,6 @@ class FeedManagerController extends Controller
         $feed->updateErrors()->delete();
 
         $feed->delete();
-
-        flash()->success(trans('feed_manager.destroy.success'));
-
-        return redirect()->route($this->redirectRoute);
     }
 
     /**

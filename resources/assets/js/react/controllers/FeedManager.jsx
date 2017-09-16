@@ -1,5 +1,5 @@
 import React from "react";
-import {get, put} from '../base/request';
+import {del, get, put} from '../base/request';
 import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
@@ -15,6 +15,10 @@ class FeedManager extends React.Component {
     }
 
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
         get('/api/feed/manage', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
@@ -26,6 +30,18 @@ class FeedManager extends React.Component {
         });
     }
 
+    deleteItem = (id) => (event) => {
+        let isConfirmed = confirm(trans('common.areYouSure'));
+
+        if (isConfirmed) {
+            del('/api/feed/manage', [id], (response) => {
+                this.loadData();
+            }, (error) => {
+                // TODO: handle error
+            });
+        }
+    };
+
     getRenderOptions() {
         let feeds = this.state.items.map((feed) => {
             return (
@@ -34,10 +50,10 @@ class FeedManager extends React.Component {
                     <td>{feed.category.title}</td>
                     <td>{feed.last_checked_at}</td>
                     <td>
-                        <a className="btn btn-link btn-delete">{trans('common.delete')}</a>
+                        <button className="btn btn-link btn-delete" onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</button>
                     </td>
                     <td>
-                        <Link to={`/feed/manage/edit/${feed.id}`} className="btn btn-link">{trans('common.edit')}</Link>
+                        <Link to={`/feed/manage/edit/${feed.id}`}>{trans('common.edit')}</Link>
                     </td>
                 </tr>
             );
@@ -50,8 +66,8 @@ class FeedManager extends React.Component {
                   <th>{trans('attributes.title')}</th>
                   <th>{trans('attributes.category')}</th>
                   <th>{trans('attributes.lastCheckedAt')}</th>
-                  <th></th>
-                  <th></th>
+                  <th/>
+                  <th/>
               </tr>
               </thead>
               <tbody>

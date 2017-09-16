@@ -47,7 +47,7 @@ class Feed extends React.Component {
     };
 
     markAllAsRead = (event) => {
-        let isConfirmed = confirm('Are you sure?');
+        let isConfirmed = confirm(trans('common.areYouSure'));
 
         if (isConfirmed) {
             put('/api/feed/mark_all_as_read', {}, [], (response) => {

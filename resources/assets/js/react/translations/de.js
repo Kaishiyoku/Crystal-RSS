@@ -20,7 +20,8 @@ let translations = {
         backToLandingPage: 'Zurück zur Startseite',
         delete: 'Löschen',
         edit: 'Ändern',
-        save: 'Speichern'
+        save: 'Speichern',
+        areYouSure: 'Sind Sie sicher?'
     },
     feed: {
         title: 'Feed',
