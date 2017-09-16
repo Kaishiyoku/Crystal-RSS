@@ -39,7 +39,7 @@ class FeedManagerEdit extends React.Component {
                         feedUrl: feedManageResponse.data.feed_url,
                         category: feedManageResponse.data.category.id
                     });
-                })
+                });
             }, (error) => {
                 // TODO: handle error
             });

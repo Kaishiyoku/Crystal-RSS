@@ -56,10 +56,13 @@ class CategoryController extends Controller
 
         $category->fill($data);
         $category->save();
+    }
 
-        flash()->success(trans('category.edit.success'));
+    public function show($id)
+    {
+        $category = auth()->user()->categories()->findOrFail($id);
 
-        return redirect()->route($this->redirectRoute);
+        return response()->json($category);
     }
 
     /**

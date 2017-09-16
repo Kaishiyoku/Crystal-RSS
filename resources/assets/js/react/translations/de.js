@@ -16,7 +16,10 @@ let translations = {
         title: 'Kategorien verwalten',
     },
     categoriesCreate: {
-        title: 'Kategorie hinzufügen'
+        title: 'Kategorie hinzufügen',
+    },
+    categoriesEdit: {
+      title: 'Kategorie „{:title}” ändern',
     },
     common: {
         appName: 'Crystal RSS',

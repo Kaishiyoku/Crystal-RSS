@@ -6,6 +6,7 @@ import Feed from "./Feed";
 import FeedManagerIndex from "./FeedManagerIndex";
 import Categories from "./Categories";
 import CategoriesCreate from "./CategoriesCreate";
+import CategoriesEdit from "./CategoriesEdit";
 
 class CategoriesIndex extends React.Component {
     render() {
@@ -13,6 +14,7 @@ class CategoriesIndex extends React.Component {
             <Switch>
                 <RouteAuth exact path={`${this.props.match.url}`} component={Categories}/>
                 <RouteAuth exact path={`${this.props.match.url}/create`} component={CategoriesCreate}/>
+                <RouteAuth exact path={`${this.props.match.url}/edit/:id`} component={CategoriesEdit}/>
             </Switch>
         );
     }
