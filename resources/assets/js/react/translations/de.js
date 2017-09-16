@@ -5,7 +5,12 @@ let translations = {
     },
     attributes: {
         email: 'E-Mail',
-        password: 'Passwort'
+        password: 'Passwort',
+        title: 'Titel',
+        category: 'Kategorie',
+        lastCheckedAt: 'Letzte Prüfung um',
+        siteUrl: 'Seiten-URL',
+        feedUrl: 'Feed-URL'
     },
     navigation: {
         landingPage: 'Startseite',
@@ -47,13 +52,6 @@ let translations = {
             title: '.·´¯`(>▂<)´¯`·.',
             subTitle: 'Die Seite, nach der Sie suchen, konnte leider nicht gefunden werden.'
         }
-    },
-    attributes: {
-        title: 'Titel',
-        category: 'Kategorie',
-        lastCheckedAt: 'Letzte Prüfung am',
-        siteUrl: 'Seiten-URL',
-        feedUrl: 'Feed-URL'
     }
 };
 
