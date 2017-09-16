@@ -10,7 +10,8 @@ let translations = {
         category: 'Kategorie',
         lastCheckedAt: 'Letzte Prüfung um',
         siteUrl: 'Seiten-URL',
-        feedUrl: 'Feed-URL'
+        feedUrl: 'Feed-URL',
+        siteOrFeedUrl: 'Seiten- oder Feed-URL'
     },
     navigation: {
         landingPage: 'Startseite',
@@ -46,6 +47,9 @@ let translations = {
     },
     feedManagerEdit: {
         title: 'Feed „{:title}” ändern'
+    },
+    feedManagerCreate: {
+        title: 'Feed hinzufügen'
     },
     errorPages: {
         404: {

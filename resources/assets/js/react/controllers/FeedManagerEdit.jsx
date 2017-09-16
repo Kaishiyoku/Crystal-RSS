@@ -101,11 +101,11 @@ class FeedManagerEdit extends React.Component {
                 </h1>
 
                 <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
-                    <Input name="title" type="text" label={trans('attributes.title')} labelColClass="col-lg-2" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.title} value={this.state.title} required/>
-                    <Input name="siteUrl" type="text" label={trans('attributes.siteUrl')} labelColClass="col-lg-2" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.siteUrl} value={this.state.siteUrl} required/>
-                    <Input name="feedUrl" type="text" label={trans('attributes.feedUrl')} labelColClass="col-lg-2" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.feedUrl} value={this.state.feedUrl} required/>
-                    <Select name="category" options={categoryOptions} label={trans('attributes.category')} labelColClass="col-lg-2" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.category} value={this.state.category} required/>
-                    <SubmitButton label={trans('common.save')} colClass="col-lg-10" disabled={!this.state.canSubmit}/>
+                    <Input name="title" type="text" label={trans('attributes.title')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.title} value={this.state.title} required/>
+                    <Input name="siteUrl" type="text" label={trans('attributes.siteUrl')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.siteUrl} value={this.state.siteUrl} required/>
+                    <Input name="feedUrl" type="text" label={trans('attributes.feedUrl')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.feedUrl} value={this.state.feedUrl} required/>
+                    <Select name="category" options={categoryOptions} label={trans('attributes.category')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.category} value={this.state.category} required/>
+                    <SubmitButton label={trans('common.save')} colClass="col-lg-9" disabled={!this.state.canSubmit}/>
                 </Formsy.Form>
             </div>
         );

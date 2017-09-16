@@ -38,6 +38,7 @@ class FeedManagerController extends Controller
         try {
             $reader = new Reader();
             $resource = $reader->discover($data['site_or_feed_url']);
+
             $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
             $rssFeed = $parser->execute();
 

@@ -8,6 +8,7 @@ import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
 import FeedManager from "../controllers/FeedManager";
 import FeedManagerEdit from "../controllers/FeedManagerEdit";
+import FeedManagerCreate from "../controllers/FeedManagerCreate";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -77,6 +78,7 @@ export const Main = () => (
         <RouteAuth exact path="/feed" component={Feed}/>
         <RouteAuth exact path="/feed/history" component={FeedHistory}/>
         <RouteAuth exact path="/feed/manage" component={FeedManager}/>
+        <RouteAuth exact path="/feed/manage/create" component={FeedManagerCreate}/>
         <RouteAuth exact path="/feed/manage/edit/:id" component={FeedManagerEdit}/>
 
         <Route component={NotFound}/>

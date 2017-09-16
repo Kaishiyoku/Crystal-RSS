@@ -30,6 +30,10 @@ class FeedManager extends React.Component {
         });
     }
 
+    addItem = (event) => {
+        this.props.history.push('/feed/manage/create');
+    };
+
     deleteItem = (id) => (event) => {
         let isConfirmed = confirm(trans('common.areYouSure'));
 
@@ -90,7 +94,7 @@ class FeedManager extends React.Component {
                 </h1>
 
                 <p>
-                    <button type="button" className="btn btn-primary">{trans('feedManager.addFeed')}</button>
+                    <button type="button" className="btn btn-primary" onClick={this.addItem}>{trans('feedManager.addFeed')}</button>
                 </p>
 
                 {feedTable}
