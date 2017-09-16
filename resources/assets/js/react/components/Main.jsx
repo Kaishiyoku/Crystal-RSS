@@ -7,6 +7,7 @@ import Logout from "../controllers/Logout";
 import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
 import FeedManager from "../controllers/FeedManager";
+import FeedManagerEdit from "../controllers/FeedManagerEdit";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -55,7 +56,7 @@ class RoutePublic extends React.Component {
     };
 
     render() {
-        let {component, path, name, exact, strict} = this.props;
+        let {component, path, name, exact, strict, children} = this.props;
         let routeProps = {
             path,
             component,
@@ -64,7 +65,7 @@ class RoutePublic extends React.Component {
             strict
         };
 
-        return !isLoggedIn() ? <Route {...routeProps} /> : <Redirect to="/feed" />;
+        return !isLoggedIn() ? <Route {...routeProps}>{children}</Route> : <Redirect to="/feed" />;
     }
 }
 
@@ -76,6 +77,7 @@ export const Main = () => (
         <RouteAuth exact path="/feed" component={Feed}/>
         <RouteAuth exact path="/feed/history" component={FeedHistory}/>
         <RouteAuth exact path="/feed/manage" component={FeedManager}/>
+        <RouteAuth exact path="/feed/manage/edit/:id" component={FeedManagerEdit}/>
 
         <Route component={NotFound}/>
     </Switch>

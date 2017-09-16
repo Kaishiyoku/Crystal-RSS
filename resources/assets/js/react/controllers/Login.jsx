@@ -40,7 +40,7 @@ class Login extends React.Component {
 
                 user$.next(userResponse.data);
 
-                history.push('/feed');
+                this.props.history.push('/feed');
             }, (error) => {
                 // TODO: handle error
             }, loginResponse.data.token);

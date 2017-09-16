@@ -72,8 +72,8 @@ custom:
   attribute-name:
     rule-name: custom-message
 attributes:
-  feed_url: Feed-Url
-  site_url: Seiten-Url
+  feed_url: Feed-URL
+  site_url: Seiten-URL
   title: Titel
   site_or_feed_url: Seiten- oder Feed-Url
   last_checked_at: Zuletzt geprüft um

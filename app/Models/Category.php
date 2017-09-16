@@ -38,7 +38,7 @@ class Category extends Model
      * @var array
      */
     protected $hidden = [
-
+        'user_id'
     ];
 
     public function user()

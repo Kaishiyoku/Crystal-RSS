@@ -22,7 +22,7 @@ class FeedHistory extends React.Component {
         get('/api/feed/read', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
-                    items: response.data.items
+                    items: response.data
                 });
             })
         }, (error) => {

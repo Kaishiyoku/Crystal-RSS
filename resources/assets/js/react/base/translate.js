@@ -15,7 +15,7 @@ export function getLocale() {
     return localStorage.getItem('locale');
 }
 
-export default function trans(lookupKey) {
+export default function trans(lookupKey, params = {}) {
     let translations = allTranslations[getLocale()];
 
     // if locale not supported use fallback locale
@@ -28,6 +28,11 @@ export default function trans(lookupKey) {
     if (_.isEmpty(translatedStr)) {
         return `[${lookupKey}]`;
     }
+
+    // replace params
+    _.forEach(params, (value, key) => {
+        translatedStr = translatedStr.replace(`{:${key}}`, value);
+    });
 
     return translatedStr
 }

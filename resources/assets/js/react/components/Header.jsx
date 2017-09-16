@@ -54,7 +54,7 @@ class Header extends React.Component {
                     </a>
                     <div className={`dropdown-menu dropdown-menu-right${showUserDropdownMenuClass}`} aria-labelledby="userDropdown">
                         <h6 className="dropdown-header">{trans('navigation.manage')}</h6>
-                        <NavLink exact to="/feed/manage" className="dropdown-item">
+                        <NavLink to="/feed/manage" className="dropdown-item">
                             <i className="fa fa-rss"></i>&nbsp;
                             {trans('navigation.feed')}
                         </NavLink>

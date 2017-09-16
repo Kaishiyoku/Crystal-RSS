@@ -14,9 +14,9 @@ function baseRequest(method, url, data = {}, urlParams = {}, successCallback = (
         data,
         params: {api_token: token || localStorage.getItem('token')}
     }).then((response) => {
-        successCallback(response);
-
         loading$.next(false);
+
+        successCallback(response);
     }).catch((error) => {
         errorCallback(error);
 
@@ -32,8 +32,8 @@ export function post(url, data = {}, successCallback = () => {}, errorCallback =
     baseRequest('post', url, data, [], successCallback, errorCallback, token);
 }
 
-export function put(url, data = {}, successCallback = () => {}, errorCallback = () => {}, token = null) {
-    baseRequest('put', url, data, [], successCallback, errorCallback, token);
+export function put(url, data = {}, urlParams = [], successCallback = () => {}, errorCallback = () => {}, token = null) {
+    baseRequest('put', url, data, urlParams, successCallback, errorCallback, token);
 }
 
 export function del(url, urlParams = [], successCallback = () => {}, errorCallback = () => {}, token = null) {

@@ -17,7 +17,10 @@ let translations = {
     common: {
         appName: 'Crystal RSS',
         loading: 'Lade...',
-        backToLandingPage: 'Zurück zur Startseite'
+        backToLandingPage: 'Zurück zur Startseite',
+        delete: 'Löschen',
+        edit: 'Ändern',
+        save: 'Speichern'
     },
     feed: {
         title: 'Feed',
@@ -31,13 +34,25 @@ let translations = {
         noReadItems: 'Keine gelesenen Einträge.'
     },
     feedManager: {
-      title: 'Feed verwalten'
+        title: 'Feed verwalten',
+        addFeed: 'Feed hinzufügen',
+        noFeedsYet: 'Noch keine Feeds vorhanden.'
+    },
+    feedManagerEdit: {
+        title: 'Feed „{:title}” ändern'
     },
     errorPages: {
         404: {
             title: '.·´¯`(>▂<)´¯`·.',
             subTitle: 'Die Seite, nach der Sie suchen, konnte leider nicht gefunden werden.'
         }
+    },
+    attributes: {
+        title: 'Titel',
+        category: 'Kategorie',
+        lastCheckedAt: 'Letzte Prüfung am',
+        siteUrl: 'Seiten-URL',
+        feedUrl: 'Feed-URL'
     }
 };
 

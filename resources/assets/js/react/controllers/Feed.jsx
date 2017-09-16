@@ -3,7 +3,6 @@ import {get, put} from '../base/request';
 import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
-import user$ from "../base/stores/user$";
 
 class Feed extends React.Component {
     constructor() {
@@ -23,7 +22,7 @@ class Feed extends React.Component {
         get('/api/feed/unread', [], (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
-                    items: response.data.items
+                    items: response.data
                 });
             })
         }, (error) => {
@@ -32,7 +31,7 @@ class Feed extends React.Component {
     }
 
     toggleItemStatus = (id) => (event) => {
-        put('/api/feed/toggle_status', {id}, (response) => {
+        put('/api/feed/toggle_status', {id}, [], (response) => {
             this.setState((prevState, props) => {
                return Object.assign({prevState, items: prevState.items.map((obj) => {
                    if (obj.id === id) {
@@ -51,7 +50,7 @@ class Feed extends React.Component {
         let isConfirmed = confirm('Are you sure?');
 
         if (isConfirmed) {
-            put('/api/feed/mark_all_as_read', {}, (response) => {
+            put('/api/feed/mark_all_as_read', {}, [], (response) => {
                 this.setState((prevState, props) => {
                     return Object.assign(prevState, {items: []});
                 });

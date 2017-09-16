@@ -10,9 +10,7 @@ class FeedController extends Controller
     {
         $unreadFeedItems = auth()->user()->feedItems()->unread()->with('feed');
 
-        return response()->json([
-            'items' => $unreadFeedItems->get()
-        ]);
+        return response()->json($unreadFeedItems->get());
     }
 
     public function toggleFeedItemStatus(Request $request)
@@ -36,8 +34,6 @@ class FeedController extends Controller
     {
         $readFeedItems = auth()->user()->feedItems()->read()->with('feed');
 
-        return response()->json([
-            'items' => $readFeedItems->get()
-        ]);
+        return response()->json($readFeedItems->get());
     }
 }

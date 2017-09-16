@@ -23,7 +23,7 @@ class App extends React.Component {
         });
 
         this.userSubscription = user$.subscribe((state) => {
-            put('/api/store/update', {user: state}, (response) => {
+            put('/api/store/update', {user: state}, [], (response) => {
 
             }, (error) => {
                 // TODO: handle error

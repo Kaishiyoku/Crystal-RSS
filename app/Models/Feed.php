@@ -48,7 +48,7 @@ class Feed extends Model
      * @var array
      */
     protected $hidden = [
-
+        'user_id', 'category_id'
     ];
 
     /**
