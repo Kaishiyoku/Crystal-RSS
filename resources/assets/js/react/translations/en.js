@@ -1,58 +1,75 @@
 let translations = {
-    login: {
-        title: 'Login',
-        submit: 'Login'
-    },
     attributes: {
-        email: 'Email',
-        password: 'Password',
-        title: 'Title',
         category: 'Category',
+        email: 'Email',
+        feedUrl: 'Feed URL',
         lastCheckedAt: 'Last checked at',
+        password: 'Password',
+        siteOrFeedUrl: 'Site or feed URL',
         siteUrl: 'Site URL',
-        feedUrl: 'Feed URL'
+        title: 'Title',
     },
-    navigation: {
-        landingPage: 'Landing page',
-        feed: 'Feed',
-        logout: 'Logout',
-        feedHistory: 'Feed history',
-        manage: 'Manage'
+    categories: {
+        addCategory: 'Add category',
+        noCategoriesYet: 'No categories yet.',
+        numberOfFeeds: 'Number of feeds',
+        title: 'Manage categories',
+    },
+    categoriesCreate: {
+        title: 'Add category',
+    },
+    categoriesEdit: {
+        title: 'Edit category “{:title}”',
     },
     common: {
         appName: 'Crystal RSS',
-        loading: 'Loading...',
+        areYouSure: 'Are you sure?',
         backToLandingPage: 'Back to landing page',
         delete: 'Delete',
         edit: 'Edit',
+        loading: 'Loading...',
         save: 'Save',
-        areYouSure: 'Are you sure?'
-    },
-    feed: {
-        title: 'Feed',
-        refreshCompleteList: 'Refresh complete list',
-        noUnreadItems: 'No unread items.',
-        markAllAsRead: 'Mark all as read',
-        loadMore: 'Load more'
-    },
-    feedHistory: {
-        title: 'Feed history',
-        noReadItems: 'No read items.'
-    },
-    feedManager: {
-        title: 'Manage feed',
-        addFeed: 'Add feed',
-        noFeedsYet: 'No feeds yet.'
-    },
-    feedManagerEdit: {
-        title: 'Edit feed “{:title}”'
     },
     errorPages: {
         404: {
+            subTitle: 'The page you’re looking for couldn’t be found.',
             title: '.·´¯`(>▂<)´¯`·.',
-            subTitle: 'The page you\'re looking for couldn\'t be found.'
         }
-    }
+    },
+    feed: {
+        loadMore: 'Load more',
+        markAllAsRead: 'Mark all as read',
+        noUnreadItems: 'No unread items.',
+        refreshCompleteList: 'Refresh complete list',
+        title: 'Feed',
+    },
+    feedHistory: {
+        noReadItems: 'No read items.',
+        title: 'Feed history',
+    },
+    feedManager: {
+        addFeed: 'Add feed',
+        noFeedsYet: 'No feeds yet.',
+        title: 'Manage feed',
+    },
+    feedManagerCreate: {
+        title: 'Add feed',
+    },
+    feedManagerEdit: {
+        title: 'Edit feed “{:title}”',
+    },
+    login: {
+        submit: 'Login',
+        title: 'Login',
+    },
+    navigation: {
+        categories: 'Categories',
+        feed: 'Feed',
+        feedHistory: 'Feed history',
+        landingPage: 'Landing page',
+        logout: 'Logout',
+        manage: 'Manage',
+    },
 };
 
 export {translations};

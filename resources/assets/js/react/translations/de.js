@@ -19,7 +19,7 @@ let translations = {
         title: 'Kategorie hinzufügen',
     },
     categoriesEdit: {
-      title: 'Kategorie „{:title}” ändern',
+        title: 'Kategorie „{:title}” ändern',
     },
     common: {
         appName: 'Crystal RSS',
