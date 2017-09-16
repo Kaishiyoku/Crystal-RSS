@@ -4,17 +4,14 @@ import React from "react";
 import NotFound from "../controllers/NotFound";
 import Login from "../controllers/Login";
 import Logout from "../controllers/Logout";
-import FeedHistory from "../controllers/FeedHistory";
 import _ from "lodash";
-import FeedManager from "../controllers/FeedManager";
-import FeedManagerEdit from "../controllers/FeedManagerEdit";
-import FeedManagerCreate from "../controllers/FeedManagerCreate";
+import FeedIndex from "../controllers/FeedIndex";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
 }
 
-class RouteAuth extends React.Component {
+export class RouteAuth extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -75,11 +72,7 @@ export const Main = () => (
         <RoutePublic exact path="/" component={Login}/>
 
         <RouteAuth exact path="/logout" component={Logout}/>
-        <RouteAuth exact path="/feed" component={Feed}/>
-        <RouteAuth exact path="/feed/history" component={FeedHistory}/>
-        <RouteAuth exact path="/feed/manage" component={FeedManager}/>
-        <RouteAuth exact path="/feed/manage/create" component={FeedManagerCreate}/>
-        <RouteAuth exact path="/feed/manage/edit/:id" component={FeedManagerEdit}/>
+        <RouteAuth path="/feed" component={FeedIndex}/>
 
         <Route component={NotFound}/>
     </Switch>
