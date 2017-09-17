@@ -76,7 +76,7 @@ class FeedHistory extends React.Component {
 
         let pageCount = this.state.items.length / APP_CONFIG.pagination.itemsPerPage;
 
-        let pagination = pageCount > 0 ? (
+        let pagination = pageCount > 1 ? (
             <ReactPaginate
                 previousClassName="page-item"
                 previousLinkClassName="page-link"
