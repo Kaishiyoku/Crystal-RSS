@@ -41,10 +41,8 @@
 <hr/>
 
 <div class="footer">
-    {{ StringHelper::getYearsFrom(2016) }}, {{ trans('common.copyright') }}<br>
-    {{ Html::linkRoute('home.show_contact_form', trans('common.contact')) }}<br>
-    {{ Html::linkRoute('home.imprint', trans('common.imprint')) }}<br>
-    {{ Html::linkRoute('home.privacy_policy', trans('common.privacy_policy')) }}<br>
+    {{ getYearsFrom(2017) }}<br/>
+    {{ env('AUTHOR') }}<br/>
 
     @yield('footer')
 </div>

@@ -78,3 +78,7 @@ attributes:
   site_or_feed_url: Seiten- oder Feed-Url
   last_checked_at: Zuletzt geprüft um
   category_id: Kategorie
+  name: Username
+  email: E-Mail
+  password: Passwort
+  password_confirmation: Passwort (Bestätigung)

@@ -7,6 +7,7 @@ import Logout from "../controllers/Logout";
 import _ from "lodash";
 import FeedIndex from "../controllers/FeedIndex";
 import CategoriesIndex from "../controllers/CategoriesIndex";
+import Registration from "../controllers/Registration";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -71,6 +72,7 @@ class RoutePublic extends React.Component {
 export const Main = () => (
     <Switch>
         <RoutePublic exact path="/" component={Login}/>
+        <RoutePublic exact path="/register" component={Registration}/>
 
         <RouteAuth exact path="/logout" component={Logout}/>
         <RouteAuth path="/feed" component={FeedIndex}/>

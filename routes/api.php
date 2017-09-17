@@ -13,6 +13,7 @@
 
 Route::middleware('api')->as('api.')->group(function () {
     Route::post('/login', 'Auth\LoginController@login')->name('auth.login');
+    Route::post('/register', 'Auth\RegisterController@register')->name('auth.register');
 });
 
 Route::middleware('auth:api')->as('api.')->group(function () {

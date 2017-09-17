@@ -4,7 +4,9 @@ let translations = {
         email: 'Email',
         feedUrl: 'Feed URL',
         lastCheckedAt: 'Last checked at',
+        name: 'Username',
         password: 'Password',
+        passwordConfirmation: 'Password (confirmation)',
         siteOrFeedUrl: 'Site or feed URL',
         siteUrl: 'Site URL',
         title: 'Title',
@@ -69,6 +71,7 @@ let translations = {
         landingPage: 'Landing page',
         logout: 'Logout',
         manage: 'Manage',
+        register: 'Register'
     },
 };
 

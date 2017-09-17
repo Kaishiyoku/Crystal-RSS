@@ -37,6 +37,10 @@ class Header extends React.Component {
             </li>
         ) : '';
 
+        let registrationLink = !isLoggedIn ? (
+            <li className="nav-item"><NavLink exact to="/register" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> {trans('navigation.register')}</NavLink></li>
+        ) : '';
+
         let feedLink = '';
         let logoutLink = '';
         let feedHistoryLink = '';
@@ -106,6 +110,7 @@ class Header extends React.Component {
                         {feedHistoryLink}
                         {userDropdown}
                         {logoutLink}
+                        {registrationLink}
                     </ul>
                 </div>
             </div>
