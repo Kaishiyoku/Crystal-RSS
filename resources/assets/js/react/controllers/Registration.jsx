@@ -1,10 +1,10 @@
 import React from "react";
 import Input from "../components/Input";
 import Formsy from 'formsy-react';
-import {get, post} from "../base/request";
+import {post} from "../base/request";
 import SubmitButton from "../components/SubmitButton";
 import trans from "../base/translate";
-import user$ from "../base/stores/user$";
+import notifications$ from "../base/stores/notifications$";
 
 class Registration extends React.Component {
     constructor() {
@@ -39,6 +39,8 @@ class Registration extends React.Component {
 
     submit = (model) => {
         post('/api/register', (response) => {
+            notifications$.next({type: 'success', text: trans('registration.success')});
+
             this.props.history.push('/');
         }, (error) => {
             this.setState((prevState, props) => {

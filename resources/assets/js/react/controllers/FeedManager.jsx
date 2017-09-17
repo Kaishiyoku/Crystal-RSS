@@ -2,7 +2,7 @@ import React from "react";
 import {del, get} from '../base/request';
 import trans from "../base/translate";
 import {Link} from "react-router-dom";
-import Logger from 'js-logger';
+import notifications$ from "../base/stores/notifications$";
 
 class FeedManager extends React.Component {
     constructor() {
@@ -38,6 +38,8 @@ class FeedManager extends React.Component {
 
         if (isConfirmed) {
             del('/api/feed/manage', (response) => {
+                notifications$.next({type: 'success', text: trans('feedManagerDelete.success')});
+
                 this.loadData();
             }, (error) => {
                 // TODO: handle error

@@ -4,6 +4,7 @@ import trans from "../base/translate";
 import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
 import Breadcrumbs from "../components/Breadcrumbs";
+import notifications$ from "../base/stores/notifications$";
 
 class CategoriesEdit extends React.Component {
     constructor() {
@@ -46,6 +47,8 @@ class CategoriesEdit extends React.Component {
 
     submit = (model) => {
         put('/api/categories', (response) => {
+            notifications$.next({type: 'success', text: trans('categoriesEdit.success')});
+
             this.props.history.push('/categories');
         }, (error) => {
             this.setState((prevState, props) => {

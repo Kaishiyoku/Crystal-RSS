@@ -1,12 +1,10 @@
 import React from "react";
-import {get, post} from '../base/request';
+import {post} from '../base/request';
 import trans from "../base/translate";
 import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
-import Select from "../components/Select";
-import _ from 'lodash';
-import {Link} from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
+import notifications$ from "../base/stores/notifications$";
 
 class CategoriesCreate extends React.Component {
     constructor() {
@@ -36,6 +34,8 @@ class CategoriesCreate extends React.Component {
 
     submit = (model) => {
         post('/api/categories', (response) => {
+            notifications$.next({type: 'success', text: trans('categoriesCreate.success')});
+
             this.props.history.push('/categories');
         }, (error) => {
             this.setState((prevState, props) => {

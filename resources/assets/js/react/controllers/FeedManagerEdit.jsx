@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
 import Select from "../components/Select";
 import Breadcrumbs from "../components/Breadcrumbs";
+import notifications$ from "../base/stores/notifications$";
 
 class FeedManagerEdit extends React.Component {
     constructor() {
@@ -62,6 +63,8 @@ class FeedManagerEdit extends React.Component {
 
     submit = (model) => {
         put('/api/feed/manage', (response) => {
+            notifications$.next({type: 'success', text: trans('feedManagerEdit.success')});
+
             this.props.history.push('/feed/manage');
         }, (error) => {
             this.setState((prevState, props) => {

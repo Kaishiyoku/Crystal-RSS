@@ -7,6 +7,7 @@ import Select from "../components/Select";
 import _ from 'lodash';
 import {Link} from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
+import notifications$ from "../base/stores/notifications$";
 
 class FeedManagerCreate extends React.Component {
     constructor() {
@@ -52,6 +53,8 @@ class FeedManagerCreate extends React.Component {
 
     submit = (model) => {
         post('/api/feed/manage', (response) => {
+            notifications$.next({type: 'success', text: trans('feedManagerCreate.success')});
+
             this.props.history.push('/feed/manage');
         }, (error) => {
             this.setState((prevState, props) => {

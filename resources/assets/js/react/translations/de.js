@@ -18,15 +18,21 @@ let translations = {
         title: 'Kategorien verwalten',
     },
     categoriesCreate: {
+        success: 'Kategorie erstellt.',
         title: 'Kategorie hinzufügen',
     },
+    categoriesDelete: {
+        success: 'Kategorie gelöscht.',
+    },
     categoriesEdit: {
+        success: 'Kategorie geändert.',
         title: 'Kategorie „{:title}” ändern',
     },
     common: {
         appName: 'Crystal RSS',
         areYouSure: 'Sind Sie sicher?',
         backToLandingPage: 'Zurück zur Startseite',
+        close: 'Schließen',
         delete: 'Löschen',
         edit: 'Ändern',
         loading: 'Lade...',
@@ -56,14 +62,23 @@ let translations = {
         title: 'Feed verwalten',
     },
     feedManagerCreate: {
-        title: 'Feed hinzufügen'
+        success: 'Feed erstellt.',
+        title: 'Feed hinzufügen',
+    },
+    feedManagerDelete: {
+        success: 'Feed gelöscht',
     },
     feedManagerEdit: {
-        title: 'Feed „{:title}” ändern'
+        success: 'Feed geändert.',
+        title: 'Feed „{:title}” ändern',
     },
     login: {
         submit: 'Login',
+        success: 'Login erfolgreich.',
         title: 'Login',
+    },
+    logout: {
+        success: 'Logout erfolgreich.',
     },
     navigation: {
         categories: 'Kategorien',
@@ -75,8 +90,9 @@ let translations = {
         register: 'Registrieren',
     },
     registration: {
+        success: 'Registrierung erfolgreich. Ihr Account muss noch von einem Administrator aktiviert werden. Sie erhalten eine E-Mail sobald Sie sich einloggen können.',
         title: 'Registrierung',
-    }
+    },
 };
 
 export {translations};

@@ -5,6 +5,7 @@ import {get, post} from "../base/request";
 import SubmitButton from "../components/SubmitButton";
 import trans from "../base/translate";
 import user$ from "../base/stores/user$";
+import notifications$ from "../base/stores/notifications$";
 
 class Login extends React.Component {
     constructor() {
@@ -39,6 +40,8 @@ class Login extends React.Component {
                 localStorage.setItem('token', loginResponse.data.token);
 
                 user$.next(userResponse.data);
+
+                notifications$.next({type: 'success', text: trans('login.success')});
             }, (error) => {
                 // TODO: handle error
             }, null, loginResponse.data.token);

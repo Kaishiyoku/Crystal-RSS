@@ -1,5 +1,5 @@
-import {ReplaySubject} from "rxjs";
+import {Subject} from "rxjs";
 
-const notifications$ = new ReplaySubject(1);
+const notifications$ = new Subject();
 
 export default notifications$;
