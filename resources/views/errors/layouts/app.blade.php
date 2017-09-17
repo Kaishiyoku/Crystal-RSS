@@ -31,8 +31,6 @@
         </div>
     </div>
 
-    {{ Html::script('js/app.js') }}
-
     @yield('scripts')
 </body>
 </html>
