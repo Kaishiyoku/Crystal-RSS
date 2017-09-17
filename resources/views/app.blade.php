@@ -22,7 +22,7 @@
 
 </div>
 
-{{ Html::script('js/react/app.js') }}
+{{ Html::script('js/app.js') }}
 
 @yield('scripts')
 
