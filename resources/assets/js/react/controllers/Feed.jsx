@@ -3,6 +3,7 @@ import {get, put} from '../base/request';
 import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
+import notifications$ from "../base/stores/notifications$";
 
 class Feed extends React.Component {
     constructor() {
@@ -53,6 +54,8 @@ class Feed extends React.Component {
             put('/api/feed/mark_all_as_read', (response) => {
                 this.setState((prevState, props) => {
                     return Object.assign(prevState, {items: []});
+                }, () => {
+                    notifications$.next({type: 'success', text: trans('feed.markAllAsReadSuccessMessage')});
                 });
             }, (error) => {
                 // TODO: handle error

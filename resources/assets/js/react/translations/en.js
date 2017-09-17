@@ -41,6 +41,7 @@ let translations = {
     feed: {
         loadMore: 'Load more',
         markAllAsRead: 'Mark all as read',
+        markAllAsReadSuccessMessage: 'All entries marked as read.',
         noUnreadItems: 'No unread items.',
         refreshCompleteList: 'Refresh complete list',
         title: 'Feed',
