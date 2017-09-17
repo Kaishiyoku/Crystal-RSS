@@ -8,7 +8,8 @@ class Header extends React.Component {
         super(props);
 
         this.state= {
-            isUserDropdownOpen: false
+            isUserDropdownOpen: false,
+            isNavigationVisible: false
         };
     }
 
@@ -16,6 +17,12 @@ class Header extends React.Component {
       this.setState((prevState, props) => {
           return Object.assign(prevState, {isUserDropdownOpen: !prevState.isUserDropdownOpen})
       })
+    };
+
+    toggleNavigation = (event) => {
+        this.setState((prevState, props) => {
+            return Object.assign(prevState, {isNavigationVisible: !prevState.isNavigationVisible});
+        });
     };
 
     render() {
@@ -67,6 +74,8 @@ class Header extends React.Component {
             );
         }
 
+        let navigationClasses = `collapse navbar-collapse${this.state.isNavigationVisible ? ' show' : ''}`;
+
         return <nav className="navbar navbar-expand-lg navbar-dark bg-primary z-m-b-25">
             <div className="container">
                 <Link to="/" className="navbar-brand">
@@ -74,11 +83,20 @@ class Header extends React.Component {
                     {trans('common.appName')}
                 </Link>
 
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={this.toggleNavigation}
+                >
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className={navigationClasses} id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         {landingPageLink}
                         {feedLink}
