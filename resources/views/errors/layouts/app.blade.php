@@ -12,8 +12,6 @@
     @include('shared._favicon')
 
     {{ Html::style('css/app.css') }}
-
-    @include('shared._javascript_config')
 </head>
 <body>
     <div id="app">

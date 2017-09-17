@@ -16,9 +16,6 @@
     @include('shared._favicon')
 
     {{ Html::style('css/app.css') }}
-    {{ Html::style('js/plugins/codesample/css/prism.css') }}
-
-    @include('shared._javascript_config')
 </head>
 <body>
 <div id="app">
