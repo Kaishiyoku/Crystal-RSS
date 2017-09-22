@@ -5,7 +5,10 @@ const LOG_VALUE_ERROR = 8;
 const LOG_VALUE_WARN = 4;
 
 export function initLogger() {
+    let defaultLogLevel = process.env.NODE_ENV === 'development' ? Logger.DEBUG : Logger.WARN;
+
     Logger.useDefaults({
+        defaultLevel: defaultLogLevel,
         formatter: (messages, context) => {
             let date = new Date();
             let formattedDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
