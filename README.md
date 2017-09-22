@@ -14,7 +14,7 @@ Table of contents
   
 License
 =======
-MIT (https://github.com/Kaishiyoku/laravel-menu/blob/master/LICENSE)
+MIT (https://github.com/Kaishiyoku/Crystal-RSS/blob/master/LICENSE)
 
 
 Author
