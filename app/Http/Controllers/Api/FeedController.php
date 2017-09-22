@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FeedController extends Controller
@@ -18,6 +19,13 @@ class FeedController extends Controller
         $feedItem = auth()->user()->feedItems()->findOrFail($request->get('id'));
 
         $feedItem->is_read = !$feedItem->is_read;
+
+        if ($feedItem->is_read) {
+            $feedItem->read_at = Carbon::now();
+        } else {
+            $feedItem->read_at = null;
+        }
+
         $feedItem->save();
 
         return response()->json(['isRead' => $feedItem->is_read]);
@@ -25,7 +33,7 @@ class FeedController extends Controller
 
     public function markAllAsRead()
     {
-        auth()->user()->feedItems()->unread()->update(['is_read' => true]);
+        auth()->user()->feedItems()->unread()->update(['is_read' => true, 'read_at' => Carbon::now()]);
 
         return response()->json();
     }
@@ -39,7 +47,7 @@ class FeedController extends Controller
 
     private function getFeedItems()
     {
-        return auth()->user()->feedItems()->select('id', 'user_id', 'feed_id', 'is_read', 'url', 'title', 'author', 'date')->with(['feed' => function ($query) {
+        return auth()->user()->feedItems()->select('id', 'feed_id', 'is_read', 'url', 'title', 'date')->with(['feed' => function ($query) {
             $query->select('id', 'title');
         }]);
     }
