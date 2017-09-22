@@ -8,7 +8,7 @@ class FeedController extends Controller
 {
     public function unread()
     {
-        $unreadFeedItems = auth()->user()->feedItems()->unread()->with('feed');
+        $unreadFeedItems = $this->getFeedItems()->unread();
 
         return response()->json($unreadFeedItems->get());
     }
@@ -32,8 +32,15 @@ class FeedController extends Controller
 
     public function read()
     {
-        $readFeedItems = auth()->user()->feedItems()->read()->with('feed');
+        $readFeedItems = $this->getFeedItems()->read();
 
         return response()->json($readFeedItems->get());
+    }
+
+    private function getFeedItems()
+    {
+        return auth()->user()->feedItems()->select('id', 'user_id', 'feed_id', 'is_read', 'url', 'title', 'author', 'date')->with(['feed' => function ($query) {
+            $query->select('id', 'title');
+        }]);
     }
 }
