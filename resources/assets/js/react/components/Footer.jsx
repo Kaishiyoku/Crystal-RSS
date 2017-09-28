@@ -11,13 +11,17 @@ class Footer extends React.Component {
             yearRange = `${startYear} - ${currentYear}`;
         }
 
+        console.debug(process.env);
+
         return (
             <div className="container">
                 <footer className="z-p-t-50 z-p-b-20">
                     <div className="text-muted">
+                        &copy;
+                        &nbsp;
                         {yearRange},
-
-                        Andreas Wiedel
+                        &nbsp;
+                        {process.env.MIX_AUTHOR}
                     </div>
                 </footer>
             </div>
