@@ -170,6 +170,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Kaishiyoku\Menu\MenuServiceProvider::class,
@@ -177,6 +178,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
 
         /*
          * Application Service Providers...

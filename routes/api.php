@@ -25,6 +25,7 @@ Route::middleware('auth:api')->as('api.')->group(function () {
     Route::get('/feed/read', 'Api\FeedController@read')->name('feed.read');
     Route::put('/feed/toggle_status', 'Api\FeedController@toggleFeedItemStatus')->name('feed.toggle_status');
     Route::put('/feed/mark_all_as_read', 'Api\FeedController@markAllAsRead')->name('feed.mark_all_as_read');
+    Route::get('/feed/search/{term}', 'Api\FeedController@search')->name('feed.search');
 
     Route::put('/store/update', 'Api\StoreController@update')->name('store.update');
     Route::get('/store/retrieve', 'Api\StoreController@retrieve')->name('store.retrieve');

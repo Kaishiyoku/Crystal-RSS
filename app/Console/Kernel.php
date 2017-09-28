@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\UpdateFeed::class
+        Commands\UpdateFeed::class,
+        Commands\ImportDataForSearchEngine::class,
     ];
 
     /**

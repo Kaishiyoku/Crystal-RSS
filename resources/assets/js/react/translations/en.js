@@ -7,6 +7,7 @@ let translations = {
         name: 'Username',
         password: 'Password',
         passwordConfirmation: 'Password (confirmation)',
+        searchTerm: 'Search term',
         siteOrFeedUrl: 'Site or feed URL',
         siteUrl: 'Site URL',
         title: 'Title',
@@ -87,11 +88,17 @@ let translations = {
         landingPage: 'Landing page',
         logout: 'Logout',
         manage: 'Manage',
-        register: 'Register'
+        register: 'Register',
+        search: 'Search',
     },
     registration: {
         success: 'Registration successful. Your account has to be activated by an administrator first. You will receive an email as soon as you can login.',
         title: 'Registration',
+    },
+    search: {
+        title: 'Search',
+        submit: 'Search',
+        nothingFound: 'No entries found.',
     },
 };
 

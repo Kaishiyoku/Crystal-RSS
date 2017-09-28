@@ -8,6 +8,7 @@ import _ from "lodash";
 import FeedIndex from "../controllers/FeedIndex";
 import CategoriesIndex from "../controllers/CategoriesIndex";
 import Registration from "../controllers/Registration";
+import Search from "../controllers/Search";
 
 export function isLoggedIn() {
     return !_.isEmpty(localStorage.getItem('token'));
@@ -77,6 +78,7 @@ export const Main = () => (
         <RouteAuth exact path="/logout" component={Logout}/>
         <RouteAuth path="/feed" component={FeedIndex}/>
         <RouteAuth path="/categories" component={CategoriesIndex}/>
+        <RouteAuth path="/search" component={Search}/>
 
         <Route component={NotFound}/>
     </Switch>

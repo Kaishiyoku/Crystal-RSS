@@ -42,6 +42,7 @@ class Header extends React.Component {
         ) : '';
 
         let feedLink = '';
+        let searchLink = '';
         let logoutLink = '';
         let feedHistoryLink = '';
         let userDropdown = '';
@@ -55,6 +56,7 @@ class Header extends React.Component {
             });
 
             feedLink = <li className="nav-item"><NavLink exact to="/feed" className="nav-link"><i className="fa fa-rss" aria-hidden="true"></i> {trans('navigation.feed')}</NavLink></li>;
+            searchLink = <li className="nav-item"><NavLink exact to="/search" className="nav-link"><i className="fa fa-search" aria-hidden="true"></i> {trans('navigation.search')}</NavLink></li>;
             logoutLink = <li className="nav-item"><NavLink exact to="/logout" className="nav-link"><i className="fa fa-sign-out"></i> {trans('navigation.logout')}</NavLink></li>;
             feedHistoryLink = <li className="nav-item"><NavLink exact to="/feed/history" className="nav-link"><i className="fa fa-history" aria-hidden="true"></i> {trans('navigation.feedHistory')}</NavLink></li>;
             userDropdown = (
@@ -104,6 +106,7 @@ class Header extends React.Component {
                     <ul className="navbar-nav mr-auto">
                         {landingPageLink}
                         {feedLink}
+                        {searchLink}
                     </ul>
 
                     <ul className="navbar-nav">

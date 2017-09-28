@@ -72,7 +72,7 @@ class CategoriesCreate extends React.Component {
 
                 <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
                     <Input name="title" type="text" label={trans('attributes.title')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.title} value={this.state.title} required/>
-                    <SubmitButton label={trans('common.save')} colClass="col-lg-10" disabled={!this.state.canSubmit}/>
+                    <SubmitButton label={trans('common.save')} colClass="col-lg-9" disabled={!this.state.canSubmit}/>
                 </Formsy.Form>
             </div>
         );

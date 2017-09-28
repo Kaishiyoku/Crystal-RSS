@@ -98,7 +98,7 @@ class FeedManagerCreate extends React.Component {
                 <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
                     <Input name="siteOrFeedUrl" type="text" label={trans('attributes.siteOrFeedUrl')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.siteOrFeedUrl} value={this.state.siteOrFeedUrl} required/>
                     <Select name="category" options={categoryOptions} label={trans('attributes.category')} labelColClass="col-lg-3" inputColClass="col-lg-5" errorMessages={this.state.errorMessages.category} value={this.state.category} required/>
-                    <SubmitButton label={trans('common.save')} colClass="col-lg-10" disabled={!this.state.canSubmit}/>
+                    <SubmitButton label={trans('common.save')} colClass="col-lg-9" disabled={!this.state.canSubmit}/>
                 </Formsy.Form>
             </div>
         );

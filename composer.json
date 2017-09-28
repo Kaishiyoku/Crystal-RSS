@@ -20,6 +20,8 @@
         "predis/predis": "1.1.1",
         "ramsey/uuid": "3.7.0",
         "spatie/laravel-paginateroute": "2.5.0",
+        "teamtnt/tntsearch": "1.0.7",
+        "teamtnt/laravel-scout-tntsearch-driver": "3.0.4",
         "webup/laravel-sendinblue": "1.1.0"
     },
     "require-dev": {

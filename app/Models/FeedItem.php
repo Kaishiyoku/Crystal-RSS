@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Models\FeedItem
@@ -34,9 +35,29 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string $checksum
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
+ * @property string|null $read_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
  */
 class FeedItem extends Model
 {
+    use Searchable;
+
+    public $asYouType = true;
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // TODO: Customize array
+
+        return $array;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,7 +73,7 @@ class FeedItem extends Model
      * @var array
      */
     protected $hidden = [
-
+        'checksum', 'user_id', 'feed_id'
     ];
 
     protected $dates = [

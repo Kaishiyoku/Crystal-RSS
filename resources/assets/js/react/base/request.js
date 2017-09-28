@@ -32,6 +32,8 @@ function baseRequest(method, url, successCallback = () => {}, errorCallback = ()
 
         successCallback(response);
     }).catch((error) => {
+        Logger.debug(error);
+
         if (error.response.status !== HTTP_STATUS_422_UNPROCESSABLE_ENTITY) {
             Logger.error('Request failed.', error.response.status);
         }

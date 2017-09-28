@@ -7,6 +7,7 @@ let translations = {
         name: 'Username',
         password: 'Passwort',
         passwordConfirmation: 'Passwort (Bestätigung)',
+        searchTerm: 'Suchbegriff',
         siteOrFeedUrl: 'Seiten- oder Feed-URL',
         siteUrl: 'Seiten-URL',
         title: 'Titel'
@@ -88,10 +89,16 @@ let translations = {
         logout: 'Logout',
         manage: 'Verwaltung',
         register: 'Registrieren',
+        search: 'Suche',
     },
     registration: {
         success: 'Registrierung erfolgreich. Ihr Account muss noch von einem Administrator aktiviert werden. Sie erhalten eine E-Mail sobald Sie sich einloggen können.',
         title: 'Registrierung',
+    },
+    search: {
+        title: 'Suche',
+        submit: 'Suchen',
+        nothingFound: 'Keine Einträge gefunden.',
     },
 };
 

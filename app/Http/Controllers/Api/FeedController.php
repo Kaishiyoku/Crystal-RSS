@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\FeedItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -45,9 +46,19 @@ class FeedController extends Controller
         return response()->json($readFeedItems->get());
     }
 
+    public function search($term)
+    {
+        $foundFeedItemsFromIndex = FeedItem::search($term)->where('user_id', auth()->user()->id);
+        $ids = $foundFeedItemsFromIndex->get()->pluck('id');
+
+        return response()->json($this->getFeedItems()->find($ids));
+    }
+
+    private $feedItemColumns = ['id', 'feed_id', 'is_read', 'url', 'title', 'date'];
+
     private function getFeedItems()
     {
-        return auth()->user()->feedItems()->select('id', 'feed_id', 'is_read', 'url', 'title', 'date')->with(['feed' => function ($query) {
+        return auth()->user()->feedItems()->select($this->feedItemColumns)->with(['feed' => function ($query) {
             $query->select('id', 'title');
         }]);
     }
