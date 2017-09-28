@@ -23,6 +23,7 @@ class Feed extends React.Component {
         get('/api/feed/unread', (response) => {
             this.setState((prevState, props) => {
                 return Object.assign(prevState, {
+                    activePage: 1,
                     items: response.data
                 });
             })
