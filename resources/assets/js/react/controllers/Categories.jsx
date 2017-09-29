@@ -3,6 +3,7 @@ import {del, get} from '../base/request';
 import trans from "../base/translate";
 import {Link} from "react-router-dom";
 import notifications$ from "../base/stores/notifications$";
+import {Button} from "material-ui";
 
 class Categories extends React.Component {
     constructor() {
@@ -54,10 +55,10 @@ class Categories extends React.Component {
                     <td>{category.title}</td>
                     <td>{category.feeds_count}</td>
                     <td>
-                        <button className="btn btn-link btn-delete" onClick={this.deleteItem(category.id)}>{trans('common.delete')}</button>
+                        <Button onClick={this.deleteItem(category.id)}>{trans('common.delete')}</Button>
                     </td>
                     <td>
-                        <Link to={`/categories/edit/${category.id}`}>{trans('common.edit')}</Link>
+                        <Button onClick={() => this.props.history.push(`/categories/edit/${category.id}`)}>{trans('common.edit')}</Button>
                     </td>
                 </tr>
             );
@@ -93,7 +94,7 @@ class Categories extends React.Component {
                 </h1>
 
                 <p>
-                    <button type="button" className="btn btn-primary" onClick={this.addItem}>{trans('categories.addCategory')}</button>
+                    <Button color="primary" onClick={this.addItem}>{trans('categories.addCategory')}</Button>
                 </p>
 
                 {categoriesTable}
