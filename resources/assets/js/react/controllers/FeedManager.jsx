@@ -3,7 +3,7 @@ import {del, get} from '../base/request';
 import trans from "../base/translate";
 import {Link} from "react-router-dom";
 import notifications$ from "../base/stores/notifications$";
-import {Button} from "react-md";
+import {Button, DataTable, TableBody, TableColumn, TableHeader, TableRow} from "react-md";
 
 class FeedManager extends React.Component {
     constructor() {
@@ -55,35 +55,35 @@ class FeedManager extends React.Component {
     getRenderOptions() {
         let feeds = this.state.items.map((feed) => {
             return (
-                <tr key={`feed-${feed.id}`}>
-                    <td>{feed.title}</td>
-                    <td>{feed.category.title}</td>
-                    <td>{feed.last_checked_at}</td>
-                    <td>
+                <TableRow key={`feed-${feed.id}`}>
+                    <TableColumn>{feed.title}</TableColumn>
+                    <TableColumn>{feed.category.title}</TableColumn>
+                    <TableColumn>{feed.last_checked_at}</TableColumn>
+                    <TableColumn>
                         <Button flat onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</Button>
-                    </td>
-                    <td>
+                    </TableColumn>
+                    <TableColumn>
                         <Button flat onClick={this.routeTo(`/feed/manage/edit/${feed.id}`)}>{trans('common.edit')}</Button>
-                    </td>
-                </tr>
+                    </TableColumn>
+                </TableRow>
             );
         });
 
         let feedTable = this.state.items.length > 0 ? (
-          <table className="table table-striped">
-              <thead>
-              <tr>
-                  <th>{trans('attributes.title')}</th>
-                  <th>{trans('attributes.category')}</th>
-                  <th>{trans('attributes.lastCheckedAt')}</th>
-                  <th/>
-                  <th/>
-              </tr>
-              </thead>
-              <tbody>
-              {feeds}
-              </tbody>
-          </table>
+            <DataTable plain>
+                <TableHeader>
+                    <TableRow>
+                        <TableColumn>{trans('attributes.title')}</TableColumn>
+                        <TableColumn>{trans('attributes.category')}</TableColumn>
+                        <TableColumn>{trans('attributes.lastCheckedAt')}</TableColumn>
+                        <TableColumn/>
+                        <TableColumn/>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {feeds}
+                </TableBody>
+            </DataTable>
         ) : <p className="lead font-italic">{trans('feedManager.noFeedsYet')}</p>;
 
         return {feedTable};

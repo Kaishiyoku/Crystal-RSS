@@ -1,9 +1,8 @@
 import React from "react";
 import {del, get} from '../base/request';
 import trans from "../base/translate";
-import {Link} from "react-router-dom";
 import notifications$ from "../base/stores/notifications$";
-import {Button} from "react-md";
+import {Button, DataTable, TableBody, TableColumn, TableHeader, TableRow} from "react-md";
 
 class Categories extends React.Component {
     constructor() {
@@ -55,34 +54,34 @@ class Categories extends React.Component {
     getRenderOptions() {
         let categories = this.state.items.map((category) => {
             return (
-                <tr key={`category-${category.id}`}>
-                    <td>{category.title}</td>
-                    <td>{category.feeds_count}</td>
-                    <td>
+                <TableRow key={`category-${category.id}`}>
+                    <TableColumn>{category.title}</TableColumn>
+                    <TableColumn>{category.feeds_count}</TableColumn>
+                    <TableColumn>
                         <Button flat onClick={this.deleteItem(category.id)}>{trans('common.delete')}</Button>
-                    </td>
-                    <td>
+                    </TableColumn>
+                    <TableColumn>
                         <Button flat
                                 onClick={this.routeTo(`/categories/edit/${category.id}`)}>{trans('common.edit')}</Button>
-                    </td>
-                </tr>
+                    </TableColumn>
+                </TableRow>
             );
         });
 
         let categoriesTable = this.state.items.length > 0 ? (
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th>{trans('attributes.title')}</th>
-                    <th>{trans('categories.numberOfFeeds')}</th>
-                    <th/>
-                    <th/>
-                </tr>
-                </thead>
-                <tbody>
-                {categories}
-                </tbody>
-            </table>
+            <DataTable plain>
+                <TableHeader>
+                    <TableRow>
+                        <TableColumn>{trans('attributes.title')}</TableColumn>
+                        <TableColumn>{trans('categories.numberOfFeeds')}</TableColumn>
+                        <TableColumn/>
+                        <TableColumn/>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {categories}
+                </TableBody>
+            </DataTable>
         ) : <p className="lead font-italic">{trans('categories.noCategoriesYet')}</p>;
 
         return {categoriesTable};
