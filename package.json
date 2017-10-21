@@ -29,10 +29,11 @@
     "prismjs": "1.8.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-md": "^1.2.4",
     "react-paginate": "4.4.4",
     "react-router-dom": "4.2.2",
-    "reactstrap": "4.8.0",
     "react-transition-group": "2.2.0",
+    "reactstrap": "4.8.0",
     "rxjs": "5.4.3",
     "tablesorter": "2.28.15",
     "vue": "^2.1.10"

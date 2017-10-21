@@ -6,3 +6,10 @@
 @import "bootstrap-additions";
 @import "waves";
 @import "boostrap-tablesorter";
+
+@import '~react-md/src/scss/react-md';
+
+$md-primary-color: $md-cyan-500;
+$md-secondary-color: $md-orange-a-400;
+
+@include react-md-everything;

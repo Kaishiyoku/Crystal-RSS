@@ -3,6 +3,7 @@ import {del, get} from '../base/request';
 import trans from "../base/translate";
 import {Link} from "react-router-dom";
 import notifications$ from "../base/stores/notifications$";
+import {Button} from "react-md";
 
 class FeedManager extends React.Component {
     constructor() {
@@ -47,6 +48,10 @@ class FeedManager extends React.Component {
         }
     };
 
+    routeTo = (route) => (event) => {
+        this.props.history.push(route);
+    };
+
     getRenderOptions() {
         let feeds = this.state.items.map((feed) => {
             return (
@@ -55,10 +60,10 @@ class FeedManager extends React.Component {
                     <td>{feed.category.title}</td>
                     <td>{feed.last_checked_at}</td>
                     <td>
-                        <button className="btn btn-link btn-delete" onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</button>
+                        <Button flat onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</Button>
                     </td>
                     <td>
-                        <Link to={`/feed/manage/edit/${feed.id}`}>{trans('common.edit')}</Link>
+                        <Button flat onClick={this.routeTo(`/feed/manage/edit/${feed.id}`)}>{trans('common.edit')}</Button>
                     </td>
                 </tr>
             );
@@ -95,7 +100,7 @@ class FeedManager extends React.Component {
                 </h1>
 
                 <p>
-                    <button type="button" className="btn btn-primary" onClick={this.addItem}>{trans('feedManager.addFeed')}</button>
+                    <Button flat primary onClick={this.addItem}>{trans('feedManager.addFeed')}</Button>
                 </p>
 
                 {feedTable}
