@@ -35,7 +35,6 @@
     "react-transition-group": "2.2.0",
     "rxjs": "5.4.3",
     "tablesorter": "2.28.15",
-    "vue": "^2.1.10",
-    "material-ui": "next"
+    "vue": "^2.1.10"
   }
 }

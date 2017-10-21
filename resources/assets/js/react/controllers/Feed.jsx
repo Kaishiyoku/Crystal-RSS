@@ -4,7 +4,6 @@ import trans from "../base/translate";
 import ReactPaginate from 'react-paginate';
 import APP_CONFIG from "../app-config";
 import notifications$ from "../base/stores/notifications$";
-import {Button} from "material-ui";
 
 class Feed extends React.Component {
     constructor() {
@@ -87,9 +86,9 @@ class Feed extends React.Component {
                 <li className={`list-group-item font-weight-bold ${lowOpacityClass}`} key={`feed-item-${obj.id}`}>
                     <div className="row">
                         <div className="col-lg-1 col-2">
-                            <Button onClick={this.toggleItemStatus(obj.id)}>
+                            <button className="btn btn-outline-primary btn-sm" type="button" onClick={this.toggleItemStatus(obj.id)}>
                                 <i className={`fa ${eyeClass}`} aria-hidden="true"></i>
-                            </Button>
+                            </button>
                         </div>
                         <div className="col-lg-8 col-10">
                             <div><a href={obj.url}>{obj.title}</a></div>
@@ -118,10 +117,10 @@ class Feed extends React.Component {
         ) : <p className="lead font-italic">{trans('feed.noUnreadItems')}</p>;
 
         let markAllAsReadButton = this.state.items.length > 0 ? (
-            <Button onClick={this.markAllAsRead}>
+            <button type="button" className="btn btn-secondary" onClick={this.markAllAsRead}>
                 <i className="fa fa-eye" aria-hidden="true"></i>
                 &nbsp;{trans('feed.markAllAsRead')}
-            </Button>
+            </button>
         ) : '';
 
         let pageCount = this.state.items.length / APP_CONFIG.pagination.itemsPerPage;
@@ -162,10 +161,10 @@ class Feed extends React.Component {
                 </h1>
 
                 <p className="pb-4">
-                    <Button color="primary" onClick={this.refresh}>
+                    <button type="button" className="btn btn-primary" onClick={this.refresh}>
                         <i className="fa fa-refresh" aria-hidden="true"></i>
                         &nbsp;{trans('feed.refreshCompleteList')}
-                    </Button>
+                    </button>
                     &nbsp;
                     {markAllAsReadButton}
                 </p>

@@ -3,7 +3,6 @@ import {del, get} from '../base/request';
 import trans from "../base/translate";
 import {Link} from "react-router-dom";
 import notifications$ from "../base/stores/notifications$";
-import {Button} from "material-ui";
 
 class FeedManager extends React.Component {
     constructor() {
@@ -56,12 +55,10 @@ class FeedManager extends React.Component {
                     <td>{feed.category.title}</td>
                     <td>{feed.last_checked_at}</td>
                     <td>
-                        <Button onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</Button>
+                        <button className="btn btn-link btn-delete" onClick={this.deleteItem(feed.id)}>{trans('common.delete')}</button>
                     </td>
                     <td>
-                        <Button onClick={() => this.props.history.push(`/feed/manage/edit/${feed.id}`)}>
-                            {trans('common.edit')}
-                        </Button>
+                        <Link to={`/feed/manage/edit/${feed.id}`}>{trans('common.edit')}</Link>
                     </td>
                 </tr>
             );
@@ -98,7 +95,7 @@ class FeedManager extends React.Component {
                 </h1>
 
                 <p>
-                    <Button color="primary" onClick={this.addItem}>{trans('feedManager.addFeed')}</Button>
+                    <button type="button" className="btn btn-primary" onClick={this.addItem}>{trans('feedManager.addFeed')}</button>
                 </p>
 
                 {feedTable}
