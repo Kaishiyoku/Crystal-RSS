@@ -1,0 +1,12 @@
+index:
+  title: Feed verwalten
+  no_feeds_yet: Noch keine Feeds vorhanden.
+create:
+  title: Feed hinzufügen
+  success: Feed hinzugefügt.
+edit:
+  title: 'Feed „:title” ändert'
+  success: Feed geändert.
+feed_exception: Konnte keinen gültigen Feed unter dieser URL finden.
+destroy:
+  success: Feed gelöscht.

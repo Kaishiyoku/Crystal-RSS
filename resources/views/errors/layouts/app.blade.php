@@ -12,8 +12,6 @@
     @include('shared._favicon')
 
     {{ Html::style('css/app.css') }}
-
-    @include('shared._javascript_config')
 </head>
 <body>
     <div id="app">
@@ -32,8 +30,6 @@
             @include('shared._footer')
         </div>
     </div>
-
-    {{ Html::script('js/app.js') }}
 
     @yield('scripts')
 </body>

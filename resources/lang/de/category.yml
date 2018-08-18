@@ -1,0 +1,14 @@
+index:
+  title: Kategorien verwalten
+  no_items: Noch keine Kategorien vorhanden.
+  number_of_feeds: Anzahl der Feeds
+create:
+  title: Kategorie hinzufügen
+  success: Kategorie erstellt.
+edit:
+  title: 'Kategorie „:title” ändern'
+  success: Kategorie geändert.
+destroy:
+  success: Kategorie gelöscht.
+  feeds_exist: Kann Kategorie nicht löschen, da sie noch Feeds besitzt.
+default_title: Unkategorisiert

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Ramsey\Uuid\Uuid;
 
 class RegisterController extends Controller
 {
@@ -60,8 +61,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'g-recaptcha-response' => 'required|captcha',
-            'name' => 'required|string|max:191',
+            'name' => 'required|string|max:191|unique:users',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -75,11 +75,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->api_token = Uuid::uuid4();
+
+        $user->save();
+
+        return $user;
     }
 
     /**
@@ -94,9 +99,7 @@ class RegisterController extends Controller
 
         event(new UserRegistered($user = $this->create($request->all())));
 
-        flash()->success(trans('auth.registered'));
-
         return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+            ?: response()->json();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
 use Vinelab\Rss\Rss;
@@ -17,10 +18,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) {
-            return redirect()->route('feed.index');
-        }
-
-        return view('home.index');
+        return view('app');
     }
 }

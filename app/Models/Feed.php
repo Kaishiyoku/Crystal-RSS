@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $category_id
  * @property-read \App\Models\Category|null $category
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
  */
 class Feed extends Model
 {
@@ -47,7 +48,7 @@ class Feed extends Model
      * @var array
      */
     protected $hidden = [
-
+        'user_id', 'category_id'
     ];
 
     /**
@@ -72,5 +73,10 @@ class Feed extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function updateErrors()
+    {
+        return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
     }
 }
