@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\FeedItem;
+use App\Models\UpdateError;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
@@ -77,24 +79,32 @@ class UpdateFeed extends Command
 
                     foreach ($rssFeed->getItems() as $item) {
                         if ($item->getId() && $item->getUrl()) {
-                            $existingFeedItem = FeedItem::whereFeedId($feed->id)->whereChecksum($item->getId())->first();
-                            $newFeedItem = $existingFeedItem == null ? new FeedItem() : $existingFeedItem;
+                            try {
+                                $existingFeedItem = FeedItem::whereFeedId($feed->id)->whereChecksum($item->getId())->first();
+                                $newFeedItem = $existingFeedItem == null ? new FeedItem() : $existingFeedItem;
 
-                            if ($existingFeedItem == null) {
-                                $newFeedItem->checksum = $item->getId();
+                                if ($existingFeedItem == null) {
+                                    $newFeedItem->checksum = $item->getId();
 
-                                $numberOfNewUnreadFeedItems++;
+                                    $numberOfNewUnreadFeedItems++;
+                                }
+
+                                $newFeedItem->feed_id = $feed->id;
+                                $newFeedItem->url = $item->getUrl();
+                                $newFeedItem->title = $item->getTitle();
+                                $newFeedItem->author = $item->getAuthor();
+                                $newFeedItem->image_url = $item->getEnclosureUrl();
+                                $newFeedItem->date = $item->getDate();
+                                $newFeedItem->content = $item->getContent();
+
+                                $user->feedItems()->save($newFeedItem);
+                            } catch (QueryException $e) {
+                                $updateError = new UpdateError();
+                                $updateError->feed_id = $feed->id;
+                                $updateError->content = "Error parsing {$item->getUrl()}";
+
+                                $user->updateErrors()->save($updateError);
                             }
-
-                            $newFeedItem->feed_id = $feed->id;
-                            $newFeedItem->url = $item->getUrl();
-                            $newFeedItem->title = $item->getTitle();
-                            $newFeedItem->author = $item->getAuthor();
-                            $newFeedItem->content = $item->getContent();
-                            $newFeedItem->image_url = $item->getEnclosureUrl();
-                            $newFeedItem->date = $item->getDate();
-
-                            $user->feedItems()->save($newFeedItem);
                         }
                     }
 
