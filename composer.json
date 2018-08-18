@@ -1,7 +1,10 @@
 {
     "name": "kaishiyoku/crystal-rss",
     "description": "Simple web-based RSS feed reader.",
-    "keywords": ["laravel", "rss"],
+    "keywords": [
+        "laravel",
+        "rss"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
