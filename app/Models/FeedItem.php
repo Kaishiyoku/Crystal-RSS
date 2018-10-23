@@ -32,6 +32,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
  * @mixin \Eloquent
+ * @property string $checksum
+ * @property string|null $read_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
  */
 class FeedItem extends Model
 {
