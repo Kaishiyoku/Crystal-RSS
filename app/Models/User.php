@@ -35,7 +35,6 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  * @property string $api_token
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereApiToken($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
  */
 class User extends Authenticatable
 {
@@ -47,7 +46,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -56,7 +55,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'is_active', 'is_administrator', 'api_token', 'id'
+        'password', 'remember_token', 'is_active', 'is_administrator'
     ];
 
     public function scopeActive($query)
@@ -82,10 +81,5 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany(Category::class)->orderBy('title');
-    }
-
-    public function updateErrors()
-    {
-        return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
     }
 }
