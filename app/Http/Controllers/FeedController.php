@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 
@@ -38,13 +39,7 @@ class FeedController extends Controller
 
     public function markAllAsRead($categoryId = null)
     {
-        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
-
-        foreach ($unreadFeedItems->get() as $unreadFeedItem) {
-            $unreadFeedItem->is_read = true;
-
-            $unreadFeedItem->save();
-        }
+        $this->getUnreadFeedItems($categoryId)->update(['is_read' => true, 'read_at' => Carbon::now()]);
 
         flash()->success(trans('feed.mark_all_as_read.success'));
 
@@ -56,6 +51,13 @@ class FeedController extends Controller
         $feedItem = auth()->user()->feedItems()->findOrFail($id);
 
         $feedItem->is_read = !$feedItem->is_read;
+
+        if ($feedItem->is_read) {
+            $feedItem->read_at = Carbon::now();
+        } else {
+            $feedItem->read_at = null;
+        }
+
         $feedItem->save();
 
         return response()->json(['isRead' => $feedItem->is_read]);

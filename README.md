@@ -1,4 +1,7 @@
 # Crystal-RSS
+
+[![Build Status](https://travis-ci.org/Kaishiyoku/Crystal-RSS.svg?branch=master)](https://travis-ci.org/Kaishiyoku/Crystal-RSS)
+
 Simple web-based RSS feed reader.
 
 <p align="center">
@@ -14,7 +17,7 @@ Table of contents
   
 License
 =======
-MIT (https://github.com/Kaishiyoku/laravel-menu/blob/master/LICENSE)
+MIT (https://github.com/Kaishiyoku/Crystal-RSS/blob/master/LICENSE)
 
 
 Author
