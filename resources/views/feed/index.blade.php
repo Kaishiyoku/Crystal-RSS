@@ -33,7 +33,7 @@
     </ul>
 
     @if ($unreadFeedItems->count() == 0)
-        <p class="lead mt-3"><i>{{ trans('feed.index.no_unread_items') }}</i></p>
+        <p class="lead font-italic mt-3"><i>{{ trans('feed.index.no_unread_items') }}</i></p>
     @else
         @include('feed._list', ['feedItems' => $unreadFeedItems->get(), 'showActions' => true, 'categoryId' => $currentCategoryId, 'hasAnotherPage' => $hasAnotherPage])
     @endif
