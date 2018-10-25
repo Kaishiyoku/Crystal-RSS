@@ -1,4 +1,7 @@
 # Crystal-RSS
+
+[![Build Status](https://travis-ci.org/Kaishiyoku/Crystal-RSS.svg?branch=master)](https://travis-ci.org/Kaishiyoku/Crystal-RSS)
+
 Simple web-based RSS feed reader.
 
 <p align="center">
