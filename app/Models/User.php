@@ -33,6 +33,8 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property string $api_token
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereApiToken($value)
  */
 class User extends Authenticatable
 {
