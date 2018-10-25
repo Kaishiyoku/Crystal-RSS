@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\FeedItem;
+use App\Models\UpdateError;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -98,7 +99,11 @@ class UpdateFeed extends Command
 
                                 $user->feedItems()->save($newFeedItem);
                             } catch (QueryException $e) {
-                                // TODO: protocol error
+                                $updateError = new UpdateError();
+                                $updateError->feed_id = $feed->id;
+                                $updateError->content = "Error parsing {$item->getUrl()}";
+
+                                $user->updateErrors()->save($updateError);
                             }
                         }
                     }
