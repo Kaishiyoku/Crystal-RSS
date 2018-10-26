@@ -78,3 +78,4 @@ attributes:
   site_or_feed_url: Site or feed url
   last_checked_at: Last checked at
   category_id: Category
+  term: Term

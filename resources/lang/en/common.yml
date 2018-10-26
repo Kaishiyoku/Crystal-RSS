@@ -10,6 +10,7 @@ nav:
   categories: Categories
   manage_feed: Manage feed
   manage_categories: Manage categories
+  search: Search
 add: Add
 delete: Delete
 edit: Edit

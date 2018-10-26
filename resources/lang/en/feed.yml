@@ -13,3 +13,9 @@ mark_all_as_read:
   success: All items marked as read.
 updating_feed_for_user: 'Updating feed for user ":name"'
 updating_at: '--- Feed updating at :date ---'
+search_show:
+  title: Search
+  submit: Search
+search_result:
+  title: Search results
+  no_entries_found: No entries found.

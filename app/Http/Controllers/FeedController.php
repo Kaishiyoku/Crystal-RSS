@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FeedItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
@@ -86,6 +88,18 @@ class FeedController extends Controller
             'nextUrl' => URL::route('feed.more_unread', [$offset + env('NUMBER_OF_ITEMS_PER_PAGE'), $categoryId]),
             'content' => view('feed._more_unread', compact('unreadFeedItems'))->render()
         ]);
+    }
+
+    public function searchShow()
+    {
+        return view('feed.search_show');
+    }
+
+    public function searchResult(Request $request)
+    {
+        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id)->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+
+        return view('feed.search_result', compact('foundFeedItemsFromIndex'));
     }
 
     private function baseIndex($categoryId = null)

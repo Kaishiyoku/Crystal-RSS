@@ -17,6 +17,8 @@ Route::group(['middleware' => ['menus']], function () {
             Route::put('/update', 'FeedController@updateFeed')->name('update_feed');
             Route::put('/mark_all_as_read/{categoryId?}', 'FeedController@markAllAsRead')->name('mark_all_as_read');
             Route::put('/toggle_status/{id}', 'FeedController@toggleFeedItemStatus')->name('toggle_status');
+            Route::get('/search', 'FeedController@searchShow')->name('search_show');
+            Route::get('/search/results', 'FeedController@searchResult')->name('search_result');
 
             // Manage feed
             Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
