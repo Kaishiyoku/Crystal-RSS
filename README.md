@@ -5,7 +5,7 @@
 Simple web-based RSS feed reader.
 
 <p align="center">
- <img src="https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Logo-thumbnail.png" alt="Logo"/>
+ <img src="https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Logo.svg" alt="Logo" width="100px"/>
 </p>
 
 ![Lettering](https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Lettering.svg)
