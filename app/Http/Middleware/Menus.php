@@ -40,8 +40,8 @@ class Menus
 
         if ($this->auth->check()) {
             Menu::registerDefault([
-                Menu::link('feed.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>'),
-                Menu::link('feed.search_show', '<i class="fa fa-search" ariad-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.search') . '</span>')
+                Menu::link('feed.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>', [], [], ['feed.category']),
+                Menu::link('feed.search_show', '<i class="fa fa-search" ariad-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.search') . '</span>', [], [], ['feed.search_result'])
             ], ['class' => 'navbar-nav mr-auto']);
         } else {
             Menu::registerDefault([

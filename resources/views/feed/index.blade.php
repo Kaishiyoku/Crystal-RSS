@@ -35,6 +35,14 @@
     @if ($unreadFeedItems->count() == 0)
         <p class="lead font-italic mt-3"><i>{{ trans('feed.index.no_unread_items') }}</i></p>
     @else
-        @include('feed._list', ['feedItems' => $unreadFeedItems->get(), 'showActions' => true, 'categoryId' => $currentCategoryId, 'hasAnotherPage' => $hasAnotherPage])
+        <div>
+            @include('shared._pagination', ['items' => $unreadFeedItems])
+        </div>
+
+        @include('feed._list', ['feedItems' => $unreadFeedItems, 'showActions' => true, 'categoryId' => $currentCategoryId])
+
+        <div class="mt-4">
+            @include('shared._pagination', ['items' => $unreadFeedItems])
+        </div>
     @endif
 @endsection

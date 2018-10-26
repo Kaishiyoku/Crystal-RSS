@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feed;
 use App\Models\FeedItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\URL;
 
 class FeedController extends Controller
 {
@@ -79,7 +79,7 @@ class FeedController extends Controller
 
     public function searchResult(Request $request)
     {
-        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id);
+        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id)->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.search_result', compact('foundFeedItemsFromIndex'));
     }
@@ -99,17 +99,14 @@ class FeedController extends Controller
 
     private function getUnreadFeedItems($categoryId = null)
     {
-        $unreadFeedItemsBase = auth()->user()->feedItems()->unread();
+        $feedIds = Feed::when($categoryId == null, function ($query) {
+            return $query;
+        }, function ($query) use ($categoryId) {
+            return $query->whereCategoryId($categoryId);
+        })->pluck('id');
 
-        if ($categoryId != null) {
-            $category = auth()->user()->categories()->findOrFail($categoryId);
+        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds);
 
-            $unreadFeedItemsBase = $unreadFeedItemsBase
-                                    ->select('feed_items.*', 'feeds.category_id')
-                                    ->join('feeds', 'feeds.id', '=', 'feed_items.feed_id')
-                                    ->where('category_id', '=', $category->id);
-        }
-
-        return $unreadFeedItemsBase;
+        return $feedItems;
     }
 }
