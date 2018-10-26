@@ -28,17 +28,6 @@ class FeedController extends Controller
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
 
-    public function updateFeed()
-    {
-        $exitCode = Artisan::call('feed:update', [
-            'user' => auth()->user()->id
-        ]);
-
-        flash()->success(trans('feed.update_feed.success'));
-
-        return redirect()->route('feed.index');
-    }
-
     public function markAllAsRead($categoryId = null)
     {
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
