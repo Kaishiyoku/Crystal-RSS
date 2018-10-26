@@ -107,31 +107,4 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('[data-load-more]').each(function () {
-        let $this = $(this);
-        let button = $($this.attr('data-button'));
-
-        button.on('click', function () {
-            event.preventDefault();
-
-            let url = $this.attr('data-load-more');
-
-            $.ajax({
-                method: 'GET',
-                url: url,
-            }).done(function (response) {
-                let nextUrl = response.nextUrl;
-
-                $this.append(response.content);
-                $this.attr('data-load-more', nextUrl);
-
-                if (!response.hasAnotherPage) {
-                    button.remove();
-                }
-            }).fail(function () {
-                console.error('Could not fetch more unread feed items.');
-            });
-        });
-    });
 });

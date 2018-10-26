@@ -11,7 +11,6 @@ Route::group(['middleware' => ['menus']], function () {
         // Feed
         Route::prefix('feed')->as('feed.')->group(function () {
             Route::paginate('/', 'FeedController@index')->name('index');
-            Route::get('/more_unread/{offset?}/{categoryId?}', 'FeedController@moreUnread')->name('more_unread');
             Route::paginate('/categories/{id}', 'FeedController@category')->name('category');
             Route::paginate('/history', 'FeedController@history')->name('history');
             Route::put('/update', 'FeedController@updateFeed')->name('update_feed');
