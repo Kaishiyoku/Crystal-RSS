@@ -1,9 +1,7 @@
 window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 
-import Popper from 'popper.js';
-
-window.Popper = Popper;
+window.Popper = require('popper.js').default;
 
 require('bootstrap');
 window.Waves = require('node-waves');

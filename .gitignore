@@ -19,3 +19,4 @@ yarn-error.log
 _ide_helper.php
 composer.lock
 npm-debug.log*
+.phpunit.result.cache
