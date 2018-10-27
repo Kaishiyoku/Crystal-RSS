@@ -3,7 +3,7 @@ index:
   no_feeds_yet: No feeds yet.
 create:
   title: Add feed
-  success: Feed added.
+  success: 'Feed added. <a href=":url">Add another one</a>'
 edit:
   title: 'Edit feed “:title”'
   success: Feed edited.

@@ -67,7 +67,7 @@ class FeedManagerController extends Controller
 
             auth()->user()->feeds()->save($feed);
 
-            flash()->success(trans('feed_manager.create.success'));
+            flash()->success(trans('feed_manager.create.success', ['url' => route('feed.manage.create')]));
 
             return redirect()->route('feed.manage.edit', [$feed->id]);
         } catch (PicoFeedException $e) {
