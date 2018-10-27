@@ -4,7 +4,7 @@
             <div class="col-lg-1 col-2">
                 <div class="custom-control custom-checkbox">
                     {{ Form::checkbox('feedIds[]', $feedItem->id, false, ['class' => 'custom-control-input', 'id' => 'feedIds-' . $feedItem->id]) }}
-                    <label class="custom-control-label d-inline" for="feedIds-{{ $feedItem->id }}"></label>
+                    <label class="custom-control-label custom-control-label-lg d-inline" for="feedIds-{{ $feedItem->id }}"></label>
                 </div>
             </div>
         @endif
