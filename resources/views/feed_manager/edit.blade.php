@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', trans('feed_manager.edit.title'))
+@section('title', trans('feed_manager.edit.title', ['title' => $feed->title]))
 
 @section('breadcrumbs')
     {!! Breadcrumbs::render('feed.manage.edit', $feed) !!}
