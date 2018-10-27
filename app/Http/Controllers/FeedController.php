@@ -89,9 +89,9 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories();
         $currentCategoryId = $categoryId;
-        $lastUpdateAt = UpdateLog::orderBy('created_at', 'desc')->first()->created_at;
+        $latestUpdateLog = UpdateLog::orderBy('created_at', 'desc')->first();
 
-        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'lastUpdateAt'));
+        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'latestUpdateLog'));
     }
 
     private function getUnreadFeedItems($categoryId = null)

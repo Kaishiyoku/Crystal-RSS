@@ -9,7 +9,11 @@
     </h1>
 
     <p class="text-muted">
-        {{ trans('feed.index.last_update_at', ['date' => $lastUpdateAt->format(DATETIME)]) }}
+        @if ($latestUpdateLog)
+            {{ trans('feed.index.last_update_at', ['date' => $latestUpdateLog->created_at->format(DATETIME)]) }}
+        @else
+            {{ trans('feed.index.last_update_at_never') }}
+        @endif
     </p>
 
     <p>
