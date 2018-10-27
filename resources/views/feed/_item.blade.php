@@ -2,9 +2,10 @@
     <div class="row">
         @if ($showActions)
             <div class="col-lg-1 col-2">
-                {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i>', [
-                    'class' => 'btn btn-outline-primary btn-sm',
-                    'data-toggle-status' => URL::route('feed.toggle_status', [$feedItem->id]), 'data-target' => '#feed-item-' . $feedItem->id]) }}
+                <div class="custom-control custom-checkbox">
+                    {{ Form::checkbox('feedIds[]', $feedItem->id, false, ['class' => 'custom-control-input', 'id' => 'feedIds-' . $feedItem->id]) }}
+                    <label class="custom-control-label d-inline" for="feedIds-{{ $feedItem->id }}"></label>
+                </div>
             </div>
         @endif
         <div class="col-lg-{{ $showActions ? '8' : '9' }} col-{{ $showActions ? '10' : '12' }}">

@@ -14,7 +14,7 @@ Route::group(['middleware' => ['menus']], function () {
             Route::paginate('/categories/{id}', 'FeedController@category')->name('category');
             Route::paginate('/history', 'FeedController@history')->name('history');
             Route::put('/mark_all_as_read/{categoryId?}', 'FeedController@markAllAsRead')->name('mark_all_as_read');
-            Route::put('/toggle_status/{id}', 'FeedController@toggleFeedItemStatus')->name('toggle_status');
+            Route::put('/toggle_status/', 'FeedController@toggleFeedItemStatus')->name('toggle_status');
             Route::get('/search', 'FeedController@searchShow')->name('search_show');
             Route::paginate('/search/results', 'FeedController@searchResult')->name('search_result');
 

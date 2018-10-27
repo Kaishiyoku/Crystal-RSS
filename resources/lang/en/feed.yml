@@ -4,6 +4,9 @@ index:
   mark_all_as_read: Mark all as read
   no_unread_items: No unread items.
   all_categories: All categories
+  toggle_status:
+    submit: Toggle status of selected items
+    success: Selected items updated.
 history:
   title: Feed history
   no_items: No items.

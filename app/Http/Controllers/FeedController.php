@@ -44,21 +44,27 @@ class FeedController extends Controller
         return redirect()->back();
     }
 
-    public function toggleFeedItemStatus($id)
+    public function toggleFeedItemStatus(Request $request)
     {
-        $feedItem = auth()->user()->feedItems()->findOrFail($id);
+        $ids = $request->get('feedIds') ?? [];
 
-        $feedItem->is_read = !$feedItem->is_read;
+        $feedItems = auth()->user()->feedItems()->whereIn('id', $ids);
 
-        if ($feedItem->is_read) {
-            $feedItem->read_at = Carbon::now();
-        } else {
-            $feedItem->read_at = null;
+        foreach ($feedItems->get() as $feedItem) {
+            $feedItem->is_read = !$feedItem->is_read;
+
+            if ($feedItem->is_Read) {
+                $feedItem->read_at = Carbon::now();
+            } else {
+                $feedItem->read_at = null;
+            }
+
+            $feedItem->save();
         }
 
-        $feedItem->save();
+        flash()->success(trans('feed.index.toggle_status.success'));
 
-        return response()->json(['isRead' => $feedItem->is_read]);
+        return redirect()->back();
     }
 
     public function searchShow()
