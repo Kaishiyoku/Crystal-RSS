@@ -89,7 +89,7 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories();
         $currentCategoryId = $categoryId;
-        $latestUpdateLog = UpdateLog::orderBy('created_at', 'desc')->first();
+        $latestUpdateLog = UpdateLog::orderBy('created_at', 'asc')->first();
 
         return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'latestUpdateLog'));
     }
