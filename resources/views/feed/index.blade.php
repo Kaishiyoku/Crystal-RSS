@@ -22,9 +22,11 @@
         </li>
 
         @foreach ($categories->get() as $category)
-            <li class="nav-item">
-                {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-secondary">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'nav-link' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
-            </li>
+            @if (getUnreadFeedItemCountForCategory($category) > 0)
+                <li class="nav-item">
+                    {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-secondary">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'nav-link' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
+                </li>
+            @endif
         @endforeach
     </ul>
 
