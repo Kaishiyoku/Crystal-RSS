@@ -7,6 +7,7 @@ index:
   toggle_status:
     submit: Toggle status of selected items
     success: Selected items updated.
+  last_update_at: Last update at :date
 history:
   title: Feed history
   no_items: No items.

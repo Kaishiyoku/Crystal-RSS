@@ -8,6 +8,10 @@
         <small class="text-muted">{{ $totalCountUnreadFeedItems }}</small>
     </h1>
 
+    <p class="text-muted">
+        {{ trans('feed.index.last_update_at', ['date' => $lastUpdateAt->format(DATETIME)]) }}
+    </p>
+
     <p>
         @if ($unreadFeedItems->count() > 0)
             {{ Form::open(['route' => ['feed.mark_all_as_read', $currentCategoryId], 'method' => 'put', 'role' => 'form', 'class' => 'd-inline']) }}

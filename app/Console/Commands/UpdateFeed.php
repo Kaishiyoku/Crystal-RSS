@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\FeedItem;
 use App\Models\UpdateError;
+use App\Models\UpdateLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -125,6 +126,9 @@ class UpdateFeed extends Command
                     $this->error($e->getMessage());
                 }
             }
+
+            $updateLog = new UpdateLog();
+            $updateLog->save();
 
             $this->info('Total: ' . $totalNumberOfNewUnreadFeedItemsForUser . ' new items.');
 

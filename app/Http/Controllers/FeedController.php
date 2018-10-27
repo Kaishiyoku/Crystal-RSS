@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
+use App\Models\UpdateLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -88,8 +89,9 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories();
         $currentCategoryId = $categoryId;
+        $lastUpdateAt = UpdateLog::orderBy('created_at', 'desc')->first()->created_at;
 
-        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId'));
+        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'lastUpdateAt'));
     }
 
     private function getUnreadFeedItems($categoryId = null)
