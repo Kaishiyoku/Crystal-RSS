@@ -22,6 +22,7 @@
             <tr>
                 <th>{{ trans('validation.attributes.title') }}</th>
                 <th>{{ trans('validation.attributes.category_id') }}</th>
+                <th>{{ trans('validation.attributes.is_enabled') }}</th>
                 <th>{{ trans('validation.attributes.last_checked_at') }}</th>
                 <th class="sorter-false"></th>
                 <th class="sorter-false"></th>
@@ -29,9 +30,10 @@
             </thead>
             <tbody>
             @foreach ($feeds->get() as $feed)
-                <tr>
+                <tr class="{{ $feed->is_enabled ? '' : 'table-warning' }}">
                     <td>{{ $feed->title }}</td>
                     <td>{{ $feed->category->title }}</td>
+                    <td>{{ formatBoolean($feed->is_enabled) }}</td>
                     <td>{{ $feed->last_checked_at->format(DATETIME) }}</td>
                     <td>
                         @include('shared._delete_link', ['route' => ['feed.manage.destroy', $feed->id]])

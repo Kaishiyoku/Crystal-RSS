@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Category|null $category
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
+ * @property bool $is_enabled
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsEnabled($value)
  */
 class Feed extends Model
 {
@@ -39,7 +41,7 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'feed_url'
+        'feed_url', 'is_enabled',
     ];
 
     /**
@@ -49,6 +51,10 @@ class Feed extends Model
      */
     protected $hidden = [
 
+    ];
+
+    protected $casts = [
+        'is_enabled' => 'boolean',
     ];
 
     /**

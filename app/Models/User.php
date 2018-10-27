@@ -36,6 +36,9 @@ use Illuminate\Notifications\Notifiable;
  * @property string $api_token
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereApiToken($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
+ * @property string|null $email_verified_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $enabledFeeds
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmailVerifiedAt($value)
  */
 class User extends Authenticatable
 {
@@ -72,6 +75,11 @@ class User extends Authenticatable
     public function feeds()
     {
         return $this->hasMany(Feed::class);
+    }
+
+    public function enabledFeeds()
+    {
+        return $this->hasMany(Feed::class)->whereIsEnabled(true);
     }
 
     public function feedItems()

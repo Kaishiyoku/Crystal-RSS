@@ -116,6 +116,7 @@ class FeedManagerController extends Controller
             $feed->feed_url = $data['feed_url'];
             $feed->site_url = $data['site_url'];
             $feed->category_id = $data['category_id'];
+            $feed->is_enabled = $data['is_enabled'];
 
             $feed->save();
 
@@ -170,7 +171,11 @@ class FeedManagerController extends Controller
             ],
             'category_id' => [
                 Rule::in($this->getCategories()->keys()->all()),
-            ]
+            ],
+            'is_enabled' => [
+                'sometimes',
+                'boolean',
+            ],
         ];
     }
 

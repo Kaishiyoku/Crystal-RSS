@@ -100,3 +100,4 @@ attributes:
   last_checked_at: Last checked at
   category_id: Category
   term: Term
+  is_enabled: Enabled

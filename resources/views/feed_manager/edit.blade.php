@@ -67,6 +67,20 @@
         </div>
 
         <div class="form-group row">
+            {{ Form::label('is_enabled', trans('validation.attributes.is_enabled'), ['class' => 'col-lg-2 col-form-label']) }}
+
+            <div class="col-lg-5">
+                {{ Form::select('is_enabled', trans('common.lists.boolean'), old('is_enabled', $feed->is_enabled), ['class' => 'form-control' . ($errors->has('is_enabled') ? ' is-invalid' : '')]) }}
+
+                @if ($errors->has('is_enabled'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('is_enabled') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
             <div class="col-lg-10 ml-md-auto">
                 {{ Form::button(trans('common.save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>

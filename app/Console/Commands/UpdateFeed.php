@@ -68,7 +68,7 @@ class UpdateFeed extends Command
             $this->comment(trans('feed.updating_feed_for_user', ['name' => $user->name]));
             $this->info(null);
 
-            foreach ($user->feeds()->get() as $feed) {
+            foreach ($user->enabledFeeds()->get() as $feed) {
                 try {
                     $reader = new Reader($config);
                     $resource = $reader->discover($feed->feed_url);

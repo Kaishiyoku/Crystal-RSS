@@ -76,3 +76,16 @@ if (! function_exists('getPageRanges')) {
         return $ranges;
     }
 }
+
+if (! function_exists('formatBoolean')) {
+    function formatBoolean($bool)
+    {
+        if ($bool == true || $bool == 1) {
+            $str = __('common.lists.boolean.1');
+        } else {
+            $str = __('common.lists.boolean.0');
+        }
+
+        return $str;
+    }
+}

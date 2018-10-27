@@ -30,3 +30,7 @@ errors:
     content: The selected resource couldn't be found.
 back_to_landing_page: Back to landing page
 load_more: Load more
+lists:
+  boolean:
+    0: No
+    1: Yes
