@@ -24,6 +24,11 @@ Route::group(['middleware' => ['menus']], function () {
 
         // Categories
         Route::resource('/categories', 'CategoryController', ['except' => 'show']);
+
+        // Profile
+        Route::get('/profile', 'ProfileController@index')->name('profile.index');
+        Route::get('/profile/password/change', 'ProfileController@editPassword')->name('profile.edit_password');
+        Route::put('/profile/password/change', 'ProfileController@updatePassword')->name('profile.update_password');
     });
 
     Auth::routes();

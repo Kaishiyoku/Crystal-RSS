@@ -34,3 +34,4 @@ lists:
   boolean:
     0: No
     1: Yes
+general: General

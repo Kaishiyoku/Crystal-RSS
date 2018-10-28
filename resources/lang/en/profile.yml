@@ -1,0 +1,9 @@
+index:
+  title: Profile
+  registered_at: Registered at
+  options: Options
+edit_password:
+  title: Change password
+  submit: Set new password
+  success: Password changed.
+  invalid_current_password: The current password is wrong.
