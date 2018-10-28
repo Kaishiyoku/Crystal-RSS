@@ -36,10 +36,9 @@
 
                 <div class="form-group row">
                     <div class="col-lg-8 ml-md-auto">
-                        <div class="checkbox">
-                            <label>
-                                {{ Form::checkbox('remember') }} {{ trans('login.remember_me') }}
-                            </label>
+                        <div class="custom-control custom-checkbox">
+                            {{ Form::checkbox('remember', 1, false, ['class' => 'custom-control-input', 'id' => 'remember']) }}
+                            {{ Form::label('remember', trans('login.remember_me'), ['class' => 'custom-control-label']) }}
                         </div>
                     </div>
                 </div>
