@@ -101,3 +101,6 @@ attributes:
   category_id: Category
   term: Term
   is_enabled: Enabled
+  email: Email
+  password: Password
+  password_confirmation: Password (confirmation)

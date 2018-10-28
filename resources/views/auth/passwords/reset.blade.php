@@ -1,13 +1,13 @@
  @extends('layouts.app')
 
-@section('title', trans('password.reset.title'))
+@section('title', trans('password.form_confirm.title'))
 
 @section('content')
     <div class="row justify-content-md-center">
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ trans('passwords.reset.title') }}
+                    {{ trans('passwords.form_confirm.title') }}
                 </h4>
                 <div class="card-body">
                     @if (session('status'))
@@ -64,7 +64,7 @@
                         <div class="form-group row">
                             <div class="col-lg-8 ml-md-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ trans('passwords.reset.submit') }}
+                                    {{ trans('passwords.form_confirm.submit') }}
                                 </button>
                             </div>
                         </div>
