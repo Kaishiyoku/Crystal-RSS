@@ -42,6 +42,9 @@ class Kernel extends ConsoleKernel
             default:
                 $schedule->command(UpdateFeed::class)->everyThirtyMinutes()->sendOutputTo('storage/logs/feed_updates.log');
         }
+
+        $schedule->command('backup:clean')->daily()->at('04:00');
+        $schedule->command('backup:run')->daily()->at('05:00');
     }
 
     /**
