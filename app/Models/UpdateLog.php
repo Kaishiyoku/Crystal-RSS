@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereId($value)
  * @mixin \Eloquent
+ * @property int $duration_in_seconds
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereDurationInSeconds($value)
  */
 class UpdateLog extends Model
 {

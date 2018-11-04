@@ -46,6 +46,8 @@ class UpdateFeed extends Command
      */
     public function handle()
     {
+        $start = microtime(true);
+
         $this->info(trans('feed.updating_at', ['date' => Carbon::now()]));
         $this->info(null);
 
@@ -127,7 +129,10 @@ class UpdateFeed extends Command
                 }
             }
 
+            $timeElapsedInSeconds = microtime(true) - $start;
+
             $updateLog = new UpdateLog();
+            $updateLog->duration_in_seconds = $timeElapsedInSeconds;
             $updateLog->save();
 
             $this->info('Total: ' . $totalNumberOfNewUnreadFeedItemsForUser . ' new items.');
