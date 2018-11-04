@@ -13,7 +13,27 @@ Simple web-based RSS feed reader.
 Table of contents
 =================
   * [License](#license)
+  * [Installation](#installation)
   * [Author](#author)
+  
+Installation
+============
+1. Download the latest release: https://github.com/Kaishiyoku/Crystal-RSS/releases/latest
+2. remove the `php artisan ide-helper` commands from the `composer.json` file
+3. run composer install --no-dev --no-scripts
+4. run php artisan migrate
+5. run npm install
+6. run npm run prod
+7. copy the `.env.example` file and fill in the necessary values:  
+`@php -r \"file_exists('.env') || copy('.env.example', '.env');\"`
+8. Setup the cronjob for the scheduler commands:  
+```
+$ sudo crontab -e -u www-data
+```
+Add the cronjob (please adjust the path if necessary):
+```
+* * * * * php /var/www/html/crystal-rss/artisan schedule:run >> /var/www/html/crystal-rss/storage/logs/scheduler.log 2>&1
+```
   
 License
 =======
