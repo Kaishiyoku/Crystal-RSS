@@ -42,7 +42,19 @@ class FeedItem extends Model
 {
     use Searchable;
 
-    public $asYouType = true;
+    public $asYouType = false;
+
+    protected $searchableFields = [
+        'id',
+        'user_id',
+        'feed_id',
+        'url',
+        'title',
+        'author',
+        'content',
+        'date',
+        'read_at',
+    ];
 
     /**
      * Get the indexable data array for the model.
@@ -51,11 +63,9 @@ class FeedItem extends Model
      */
     public function toSearchableArray()
     {
-        $array = $this->toArray();
+        $list = collect($this->toArray());
 
-        // TODO: Customize array
-
-        return $array;
+        return $list->only($this->searchableFields)->toArray();
     }
 
     /**

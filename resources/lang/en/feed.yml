@@ -22,3 +22,5 @@ search_show:
 search_result:
   title: Search results
   no_entries_found: No entries found.
+search:
+  importing: Importing feed items...
