@@ -34,7 +34,6 @@ class FeedController extends Controller
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
 
         foreach ($unreadFeedItems->get() as $unreadFeedItem) {
-            $unreadFeedItem->is_read = true;
             $unreadFeedItem->read_at = Carbon::now();
 
             $unreadFeedItem->save();
@@ -52,9 +51,7 @@ class FeedController extends Controller
         $feedItems = auth()->user()->feedItems()->whereIn('id', $ids);
 
         foreach ($feedItems->get() as $feedItem) {
-            $feedItem->is_read = !$feedItem->is_read;
-
-            if ($feedItem->is_Read) {
+            if (empty($feedItem->read_at)) {
                 $feedItem->read_at = Carbon::now();
             } else {
                 $feedItem->read_at = null;

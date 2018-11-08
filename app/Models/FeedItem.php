@@ -81,19 +81,19 @@ class FeedItem extends Model
     ];
 
     protected $casts = [
-        'is_read' => 'boolean',
+
     ];
 
     public $timestamps = false;
 
     public function scopeRead($query)
     {
-        return $query->where('is_read', true);
+        return $query->whereNotNull('read_at');
     }
 
     public function scopeUnread($query)
     {
-        return $query->where('is_read', false);
+        return $query->whereNull('read_at');
     }
 
     public function user()
