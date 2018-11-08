@@ -6,14 +6,14 @@ index:
   all_categories: All categories
   toggle_status:
     submit: Toggle status of selected items
-    success: Selected items updated.
+    success: Selected items updated. This
   last_update_at: 'Last update at: :date'
   last_update_at_never: 'Last update at: never'
 history:
   title: Feed history
   no_items: No items.
 mark_all_as_read:
-  success: All items marked as read.
+  success: All items marked as read and will be added to the queue, this may take some seconds.
 updating_feed_for_user: 'Updating feed for user ":name"'
 updating_at: '--- Feed updating at :date ---'
 search_show:

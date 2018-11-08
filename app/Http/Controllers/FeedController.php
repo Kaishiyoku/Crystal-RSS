@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessFeedItems;
+use App\Libraries\ManualPaginator;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UpdateLog;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 
@@ -31,12 +34,21 @@ class FeedController extends Controller
 
     public function markAllAsRead($categoryId = null)
     {
-        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
+        if (env('DEFERRED_MARK_AS_READ')) {
+            $date = Carbon::now();
+            $unreadFeedItems = new ManualPaginator($this->getUnreadFeedItems($categoryId)->get(), (int) env('DEFERRED_PER_PAGE'));
 
-        foreach ($unreadFeedItems->get() as $unreadFeedItem) {
-            $unreadFeedItem->read_at = Carbon::now();
+            foreach($unreadFeedItems->pages() as $items) {
+                ProcessFeedItems::dispatch($items, $date);
+            }
+        } else {
+            $date = Carbon::now();
 
-            $unreadFeedItem->save();
+            foreach ($this->getUnreadFeedItems($categoryId)->get() as $feedItem) {
+                $feedItem->read_at = $date;
+
+                $feedItem->save();
+            }
         }
 
         flash()->success(trans('feed.mark_all_as_read.success'));
