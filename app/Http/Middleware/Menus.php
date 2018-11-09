@@ -54,6 +54,7 @@ class Menus
                 Menu::dropdown([
                     Menu::dropdownHeader(trans('common.nav.general')),
                     Menu::link('feed.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
+                    Menu::link('profile.index', '<i class="fa fa-user" aria-hidden="true"></i> ' . trans('common.nav.profile'), [], [], ['profile.edit_password']),
                     Menu::dropdownHeader(trans('common.nav.manage')),
                     Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
                     Menu::link('categories.index', '<i class="fa fa-folder" aria-hidden="true"></i> ' . trans('common.nav.categories'), [], [], ['categories.create', 'categories.edit']),

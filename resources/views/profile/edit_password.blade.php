@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', trans('profile.edit_password.title'))
+
 @section('content')
     <h1>{{ __('profile.edit_password.title') }}</h1>
 

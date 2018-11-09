@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', trans('profile.index.title'))
+
 @section('content')
     <h1>@lang('profile.index.title')</h1>
 
