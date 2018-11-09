@@ -34,9 +34,12 @@ class FeedController extends Controller
 
     public function markAllAsRead($categoryId = null)
     {
-        if (env('DEFERRED_MARK_AS_READ')) {
+        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
+        $minNumber = (int) env('DEFERRED_MIN_NUMBER');
+
+        if (env('DEFERRED_MARK_AS_READ') && $unreadFeedItems->count() > $minNumber) {
             $date = Carbon::now();
-            $unreadFeedItems = new ManualPaginator($this->getUnreadFeedItems($categoryId)->get(), (int) env('DEFERRED_PER_PAGE'));
+            $unreadFeedItems = new ManualPaginator($unreadFeedItems->get(), (int) env('DEFERRED_PER_PAGE'));
 
             foreach($unreadFeedItems->pages() as $items) {
                 ProcessFeedItems::dispatch($items, $date);
@@ -44,7 +47,7 @@ class FeedController extends Controller
         } else {
             $date = Carbon::now();
 
-            foreach ($this->getUnreadFeedItems($categoryId)->get() as $feedItem) {
+            foreach ($unreadFeedItems->get() as $feedItem) {
                 $feedItem->read_at = $date;
 
                 $feedItem->save();
