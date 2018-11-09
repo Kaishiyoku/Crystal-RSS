@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function feedItems()
     {
-        return $this->hasMany(FeedItem::class)->orderBy('read_at')->orderBy('date', 'desc');
+        return $this->hasMany(FeedItem::class)->orderBy('read_at', 'desc')->orderBy('date', 'desc');
     }
 
     public function categories()
