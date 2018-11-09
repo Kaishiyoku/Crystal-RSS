@@ -2,7 +2,7 @@
     <div class="col col-lg-8">
         <div class="card border-primary">
             <h4 class="card-header text-white bg-primary">
-                {{ __('login.title') }}
+                @lang('login.title')
             </h4>
             <div class="card-body">
                 {{ Form::open(['route' => 'login', 'method' => 'post', 'role' => 'form']) }}

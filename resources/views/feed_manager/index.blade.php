@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>
-        {{ __('feed_manager.index.title') }}
+        @lang('feed_manager.index.title')
         <small class="text-muted">{{ $feeds->count() }}</small>
     </h1>
 
@@ -14,16 +14,16 @@
 
     @if ($feeds->count() == 0)
         <p class="lead">
-            <i>{{ __('feed_manager.index.no_feeds_yet') }}</i>
+            <i>@lang('feed_manager.index.no_feeds_yet')</i>
         </p>
     @else
         <table class="table table-striped" data-provide="tablesorter">
             <thead>
             <tr>
-                <th>{{ __('validation.attributes.title') }}</th>
-                <th>{{ __('validation.attributes.category_id') }}</th>
-                <th>{{ __('validation.attributes.is_enabled') }}</th>
-                <th>{{ __('validation.attributes.last_checked_at') }}</th>
+                <th>@lang('validation.attributes.title')</th>
+                <th>@lang('validation.attributes.category_id')</th>
+                <th>@lang('validation.attributes.is_enabled')</th>
+                <th>@lang('validation.attributes.last_checked_at')</th>
                 <th class="sorter-false"></th>
                 <th class="sorter-false"></th>
             </tr>

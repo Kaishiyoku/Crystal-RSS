@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>
-        {{ __('category.index.title') }}
+        @lang('category.index.title')
         <small class="text-muted">{{ $categories->count() }}</small>
     </h1>
 
@@ -13,13 +13,13 @@
     </p>
 
     @if ($categories->count() == 0)
-        <p class="lead"><i>{{ __('category.index.no_items') }}</i></p>
+        <p class="lead"><i>@lang('category.index.no_items')</i></p>
     @else
         <table class="table table-striped" data-provide="tablesorter">
             <thead>
             <tr>
-                <th>{{ __('validation.attributes.title') }}</th>
-                <th>{{ __('category.index.number_of_feeds') }}</th>
+                <th>@lang('validation.attributes.title')</th>
+                <th>@lang('category.index.number_of_feeds')</th>
                 <th class="sorter-false"></th>
                 <th class="sorter-false"></th>
             </tr>

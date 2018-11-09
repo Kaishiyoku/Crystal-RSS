@@ -7,7 +7,7 @@
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ __('register.title') }}
+                    @lang('register.title')
                 </h4>
                 <div class="card-body">
                     {{ Form::open(['route' => 'register', 'method' => 'post', 'role' => 'form']) }}

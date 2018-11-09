@@ -7,7 +7,7 @@
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ __('passwords.form_confirm.title') }}
+                    @lang('passwords.form_confirm.title')
                 </h4>
                 <div class="card-body">
                     @if (session('status'))
@@ -64,7 +64,7 @@
                         <div class="form-group row">
                             <div class="col-lg-8 ml-md-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('passwords.form_confirm.submit') }}
+                                    @lang('passwords.form_confirm.submit')
                                 </button>
                             </div>
                         </div>

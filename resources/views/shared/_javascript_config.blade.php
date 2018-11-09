@@ -1,7 +1,7 @@
 <script>
     const CONFIG = {
         confirm: {
-            defaultText: '{{ __('common.are_you_sure') }}',
+            defaultText: '@lang('common.are_you_sure')',
         }
     };
 </script>

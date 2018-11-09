@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('category.edit.title', ['title' => $category->title]) }}</h1>
+    <h1>@lang('category.edit.title', ['title' => $category->title])</h1>
 
     {{ Form::open(['route' => ['categories.update', $category->id], 'method' => 'put', 'role' => 'form']) }}
         @include('category._form', ['submitTitle' => __('common.update')])

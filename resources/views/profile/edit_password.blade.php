@@ -3,7 +3,7 @@
 @section('title', __('profile.edit_password.title'))
 
 @section('content')
-    <h1>{{ __('profile.edit_password.title') }}</h1>
+    <h1>@lang('profile.edit_password.title')</h1>
 
     {{ Form::open(['route' => 'profile.update_password', 'method' => 'put', 'role' => 'form']) }}
     <div class="form-group row">

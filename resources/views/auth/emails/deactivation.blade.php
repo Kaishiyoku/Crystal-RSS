@@ -4,6 +4,6 @@
 
 @section('content')
     <p>
-        {{ __('auth.emails.deactivation.your_account_has_been_deactivated', ['name' => $user->name]) }}
+        @lang('auth.emails.deactivation.your_account_has_been_deactivated', ['name' => $user->name])
     </p>
 @endsection

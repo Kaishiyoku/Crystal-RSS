@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <h2>{{ __('profile.index.options') }}</h2>
+            <h2>@lang('profile.index.options')</h2>
 
             <p class="lead p-t-10">
                 {!! Html::decode(Html::linkRoute('profile.edit_password', '<i class="fa fa-key" aria-hidden="true"></i> ' . __('profile.edit_password.title'))) !!}

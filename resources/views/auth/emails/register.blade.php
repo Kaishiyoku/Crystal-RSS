@@ -4,15 +4,15 @@
 
 @section('content')
     <p>
-        {{ __('auth.emails.register.a_new_user_registered') }}:
+        @lang('auth.emails.register.a_new_user_registered'):
     </p>
 
     <p>
-        {{ __('validation.attributes.name') }}: {{ $user->name }}<br>
-        {{ __('validation.attributes.email') }}: {{ $user->email }}
+        @lang('validation.attributes.name'): {{ $user->name }}<br>
+        @lang('validation.attributes.email'): {{ $user->email }}
     </p>
 
     <p>
-        {{ __('auth.emails.register.click_here_to_activate_the_user') }}:
+        @lang('auth.emails.register.click_here_to_activate_the_user'):
     </p>
 @endsection

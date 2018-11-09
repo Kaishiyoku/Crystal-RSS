@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <h1>{{ __('feed_manager.edit.title', ['title' => $feed->title]) }}</h1>
+    <h1>@lang('feed_manager.edit.title', ['title' => $feed->title])</h1>
 
     {{ Form::open(['route' => ['feed.manage.update', $feed->id], 'method' => 'put', 'role' => 'form']) }}
         <div class="form-group row">

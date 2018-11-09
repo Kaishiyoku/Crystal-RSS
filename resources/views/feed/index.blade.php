@@ -4,15 +4,15 @@
 
 @section('content')
     <h1>
-        {{ __('feed.index.title') }}
+        @lang('feed.index.title')
         <small class="text-muted">{{ $totalCountUnreadFeedItems }}</small>
     </h1>
 
     <p class="text-muted">
         @if ($latestUpdateLog)
-            {{ __('feed.index.last_update_at', ['date' => $latestUpdateLog->created_at->format(DATETIME)]) }}
+            @lang('feed.index.last_update_at', ['date' => $latestUpdateLog->created_at->format(DATETIME)])
         @else
-            {{ __('feed.index.last_update_at_never') }}
+            @lang('feed.index.last_update_at_never')
         @endif
     </p>
 
@@ -39,7 +39,7 @@
     </ul>
 
     @if ($unreadFeedItems->count() == 0)
-        <p class="lead font-italic mt-3"><i>{{ __('feed.index.no_unread_items') }}</i></p>
+        <p class="lead font-italic mt-3"><i>@lang('feed.index.no_unread_items')</i></p>
     @else
         <div>
             @include('shared._pagination', ['items' => $unreadFeedItems])

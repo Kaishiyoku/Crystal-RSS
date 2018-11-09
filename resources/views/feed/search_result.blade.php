@@ -3,12 +3,12 @@
 @section('title', __('feed.index.title'))
 
 @section('content')
-    <h1>{{ __('feed.search_result.title') }}</h1>
+    <h1>@lang('feed.search_result.title')</h1>
 
     @include('feed._search_form')
 
     @if($foundFeedItemsFromIndex->count() == 0)
-        <p class="lead font-italic">{{ __('feed.search_result.no_entries_found') }}</p>
+        <p class="lead font-italic">@lang('feed.search_result.no_entries_found')</p>
     @endif
 
     <div class="mt-4">
