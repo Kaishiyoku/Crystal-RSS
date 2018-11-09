@@ -23,7 +23,7 @@ class EmailUserRegistrationAdministratorsNotification extends BaseListener
 
         foreach ($administrators->get() as $administrator) {
             $this->mailer->send('auth.emails.register', ['user' => $user], function ($m) use ($administrator) {
-                $m->to($administrator->email)->subject(trans('auth.emails.register.title'));
+                $m->to($administrator->email)->subject(__('auth.emails.register.title'));
             });
         }
     }

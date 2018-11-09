@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', trans('login.title'))
+@section('title', __('login.title'))
 
 @section('content')
     @include('shared._login')

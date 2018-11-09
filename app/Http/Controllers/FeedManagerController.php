@@ -67,12 +67,12 @@ class FeedManagerController extends Controller
 
             auth()->user()->feeds()->save($feed);
 
-            flash()->success(trans('feed_manager.create.success', ['url' => route('feed.manage.create')]));
+            flash()->success(__('feed_manager.create.success', ['url' => route('feed.manage.create')]));
 
             return redirect()->route('feed.manage.edit', [$feed->id]);
         } catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
-            $validator->getMessageBag()->add('site_or_feed_url', trans('feed_manager.feed_exception'));
+            $validator->getMessageBag()->add('site_or_feed_url', __('feed_manager.feed_exception'));
 
             throw new ValidationException($validator);
         }
@@ -120,13 +120,13 @@ class FeedManagerController extends Controller
 
             $feed->save();
 
-            flash()->success(trans('feed_manager.edit.success'));
+            flash()->success(__('feed_manager.edit.success'));
 
             return redirect()->route($this->redirectRoute);
         }
         catch (PicoFeedException $e) {
             $validator = Validator::make([], []);
-            $validator->getMessageBag()->add('feed_url', trans('feed_manager.feed_exception'));
+            $validator->getMessageBag()->add('feed_url', __('feed_manager.feed_exception'));
 
             throw new ValidationException($validator);
         }
@@ -147,7 +147,7 @@ class FeedManagerController extends Controller
 
         $feed->delete();
 
-        flash()->success(trans('feed_manager.destroy.success'));
+        flash()->success(__('feed_manager.destroy.success'));
 
         return redirect()->route($this->redirectRoute);
     }

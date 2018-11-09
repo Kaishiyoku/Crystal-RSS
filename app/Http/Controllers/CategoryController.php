@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
         auth()->user()->categories()->save($category);
 
-        flash()->success(trans('category.create.success'));
+        flash()->success(__('category.create.success'));
 
         return redirect()->route($this->redirectRoute);
     }
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         $category->fill($data);
         $category->save();
 
-        flash()->success(trans('category.edit.success'));
+        flash()->success(__('category.edit.success'));
 
         return redirect()->route($this->redirectRoute);
     }
@@ -103,11 +103,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->feeds()->count() > 0) {
-            flash()->error(trans('category.destroy.feeds_exist'));
+            flash()->error(__('category.destroy.feeds_exist'));
         } else {
             $category->delete();
 
-            flash()->success(trans('category.destroy.success'));
+            flash()->success(__('category.destroy.success'));
         }
 
         return redirect()->route($this->redirectRoute);

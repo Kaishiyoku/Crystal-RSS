@@ -16,7 +16,7 @@
 
 @if ($showActions)
     <p class="mt-2">
-        {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i> ' . trans('feed.index.toggle_status.submit'), ['type' => 'submit', 'class' => 'btn btn-outline-primary', 'data-confirm' => true]) }}
+        {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i> ' . __('feed.index.toggle_status.submit'), ['type' => 'submit', 'class' => 'btn btn-outline-primary', 'data-confirm' => true]) }}
     </p>
 
     {{ Form::close() }}

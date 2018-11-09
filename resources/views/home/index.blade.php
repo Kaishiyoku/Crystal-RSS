@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', trans('home.index.title'))
+@section('title', __('home.index.title'))
 
 @section('content')
     <div class="d-flex justify-content-center">

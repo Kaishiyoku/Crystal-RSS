@@ -1,13 +1,13 @@
  @extends('layouts.app')
 
-@section('title', trans('password.form_confirm.title'))
+@section('title', __('password.form_confirm.title'))
 
 @section('content')
     <div class="row justify-content-md-center">
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ trans('passwords.form_confirm.title') }}
+                    {{ __('passwords.form_confirm.title') }}
                 </h4>
                 <div class="card-body">
                     @if (session('status'))
@@ -20,7 +20,7 @@
                         {{ Form::hidden('token', $token) }}
 
                         <div class="form-group row">
-                            {{ Form::label('email', trans('validation.attributes.email'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('email', __('validation.attributes.email'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::email('email', old('email'), ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{ Form::label('password', trans('validation.attributes.password'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('password', __('validation.attributes.password'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{ Form::label('password_confirmation', trans('validation.attributes.password_confirmation'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('password_confirmation', __('validation.attributes.password_confirmation'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::password('password_confirmation', ['class' => 'form-control' . ($errors->has('password_confirmation') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -64,7 +64,7 @@
                         <div class="form-group row">
                             <div class="col-lg-8 ml-md-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ trans('passwords.form_confirm.submit') }}
+                                    {{ __('passwords.form_confirm.submit') }}
                                 </button>
                             </div>
                         </div>

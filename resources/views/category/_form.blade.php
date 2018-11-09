@@ -1,5 +1,5 @@
 <div class="form-group row">
-    {{ Form::label('title', trans('validation.attributes.title'), ['class' => 'col-lg-2 col-form-label']) }}
+    {{ Form::label('title', __('validation.attributes.title'), ['class' => 'col-lg-2 col-form-label']) }}
 
     <div class="col-lg-3">
         {{ Form::text('title', old('title', $category->title), ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'required' => true]) }}

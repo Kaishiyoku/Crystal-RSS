@@ -48,7 +48,7 @@ class UpdateFeed extends Command
     {
         $start = microtime(true);
 
-        $this->info(trans('feed.updating_at', ['date' => Carbon::now()]));
+        $this->info(__('feed.updating_at', ['date' => Carbon::now()]));
         $this->info(null);
 
         $config = new Config();
@@ -68,7 +68,7 @@ class UpdateFeed extends Command
         foreach ($users as $user) {
             $totalNumberOfNewUnreadFeedItemsForUser = 0;
 
-            $this->comment(trans('feed.updating_feed_for_user', ['name' => $user->name]));
+            $this->comment(__('feed.updating_feed_for_user', ['name' => $user->name]));
             $this->info(null);
 
             foreach ($user->enabledFeeds()->get() as $feed) {

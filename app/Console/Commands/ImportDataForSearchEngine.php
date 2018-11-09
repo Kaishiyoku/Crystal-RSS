@@ -45,7 +45,7 @@ class ImportDataForSearchEngine extends Command
      */
     public function handle()
     {
-        $this->info(trans('feed.search.importing'));
+        $this->info(__('feed.search.importing'));
 
         $this->call('scout:import', ['model' => 'App\Models\FeedItem']);
     }

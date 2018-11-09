@@ -41,10 +41,10 @@
 <hr/>
 
 <div class="footer">
-    {{ StringHelper::getYearsFrom(2016) }}, {{ trans('common.copyright') }}<br>
-    {{ Html::linkRoute('home.show_contact_form', trans('common.contact')) }}<br>
-    {{ Html::linkRoute('home.imprint', trans('common.imprint')) }}<br>
-    {{ Html::linkRoute('home.privacy_policy', trans('common.privacy_policy')) }}<br>
+    {{ StringHelper::getYearsFrom(2016) }}, {{ __('common.copyright') }}<br>
+    {{ Html::linkRoute('home.show_contact_form', __('common.contact')) }}<br>
+    {{ Html::linkRoute('home.imprint', __('common.imprint')) }}<br>
+    {{ Html::linkRoute('home.privacy_policy', __('common.privacy_policy')) }}<br>
 
     @yield('footer')
 </div>

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', trans('feed_manager.edit.title', ['title' => $feed->title]))
+@section('title', __('feed_manager.edit.title', ['title' => $feed->title]))
 
 @section('breadcrumbs')
     {!! Breadcrumbs::render('feed.manage.edit', $feed) !!}
 @endsection
 
 @section('content')
-    <h1>{{ trans('feed_manager.edit.title', ['title' => $feed->title]) }}</h1>
+    <h1>{{ __('feed_manager.edit.title', ['title' => $feed->title]) }}</h1>
 
     {{ Form::open(['route' => ['feed.manage.update', $feed->id], 'method' => 'put', 'role' => 'form']) }}
         <div class="form-group row">
-            {{ Form::label('title', trans('validation.attributes.title'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('title', __('validation.attributes.title'), ['class' => 'col-lg-2 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::text('title', old('title', $feed->title), ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group row">
-            {{ Form::label('site_url', trans('validation.attributes.site_url'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('site_url', __('validation.attributes.site_url'), ['class' => 'col-lg-2 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::text('site_url', old('site_url', $feed->site_url), ['class' => 'form-control' . ($errors->has('site_url') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group row">
-            {{ Form::label('feed_url', trans('validation.attributes.feed_url'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('feed_url', __('validation.attributes.feed_url'), ['class' => 'col-lg-2 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::text('feed_url', old('feed_url', $feed->feed_url), ['class' => 'form-control' . ($errors->has('feed_url') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group row">
-            {{ Form::label('category_id', trans('validation.attributes.category_id'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('category_id', __('validation.attributes.category_id'), ['class' => 'col-lg-2 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::select('category_id', $categories, old('category_id', $feed->category_id), ['class' => 'form-control' . ($errors->has('category_id') ? ' is-invalid' : '')]) }}
@@ -67,10 +67,10 @@
         </div>
 
         <div class="form-group row">
-            {{ Form::label('is_enabled', trans('validation.attributes.is_enabled'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('is_enabled', __('validation.attributes.is_enabled'), ['class' => 'col-lg-2 col-form-label']) }}
 
             <div class="col-lg-5">
-                {{ Form::select('is_enabled', trans('common.lists.boolean'), old('is_enabled', $feed->is_enabled), ['class' => 'form-control' . ($errors->has('is_enabled') ? ' is-invalid' : '')]) }}
+                {{ Form::select('is_enabled', __('common.lists.boolean'), old('is_enabled', $feed->is_enabled), ['class' => 'form-control' . ($errors->has('is_enabled') ? ' is-invalid' : '')]) }}
 
                 @if ($errors->has('is_enabled'))
                     <div class="invalid-feedback">
@@ -82,7 +82,7 @@
 
         <div class="form-group row">
             <div class="col-lg-10 ml-md-auto">
-                {{ Form::button(trans('common.save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                {{ Form::button(__('common.save'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
         </div>
     {{ Form::close() }}

@@ -40,33 +40,33 @@ class Menus
 
         if ($this->auth->check()) {
             Menu::registerDefault([
-                Menu::link('feed.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.feed') . '</span>', [], [], ['feed.category']),
-                Menu::link('feed.search_show', '<i class="fa fa-search" ariad-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.search') . '</span>', [], [], ['feed.search_result'])
+                Menu::link('feed.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . __('common.nav.feed') . '</span>', [], [], ['feed.category']),
+                Menu::link('feed.search_show', '<i class="fa fa-search" ariad-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . __('common.nav.search') . '</span>', [], [], ['feed.search_result'])
             ], ['class' => 'navbar-nav mr-auto']);
         } else {
             Menu::registerDefault([
-                Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . trans('common.nav.landing_page') . '</span>')
+                Menu::link('home.index', '<i class="fa fa-home" aria-hidden="true"></i> ' . '<span class="d-lg-none d-xl-inline">' . __('common.nav.landing_page') . '</span>')
             ], ['class' => 'navbar-nav mr-auto']);
         }
 
         if ($this->auth->check()) {
             Menu::register('user', [
                 Menu::dropdown([
-                    Menu::dropdownHeader(trans('common.nav.general')),
-                    Menu::link('feed.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . trans('common.nav.history')),
-                    Menu::link('profile.index', '<i class="fa fa-user" aria-hidden="true"></i> ' . trans('common.nav.profile'), [], [], ['profile.edit_password']),
-                    Menu::dropdownHeader(trans('common.nav.manage')),
-                    Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . trans('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
-                    Menu::link('categories.index', '<i class="fa fa-folder" aria-hidden="true"></i> ' . trans('common.nav.categories'), [], [], ['categories.create', 'categories.edit']),
+                    Menu::dropdownHeader(__('common.nav.general')),
+                    Menu::link('feed.history', '<i class="fa fa-history" aria-hidden="true"></i> ' . __('common.nav.history')),
+                    Menu::link('profile.index', '<i class="fa fa-user" aria-hidden="true"></i> ' . __('common.nav.profile'), [], [], ['profile.edit_password']),
+                    Menu::dropdownHeader(__('common.nav.manage')),
+                    Menu::link('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . __('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
+                    Menu::link('categories.index', '<i class="fa fa-folder" aria-hidden="true"></i> ' . __('common.nav.categories'), [], [], ['categories.create', 'categories.edit']),
                     Menu::dropdownDivider(),
-                    Menu::link('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . trans('common.nav.logout'), [], ['data-click' => '#logout-form'])
+                    Menu::link('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . __('common.nav.logout'), [], ['data-click' => '#logout-form'])
 
                 ], '<i class="fa fa-user" aria-hidden="true"></i> ' . $this->auth->user()->name . ' ', null, [], ['class' => 'dropdown-menu-right'])
             ], ['class' => 'navbar-nav']);
         } else {
             Menu::register('user', [
-                Menu::link('login', '<i class="fa fa-sign-in" aria-hidden="true"></i> ' . trans('common.nav.login')),
-                Menu::link('register', '<i class="fa fa-user-plus" aria-hidden="true"></i> ' . trans('common.nav.register'))
+                Menu::link('login', '<i class="fa fa-sign-in" aria-hidden="true"></i> ' . __('common.nav.login')),
+                Menu::link('register', '<i class="fa fa-user-plus" aria-hidden="true"></i> ' . __('common.nav.register'))
             ], ['class' => 'navbar-nav']);
         }
 

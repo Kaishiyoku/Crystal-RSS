@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', trans('passwords.form.title'))
+@section('title', __('passwords.form.title'))
 
 @section('content')
     <div class="row justify-content-md-center">
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ trans('passwords.form.title') }}
+                    {{ __('passwords.form.title') }}
                 </h4>
                 <div class="card-body">
                     @if (session('status'))
@@ -18,7 +18,7 @@
 
                     {{ Form::open(['url' => '/password/email', 'method' => 'post', 'role' => 'form']) }}
                         <div class="form-group row">
-                            {{ Form::label('email', trans('validation.attributes.email'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('email', __('validation.attributes.email'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::email('email', old('email'), ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -33,7 +33,7 @@
 
                         <div class="form-group row">
                             <div class="col-lg-8 ml-md-auto">
-                                {{ Form::button(trans('passwords.form.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                                {{ Form::button(__('passwords.form.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
                             </div>
                         </div>
                     {{ Form::close() }}

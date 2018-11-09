@@ -51,7 +51,7 @@ class FeedController extends Controller
             }
         }
 
-        flash()->success(trans('feed.mark_all_as_read.success'));
+        flash()->success(__('feed.mark_all_as_read.success'));
 
         return redirect()->back();
     }
@@ -72,7 +72,7 @@ class FeedController extends Controller
             $feedItem->save();
         }
 
-        flash()->success(trans('feed.index.toggle_status.success'));
+        flash()->success(__('feed.index.toggle_status.success'));
 
         return redirect()->back();
     }

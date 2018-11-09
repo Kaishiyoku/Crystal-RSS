@@ -23,7 +23,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark m-b-25">
         <div class="container">
-            {{ Html::linkRoute('admin.home.index', config('app.name', 'Laravel') . ' - ' . trans('common.nav.administration'), [], ['class' => 'navbar-brand']) }}
+            {{ Html::linkRoute('admin.home.index', config('app.name', 'Laravel') . ' - ' . __('common.nav.administration'), [], ['class' => 'navbar-brand']) }}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', trans('register.title'))
+@section('title', __('register.title'))
 
 @section('content')
     <div class="row justify-content-md-center">
         <div class="col col-lg-8">
             <div class="card border-primary">
                 <h4 class="card-header text-white bg-primary">
-                    {{ trans('register.title') }}
+                    {{ __('register.title') }}
                 </h4>
                 <div class="card-body">
                     {{ Form::open(['route' => 'register', 'method' => 'post', 'role' => 'form']) }}
                         @captcha()
 
                         <div class="form-group row">
-                            {{ Form::label('name', trans('register.name'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('name', __('register.name'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::text('name', old('name'), ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'required' => 'true']) }}
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{ Form::label('email', trans('register.email'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('email', __('register.email'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::email('email', old('email'), ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{ Form::label('password', trans('register.password'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('password', __('register.password'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'required' => true, 'data-provide' => 'password-strength', 'data-username-field' => '#name']) }}
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{ Form::label('password_confirmation', trans('register.password_confirmation'), ['class' => 'col-lg-4 col-form-label']) }}
+                            {{ Form::label('password_confirmation', __('register.password_confirmation'), ['class' => 'col-lg-4 col-form-label']) }}
 
                             <div class="col-lg-6">
                                 {{ Form::password('password_confirmation', ['class' => 'form-control' . ($errors->has('password_confirmation') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -71,7 +71,7 @@
 
                         <div class="form-group row">
                             <div class="col-lg-8 ml-md-auto">
-                                {{ Form::button(trans('register.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                                {{ Form::button(__('register.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
                             </div>
                         </div>
                     {{ Form::close() }}
