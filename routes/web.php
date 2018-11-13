@@ -27,6 +27,9 @@ Route::group(['middleware' => ['menus']], function () {
 
         // Profile
         Route::get('/profile', 'ProfileController@index')->name('profile.index');
+        Route::get('/profile/email/edit', 'ProfileController@editEmail')->name('profile.edit_email');
+        Route::put('/profile/email/edit', 'ProfileController@updateEmail')->name('profile.update_email');
+        Route::get('/profile/email/confirm/{token}', 'ProfileController@confirmNewEmail')->name('profile.confirm_new_email');
         Route::get('/profile/password/change', 'ProfileController@editPassword')->name('profile.edit_password');
         Route::put('/profile/password/change', 'ProfileController@updatePassword')->name('profile.update_password');
     });

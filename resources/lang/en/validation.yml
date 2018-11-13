@@ -107,3 +107,6 @@ attributes:
   current_password: Current password
   new_password: New password
   new_password_confirmation: New password (confirmation)
+  current_email: Current email
+  new_email: New email
+  new_email_confirmation: New email (confirmation)
