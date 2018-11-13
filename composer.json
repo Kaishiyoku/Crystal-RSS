@@ -16,6 +16,7 @@
         "kaishiyoku/yaml-translation": "5.7.0",
         "laracasts/flash": "3.0.2",
         "laravel/framework": "5.7.12",
+        "laravel/horizon": "1.4.3",
         "laravel/tinker": "1.0.8",
         "laravelcollective/html": "5.7.1",
         "pda/pheanstalk": "3.2.1",
