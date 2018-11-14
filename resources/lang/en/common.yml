@@ -12,6 +12,8 @@ nav:
   manage_categories: Manage categories
   search: Search
   profile: Profile
+  administration: Administration
+  horizon: Horizon
 add: Add
 delete: Delete
 edit: Edit

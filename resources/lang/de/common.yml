@@ -12,6 +12,8 @@ nav:
   manage_categories: Kategorien verwalten
   search: Suche
   profile: Profil
+  administration: Administration
+  horizon: Horizon
 add: Hinzufügen
 delete: Löschen
 edit: Ändern
