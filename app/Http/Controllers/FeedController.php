@@ -56,7 +56,7 @@ class FeedController extends Controller
 
         flash()->success(__('feed.mark_all_as_read.success'));
 
-        return redirect()->back();
+        return redirect()->route('feed.index');
     }
 
     public function toggleFeedItemStatus(Request $request)
