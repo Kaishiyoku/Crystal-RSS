@@ -1,11 +1,11 @@
-@extends('errors.layouts.app')
+@extends('errors::illustrated-layout')
 
-@section('content')
-    <h1>@lang('common.errors.404.title')</h1>
+@section('code', '404')
+@section('title', __('errors.404.title'))
 
-    <h2>@lang('common.errors.404.content')</h2>
-
-    <p class="pt-5">
-        {{ Html::link('/', __('common.back_to_landing_page'), ['class' => 'btn btn-primary btn-lg']) }}
-    </p>
+@section('image')
+<div style="background-image: url('/svg/404.svg');" class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
+</div>
 @endsection
+
+@section('message', __('errors.404.message'))

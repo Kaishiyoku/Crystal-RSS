@@ -22,16 +22,6 @@ save: Speichern
 are_you_sure: Sind Sie sicher?
 create: Erstellenx
 update: Speichern
-errors:
-  404:
-    title: .·´¯`(>▂<)´¯`·.
-    content: Die Seite, nach der Sie suchen, konnte nicht gefunden werden.
-  503:
-    title: (✖╭╮✖)
-    content: Es ist ein Fehler aufgetreten. Wir sind gleich zurück.
-  resource_not_found:
-    title: ¯\_(ツ)_/¯
-    content: Die gewählte Ressource konnte nicht gefunden werden.
 back_to_landing_page: Zurück zur Startseite
 load_more: Mehr laden
 lists:

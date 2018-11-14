@@ -1,11 +1,11 @@
-@extends('errors.layouts.app')
+@extends('errors::illustrated-layout')
 
-@section('content')
-    <h1>@lang('common.errors.503.title')</h1>
+@section('code', '503')
+@section('title', __('errors.503.title'))
 
-    <h2>@lang('common.errors.503.content')</h2>
-
-    <p class="pt-5">
-        {{ Html::link('/', __('common.back_to_landing_page'), ['class' => 'btn btn-primary btn-lg']) }}
-    </p>
+@section('image')
+<div style="background-image: url('/svg/503.svg');" class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
+</div>
 @endsection
+
+@section('message', __($exception->getMessage() ?: 'errors.503.message'))

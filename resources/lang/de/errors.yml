@@ -1,0 +1,22 @@
+401:
+  title: Nicht autorisiert
+  message: Entschuldigung, Sie sind nicht autorisiert, um diese Seite aufzurufen.
+403:
+  title: Unerlaubt
+  message: Entschuldigung, Sie sind nicht befugt, diese Seite aufzurufen.
+404:
+  title: Seite nicht gefunden
+  message: Entschuldigung, die Seite nach der Sie suchen konnte nicht gefunden werden.
+419:
+  title: Seite abgelaufen
+  message: Entschuldigung, Ihre Session ist abgelaufen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.
+429:
+  title: Zu viel Aufrufe
+  message: Entschuldigung, Sie führen zu Viele Aufrufe gegen unsere Server aus.
+500:
+  title: Fehler
+  message: Hoppla, da ist etwas schiefgelaufen.
+503:
+  title: Service nicht verfügbar
+  message: Entschuldigung, wir führen Wartungsarbeiten durch. Bitte schauen Sie später wieder vorbei.
+go_home: Zur Startseite
