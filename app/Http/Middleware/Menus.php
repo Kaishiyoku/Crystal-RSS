@@ -41,11 +41,11 @@ class Menus
         $isLoggedIn = $this->auth->check();
         $isAdministrator = $isLoggedIn && $this->auth->user()->is_administrator;
 
-        $adminLinks = $isAdministrator ? [
+        $administrationLinks = removeNulls(itemIf([
             Menu::dropdownHeader(__('common.nav.administration')),
             Menu::link('/horizon', '<i class="fa fa-compass" aria-hidden="true"></i> ' . __('common.nav.horizon')),
-            Menu::link('/telescope', '<i class="fa fa-compass" aria-hidden="true"></i> ' . __('common.nav.telescope')),
-        ] : [];
+            itemIf(Menu::link('/telescope', '<i class="fa fa-compass" aria-hidden="true"></i> ' . __('common.nav.telescope')), env('ENABLE_TELESCOPE')),
+        ], $isAdministrator, []));
 
         Menu::setConfig(Config::forBootstrap4());
 
@@ -63,7 +63,7 @@ class Menus
                     Menu::dropdownHeader(__('common.nav.manage')),
                     Menu::linkRoute('feed.manage.index', '<i class="fa fa-rss" aria-hidden="true"></i> ' . __('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
                     Menu::linkRoute('categories.index', '<i class="fa fa-folder" aria-hidden="true"></i> ' . __('common.nav.categories'), [], [], ['categories.create', 'categories.edit']),
-                ], $adminLinks, [
+                ], $administrationLinks, [
                     Menu::dropdownDivider(),
                     Menu::linkRoute('logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> ' . __('common.nav.logout'), [], ['data-click' => '#logout-form']),
                 ]), '<i class="fa fa-user" aria-hidden="true"></i> ' . $this->auth->user()->name . ' ', null, [], ['class' => 'dropdown-menu-right'])
@@ -74,7 +74,7 @@ class Menus
             ], ['class' => 'navbar-nav mr-auto']);
 
             Menu::register('user', [
-                Menu::linRoutek('login', '<i class="fa fa-sign-in" aria-hidden="true"></i> ' . __('common.nav.login')),
+                Menu::linkRoute('login', '<i class="fa fa-sign-in" aria-hidden="true"></i> ' . __('common.nav.login')),
                 Menu::linkRoute('register', '<i class="fa fa-user-plus" aria-hidden="true"></i> ' . __('common.nav.register'))
             ], ['class' => 'navbar-nav']);
         }

@@ -104,3 +104,13 @@ if (! function_exists('upper'))
         return \Illuminate\Support\Str::upper($string);
     }
 }
+
+function itemIf($item, $isVisible, $default = null) {
+    return $isVisible ? $item : $default;
+}
+
+function removeNulls(array $arr) {
+    return array_filter($arr, function ($item) {
+        return $item != null;
+    });
+}

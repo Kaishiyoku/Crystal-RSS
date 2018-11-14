@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\Horizon;
-use Laravel\Telescope\Telescope;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
         };
 
         Horizon::auth($administrationCheckFn);
-        Telescope::auth($administrationCheckFn);
     }
 
     /**
@@ -38,9 +36,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() !== 'production') {
+        if ($this->app->isLocal()) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
+
+        if (env('ENABLE_TELESCOPE')) {
             $this->app->register(TelescopeServiceProvider::class);
         }
     }
