@@ -20,7 +20,7 @@ delete: Löschen
 edit: Ändern
 save: Speichern
 are_you_sure: Sind Sie sicher?
-create: Erstellen
+create: Erstellenx
 update: Speichern
 errors:
   404:
@@ -42,3 +42,5 @@ general: Allgemein
 languages:
   de: Deutsch
   en: English
+date_formats:
+  datetime: 'd.m.Y H:i'

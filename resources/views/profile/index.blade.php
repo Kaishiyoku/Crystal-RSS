@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    {{ $user->created_at->format(DATETIME) }}
+                    {{ $user->created_at->format(l(DATETIME)) }}
                 </div>
             </div>
 

@@ -10,7 +10,7 @@
 
     <p class="text-muted">
         @if ($latestUpdateLog)
-            @lang('feed.index.last_update_at', ['date' => $latestUpdateLog->created_at->format(DATETIME)])
+            @lang('feed.index.last_update_at', ['date' => $latestUpdateLog->created_at->format(l(DATETIME))])
         @else
             @lang('feed.index.last_update_at_never')
         @endif

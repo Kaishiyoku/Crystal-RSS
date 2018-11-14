@@ -16,12 +16,12 @@
                     {{ $feedItem->feed->title }}
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small font-weight-bold">
-                    {{ $feedItem->date->format(DATETIME) }}
+                    {{ $feedItem->date->format(l(DATETIME)) }}
                 </div>
             </div>
         </div>
         <div class="col-lg-3 text-right d-none d-lg-block d-xl-block">
-            {{ $feedItem->date->format(DATETIME) }}
+            {{ $feedItem->date->format(l(DATETIME)) }}
         </div>
     </div>
 </li>

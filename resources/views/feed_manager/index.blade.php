@@ -34,7 +34,7 @@
                     <td>{{ $feed->title }}</td>
                     <td>{{ $feed->category->title }}</td>
                     <td>{{ formatBoolean($feed->is_enabled) }}</td>
-                    <td>{{ $feed->last_checked_at->format(DATETIME) }}</td>
+                    <td>{{ $feed->last_checked_at->format(l(DATETIME)) }}</td>
                     <td>
                         @include('shared._delete_link', ['route' => ['feed.manage.destroy', $feed->id]])
                     </td>

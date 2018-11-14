@@ -42,3 +42,5 @@ general: General
 languages:
   de: Deutsch
   en: English
+date_formats:
+  datetime: 'Y-m-d H:i'

@@ -1,6 +1,13 @@
 <?php
 
-const DATETIME = 'Y-m-d H:i';
+const DATETIME = 'datetime';
+
+if (! function_exists('l'))
+{
+    function l($type) {
+        return __('common.date_formats.' . $type);
+    }
+}
 
 if (! function_exists('getYearsFrom')) {
     function getYearsFrom($year)
