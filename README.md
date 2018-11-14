@@ -20,7 +20,7 @@ Installation
 ============
 1. Download the latest release: https://github.com/Kaishiyoku/Crystal-RSS/releases/latest
 2. remove the `php artisan ide-helper` commands from the `composer.json` file
-3. run composer install --no-dev --no-scripts
+3. run composer install --no-dev --no-scripts (if you're installing under Windows add the `--ignore-platform-reqs` flag due to the use of Laravel Horizon which is incompatible with Windows)
 4. run php artisan migrate
 5. run npm install
 6. run npm run prod
