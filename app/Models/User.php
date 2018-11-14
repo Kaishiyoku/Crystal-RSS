@@ -39,6 +39,10 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $email_verified_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $enabledFeeds
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmailVerifiedAt($value)
+ * @property string|null $new_email
+ * @property string|null $new_email_token
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNewEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNewEmailToken($value)
  */
 class User extends Authenticatable
 {

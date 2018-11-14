@@ -35,9 +35,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {!! Menu::render() !!}
 
+                <ul class="navbar-nav">
+                    @include('shared._navbar_language_dropdown')
+                </ul>
+
                 {!! Menu::render('user') !!}
 
-                @include('shared._logout_form')
+                @auth
+                    @include('shared._logout_form')
+                @endauth
             </div>
         </div>
     </nav>

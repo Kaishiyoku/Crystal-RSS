@@ -6,7 +6,7 @@ index:
   all_categories: All categories
   toggle_status:
     submit: Toggle status of selected items
-    success: Selected items updated. This
+    success: Selected items updated.
   last_update_at: 'Last update at: :date'
   last_update_at_never: 'Last update at: never'
 history:

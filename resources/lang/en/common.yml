@@ -36,3 +36,6 @@ lists:
     0: No
     1: Yes
 general: General
+languages:
+  de: Deutsch
+  en: English

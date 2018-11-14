@@ -37,6 +37,7 @@ class Language
         if (!Session::has('locale')) {
             // Try to set locale by browser language
             $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+
             if (in_array($browserLang, (array) config('app.available_locales'))) {
                 Session::put('locale', $browserLang);
             } else {
@@ -45,6 +46,7 @@ class Language
         }
         app()->setLocale(Session::get('locale'));
         Carbon::setLocale(Session::get('locale'));
+
         return $next($request);
     }
 }

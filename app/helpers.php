@@ -89,3 +89,11 @@ if (! function_exists('formatBoolean')) {
         return $str;
     }
 }
+
+
+if (! function_exists('upper'))
+{
+    function upper($string) {
+        return \Illuminate\Support\Str::upper($string);
+    }
+}

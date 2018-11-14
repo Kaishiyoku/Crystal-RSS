@@ -3,6 +3,7 @@
 Route::group(['middleware' => ['menus']], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/login', 'HomeController@login')->name('home.login');
+    Route::post('/lang/change', 'LanguageController@change')->name('language.change');
 
     /* ****************
      * Logged on users *
