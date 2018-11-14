@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
  * @property bool $is_enabled
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed query()
  */
 class Feed extends Model
 {

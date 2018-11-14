@@ -20,6 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUserId($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError query()
  */
 class UpdateError extends Model
 {

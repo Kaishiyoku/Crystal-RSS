@@ -37,6 +37,9 @@ use Laravel\Scout\Searchable;
  * @property string|null $read_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem query()
  */
 class FeedItem extends Model
 {

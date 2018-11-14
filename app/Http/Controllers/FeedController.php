@@ -36,17 +36,15 @@ class FeedController extends Controller
     {
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
         $minNumber = (int) env('DEFERRED_MIN_NUMBER');
+        $date = Carbon::now();
 
         if (env('DEFERRED_MARK_AS_READ') && $unreadFeedItems->count() > $minNumber) {
-            $date = Carbon::now();
             $unreadFeedItems = new ManualPaginator($unreadFeedItems->get(), (int) env('DEFERRED_PER_PAGE'));
 
             foreach($unreadFeedItems->pages() as $items) {
                 ProcessFeedItems::dispatch($items, $date);
             }
         } else {
-            $date = Carbon::now();
-
             foreach ($unreadFeedItems->get() as $feedItem) {
                 $feedItem->read_at = $date;
 

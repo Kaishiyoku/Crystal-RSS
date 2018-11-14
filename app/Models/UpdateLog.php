@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $duration_in_seconds
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereDurationInSeconds($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog query()
  */
 class UpdateLog extends Model
 {
