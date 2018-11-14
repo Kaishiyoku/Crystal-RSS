@@ -14,6 +14,7 @@ nav:
   profile: Profil
   administration: Administration
   horizon: Horizon
+  telescope: Telescope
 add: Hinzufügen
 delete: Löschen
 edit: Ändern

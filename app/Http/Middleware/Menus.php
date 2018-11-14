@@ -44,6 +44,7 @@ class Menus
         $adminLinks = $isAdministrator ? [
             Menu::dropdownHeader(__('common.nav.administration')),
             Menu::link('/horizon', '<i class="fa fa-compass" aria-hidden="true"></i> ' . __('common.nav.horizon')),
+            Menu::link('/telescope', '<i class="fa fa-compass" aria-hidden="true"></i> ' . __('common.nav.telescope')),
         ] : [];
 
         Menu::setConfig(Config::forBootstrap4());

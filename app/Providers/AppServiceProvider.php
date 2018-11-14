@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\Horizon;
+use Laravel\Telescope\Telescope;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,13 +19,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        Horizon::auth(function ($request) {
+        $administrationCheckFn = function ($request) {
             if (!$request->user() || !$request->user()->is_administrator) {
                 throw new UnauthorizedHttpException('Unauthorized');
             }
 
             return true;
-        });
+        };
+
+        Horizon::auth($administrationCheckFn);
+        Telescope::auth($administrationCheckFn);
     }
 
     /**
