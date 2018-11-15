@@ -200,3 +200,11 @@ footer {
     }
   }
 }
+
+.hoverable {
+  @include _transition(background-color, 50ms, linear);
+
+  &:hover {
+    background-color: rgba($black, .025);
+  }
+}
