@@ -85,7 +85,7 @@ class FeedController extends Controller
 
     public function searchResult(Request $request)
     {
-        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id)->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id)->orderBy('date', 'desc')->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.search_result', compact('foundFeedItemsFromIndex'));
     }
