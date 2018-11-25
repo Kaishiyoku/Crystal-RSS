@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
     }
+
+    public function feedItemCategories()
+    {
+        return $this->hasMany(FeedItemCategory::class)->orderBy('title');
+    }
 }

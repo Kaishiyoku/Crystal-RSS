@@ -5,9 +5,9 @@ Route::group(['middleware' => ['menus']], function () {
     Route::get('/login', 'HomeController@login')->name('home.login');
     Route::post('/lang/change', 'LanguageController@change')->name('language.change');
 
-    /* ****************
+    /* *****************
      * Logged on users *
-     **************** */
+     ***************** */
     Route::group(['middleware' => ['auth']], function () {
         // Feed
         Route::prefix('feed')->as('feed.')->group(function () {
@@ -33,6 +33,14 @@ Route::group(['middleware' => ['menus']], function () {
         Route::get('/profile/email/confirm/{token}', 'ProfileController@confirmNewEmail')->name('profile.confirm_new_email');
         Route::get('/profile/password/change', 'ProfileController@editPassword')->name('profile.edit_password');
         Route::put('/profile/password/change', 'ProfileController@updatePassword')->name('profile.update_password');
+
+        /* ****************
+         * Administrators *
+         **************** */
+        Route::group(['middleware' => ['admin']], function () {
+            // Feed
+            Route::get('/feed/{feedItem}/details', 'FeedController@details')->name('feed.details');
+        });
     });
 
     Auth::routes();

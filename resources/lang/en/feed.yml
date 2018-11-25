@@ -9,9 +9,12 @@ index:
     success: Selected items updated.
   last_update_at: 'Last update at: :date'
   last_update_at_never: 'Last update at: never'
+  details: Details
 history:
   title: Feed history
   no_items: No items.
+details:
+  title: 'Details for #:title'
 mark_all_as_read:
   success: All items marked as read and will be added to the queue, this may take some seconds.
 updating_feed_for_user: 'Updating feed for user ":name"'

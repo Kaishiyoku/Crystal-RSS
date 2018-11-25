@@ -105,12 +105,57 @@ if (! function_exists('upper'))
     }
 }
 
-function itemIf($item, $isVisible, $default = null) {
-    return $isVisible ? $item : $default;
+if (! function_exists('itemIf'))
+{
+    function itemIf($item, $isVisible, $default = null) {
+        return $isVisible ? $item : $default;
+    }
 }
 
-function removeNulls(array $arr) {
-    return array_filter($arr, function ($item) {
-        return $item != null;
-    });
+if (! function_exists('removeNulls'))
+{
+    function removeNulls(array $arr) {
+        return array_filter($arr, function ($item) {
+            return $item != null;
+        });
+    }
+}
+
+if (! function_exists('purifyHtml'))
+{
+    function purifyHtml($value)
+    {
+        $purifier = new \Kaishiyoku\HtmlPurifier\HtmlPurifier();
+
+        return $purifier->purify($value);
+    }
+}
+
+if (! function_exists('syncFeedItemCategories'))
+{
+    function syncFeedItemCategories(array $categoryTitles, \App\Models\User $user, \App\Models\FeedItem $feedItem)
+    {
+        $categoryIds = [];
+
+        foreach ($categoryTitles as $categoryTitle) {
+            $currentCategory = $user->feedItemCategories()->whereTitle($categoryTitle)->first();
+
+            // if category currently doesn't exist, create it
+            if ($currentCategory == null) {
+                $newCategory = new \App\Models\FeedItemCategory();
+                $newCategory->title = $categoryTitle;
+
+                $newCategory->user_id = $user->id;
+                $newCategory->save();
+
+                $user->feedItemCategories()->save($newCategory);
+
+                $categoryIds[] = $newCategory->id;
+            } else {
+                $categoryIds[] = $currentCategory->id;
+            }
+        }
+
+        $feedItem->categories()->sync($categoryIds);
+    }
 }

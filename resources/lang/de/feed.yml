@@ -9,9 +9,13 @@ index:
     success: Ausgewählte Artikel geändert.
   last_update_at: 'Zuletzt aktualisiert um: :date'
   last_update_at_never: 'Zuletzt aktualisiert um: nie'
+  details: Details
 history:
   title: Feed-Historie
   no_items: Keine Artikel.
+details:
+  title: 'Details für #:title'
+  unread: Ungelesen
 mark_all_as_read:
   success: Alle Artikel wurden als gelesen markiert und werden der Warteschleife hinzugefügt; dies kann einige Sekunden dauern.
 updating_feed_for_user: 'Aktualisiere Feed für Benutzt ":name"'

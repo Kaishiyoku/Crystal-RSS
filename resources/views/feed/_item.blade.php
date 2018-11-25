@@ -14,6 +14,10 @@
             <div class="row">
                 <div class="col-6 col-lg-12 small">
                     {{ $feedItem->feed->title }}
+
+                    @if (auth()->user()->is_administrator)
+                        {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem) }}
+                    @endif
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small font-weight-bold">
                     {{ $feedItem->date->format(l(DATETIME)) }}

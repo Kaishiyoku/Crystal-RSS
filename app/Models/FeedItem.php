@@ -113,7 +113,7 @@ class FeedItem extends Model
 
     public function getJson()
     {
-        return json_decode($this->raw_json, false, 512, JSON_THROW_ON_ERROR);
+        return json_decode($this->raw_json);
     }
 
     public function user()
@@ -124,5 +124,10 @@ class FeedItem extends Model
     public function feed()
     {
         return $this->belongsTo(Feed::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(FeedItemCategory::class);
     }
 }

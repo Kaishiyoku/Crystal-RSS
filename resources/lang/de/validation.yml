@@ -137,3 +137,11 @@ attributes:
   current_email: Derzeitige E-Mail-Adresse
   new_email: Neue E-Mail-Adresse
   new_email_confirmation: Neue E-Mail-Adresse (Bestätigung)
+  id: ID
+  feed_id: Feed
+  url: URL
+  author: Autor
+  image_url: Bild-URL
+  checksum: Prüfsumme
+  read_at: Gelesen um
+  raw_json: JSON

@@ -18,6 +18,8 @@
     {{ Html::style('css/app.css') }}
     {{ Html::style('js/plugins/codesample/css/prism.css') }}
 
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
     @include('shared._javascript_config')
 </head>
 <body>

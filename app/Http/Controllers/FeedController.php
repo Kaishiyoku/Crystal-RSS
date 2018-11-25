@@ -32,6 +32,11 @@ class FeedController extends Controller
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
 
+    public function details(FeedItem $feedItem)
+    {
+        return view('feed.details', compact('feedItem'));
+    }
+
     public function markAllAsRead($categoryId = null)
     {
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
