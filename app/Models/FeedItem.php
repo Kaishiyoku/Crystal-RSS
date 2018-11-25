@@ -40,6 +40,8 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem query()
+ * @property string|null $raw_json
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereRawJson($value)
  */
 class FeedItem extends Model
 {
@@ -107,6 +109,11 @@ class FeedItem extends Model
     public function scopeUnread($query)
     {
         return $query->whereNull('read_at');
+    }
+
+    public function getJson()
+    {
+        return json_decode($this->raw_json, false, 512, JSON_THROW_ON_ERROR);
     }
 
     public function user()

@@ -99,6 +99,7 @@ class UpdateFeed extends Command
                                 $newFeedItem->image_url = $item->getEnclosureUrl();
                                 $newFeedItem->date = $item->getDate();
                                 $newFeedItem->content = $item->getContent();
+                                $newFeedItem->raw_json = json_encode((array) $item->getXml());
 
                                 $user->feedItems()->save($newFeedItem);
                             } catch (QueryException $e) {
