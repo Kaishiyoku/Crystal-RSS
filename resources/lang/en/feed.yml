@@ -15,6 +15,7 @@ history:
   no_items: No items.
 details:
   title: 'Details for #:title'
+  unread: Unread
 mark_all_as_read:
   success: All items marked as read and will be added to the queue, this may take some seconds.
 updating_feed_for_user: 'Updating feed for user ":name"'
@@ -27,3 +28,4 @@ search_result:
   no_entries_found: No entries found.
 search:
   importing: Importing feed items...
+categories: Categories

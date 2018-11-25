@@ -117,6 +117,16 @@
 
     <div class="row mb-2">
         <div class="col-md-2">
+            @lang('feed.categories'):
+        </div>
+
+        <div class="col-md-10">
+            @include('feed._categories', ['categories' => $feedItem->categories])
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-2">
             @lang('validation.attributes.raw_json'):
         </div>
 

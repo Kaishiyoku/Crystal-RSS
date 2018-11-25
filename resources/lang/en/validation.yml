@@ -110,3 +110,13 @@ attributes:
   current_email: Current email
   new_email: New email
   new_email_confirmation: New email (confirmation)
+  id: ID
+  feed_id: Feed
+  url: URL
+  author: Author
+  content: Content
+  image_url: Image-URL
+  date: Date
+  checksum: Checksum
+  read_at: Read at
+  raw_json: JSON

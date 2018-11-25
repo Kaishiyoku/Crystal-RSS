@@ -13,11 +13,13 @@
 
             <div class="row">
                 <div class="col-6 col-lg-12 small">
-                    {{ $feedItem->feed->title }}
+                    <i class="fa fa-rss"></i>
+                    <span class="pr-2">
+                        {{ $feedItem->feed->title }}
+                    </span>
 
-                    @if (auth()->user()->is_administrator)
-                        {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem) }}
-                    @endif
+                    <i class="fa fa-tags"></i>
+                    @include('feed._categories', ['categories' => $feedItem->categories])
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small font-weight-bold">
                     {{ $feedItem->date->format(l(DATETIME)) }}
@@ -26,6 +28,14 @@
         </div>
         <div class="col-lg-3 text-right d-none d-lg-block d-xl-block">
             {{ $feedItem->date->format(l(DATETIME)) }}
+
+            <br/>
+
+            @if (auth()->user()->is_administrator)
+                <span class="small">
+                    {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem) }}
+                </span>
+            @endif
         </div>
     </div>
 </li>
