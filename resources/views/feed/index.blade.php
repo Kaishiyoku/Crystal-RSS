@@ -39,7 +39,13 @@
     </ul>
 
     @if ($unreadFeedItems->count() == 0)
-        <p class="lead font-italic mt-3"><i>@lang('feed.index.no_unread_items')</i></p>
+        <div class="row pt-3">
+            <div class="col-md-4 offset-md-4">
+                {{ Html::image('img/no_unread_items.svg', __('feed.index.no_unread_items'), ['class' => 'img-fluid']) }}
+
+                <p class="lead font-italic mt-3 text-center"><i>@lang('feed.index.no_unread_items')</i></p>
+            </div>
+        </div>
     @else
         <div>
             @include('shared._pagination', ['items' => $unreadFeedItems])
