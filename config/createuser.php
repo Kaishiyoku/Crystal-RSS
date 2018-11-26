@@ -41,4 +41,8 @@ return [
         ],
     ],
 
+    'post_creation_fn' => function (\App\Models\User $user) {
+        return \App\Http\Controllers\Auth\RegisterController::createDefaultCategory($user);
+    },
+
 ];

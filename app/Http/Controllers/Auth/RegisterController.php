@@ -93,11 +93,24 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        event(new UserRegistered($user = $this->create($request->all())));
+        $user = $this->create($request->all());
+        $this->createDefaultCategory($user);
+
+        event(new UserRegistered($user));
 
         flash()->success(__('auth.registered'));
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
+    }
+
+    public static function createDefaultCategory(User $user)
+    {
+        $defaultCategory = new \App\Models\Category();
+        $defaultCategory->title = __('category.default_title');
+
+        $user->feedItemCategories()->save($defaultCategory);
+
+        return $user;
     }
 }
