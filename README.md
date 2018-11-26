@@ -14,6 +14,7 @@ Table of contents
 =================
   * [License](#license)
   * [Installation](#installation)
+  * [Screenshots](#screenshots)
   * [Author](#author)
   
 Installation
@@ -34,7 +35,11 @@ Add the cronjob (please adjust the path if necessary):
 ```
 * * * * * php /var/www/html/crystal-rss/artisan schedule:run >> /var/www/html/crystal-rss/storage/logs/scheduler.log 2>&1
 ```
-  
+
+Screenshots
+===========
+https://imgur.com/gallery/DWPNn47
+
 License
 =======
 MIT (https://github.com/Kaishiyoku/Crystal-RSS/blob/master/LICENSE)
