@@ -175,6 +175,7 @@ return [
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
+        Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
 
         /*
          * Application Service Providers...

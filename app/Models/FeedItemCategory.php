@@ -5,6 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
+/**
+ * App\Models\FeedItemCategory
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereUserId($value)
+ * @mixin \Eloquent
+ */
 class FeedItemCategory extends Model
 {
     /**
