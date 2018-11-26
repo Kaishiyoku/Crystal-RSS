@@ -24,19 +24,21 @@
         @endif
     </p>
 
-    <ul class="nav nav-pills mt-5 mb-3">
-        <li class="nav-item">
-            {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-secondary">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'nav-link'. ($currentCategoryId == null ? ' active' : '')])) !!}
-        </li>
+    @if ($totalCountUnreadFeedItems > 0)
+        <ul class="nav nav-pills mt-5 mb-3">
+            <li class="nav-item">
+                {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-secondary">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'nav-link'. ($currentCategoryId == null ? ' active' : '')])) !!}
+            </li>
 
-        @foreach ($categories->get() as $category)
-            @if (getUnreadFeedItemCountForCategory($category) > 0)
-                <li class="nav-item">
-                    {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-secondary">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'nav-link' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
-                </li>
-            @endif
-        @endforeach
-    </ul>
+            @foreach ($categories->get() as $category)
+                @if (getUnreadFeedItemCountForCategory($category) > 0)
+                    <li class="nav-item">
+                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-secondary">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'nav-link' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
+                    </li>
+                @endif
+            @endforeach
+        </ul>
+    @endif
 
     @if ($unreadFeedItems->count() == 0)
         <div class="row pt-3">
