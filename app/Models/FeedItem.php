@@ -94,6 +94,7 @@ class FeedItem extends Model
 
     protected $dates = [
         'date',
+        'read_at',
     ];
 
     protected $casts = [
