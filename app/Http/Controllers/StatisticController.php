@@ -33,15 +33,15 @@ class StatisticController extends Controller
                 return $feedItem->date->between($date->copy()->startOfDay(), $date->copy()->endOfDay());
             });
 
-            return [$date->format('Y-m-d') => $items->count()];
+            return [$date->format(l(DATE)) => $items->count()];
         });
 
 
         $dailyArticlesChart = new DailyArticlesChart();
-        $dailyArticlesChart->title('Articles of the last 31 days');
+        $dailyArticlesChart->title(__('statistic.index.articles_of_the_last_month'));
 
         $dailyArticlesChart->labels($items->keys());
-        $dailyArticlesChart->dataset('Total articles', 'bar', $items->values())->options([
+        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->values())->options([
             'backgroundColor' => config('charts.colors')[0],
         ]);
 

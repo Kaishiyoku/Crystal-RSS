@@ -34,4 +34,5 @@ languages:
   en: English
 date_formats:
   datetime: 'Y-m-d H:i'
+  date: 'Y-m-d'
 none: None
