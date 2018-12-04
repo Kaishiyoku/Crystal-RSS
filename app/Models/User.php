@@ -90,9 +90,15 @@ class User extends Authenticatable
         return $this->hasMany(Feed::class)->whereIsEnabled(true);
     }
 
-    public function feedItems()
+    public function feedItems($withOrder = true)
     {
-        return $this->hasMany(FeedItem::class)->orderBy('read_at', 'desc')->orderBy('date', 'desc');
+        $data = $this->hasMany(FeedItem::class);
+
+        if ($withOrder) {
+            $data = $data->orderBy('read_at', 'desc')->orderBy('date', 'desc');
+        }
+
+        return $data;
     }
 
     public function categories()

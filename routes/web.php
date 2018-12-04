@@ -34,6 +34,9 @@ Route::group(['middleware' => ['menus']], function () {
         Route::get('/profile/password/change', 'ProfileController@editPassword')->name('profile.edit_password');
         Route::put('/profile/password/change', 'ProfileController@updatePassword')->name('profile.update_password');
 
+        // Statistics
+        Route::get('/statistics', 'StatisticController@index')->name('statistics.index');
+
         /* ****************
          * Administrators *
          **************** */
