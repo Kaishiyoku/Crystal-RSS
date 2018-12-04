@@ -3,37 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Charts\DailyArticlesChart;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
     public function index()
     {
-        // TODO: fill gaps
-        $feedItems = auth()->user()->feedItems(false)->where('date', '>=', Carbon::now()->subMonth())
-                            ->where('date', '<=', Carbon::now())
-                            ->orderBy('fetch_date')
-                            ->get([
-                                'id',
-                                'read_at',
-                                DB::raw('Date(date) as fetch_date'),
-                            ]);
+        $dailyArticlesChart = $this->getDailyArticlesChart();
 
-        $feedItems = $feedItems->groupBy('fetch_date');
+        return view('statistic.index', compact('dailyArticlesChart'));
+    }
 
-        $feedItemValues = $feedItems->map(function ($items) {
-            return $items->count();
+    private function getDailyArticlesChart()
+    {
+        $minDate = Carbon::now()->subMonth()->startOfDay();
+        $maxDate = Carbon::now()->endOfDay();
+        $feedItems = auth()->user()->feedItems(false)
+            ->where('date', '>=', $minDate)
+            ->where('date', '<=', $maxDate)
+            ->orderBy('date')
+            ->get([
+                'date'
+            ]);
+
+        $items = collect(CarbonPeriod::create($minDate, $maxDate)->toArray());
+        $items = $items->mapWithKeys(function (Carbon $date) use ($feedItems) {
+            $items = $feedItems->filter(function ($feedItem) use ($date) {
+                return $feedItem->date->between($date->copy()->startOfDay(), $date->copy()->endOfDay());
+            });
+
+            return [$date->format('Y-m-d') => $items->count()];
         });
+
 
         $dailyArticlesChart = new DailyArticlesChart();
         $dailyArticlesChart->title('Articles of the last 31 days');
 
-        $dailyArticlesChart->labels($feedItemValues->keys());
-        $dailyArticlesChart->dataset('Total articles', 'bar', $feedItemValues->values())->options([
+        $dailyArticlesChart->labels($items->keys());
+        $dailyArticlesChart->dataset('Total articles', 'bar', $items->values())->options([
             'backgroundColor' => config('charts.colors')[0],
         ]);
 
-        return view('statistic.index', compact('dailyArticlesChart'));
+        return $dailyArticlesChart;
     }
 }
