@@ -17,6 +17,7 @@
         "kaishiyoku/laravel-menu": "2.0.0",
         "kaishiyoku/picofeed": "1.0.0",
         "kaishiyoku/yaml-translation": "5.7.0",
+        "khill/php-duration": "1.0.6",
         "laracasts/flash": "3.0.2",
         "laravel/framework": "5.7.15",
         "laravel/horizon": "2.0.0",
