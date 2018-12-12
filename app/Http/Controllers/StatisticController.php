@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\CategoriesChart;
 use App\Charts\DailyArticlesChart;
-use App\Models\Category;
-use App\Models\Feed;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Carbon;
 use Khill\Duration\Duration;
@@ -18,7 +15,6 @@ class StatisticController extends Controller
         $maxDate = Carbon::now()->endOfDay();
 
         $dailyArticlesChart = $this->getDailyArticlesChart($minDate, $maxDate);
-        $categoriesChart = $this->getCategoriesChart();
 
         $feedItems = auth()->user()->feedItems(false)
             ->where('date', '>=', $minDate)
@@ -35,7 +31,7 @@ class StatisticController extends Controller
 
         $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
 
-        return view('statistic.index', compact('dailyArticlesChart', 'averageDurationBetweenRetrievalAndRead', 'categoriesChart'));
+        return view('statistic.index', compact('dailyArticlesChart', 'averageDurationBetweenRetrievalAndRead'));
     }
 
     private function getDailyArticlesChart($minDate, $maxDate)
@@ -49,45 +45,41 @@ class StatisticController extends Controller
             ]);
 
         $items = collect(CarbonPeriod::create($minDate, $maxDate)->toArray());
-        $items = $items->mapWithKeys(function (Carbon $date) use ($feedItems) {
+        $items = $items->map(function (Carbon $date) use ($feedItems) {
             $items = $feedItems->filter(function ($feedItem) use ($date) {
                 return $feedItem->date->between($date->copy()->startOfDay(), $date->copy()->endOfDay());
             });
 
-            return [$date->format(l(DATE)) => $items->count()];
+            return [
+                'date' => $date->format(l(DATE)),
+                'numberOfArticles' => $items->count(),
+                'numberOfReadArticles' => auth()->user()->feedItems(false)
+                    ->where('read_at', '>=', $date->copy()->startOfDay())
+                    ->where('read_at', '<=', $date->copy()->endOfDay())
+                    ->whereNotNull('read_at')
+                    ->count(),
+            ];
         });
 
         $dailyArticlesChart = new DailyArticlesChart();
         $dailyArticlesChart->title(__('statistic.index.articles_of_the_last_month'));
+        $dailyArticlesChart->type('bar');
+        $dailyArticlesChart->options([
+            'tooltips' => [
+                'mode' => 'point'
+            ]
+        ]);
 
-        $dailyArticlesChart->labels($items->keys());
-        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'line', $items->values())->options([
-            'backgroundColor' => config('charts.colors')[0],
+        $dailyArticlesChart->labels($items->pluck('date'));
+        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->pluck('numberOfArticles'))->options([
+//            'borderColor' => config('charts.colors')[0],
+//            'backgroundColor' => config('charts.colors')[0],
+        ]);
+        $dailyArticlesChart->dataset(__('statistic.index.read_articles'), 'line', $items->pluck('numberOfReadArticles'))->options([
+//            'borderColor' => config('charts.colors')[1],
+            'fill' => false,
         ]);
 
         return $dailyArticlesChart;
-    }
-
-    private function getCategoriesChart()
-    {
-        $categoriesChart = new CategoriesChart();
-
-        $items = Category::withCount('feeds')->get();
-
-        $categoriesChart->labels($items->map(function ($item) {
-            return $item->title;
-        }));
-
-        $categoriesChart->dataset('Anzahl Feeds', 'bar', $items->map(function ($item) {
-            return $item->feeds_count;
-        }));
-
-        $categoriesChart->dataset('Anzahl Artikel', 'bar', $items->map(function ($item) {
-            return $item->feeds->map(function (Feed $feed) {
-                return $feed->feedItems->count();
-            });
-        }));
-
-        return $categoriesChart;
     }
 }
