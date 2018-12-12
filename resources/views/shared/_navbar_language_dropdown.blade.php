@@ -1,6 +1,6 @@
 <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <i class="fa fa-globe" aria-hidden="true"></i>
+        <i class="fas fa-globe-europe"></i>
         <span class="d-sm-inline d-lg-none d-xl-inline">{{ upper(Session::get('locale')) }}</span>
         <span class="caret"></span>
     </a>

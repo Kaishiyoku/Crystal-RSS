@@ -13,12 +13,12 @@
 
             <div class="row">
                 <div class="col-6 col-lg-12 small">
-                    <i class="fa fa-rss"></i>
+                    <i class="fas fa-rss"></i>
                     <span class="pr-2">
                         {{ $feedItem->feed->title }}
                     </span>
 
-                    <i class="fa fa-tags"></i>
+                    <i class="fas fa-tags"></i>
                     @include('feed._categories', ['categories' => $feedItem->categories])
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small font-weight-bold">

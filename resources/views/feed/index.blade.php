@@ -19,7 +19,7 @@
     <p>
         @if ($unreadFeedItems->count() > 0)
             {{ Form::open(['route' => ['feed.mark_all_as_read', $currentCategoryId], 'method' => 'put', 'role' => 'form', 'class' => 'd-inline']) }}
-                {{ Form::button('<i class="fa fa-eye" aria-hidden="true"></i> ' . __('feed.index.mark_all_as_read'), ['type' => 'submit', 'class' => 'btn btn-outline-dark', 'data-confirm' => true]) }}
+                {{ Form::button('<i class="fas fa-eye"></i> ' . __('feed.index.mark_all_as_read'), ['type' => 'submit', 'class' => 'btn btn-outline-dark', 'data-confirm' => true]) }}
             {{ Form::close() }}
         @endif
     </p>

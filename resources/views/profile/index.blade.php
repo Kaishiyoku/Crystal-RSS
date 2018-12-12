@@ -22,11 +22,11 @@
             <h2>@lang('profile.index.options')</h2>
 
             <p class="lead p-t-10">
-                {!! Html::decode(Html::linkRoute('profile.edit_email', '<i class="fa fa-envelope" aria-hidden="true"></i> ' . __('profile.edit_email.title'))) !!}
+                {!! Html::decode(Html::linkRoute('profile.edit_email', '<i class="fas fa-envelope"></i> ' . __('profile.edit_email.title'))) !!}
             </p>
 
             <p class="lead">
-                {!! Html::decode(Html::linkRoute('profile.edit_password', '<i class="fa fa-key" aria-hidden="true"></i> ' . __('profile.edit_password.title'))) !!}
+                {!! Html::decode(Html::linkRoute('profile.edit_password', '<i class="fas fa-key"></i> ' . __('profile.edit_password.title'))) !!}
             </p>
         </div>
     </div>
