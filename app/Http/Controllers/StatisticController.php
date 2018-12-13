@@ -36,28 +36,23 @@ class StatisticController extends Controller
 
     private function getDailyArticlesChart($minDate, $maxDate)
     {
-        $feedItems = auth()->user()->feedItems(false)
-            ->where('date', '>=', $minDate)
-            ->where('date', '<=', $maxDate)
-            ->orderBy('date')
-            ->get([
-                'date'
-            ]);
+        $carbonPeriod = collect(CarbonPeriod::create($minDate, $maxDate)->toArray());
 
-        $items = collect(CarbonPeriod::create($minDate, $maxDate)->toArray());
-        $items = $items->map(function (Carbon $date) use ($feedItems) {
-            $items = $feedItems->filter(function ($feedItem) use ($date) {
-                return $feedItem->date->between($date->copy()->startOfDay(), $date->copy()->endOfDay());
-            });
+        $items = $carbonPeriod->map(function (Carbon $date) {
+            $currentItems = auth()->user()->feedItems(false)
+                ->where('date', '>=', $date->copy()->startOfDay())
+                ->where('date', '<=', $date->copy()->endOfDay())
+                ->orderBy('date');
+
+            $currentReadItems = auth()->user()->feedItems(false)
+                ->where('read_at', '>=', $date->copy()->startOfDay())
+                ->where('read_at', '<=', $date->copy()->endOfDay())
+                ->whereNotNull('read_at');
 
             return [
                 'date' => $date->format(l(DATE)),
-                'numberOfArticles' => $items->count(),
-                'numberOfReadArticles' => auth()->user()->feedItems(false)
-                    ->where('read_at', '>=', $date->copy()->startOfDay())
-                    ->where('read_at', '<=', $date->copy()->endOfDay())
-                    ->whereNotNull('read_at')
-                    ->count(),
+                'numberOfArticles' => $currentItems->count(),
+                'numberOfReadArticles' => $currentReadItems->count(),
             ];
         });
 
@@ -71,12 +66,8 @@ class StatisticController extends Controller
         ]);
 
         $dailyArticlesChart->labels($items->pluck('date'));
-        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->pluck('numberOfArticles'))->options([
-//            'borderColor' => config('charts.colors')[0],
-//            'backgroundColor' => config('charts.colors')[0],
-        ]);
+        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->pluck('numberOfArticles'));
         $dailyArticlesChart->dataset(__('statistic.index.read_articles'), 'line', $items->pluck('numberOfReadArticles'))->options([
-//            'borderColor' => config('charts.colors')[1],
             'fill' => false,
         ]);
 
