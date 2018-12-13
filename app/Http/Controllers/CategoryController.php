@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories();
+        $categories = auth()->user()->categories()->with('feeds');
 
         return view('category.index', compact('categories'));
     }

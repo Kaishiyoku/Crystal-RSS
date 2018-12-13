@@ -27,7 +27,7 @@ class FeedController extends Controller
     public function history()
     {
         $totalCountReadFeedItems = auth()->user()->feedItems()->read()->count();
-        $readFeedItems = auth()->user()->feedItems()->read()->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $readFeedItems = auth()->user()->feedItems()->read()->with('categories')->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
@@ -117,7 +117,7 @@ class FeedController extends Controller
             return $query->whereCategoryId($categoryId);
         })->pluck('id');
 
-        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds);
+        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->with('categories');
 
         return $feedItems;
     }

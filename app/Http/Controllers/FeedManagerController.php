@@ -24,7 +24,7 @@ class FeedManagerController extends Controller
      */
     public function index()
     {
-        $feeds = auth()->user()->feeds()->orderBy('title');
+        $feeds = auth()->user()->feeds()->with('category')->orderBy('title');
 
         return view('feed_manager.index', compact('feeds'));
     }
