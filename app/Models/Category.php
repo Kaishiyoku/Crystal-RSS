@@ -53,4 +53,11 @@ class Category extends Model
     {
         return $this->hasMany(Feed::class);
     }
+
+    public function getTotalFeedCount()
+    {
+        return $this->feeds->map(function (Feed $feed) {
+            return $feed->feedItems()->count();
+        })->sum();
+    }
 }
