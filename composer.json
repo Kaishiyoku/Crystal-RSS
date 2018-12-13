@@ -13,6 +13,7 @@
         "doctrine/dbal": "2.8.0",
         "fideloper/proxy": "4.0.0",
         "kaishiyoku/laravel-cli-create-user": "2.1.0",
+        "kaishiyoku/laravel-color-validation": "1.1.0",
         "kaishiyoku/laravel-html-purifier": "1.1.1",
         "kaishiyoku/laravel-menu": "2.0.0",
         "kaishiyoku/picofeed": "1.0.0",

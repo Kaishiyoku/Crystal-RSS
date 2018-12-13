@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed query()
+ * @property string|null $color
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereColor($value)
  */
 class Feed extends Model
 {
@@ -44,7 +46,9 @@ class Feed extends Model
      * @var array
      */
     protected $fillable = [
-        'feed_url', 'is_enabled',
+        'feed_url',
+        'is_enabled',
+        'color',
     ];
 
     /**
@@ -87,5 +91,10 @@ class Feed extends Model
     public function updateErrors()
     {
         return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
+    }
+
+    public function getColor()
+    {
+        return $this->color ?? 'inherit';
     }
 }

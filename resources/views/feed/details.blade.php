@@ -26,7 +26,7 @@
             @lang('validation.attributes.feed_id'):
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-10" style="color: {{ $feedItem->feed->getColor() }}">
             {{ $feedItem->feed->title }}
         </div>
     </div>

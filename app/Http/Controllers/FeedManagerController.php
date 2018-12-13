@@ -63,6 +63,7 @@ class FeedManagerController extends Controller
             $feed->site_url = $rssFeed->getSiteUrl();
             $feed->feed_url = $rssFeed->getFeedUrl();
             $feed->title = $rssFeed->getTitle();
+            $feed->color = $data['color'];
             $feed->category_id = $data['category_id'];
 
             auth()->user()->feeds()->save($feed);
@@ -115,6 +116,7 @@ class FeedManagerController extends Controller
             $feed->title = $data['title'];
             $feed->feed_url = $data['feed_url'];
             $feed->site_url = $data['site_url'];
+            $feed->color = $data['color'];
             $feed->category_id = $data['category_id'];
             $feed->is_enabled = $data['is_enabled'];
 
@@ -176,6 +178,7 @@ class FeedManagerController extends Controller
                 'sometimes',
                 'boolean',
             ],
+            'color' => 'color_hex'
         ];
     }
 

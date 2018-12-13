@@ -145,3 +145,4 @@ attributes:
   checksum: Prüfsumme
   read_at: Gelesen um
   raw_json: JSON
+  color: Farbe

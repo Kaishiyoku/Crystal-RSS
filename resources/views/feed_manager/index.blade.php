@@ -32,7 +32,9 @@
                 <tbody>
                 @foreach ($feeds->get() as $feed)
                     <tr class="{{ $feed->is_enabled ? '' : 'table-warning' }}">
-                        <td>{{ $feed->title }}</td>
+                        <td style="color: {{ $feed->getColor() }}">
+                            {{ $feed->title }}
+                        </td>
                         <td>{{ $feed->category->title }}</td>
                         <td>{{ formatBoolean($feed->is_enabled) }}</td>
                         <td>{{ $feed->last_checked_at->format(l(DATETIME)) }}</td>

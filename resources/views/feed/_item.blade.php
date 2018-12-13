@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-6 col-lg-12 small">
                     <i class="fas fa-rss"></i>
-                    <span class="pr-2">
+                    <span class="pr-2" style="color: {{ $feedItem->feed->getColor() }}">
                         {{ $feedItem->feed->title }}
                     </span>
 

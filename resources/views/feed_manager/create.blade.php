@@ -38,6 +38,8 @@
             </div>
         </div>
 
+    @include('feed_manager._form_color')
+
         <div class="form-group row">
             <div class="col-lg-10 ml-md-auto">
                 {{ Form::button(__('common.add'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}

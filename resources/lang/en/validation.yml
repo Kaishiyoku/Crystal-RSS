@@ -120,3 +120,4 @@ attributes:
   checksum: Checksum
   read_at: Read at
   raw_json: JSON
+  color: Color
