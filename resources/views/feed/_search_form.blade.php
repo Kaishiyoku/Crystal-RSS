@@ -3,7 +3,7 @@
         {{ Form::label('term', __('validation.attributes.term'), ['class' => 'col-lg-2 col-form-label']) }}
 
         <div class="col-lg-5">
-            {{ Form::text('query', old('query'), ['class' => 'form-control' . ($errors->has('query') ? ' is-invalid' : ''), 'required' => true]) }}
+            {{ Form::text('query', request()->query('query'), ['class' => 'form-control' . ($errors->has('query') ? ' is-invalid' : ''), 'required' => true]) }}
 
             @if ($errors->has('query'))
                 <div class="invalid-feedback">

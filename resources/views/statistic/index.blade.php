@@ -20,7 +20,7 @@
         <div class="row mt-3">
             <div class="col-lg-6 col-12 border-bottom hoverable">
                 <div class="row">
-                    <div class="col-8 font-weight-bold">{{ $category->title }}</div>
+                    <div class="col-8 font-weight-bold" {!! $category->getStyle() !!}>{{ $category->title }}</div>
                     <div class="col-4 text-right font-weight-bold">{{ $category->getTotalFeedCount() }}</div>
                 </div>
             </div>
