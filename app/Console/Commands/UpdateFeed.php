@@ -86,7 +86,7 @@ class UpdateFeed extends Command
                     foreach ($rssFeed->getItems() as $item) {
                         if ($item->getId() && $item->getUrl()) {
                             try {
-                                $existingFeedItem = FeedItem::whereFeedId($feed->id)->whereChecksum($item->getId())->first();
+                                $existingFeedItem = FeedItem::whereUserId($user->id)->whereFeedId($feed->id)->whereChecksum($item->getId())->first();
                                 $newFeedItem = $existingFeedItem == null ? new FeedItem() : $existingFeedItem;
 
                                 if ($existingFeedItem == null) {
