@@ -1,8 +1,23 @@
 # Change Log
 
-## [Unreleased](https://github.com/kaishiyoku/crystal-rss/tree/HEAD)
+## [0.12.0](https://github.com/kaishiyoku/crystal-rss/tree/0.12.0) (2018-12-14)
+[Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.11.0...0.12.0)
 
-[Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.10.1...HEAD)
+**Implemented enhancements:**
+
+- Add better error messages to the error log table [\#80](https://github.com/Kaishiyoku/Crystal-RSS/issues/80)
+- Add ability to filter search by feed [\#77](https://github.com/Kaishiyoku/Crystal-RSS/issues/77)
+- Add ability to optionally give a category a color [\#74](https://github.com/Kaishiyoku/Crystal-RSS/issues/74)
+
+**Fixed bugs:**
+
+- Some feed items couldn't be added to the database due to the author field being not long enough [\#79](https://github.com/Kaishiyoku/Crystal-RSS/issues/79)
+- Can't add the same feed items for multiple users due to user-independent duplicate check [\#78](https://github.com/Kaishiyoku/Crystal-RSS/issues/78)
+- Search field is empty after submitting it [\#76](https://github.com/Kaishiyoku/Crystal-RSS/issues/76)
+- The optional color field raises a validation exception when it is empty [\#75](https://github.com/Kaishiyoku/Crystal-RSS/issues/75)
+
+## [0.11.0](https://github.com/kaishiyoku/crystal-rss/tree/0.11.0) (2018-12-13)
+[Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.10.1...0.11.0)
 
 **Implemented enhancements:**
 
