@@ -208,3 +208,9 @@ footer {
     background-color: rgba($black, .025);
   }
 }
+
+.invalid {
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: $form-feedback-invalid-color;
+}

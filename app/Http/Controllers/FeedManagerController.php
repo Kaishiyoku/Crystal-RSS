@@ -178,7 +178,7 @@ class FeedManagerController extends Controller
                 'sometimes',
                 'boolean',
             ],
-            'color' => 'color_hex'
+            'color' => ['nullable', 'color_hex']
         ];
     }
 

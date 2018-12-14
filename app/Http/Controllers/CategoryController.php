@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     private $validationRules = [
         'title' => ['required', 'max:191'],
-        'color' => 'color_hex',
+        'color' => ['nullable', 'color_hex']
     ];
 
     /**
