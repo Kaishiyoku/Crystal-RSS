@@ -13,7 +13,8 @@ class CategoryController extends Controller
      * @var array
      */
     private $validationRules = [
-        'title' => ['required', 'max:191']
+        'title' => ['required', 'max:191'],
+        'color' => 'color_hex',
     ];
 
     /**

@@ -32,7 +32,7 @@
                 <tbody>
                 @foreach ($feeds->get() as $feed)
                     <tr class="{{ $feed->is_enabled ? '' : 'table-warning' }}">
-                        <td style="color: {{ $feed->getColor() }}">
+                        <td {!! $feed->getStyle() !!}>
                             {{ $feed->title }}
                         </td>
                         <td>{{ $feed->category->title }}</td>

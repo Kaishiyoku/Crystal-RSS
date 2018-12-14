@@ -8,9 +8,7 @@ use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UpdateLog;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Artisan;
 
 class FeedController extends Controller
 {

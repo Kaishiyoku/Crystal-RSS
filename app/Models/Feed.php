@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Extensions\ColoredModel;
 
 /**
  * App\Models\Feed
@@ -38,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $color
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereColor($value)
  */
-class Feed extends Model
+class Feed extends ColoredModel
 {
     /**
      * The attributes that are mass assignable.
@@ -91,10 +91,5 @@ class Feed extends Model
     public function updateErrors()
     {
         return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
-    }
-
-    public function getColor()
-    {
-        return $this->color ?? 'inherit';
     }
 }

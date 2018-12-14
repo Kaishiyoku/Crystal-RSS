@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        @include('feed_manager._form_color')
+        @include('shared._form_color', ['item' => $feed])
 
         <div class="form-group row">
             <div class="col-lg-10 ml-md-auto">

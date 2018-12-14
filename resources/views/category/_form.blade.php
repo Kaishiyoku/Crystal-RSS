@@ -12,6 +12,8 @@
     </div>
 </div>
 
+@include('shared._form_color', ['item' => $category])
+
 <div class="form-group row">
     <div class="col-lg-10 ml-md-auto">
         {{ Form::button($submitTitle, ['type' => 'submit', 'class' => 'btn btn-primary']) }}

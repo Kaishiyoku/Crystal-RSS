@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Extensions\ColoredModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,8 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category query()
+ * @property string|null $color
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereColor($value)
  */
-class Category extends Model
+class Category extends ColoredModel
 {
     /**
      * The attributes that are mass assignable.
@@ -32,7 +35,8 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'title'
+        'title',
+        'color',
     ];
 
     /**
