@@ -76,7 +76,7 @@ class Menus
 
             Menu::register('user', [
                 Menu::linkRoute('login', '<i class="fas fa-sign-in-alt"></i> ' . __('common.nav.login')),
-                Menu::linkRoute('register', '<i class="fas fa-user-plus"></i>res ' . __('common.nav.register'))
+                Menu::linkRoute('register', '<i class="fas fa-user-plus"></i> ' . __('common.nav.register'))
             ], ['class' => 'navbar-nav']);
         }
 
