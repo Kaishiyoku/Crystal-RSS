@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ProcessFeedItems;
 use App\Libraries\ManualPaginator;
+use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UpdateLog;
@@ -83,14 +84,33 @@ class FeedController extends Controller
 
     public function searchShow()
     {
-        return view('feed.search_show');
+        $feeds = $this->getFeedsForSelect();
+        $feedIds = auth()->user()->feeds()->pluck('id');
+
+        return view('feed.search_show', compact('feeds', 'feedIds'));
     }
 
     public function searchResult(Request $request)
     {
-        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))->where('user_id', auth()->user()->id)->orderBy('date', 'desc')->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $feeds = $this->getFeedsForSelect();
 
-        return view('feed.search_result', compact('foundFeedItemsFromIndex'));
+        $requestFeedIds = $request->get('feed_ids') ?? [];
+
+        $filteredFeedIds = auth()->user()->feeds()->pluck('id')->toArray();
+        $filteredFeedIds = array_filter($requestFeedIds, function ($requestFeedId) use ($filteredFeedIds) {
+            return in_array($requestFeedId, $filteredFeedIds);
+        });
+        $feedIds = $filteredFeedIds;
+
+        $filteredFeedItems = auth()->user()->feedItems()
+            ->whereIn('feed_id', $filteredFeedIds);
+
+        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))
+            ->constrain($filteredFeedItems)
+            ->orderBy('date', 'desc')
+            ->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+
+        return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }
 
     private function baseIndex($categoryId = null)
@@ -118,5 +138,16 @@ class FeedController extends Controller
         $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->with('categories');
 
         return $feedItems;
+    }
+
+    private function getFeedsForSelect()
+    {
+        return auth()->user()->categories()->with('feeds')->get()->mapWithKeys(function (Category $category) {
+            return [
+                $category->title => $category->feeds()->orderBy('title')->get()->mapWithKeys(function (Feed $feed) {
+                    return [$feed->id =>  $feed->title];
+                })->toArray(),
+            ];
+        })->toArray();
     }
 }

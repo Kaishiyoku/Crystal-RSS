@@ -28,4 +28,5 @@ search_result:
   no_entries_found: Keine Artikel gefunden.
 search:
   importing: Importiere Feed-Artikel...
+  feed_ids: Feeds
 categories: Kategorien
