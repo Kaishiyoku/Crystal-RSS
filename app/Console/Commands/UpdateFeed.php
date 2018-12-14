@@ -113,7 +113,8 @@ class UpdateFeed extends Command
                             } catch (QueryException $e) {
                                 $updateError = new UpdateError();
                                 $updateError->feed_id = $feed->id;
-                                $updateError->content = "Error parsing {$item->getUrl()}";
+                                $updateError->url = $item->getUrl();
+                                $updateError->content = $e->getMessage();
 
                                 Log::error($e);
 
