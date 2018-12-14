@@ -1,0 +1,5 @@
+multiselect:
+  nonSelectedText: Nichts ausgewählt
+  nSelectedText: ausgewählt
+  allSelectedText: Alle ausgewählt
+  selectAllText: Alle auswählen

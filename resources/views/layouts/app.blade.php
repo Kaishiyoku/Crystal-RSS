@@ -25,6 +25,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.2/fusioncharts.js" charset="utf-8"></script>
 
+    {{ Html::script('js/app.js') }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js" charset="utf-8"></script>
+
     @include('shared._javascript_config')
 </head>
 <body>
@@ -68,9 +72,11 @@
     </div>
 </div>
 
-{{ Html::script('js/app.js') }}
-
 @yield('scripts')
+
+<script type="text/javascript">
+    window.TRANSLATIONS = {!! json_encode(__('javascript')) !!}
+</script>
 
 </body>
 </html>

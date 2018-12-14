@@ -1,4 +1,8 @@
+import baseTranslator from "./baseTranslator";
+
 $(document).ready(function () {
+    window.trans = baseTranslator(window.TRANSLATIONS);
+
     Waves.attach('.btn-primary', ['waves-light']);
     Waves.attach('.btn-secondary', ['waves-light']);
     Waves.attach('.btn-success', ['waves-light']);
@@ -123,5 +127,23 @@ $(document).ready(function () {
             swatches: $this.attr('data-swatches') ? $this.attr('data-swatches').split('|') : [],
             theme: 'bootstrap'
         });
+    });
+
+    $('[data-provide="multiselect"]').multiselect({
+        enableClickableOptGroups: true,
+        includeSelectAllOption: true,
+        numberDisplayed: 1,
+        maxHeight: 350,
+        buttonClass: 'btn btn-outline-secondary',
+        nonSelectedText: trans('multiselect.nonSelectedText'),
+        nSelectedText: trans('multiselect.nSelectedText'),
+        allSelectedText: trans('multiselect.allSelectedText'),
+        selectAllText: trans('multiselect.selectAllText'),
+        buttonContainer: '<div class="dropdown" />',
+        templates: {
+            li: '<li class="dropdown-item"><a href="javascript:void(0);"><label></label></a></li>',
+            liGroup: '<li class="dropdown-item"><a href="javascript:void(0);"><label></label></a></li>',
+            divider: '<li class="dropdown-divider"></li>',
+        },
     });
 });

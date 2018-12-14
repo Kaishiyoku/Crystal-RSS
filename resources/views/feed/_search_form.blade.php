@@ -17,7 +17,7 @@
         {{ Form::label('feed_ids', __('feed.search.feed_ids'), ['class' => 'col-lg-2 col-form-label']) }}
 
         <div class="col-lg-5">
-            {{ Form::select('feed_ids[]', $feeds, request()->query('feed_ids') ?? $feedIds, ['multiple' => true, 'size' => 15]) }}
+            {{ Form::select('feed_ids[]', $feeds, request()->query('feed_ids') ?? $feedIds, ['multiple' => true, 'size' => 15, 'data-provide' => 'multiselect', 'class' => 'd-none']) }}
         </div>
     </div>
 
