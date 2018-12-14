@@ -3,14 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\FeedItem;
-use App\Models\FeedItemCategory;
 use App\Models\UpdateError;
 use App\Models\UpdateLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
