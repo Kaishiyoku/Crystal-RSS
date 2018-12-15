@@ -3,3 +3,6 @@ multiselect:
   nSelectedText: ausgewählt
   allSelectedText: Alle ausgewählt
   selectAllText: Alle auswählen
+datepicker:
+  formats:
+    date: DD.MM.YYYY

@@ -146,4 +146,24 @@ $(document).ready(function () {
             divider: '<li class="dropdown-divider"></li>',
         },
     });
+
+    $('[data-provide="datepicker"]').each(function () {
+        const $this = $(this);
+        const date = $this.find('input').val();
+        const dateFormat = trans('datepicker.formats.date');
+
+        const baseConfig = {
+            locale: $('html').attr('lang'),
+            format: dateFormat,
+            useCurrent: true,
+            calendarWeeks: true,
+            allowInputToggle: true,
+        };
+
+        const config = date ? _.merge(baseConfig, {
+            defaultDate: moment(date, dateFormat)
+        }) : baseConfig;
+
+        $this.datetimepicker(config);
+    });
 });

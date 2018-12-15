@@ -3,8 +3,7 @@
 const DATETIME = 'datetime';
 const DATE = 'date';
 
-if (! function_exists('l'))
-{
+if (! function_exists('l')) {
     function l($type) {
         return __('common.date_formats.' . $type);
     }
@@ -99,22 +98,19 @@ if (! function_exists('formatBoolean')) {
 }
 
 
-if (! function_exists('upper'))
-{
+if (! function_exists('upper')) {
     function upper($string) {
         return \Illuminate\Support\Str::upper($string);
     }
 }
 
-if (! function_exists('itemIf'))
-{
+if (! function_exists('itemIf')) {
     function itemIf($item, $isVisible, $default = null) {
         return $isVisible ? $item : $default;
     }
 }
 
-if (! function_exists('removeNulls'))
-{
+if (! function_exists('removeNulls')) {
     function removeNulls(array $arr) {
         return array_filter($arr, function ($item) {
             return $item != null;
@@ -122,8 +118,7 @@ if (! function_exists('removeNulls'))
     }
 }
 
-if (! function_exists('purifyHtml'))
-{
+if (! function_exists('purifyHtml')) {
     function purifyHtml($value)
     {
         $purifier = new \Kaishiyoku\HtmlPurifier\HtmlPurifier();
@@ -132,8 +127,7 @@ if (! function_exists('purifyHtml'))
     }
 }
 
-if (! function_exists('syncFeedItemCategories'))
-{
+if (! function_exists('syncFeedItemCategories')) {
     function syncFeedItemCategories(array $categoryTitles, \App\Models\User $user, \App\Models\FeedItem $feedItem)
     {
         $categoryIds = [];
@@ -158,5 +152,20 @@ if (! function_exists('syncFeedItemCategories'))
         }
 
         $feedItem->categories()->sync($categoryIds);
+    }
+}
+
+if (! function_exists('createDateFromStr')) {
+    /**
+     * @param string $str
+     * @return \Illuminate\Support\Carbon
+     */
+    function createDateFromStr($str)
+    {
+        try {
+            return \Illuminate\Support\Carbon::createFromFormat(__('common.date_formats.date'), $str)->startOfDay();
+        } catch (InvalidArgumentException $e) {
+            return null;
+        }
     }
 }

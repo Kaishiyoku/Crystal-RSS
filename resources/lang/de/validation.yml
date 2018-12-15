@@ -146,3 +146,5 @@ attributes:
   read_at: Gelesen um
   raw_json: JSON
   color: Farbe
+  date_from: Von
+  date_till: Bis

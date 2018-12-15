@@ -99,6 +99,18 @@ class FeedController extends Controller
 
     public function searchResult(Request $request)
     {
+        $rules = [
+            'term' => ['required'],
+            'feed_ids' => ['array'],
+            'date_from' => ['nullable', 'date_format:' . __('common.date_formats.date')],
+            'date_till' => ['nullable', 'date_format:' . __('common.date_formats.date')],
+        ];
+
+        $request->validate($rules);
+
+        $dateFrom = createDateFromStr($request->get('date_from'));
+        $dateTill = createDateFromStr($request->get('date_till'));
+
         $feeds = $this->getFeedsForSelect();
 
         $requestFeedIds = $request->get('feed_ids') ?? [];
@@ -112,7 +124,15 @@ class FeedController extends Controller
         $filteredFeedItems = auth()->user()->feedItems()
             ->whereIn('feed_id', $filteredFeedIds);
 
-        $foundFeedItemsFromIndex = FeedItem::search($request->get('query'))
+        if ($dateFrom) {
+            $filteredFeedItems = $filteredFeedItems->where('date', '>=', $dateFrom->startOfDay());
+        }
+
+        if ($dateTill) {
+            $filteredFeedItems = $filteredFeedItems->where('date', '<=', $dateTill->endOfDay());
+        }
+
+        $foundFeedItemsFromIndex = FeedItem::search($request->get('term'))
             ->constrain($filteredFeedItems)
             ->orderBy('date', 'desc')
             ->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));

@@ -214,3 +214,9 @@ footer {
   font-size: 80%;
   color: $form-feedback-invalid-color;
 }
+
+.bootstrap-datetimepicker-widget {
+  &.dropdown-menu {
+    width: 16rem !important;
+  }
+}

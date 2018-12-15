@@ -121,3 +121,5 @@ attributes:
   read_at: Read at
   raw_json: JSON
   color: Color
+  date_from: From
+  date_till: Till

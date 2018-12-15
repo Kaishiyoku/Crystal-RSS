@@ -22,12 +22,14 @@
     "jquery": "3.3.1",
     "laravel-mix": "4.0.4",
     "lodash": "4.17.11",
+    "moment": "^2.23.0",
     "node-waves": "0.7.6",
     "popper.js": "1.14.6",
     "prismjs": "1.15.0",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
-    "tablesorter": "2.31.1"
+    "tablesorter": "2.31.1",
+    "tempusdominus-bootstrap-4": "^5.1.2"
   }
 }

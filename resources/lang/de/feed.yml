@@ -30,3 +30,5 @@ search:
   importing: Importiere Feed-Artikel...
   feed_ids: Feeds
 categories: Kategorien
+date_from: Von
+date_till: Bis
