@@ -20,6 +20,13 @@ class FeedController extends Controller
 
     public function category($id)
     {
+        // check if there are any unread feed items
+        $feedItems = $this->getUnreadFeedItems($id);
+
+        if ($feedItems->count() == 0) {
+            return redirect()->route('feed.index');
+        }
+
         return $this->baseIndex($id);
     }
 
