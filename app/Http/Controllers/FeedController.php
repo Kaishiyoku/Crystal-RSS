@@ -40,6 +40,8 @@ class FeedController extends Controller
 
     public function details(FeedItem $feedItem)
     {
+        $this->authorize('viewDetails', $feedItem);
+
         return view('feed.details', compact('feedItem'));
     }
 

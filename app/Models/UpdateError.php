@@ -44,6 +44,13 @@ class UpdateError extends Model
 
     ];
 
+    /**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    protected $perPage = 25;
+
     public function setUpdatedAt($value)
     {
         //

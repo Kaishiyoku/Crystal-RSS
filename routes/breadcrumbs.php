@@ -45,3 +45,14 @@ Breadcrumbs::register('feed.details', function ($breadcrumbs, \App\Models\FeedIt
     $breadcrumbs->parent('feed.index');
     $breadcrumbs->push(__('feed.index.details'), route('feed.details', $feedItem));
 });
+
+// Update errors
+Breadcrumbs::register('update_errors.index', function ($breadcrumbs) {
+    $breadcrumbs->push(__('common.nav.update_errors'), route('update_errors.index'));
+});
+
+// Update errors -> Details
+Breadcrumbs::register('update_errors.show', function ($breadcrumbs) {
+    $breadcrumbs->parent('update_errors.index');
+    $breadcrumbs->push(__('common.details'));
+});

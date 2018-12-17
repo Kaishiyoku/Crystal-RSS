@@ -45,6 +45,7 @@ class Menus
             Menu::dropdownHeader(__('common.nav.administration')),
             Menu::link('/horizon', '<i class="fas fa-compass"></i> ' . __('common.nav.horizon')),
             itemIf(Menu::link('/telescope', '<i class="fas fa-compass"></i> ' . __('common.nav.telescope')), env('ENABLE_TELESCOPE')),
+            Menu::linkRoute('update_errors.index', '<i class="fas fa-exclamation-triangle"></i> ' . __('common.nav.update_errors'), [], [], ['update_errors.show']),
         ], $isAdministrator, []));
 
         Menu::setConfig(Config::forBootstrap4());

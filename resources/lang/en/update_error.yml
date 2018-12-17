@@ -1,0 +1,5 @@
+index:
+  title: Update errors
+  none: No entries.
+show:
+  title: 'Update error #:id'

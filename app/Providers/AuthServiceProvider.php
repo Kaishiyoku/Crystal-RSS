@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Models\FeedItem;
+use App\Models\UpdateError;
+use App\Policies\FeedItemPolicy;
+use App\Policies\UpdateErrorPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        UpdateError::class => UpdateErrorPolicy::class,
+        FeedItem::class => FeedItemPolicy::class,
     ];
 
     /**

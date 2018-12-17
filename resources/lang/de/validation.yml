@@ -148,3 +148,4 @@ attributes:
   color: Farbe
   date_from: Von
   date_till: Bis
+  created_at: Erstellt am

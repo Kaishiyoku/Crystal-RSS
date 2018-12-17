@@ -15,6 +15,8 @@ nav:
   administration: Administration
   horizon: Horizon
   telescope: Telescope
+  statistics: Statistics
+  update_errors: Update-Fehler
 add: Add
 delete: Delete
 edit: Edit
@@ -36,3 +38,4 @@ date_formats:
   datetime: 'Y-m-d H:i'
   date: 'Y-m-d'
 none: None
+details: Details

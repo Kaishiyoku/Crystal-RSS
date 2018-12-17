@@ -16,6 +16,7 @@ nav:
   horizon: Horizon
   telescope: Telescope
   statistics: Statistiken
+  update_errors: Update-Fehler
 add: Hinzufügen
 delete: Löschen
 edit: Ändern
@@ -37,3 +38,4 @@ date_formats:
   datetime: 'd.m.Y H:i'
   date: 'd.m.Y'
 none: Keine
+details: Details

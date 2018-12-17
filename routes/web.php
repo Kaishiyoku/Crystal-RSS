@@ -43,6 +43,9 @@ Route::group(['middleware' => ['menus']], function () {
         Route::group(['middleware' => ['admin']], function () {
             // Feed
             Route::get('/feed/{feedItem}/details', 'FeedController@details')->name('feed.details');
+
+            // UpdateError
+            Route::resource('update_errors', 'UpdateErrorController')->only(['index', 'show']);
         });
     });
 

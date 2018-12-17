@@ -110,6 +110,27 @@ attributes:
   current_email: Current email
   new_email: New email
   new_email_confirmation: New email (confirmation)
+  first_name: Vorname
+  last_name: Nachname
+  city: Stadt
+  country: Land
+  address: Adresse
+  phone: Telefonnummer
+  mobile: Handynummer
+  age: Alter
+  sex: Geschlecht
+  gender: Geschlecht
+  day: Tag
+  month: Monat
+  year: Jahr
+  hour: Stunde
+  minute: Minute
+  second: Sekunde
+  description: Beschreibung
+  excerpt: Auszug
+  time: Uhrzeit
+  available: verfügbar
+  size: Größe
   id: ID
   feed_id: Feed
   url: URL
@@ -123,3 +144,4 @@ attributes:
   color: Color
   date_from: From
   date_till: Till
+  created_at: Created at
