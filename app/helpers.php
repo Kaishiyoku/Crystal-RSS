@@ -118,15 +118,6 @@ if (! function_exists('removeNulls')) {
     }
 }
 
-if (! function_exists('purifyHtml')) {
-    function purifyHtml($value)
-    {
-        $purifier = new \Kaishiyoku\HtmlPurifier\HtmlPurifier();
-
-        return $purifier->purify($value);
-    }
-}
-
 if (! function_exists('syncFeedItemCategories')) {
     function syncFeedItemCategories(array $categoryTitles, \App\Models\User $user, \App\Models\FeedItem $feedItem)
     {
