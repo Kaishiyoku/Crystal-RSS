@@ -1,4 +1,4 @@
-<li class="list-group-item font-weight-bold hoverable" id="feed-item-{{ $feedItem->id }}">
+<li class="list-group-item hoverable" id="feed-item-{{ $feedItem->id }}">
     <div class="row">
         @if ($showActions)
             <div class="col-lg-1 col-2">
@@ -21,7 +21,7 @@
                     <i class="fas fa-tags"></i>
                     @include('feed._categories', ['categories' => $feedItem->categories])
                 </div>
-                <div class="col-6 d-none-md d-lg-none d-xl-none text-right small font-weight-bold">
+                <div class="col-6 d-none-md d-lg-none d-xl-none text-right small">
                     {{ $feedItem->date->format(l(DATETIME)) }}
                 </div>
             </div>
