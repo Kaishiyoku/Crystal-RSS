@@ -153,7 +153,9 @@ class FeedController extends Controller
         $currentCategoryId = $categoryId;
         $latestUpdateLog = UpdateLog::orderBy('created_at', 'asc')->first();
 
-        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'latestUpdateLog'));
+        $categoryDropdownTranslation = $currentCategoryId == null ? __('feed.index.all_categories') : auth()->user()->categories()->find($currentCategoryId)->title;
+
+        return view('feed.index', compact('totalCountUnreadFeedItems', 'unreadFeedItems', 'categories', 'currentCategoryId', 'latestUpdateLog', 'categoryDropdownTranslation'));
     }
 
     private function getUnreadFeedItems($categoryId = null)

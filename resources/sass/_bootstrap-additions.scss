@@ -247,3 +247,10 @@ footer {
   box-shadow: 0 0 5px rgba($black, .35);
 }
 
+.dropdown-menu {
+  &.dropdown-menu-scrollable {
+    height: auto;
+    max-height: 80vh;
+    overflow-x: hidden;
+  }
+}

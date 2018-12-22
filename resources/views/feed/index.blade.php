@@ -24,20 +24,25 @@
         @endif
     </p>
 
-    @if ($totalCountUnreadFeedItems > 0)
-        <ul class="nav nav-pills mt-5 mb-3">
-            <li class="nav-item">
-                {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-dark">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'nav-link'. ($currentCategoryId == null ? ' active' : '')])) !!}
-            </li>
 
-            @foreach ($categories->get() as $category)
-                @if (getUnreadFeedItemCountForCategory($category) > 0)
-                    <li class="nav-item">
-                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'nav-link' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
-                    </li>
-                @endif
-            @endforeach
-        </ul>
+    @if ($totalCountUnreadFeedItems > 0)
+        <div class="dropdown mt-5">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-filter"></i>
+
+                {{ $categoryDropdownTranslation }}
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="categoryDropdownMenuButton">
+                {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-dark">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'dropdown-item'. ($currentCategoryId == null ? ' active' : '')])) !!}
+
+                @foreach ($categories->get() as $category)
+                    @if (getUnreadFeedItemCountForCategory($category) > 0)
+                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'dropdown-item' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
+                    @endif
+                @endforeach
+            </div>
+        </div>
     @endif
 
     @if ($unreadFeedItems->count() == 0)
