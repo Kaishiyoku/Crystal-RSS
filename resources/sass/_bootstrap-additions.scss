@@ -192,6 +192,8 @@ footer {
 
 .custom-control-label {
   &.custom-control-label-lg {
+    vertical-align: baseline;
+
     &::before,
     &::after {
       top: .8rem;
@@ -244,3 +246,4 @@ footer {
 .navbar {
   box-shadow: 0 0 5px rgba($black, .35);
 }
+
