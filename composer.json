@@ -18,7 +18,7 @@
         "kaishiyoku/yaml-translation": "5.7.0",
         "khill/php-duration": "1.0.6",
         "laracasts/flash": "3.0.2",
-        "laravel/framework": "5.7.18",
+        "laravel/framework": "5.7.19",
         "laravel/horizon": "2.0.0",
         "laravel/telescope": "1.0.10",
         "laravel/tinker": "1.0.8",
@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "3.2.1",
-        "barryvdh/laravel-ide-helper": "2.5.2",
+        "barryvdh/laravel-ide-helper": "2.5.3",
         "beyondcode/laravel-dump-server": "1.2.2",
         "filp/whoops": "2.3.1",
         "fzaninotto/faker": "1.8.0",
