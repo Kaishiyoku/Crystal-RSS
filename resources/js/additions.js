@@ -134,7 +134,7 @@ $(document).ready(function () {
         includeSelectAllOption: true,
         numberDisplayed: 1,
         maxHeight: 350,
-        buttonClass: 'btn btn-outline-secondary',
+        buttonClass: 'btn btn-outline-dark',
         nonSelectedText: trans('multiselect.nonSelectedText'),
         nSelectedText: trans('multiselect.nSelectedText'),
         allSelectedText: trans('multiselect.allSelectedText'),

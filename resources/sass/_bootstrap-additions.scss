@@ -220,3 +220,24 @@ footer {
     width: 16rem !important;
   }
 }
+
+.nav-pills {
+  .nav-item {
+    a {
+      margin-right: .5rem;
+
+      &:not(.active) {
+        &:hover {
+          background-color: rgba(desaturate(theme-color("primary"), 10%), .1);
+        }
+      }
+
+      &.active {
+        &:hover {
+          background-color: darken(theme-color("primary"), 10%);
+        }
+      }
+    }
+  }
+}
+
