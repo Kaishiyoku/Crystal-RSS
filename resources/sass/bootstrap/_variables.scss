@@ -380,6 +380,10 @@ $table-caption-color:         $text-muted !default;
 $table-bg-level:              -9 !default;
 $table-border-level:          -6 !default;
 
+$list-group-accent-bg:        rgba($black, .025) !default;
+$list-group-striped-order:    odd !default;
+
+$hoverable-bg:                rgba(theme-color("primary"), .1) !default;
 
 // Buttons + Forms
 //

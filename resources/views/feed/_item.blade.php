@@ -1,4 +1,4 @@
-<li class="list-group-item hoverable" id="feed-item-{{ $feedItem->id }}">
+<li class="list-group-item border-0 hoverable" id="feed-item-{{ $feedItem->id }}">
     <div class="row">
         @if ($showActions)
             <div class="col-lg-1 col-2">

@@ -204,10 +204,10 @@ footer {
 }
 
 .hoverable {
-  @include _transition(background-color, 50ms, linear);
+  @include _transition(background-color, 100ms, linear);
 
   &:hover {
-    background-color: rgba($black, .025);
+    background-color: $hoverable-bg !important;
   }
 }
 
@@ -252,5 +252,11 @@ footer {
     height: auto;
     max-height: 80vh;
     overflow-x: hidden;
+  }
+}
+
+.list-group-striped {
+  > .list-group-item:nth-of-type(#{$list-group-striped-order}) {
+    background-color: $list-group-accent-bg;
   }
 }

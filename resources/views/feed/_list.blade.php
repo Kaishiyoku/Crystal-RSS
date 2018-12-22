@@ -8,7 +8,7 @@
     {{ Form::open(['route' => ['feed.toggle_status'], 'method' => 'put', 'role' => 'form']) }}
 @endif
 
-<ul class="list-group">
+<ul class="list-group list-group-striped">
     @foreach ($feedItems as $feedItem)
         @include('feed._item', ['feedItem' => $feedItem, 'showActions' => $showActions])
     @endforeach
