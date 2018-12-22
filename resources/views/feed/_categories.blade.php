@@ -2,6 +2,6 @@
     <i>@lang('common.none')</i>
 @else
     @foreach ($categories as $category)
-        <span class="badge badge-secondary">{{ $category->title }}</span>
+        <span class="badge badge-dark">{{ $category->title }}</span>
     @endforeach
 @endif
