@@ -1,6 +1,6 @@
 index:
   title: Statistiken
-  articles_of_the_last_month: Artikel des letzten Monats
+  last_month: letzter Monat
   articles: Artikel
   average_time_between_retrieval_and_read: Durchschnittliche Dauer bis ein Artikel als gelesen markiert wird
   read_articles: Gelesene Artikel

@@ -3,6 +3,14 @@
 @section('title', __('statistic.index.title'))
 
 @section('content')
+    <h1>
+        @lang('statistic.index.title')
+
+        <small class="text-muted">
+            @lang('statistic.index.last_month')
+        </small>
+    </h1>
+
     <div>
         {!! $dailyArticlesChart->container() !!}
         {!! $dailyArticlesChart->script() !!}

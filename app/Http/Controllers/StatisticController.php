@@ -57,7 +57,6 @@ class StatisticController extends Controller
         });
 
         $dailyArticlesChart = new DailyArticlesChart();
-        $dailyArticlesChart->title(__('statistic.index.articles_of_the_last_month'));
         $dailyArticlesChart->type('bar');
         $dailyArticlesChart->options([
             'tooltips' => [
