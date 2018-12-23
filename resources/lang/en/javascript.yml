@@ -5,4 +5,4 @@ multiselect:
   selectAllText: Select all
 datepicker:
   formats:
-    date: MM/DD/YYYY
+    date: YYYY-MM-DD

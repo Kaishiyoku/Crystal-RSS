@@ -30,3 +30,7 @@ search:
   importing: Importing feed items...
   feed_ids: Feeds
 categories: Categories
+date_from: From
+date_till: Till
+vote:
+  success: Updated vote.

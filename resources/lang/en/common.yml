@@ -16,7 +16,7 @@ nav:
   horizon: Horizon
   telescope: Telescope
   statistics: Statistics
-  update_errors: Update-Fehler
+  update_errors: Update errors
 add: Add
 delete: Delete
 edit: Edit

@@ -89,11 +89,9 @@ timezone: ':attribute muss eine gültige Zeitzone sein.'
 unique: ':attribute ist schon vergeben.'
 uploaded: ':attribute konnte nicht hochgeladen werden.'
 url: ':attribute muss eine URL sein.'
-
 custom:
   attribute-name:
     rule-name: custom-message
-
 attributes:
   name: Name
   username: Benutzername
