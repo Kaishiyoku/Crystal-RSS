@@ -1,5 +1,26 @@
 # Change Log
 
+## [0.13.0](https://github.com/kaishiyoku/crystal-rss/tree/0.13.0) (2018-12-23)
+[Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.12.0...0.13.0)
+
+**Implemented enhancements:**
+
+- Adjust calculation of the average time to read an article as read: only take the last month [\#89](https://github.com/Kaishiyoku/Crystal-RSS/issues/89)
+- Adjust feed list for mobile devices [\#88](https://github.com/Kaishiyoku/Crystal-RSS/issues/88)
+- Add ability to up- and downvote feed items [\#87](https://github.com/Kaishiyoku/Crystal-RSS/issues/87)
+- Upgrade to Bootstrap 4.2 [\#86](https://github.com/Kaishiyoku/Crystal-RSS/issues/86)
+- Adjust theme [\#85](https://github.com/Kaishiyoku/Crystal-RSS/issues/85)
+- Add ability to read update errors [\#83](https://github.com/Kaishiyoku/Crystal-RSS/issues/83)
+- Add date range filter for search [\#82](https://github.com/Kaishiyoku/Crystal-RSS/issues/82)
+
+**Fixed bugs:**
+
+- No redirect to index page when marking all items of a specific category as read by using the checkboxes [\#81](https://github.com/Kaishiyoku/Crystal-RSS/issues/81)
+
+**Closed issues:**
+
+- Update Composer dependencies [\#84](https://github.com/Kaishiyoku/Crystal-RSS/issues/84)
+
 ## [0.12.0](https://github.com/kaishiyoku/crystal-rss/tree/0.12.0) (2018-12-14)
 [Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.11.0...0.12.0)
 
