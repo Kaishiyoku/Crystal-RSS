@@ -32,3 +32,5 @@ search:
 categories: Kategorien
 date_from: Von
 date_till: Bis
+vote:
+  success: Wertung aktualisiert.

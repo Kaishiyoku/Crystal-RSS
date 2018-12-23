@@ -19,13 +19,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereFeedId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUserId($value)
-     * @mixin \Eloquent
-     * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newModelQuery()
-     * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newQuery()
-     * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError query()
-     * @property string $url
-     * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUrl($value)
-     */
+ * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError query()
+ * @property string $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUrl($value)
+ */
 class UpdateError extends Model
 {
     /**

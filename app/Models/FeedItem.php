@@ -43,6 +43,8 @@ use Laravel\Scout\Searchable;
  * @property string|null $raw_json
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereRawJson($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
+ * @property string $vote_status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
  */
 class FeedItem extends Model
 {

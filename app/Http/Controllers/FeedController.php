@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\VoteStatus;
 use App\Jobs\ProcessFeedItems;
 use App\Libraries\ManualPaginator;
 use App\Models\Category;
@@ -140,6 +141,36 @@ class FeedController extends Controller
             ->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
+    }
+
+    public function voteUp(Request $request, FeedItem $feedItem)
+    {
+        return $this->vote($request, $feedItem, VoteStatus::Up);
+    }
+
+    public function voteDown(Request $request, FeedItem $feedItem)
+    {
+        return $this->vote($request, $feedItem, VoteStatus::Down);
+    }
+
+    private function vote(Request $request, FeedItem $feedItem, string $voteStatus)
+    {
+        $this->authorize('vote', $feedItem);
+
+        if ($feedItem->vote_status == $voteStatus) {
+            $voteStatus = VoteStatus::None;
+        }
+
+        $feedItem->vote_status = $voteStatus;
+        $feedItem->save();
+
+        if ($request->ajax()) {
+            return response()->json(['vote_status' => $voteStatus]);
+        }
+
+        flash(__('feed.vote.success'))->success();
+
+        return redirect()->back();
     }
 
     private function baseIndex($categoryId = null)

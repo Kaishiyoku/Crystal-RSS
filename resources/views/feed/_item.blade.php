@@ -20,6 +20,10 @@
 
                     <i class="fas fa-tags"></i>
                     @include('feed._categories', ['categories' => $feedItem->categories])
+
+                    <span class="d-lg-none d-xl-none">
+                        @include('feed._additional_item_actions')
+                    </span>
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small">
                     {{ $feedItem->date->format(l(DATETIME)) }}
@@ -32,10 +36,10 @@
             <br/>
 
             @if (auth()->user()->is_administrator)
-                <span class="small">
-                    {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem) }}
-                </span>
+                {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem, ['class' => 'btn btn-xs btn-outline-dark']) }}
             @endif
+
+            @include('feed._additional_item_actions')
         </div>
     </div>
 </li>

@@ -19,6 +19,9 @@ Route::group(['middleware' => ['menus']], function () {
             Route::get('/search', 'FeedController@searchShow')->name('search_show');
             Route::paginate('/search/results', 'FeedController@searchResult')->name('search_result');
 
+            Route::put('/{feedItem}/vote_up', 'FeedController@voteUp')->name('vote_up');
+            Route::put('/{feedItem}/vote_down', 'FeedController@voteDown')->name('vote_down');
+
             // Manage feed
             Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
         });
