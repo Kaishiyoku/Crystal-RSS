@@ -38,7 +38,12 @@ Add the cronjob (please adjust the path if necessary):
 
 Screenshots
 ===========
-https://imgur.com/gallery/DWPNn47
+https://imgur.com/a/DWPNn47
+
+|                                                              |                                                              |
+|--------------------------------------------------------------|--------------------------------------------------------------|
+| ![Feed with items](https://i.imgur.com/Azv6eUS.png?raw=true) | ![Search](https://i.imgur.com/kD5T53C.png?raw=true)          |
+| ![Statistics](https://i.imgur.com/ICdkbS7.png?raw=true)      | ![Article details](https://i.imgur.com/nzfbnj4.png?raw=true) |
 
 License
 =======
