@@ -24,6 +24,7 @@
         "classnames": "^2.2.6",
         "cross-env": "5.2.0",
         "jquery": "3.3.1",
+        "js-simple-logger": "^2.3.0",
         "laravel-mix": "4.0.12",
         "lodash": "4.17.11",
         "moment": "2.23.0",

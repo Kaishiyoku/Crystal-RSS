@@ -1,5 +1,3 @@
-import React from "react";
-
 window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import fetchPut from '../core/request/fetchPut';
 import classNames from 'classnames';
+import * as Logger from 'js-simple-logger';
+
+const logger = Logger.getLogger();
 
 class Voter extends Component {
     propTyes = {

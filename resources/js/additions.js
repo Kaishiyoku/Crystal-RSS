@@ -2,6 +2,9 @@ import Voter from "./components/Voter";
 import baseTranslator from "./baseTranslator";
 import ReactDOM from "react-dom";
 import React from "react";
+import * as Logger from 'js-simple-logger';
+
+Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
 $(document).ready(function () {
     window.trans = baseTranslator(window.TRANSLATIONS);
