@@ -1,0 +1,44 @@
+<?php
+
+use App\Models\User;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddApiTokenToUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('api_token', 60);
+        });
+
+        // create unique tokens for existing users
+        $users = User::all();
+
+        $users->each(function (User $user) {
+            \App\Http\Controllers\Auth\RegisterController::createApiToken($user);
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('api_token', 60)->unique()->change();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('api_token');
+        });
+    }
+}

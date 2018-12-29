@@ -26,6 +26,7 @@
         "laravelcollective/html": "5.7.1",
         "pda/pheanstalk": "3.2.1",
         "predis/predis": "1.1.1",
+        "ramsey/uuid": "3.8.0",
         "spatie/flysystem-dropbox": "1.0.6",
         "spatie/laravel-backup": "5.11.3",
         "spatie/laravel-paginateroute": "2.7.0",

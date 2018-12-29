@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use Ramsey\Uuid\Uuid;
 
 return [
     /*
@@ -42,6 +43,8 @@ return [
     ],
 
     'post_creation_fn' => function (\App\Models\User $user) {
+        $user = \App\Http\Controllers\Auth\RegisterController::createApiToken($user);
+
         return \App\Http\Controllers\Auth\RegisterController::createDefaultCategory($user);
     },
 

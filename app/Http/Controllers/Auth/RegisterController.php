@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Ramsey\Uuid\Uuid;
 
 class RegisterController extends Controller
 {
@@ -94,7 +95,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $user = $this->create($request->all());
-        $this->createDefaultCategory($user);
+        $user = self::createApiToken($user);
+        $user = self::createDefaultCategory($user);
 
         event(new UserRegistered($user));
 
@@ -110,6 +112,14 @@ class RegisterController extends Controller
         $defaultCategory->title = __('category.default_title');
 
         $user->feedItemCategories()->save($defaultCategory);
+
+        return $user;
+    }
+
+    public static function createApiToken(User $user)
+    {
+        $user->api_token = Uuid::uuid4();
+        $user->save();
 
         return $user;
     }
