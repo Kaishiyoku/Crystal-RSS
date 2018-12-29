@@ -182,7 +182,7 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories();
         $currentCategoryId = $categoryId;
-        $latestUpdateLog = UpdateLog::orderBy('created_at', 'asc')->first();
+        $latestUpdateLog = UpdateLog::orderBy('created_at', 'desc')->first();
 
         $categoryDropdownTranslation = $currentCategoryId == null ? __('feed.index.all_categories') : auth()->user()->categories()->find($currentCategoryId)->title;
 
