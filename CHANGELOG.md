@@ -1,5 +1,18 @@
 # Change Log
 
+## [0.14.0](https://github.com/kaishiyoku/crystal-rss/tree/0.14.0) (2018-12-29)
+[Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.13.0...0.14.0)
+
+**Implemented enhancements:**
+
+- Rework up- and downvoting UI in react [\#94](https://github.com/Kaishiyoku/Crystal-RSS/issues/94)
+- Add API token generation upon user registration [\#92](https://github.com/Kaishiyoku/Crystal-RSS/issues/92)
+- Change order of last update log item [\#91](https://github.com/Kaishiyoku/Crystal-RSS/issues/91)
+
+**Fixed bugs:**
+
+- Fix English navigation translation for the update errors link [\#93](https://github.com/Kaishiyoku/Crystal-RSS/issues/93)
+
 ## [0.13.0](https://github.com/kaishiyoku/crystal-rss/tree/0.13.0) (2018-12-23)
 [Full Changelog](https://github.com/kaishiyoku/crystal-rss/compare/0.12.0...0.13.0)
 
