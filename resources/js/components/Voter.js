@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import fetchPut from '../core/request/fetchPut';
 import classNames from 'classnames';
 import * as Logger from 'js-simple-logger';
+import LoadingButton from "./LoadingButton";
 
 const logger = Logger.getLogger();
 
 class Voter extends Component {
-    propTyes = {
+    static propTyes = {
         voteUpUrl: PropTypes.string.isRequired,
         voteDownUrl: PropTypes.string.isRequired,
         token: PropTypes.string.isRequired,
@@ -18,6 +18,8 @@ class Voter extends Component {
 
     state = {
         voteStatus: 'NONE',
+        upButtonIsLoading: false,
+        downButtonIsLoading: false,
     };
 
     componentDidMount() {
@@ -27,21 +29,25 @@ class Voter extends Component {
     }
 
     voteUp = () => {
-        this.vote(this.props.voteUpUrl);
+        this.vote('upButtonIsLoading', this.props.voteUpUrl);
     };
 
     voteDown = () => {
-        this.vote(this.props.voteDownUrl);
+        this.vote('downButtonIsLoading', this.props.voteDownUrl);
     };
 
-    vote = (url) => {
-        return fetchPut(url, this.props.token)
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState((prevState, props) => {
-                    return Object.assign({}, {voteStatus: data.vote_status});
+    vote = (field, url) => {
+        this.setState((prevState, props) => {
+            return Object.assign({}, {[field]: true});
+        }, () => {
+            return fetchPut(url, this.props.token)
+                .then((response) => response.json())
+                .then((data) => {
+                    this.setState((prevState, props) => {
+                        return Object.assign({}, {voteStatus: data.vote_status, [field]: false});
+                    });
                 });
-            });
+        });
     };
 
     render() {
@@ -57,15 +63,15 @@ class Voter extends Component {
 
         return (
             <React.Fragment>
-                <button type="button" className={upBtnClass} onClick={this.voteUp}>
-                    <i className="fas fa-chevron-up"></i>
-                </button>
+                <LoadingButton isLoading={this.state.upButtonIsLoading} className={upBtnClass} onClick={this.voteUp}>
+                    <i className="fas fa-chevron-up"/>
+                </LoadingButton>
 
                 &nbsp;
 
-                <button type="button" className={downBtnClass} onClick={this.voteDown}>
-                    <i className="fas fa-chevron-down"></i>
-                </button>
+                <LoadingButton isLoading={this.state.downButtonIsLoading} className={downBtnClass} onClick={this.voteDown}>
+                    <i className="fas fa-chevron-down"/>
+                </LoadingButton>
             </React.Fragment>
         );
     }
