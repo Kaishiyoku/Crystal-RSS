@@ -1,17 +1,9 @@
-<a
-        href="#"
-        class="btn btn-xs {{ $feedItem->vote_status == \App\Enums\VoteStatus::Up ? 'btn-success' : 'btn-outline-dark' }}"
-        data-vote="{{ route('feed.vote_up', $feedItem) }}" id="vote-up-{{ $feedItem->id }}"
-        data-other="#vote-down-{{ $feedItem->id }}"
+<span
+        class="ml-2"
+        data-provide="voter"
+        data-vote-up-url="{{ route('feed.vote_up', $feedItem, false) }}"
+        data-vote-down-url="{{ route('feed.vote_down', $feedItem, false) }}"
+        data-vote-status="{{ $feedItem->vote_status }}"
 >
-    <i class="fas fa-chevron-up"></i>
-</a>
 
-<a
-        href="#"
-        class="btn btn-xs {{ $feedItem->vote_status == \App\Enums\VoteStatus::Down ? 'btn-danger' : 'btn-outline-dark' }}"
-        data-vote="{{ route('feed.vote_down', $feedItem) }}" id="vote-down-{{ $feedItem->id }}"
-        data-other="#vote-up-{{ $feedItem->id }}"
->
-    <i class="fas fa-chevron-down"></i>
-</a>
+</span>

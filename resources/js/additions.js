@@ -1,4 +1,7 @@
+import Voter from "./components/Voter";
 import baseTranslator from "./baseTranslator";
+import ReactDOM from "react-dom";
+import React from "react";
 
 $(document).ready(function () {
     window.trans = baseTranslator(window.TRANSLATIONS);
@@ -178,5 +181,14 @@ $(document).ready(function () {
         }) : baseConfig;
 
         $this.datetimepicker(config);
+    });
+
+    $('[data-provide="voter"]').each(function () {
+        const dataVoteUpUrl = $(this).attr('data-vote-up-url');
+        const dataVoteDownUrl = $(this).attr('data-vote-down-url');
+        const dataToken = $('meta[name="csrf-token"]').attr('content');
+        const dataVoteStatus = $(this).attr('data-vote-status');
+
+        ReactDOM.render(<Voter voteUpUrl={dataVoteUpUrl} voteDownUrl={dataVoteDownUrl} token={dataToken} voteStatus={dataVoteStatus}/>, $(this)[0]);
     });
 });
