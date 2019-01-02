@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'use' => 'default',
+    'use' => 'feed',
 
     /*
     |--------------------------------------------------------------------------
@@ -89,7 +89,7 @@ return [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['feed'],
                 'balance' => 'simple',
                 'processes' => 1,
                 'tries' => 3,
@@ -99,7 +99,7 @@ return [
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
+                'queue' => ['feed'],
                 'balance' => 'simple',
                 'processes' => 1,
                 'tries' => 3,
