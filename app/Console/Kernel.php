@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
+
         switch (env('UPDATE_INTERVAL')) {
             case '5_MINUTES':
                 $schedule->command(UpdateFeed::class)->everyFiveMinutes()->sendOutputTo('storage/logs/feed_updates.log');
