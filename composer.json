@@ -30,8 +30,8 @@
         "spatie/flysystem-dropbox": "1.0.6",
         "spatie/laravel-backup": "5.11.3",
         "spatie/laravel-paginateroute": "2.7.0",
-        "teamtnt/laravel-scout-tntsearch-driver": "6.1",
-        "teamtnt/tntsearch": "1.4.0",
+        "teamtnt/laravel-scout-tntsearch-driver": "7.0.0",
+        "teamtnt/tntsearch": "2.0.0",
         "webup/laravel-sendinblue": "1.1.3"
     },
     "require-dev": {
