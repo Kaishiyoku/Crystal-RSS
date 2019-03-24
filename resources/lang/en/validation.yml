@@ -147,3 +147,4 @@ attributes:
   date_from: From
   date_till: Till
   created_at: Created at
+  vote_status: Rating

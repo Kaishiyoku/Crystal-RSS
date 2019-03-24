@@ -147,3 +147,4 @@ attributes:
   date_from: Von
   date_till: Bis
   created_at: Erstellt am
+  vote_status: Bewertung

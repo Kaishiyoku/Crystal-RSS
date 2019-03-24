@@ -127,6 +127,21 @@
 
     <div class="row mb-2">
         <div class="col-md-2">
+            @lang('validation.attributes.vote_status')
+        </div>
+
+        <div class="col-md-10">
+            <span
+                    data-provide="voter"
+                    data-vote-up-url="{{ route('feed.vote_up', $feedItem, false) }}"
+                    data-vote-down-url="{{ route('feed.vote_down', $feedItem, false) }}"
+                    data-vote-status="{{ $feedItem->vote_status }}"
+            >
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-2">
             @lang('validation.attributes.raw_json'):
         </div>
 
