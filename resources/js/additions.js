@@ -160,9 +160,9 @@ $(document).ready(function () {
         selectAllText: trans('multiselect.selectAllText'),
         buttonContainer: '<div class="dropdown" />',
         templates: {
-            li: '<li class="dropdown-item"><a href="javascript:void(0);"><label></label></a></li>',
-            liGroup: '<li class="dropdown-item"><a href="javascript:void(0);"><label></label></a></li>',
-            divider: '<li class="dropdown-divider"></li>',
+            li: '<li><a href="javascript:void(0);" class="dropdown-item"><label></label></a></li>',
+            liGroup: '<li><a href="javascript:void(0);" class="dropdown-item"><label></label></a></li>',
+            divider: '<li><div class="dropdown-divider"></div></li>',
         },
     });
 
