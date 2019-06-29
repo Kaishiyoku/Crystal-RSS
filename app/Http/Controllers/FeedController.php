@@ -136,9 +136,16 @@ class FeedController extends Controller
         }
 
         $foundFeedItemsFromIndex = FeedItem::search($request->get('term'))
-            ->constrain($filteredFeedItems)
             ->orderBy('date', 'desc')
-            ->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+            ->get();
+
+        $filteredFeedItemIds = $filteredFeedItems->get()->pluck('id');
+
+        $foundFeedItemsFromIndexIds = $foundFeedItemsFromIndex->filter(function (FeedItem $feedItem, $key) use ($filteredFeedItemIds) {
+            return $filteredFeedItemIds->contains($feedItem->id);
+        })->pluck('id');
+
+        $foundFeedItemsFromIndex = auth()->user()->feedItems()->whereIn('id', $foundFeedItemsFromIndexIds)->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }

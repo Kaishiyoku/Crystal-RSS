@@ -3,7 +3,13 @@
 @section('title', __('feed.index.title'))
 
 @section('content')
-    <h1>@lang('feed.search_result.title')</h1>
+    <h1>
+        @lang('feed.search_result.title')
+
+        <small class="text-muted">
+            {{ $foundFeedItemsFromIndex->total() }}
+        </small>
+    </h1>
 
     @include('feed._search_form')
 

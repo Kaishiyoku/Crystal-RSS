@@ -173,7 +173,6 @@ return [
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
-        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
