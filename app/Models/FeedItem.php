@@ -45,6 +45,7 @@ use Laravel\Scout\Searchable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
  * @property string $vote_status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
+ * @property-read int|null $categories_count
  */
 class FeedItem extends Model
 {

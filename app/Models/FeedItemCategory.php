@@ -20,6 +20,7 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereUserId($value)
  * @mixin \Eloquent
+ * @property-read int|null $categories_count
  */
 class FeedItemCategory extends Model
 {

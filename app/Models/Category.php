@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category query()
  * @property string|null $color
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereColor($value)
+ * @property-read int|null $feeds_count
  */
 class Category extends ColoredModel
 {

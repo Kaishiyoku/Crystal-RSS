@@ -47,6 +47,12 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $feedItemCategories
+ * @property-read int|null $categories_count
+ * @property-read int|null $enabled_feeds_count
+ * @property-read int|null $feed_item_categories_count
+ * @property-read int|null $feeds_count
+ * @property-read int|null $notifications_count
+ * @property-read int|null $update_errors_count
  */
 class User extends Authenticatable
 {

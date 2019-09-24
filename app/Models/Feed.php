@@ -37,6 +37,8 @@ use App\Models\Extensions\ColoredModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed query()
  * @property string|null $color
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereColor($value)
+ * @property-read int|null $feed_items_count
+ * @property-read int|null $update_errors_count
  */
 class Feed extends ColoredModel
 {
