@@ -12,9 +12,9 @@ Simple web-based RSS feed reader.
 
 Table of contents
 =================
-  * [License](#license)
   * [Installation](#installation)
   * [Screenshots](#screenshots)
+  * [License](#license)
   * [Author](#author)
   
 Installation
