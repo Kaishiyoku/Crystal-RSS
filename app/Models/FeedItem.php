@@ -54,10 +54,9 @@ class FeedItem extends Model
 
     public $asYouType = false;
 
+    public $timestamps = false;
+
     protected $searchableFields = [
-        'id',
-        'user_id',
-        'feed_id',
         'url',
         'title',
         'author',
@@ -96,16 +95,10 @@ class FeedItem extends Model
         'checksum', 'user_id', 'feed_id',
     ];
 
-    protected $dates = [
-        'date',
-        'read_at',
-    ];
-
     protected $casts = [
-
+        'date' => 'date',
+        'read_at' => 'date',
     ];
-
-    public $timestamps = false;
 
     public function scopeRead($query)
     {

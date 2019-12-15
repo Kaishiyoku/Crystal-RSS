@@ -116,7 +116,9 @@ class FeedController extends Controller
 
         $feeds = $this->getFeedsForSelect();
 
-        $requestFeedIds = $request->get('feed_ids') ?? [];
+        $requestFeedIds = array_map(function ($feedId) {
+                return (int)$feedId;
+            }, $request->get('feed_ids')) ?? [];
 
         $filteredFeedIds = auth()->user()->feeds()->pluck('id')->toArray();
         $filteredFeedIds = array_filter($requestFeedIds, function ($requestFeedId) use ($filteredFeedIds) {
@@ -124,28 +126,24 @@ class FeedController extends Controller
         });
         $feedIds = $filteredFeedIds;
 
-        $filteredFeedItems = auth()->user()->feedItems()
-            ->whereIn('feed_id', $filteredFeedIds);
+        $foundFeedItemIdsFromIndex = FeedItem::search($request->get('term'))
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('date', 'desc')
+            ->get()
+            ->pluck('id');
+
+        $foundFeedItemsFromIndex = FeedItem::whereIn('id', $foundFeedItemIdsFromIndex)
+            ->whereIn('feed_id', $feedIds);
 
         if ($dateFrom) {
-            $filteredFeedItems = $filteredFeedItems->where('date', '>=', $dateFrom->startOfDay());
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('date', '>=', $dateFrom->startOfDay());
         }
 
         if ($dateTill) {
-            $filteredFeedItems = $filteredFeedItems->where('date', '<=', $dateTill->endOfDay());
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('date', '<=', $dateTill->endOfDay());
         }
 
-        $foundFeedItemsFromIndex = FeedItem::search($request->get('term'))
-            ->orderBy('date', 'desc')
-            ->get();
-
-        $filteredFeedItemIds = $filteredFeedItems->get()->pluck('id');
-
-        $foundFeedItemsFromIndexIds = $foundFeedItemsFromIndex->filter(function (FeedItem $feedItem, $key) use ($filteredFeedItemIds) {
-            return $filteredFeedItemIds->contains($feedItem->id);
-        })->pluck('id');
-
-        $foundFeedItemsFromIndex = auth()->user()->feedItems()->whereIn('id', $foundFeedItemsFromIndexIds)->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->paginate();
 
         return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }
