@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\VoteStatus;
 use App\Models\Extensions\ColoredModel;
 
 /**
@@ -93,5 +94,15 @@ class Feed extends ColoredModel
     public function updateErrors()
     {
         return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
+    }
+
+    public function getTotalUpVoteCount()
+    {
+        return $this->feedItems()->whereVoteStatus(VoteStatus::Up)->count();
+    }
+
+    public function getTotalDownVoteCount()
+    {
+        return $this->feedItems()->whereVoteStatus(VoteStatus::Down)->count();
     }
 }

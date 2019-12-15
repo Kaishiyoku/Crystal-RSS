@@ -64,4 +64,18 @@ class Category extends ColoredModel
             return $feed->feedItems()->count();
         })->sum();
     }
+
+    public function getTotalUpVoteCount()
+    {
+        return $this->feeds->map(function (Feed $feed) {
+            return $feed->getTotalUpVoteCount();
+        })->sum();
+    }
+
+    public function getTotalDownVoteCount()
+    {
+        return $this->feeds->map(function (Feed $feed) {
+            return $feed->getTotalDownVoteCount();
+        })->sum();
+    }
 }

@@ -26,20 +26,42 @@
 
     @foreach ($categories as $category)
         <div class="row mt-3">
-            <div class="col-lg-6 col-12 border-bottom hoverable">
+            <div class="col-xl-6 col-lg-8 col-12 border-bottom hoverable">
                 <div class="row">
-                    <div class="col-8 font-weight-bold" {!! $category->getStyle() !!}>{{ $category->title }}</div>
-                    <div class="col-4 text-right font-weight-bold">{{ $category->getTotalFeedCount() }}</div>
+                    <div class="col-7 font-weight-bold" {!! $category->getStyle() !!}>{{ $category->title }}</div>
+                    <div class="col-3">
+                        <span class="text-success">
+                            <i class="fas fa-chevron-up"></i>
+                            {{ $category->getTotalUpVoteCount() }}
+                        </span>
+
+                        <span class="text-danger">
+                            <i class="fas fa-chevron-down"></i>
+                            {{ $category->getTotalDownVoteCount() }}
+                        </span>
+                    </div>
+                    <div class="col-2 text-right font-weight-bold">{{ $category->getTotalFeedCount() }}</div>
                 </div>
             </div>
         </div>
 
         @foreach ($category->feeds as $feed)
             <div class="row">
-                <div class="col-lg-6 col-12 hoverable">
+                <div class="col-xl-6 col-lg-8 col-12 hoverable">
                     <div class="row">
-                        <div class="col-8" {!! $feed->getStyle() !!}>{{ $feed->title }}</div>
-                        <div class="col-4 text-right">{{ $feed->feedItems()->count() }}</div>
+                        <div class="col-7" {!! $feed->getStyle() !!}>{{ $feed->title }}</div>
+                        <div class="col-3">
+                            <span class="text-success">
+                                <i class="fas fa-chevron-up"></i>
+                                {{ $feed->getTotalUpVoteCount() }}
+                            </span>
+
+                            <span class="text-danger">
+                                <i class="fas fa-chevron-down"></i>
+                                {{ $feed->getTotalDownVoteCount() }}
+                            </span>
+                        </div>
+                        <div class="col-2 text-right">{{ $feed->feedItems()->count() }}</div>
                     </div>
                 </div>
             </div>
