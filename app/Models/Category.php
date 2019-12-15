@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Extensions\ColoredModel;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Category

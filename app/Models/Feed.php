@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Extensions\ColoredModel;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
  * App\Models\Feed
@@ -43,13 +42,6 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
  */
 class Feed extends ColoredModel
 {
-    use QueryCacheable;
-
-    /**
-     * @var cache time, in seconds
-     */
-    protected $cacheFor = 3600;
-
     /**
      * The attributes that are mass assignable.
      *

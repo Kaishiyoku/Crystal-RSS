@@ -29,10 +29,10 @@
         "pda/pheanstalk": "4.0.0",
         "predis/predis": "1.1.1",
         "ramsey/uuid": "3.9.1",
-        "rennokki/laravel-eloquent-query-cache": "^1.2",
         "spatie/flysystem-dropbox": "1.2.2",
         "spatie/laravel-backup": "6.7.6",
         "spatie/laravel-paginateroute": "2.7.0",
+        "watson/rememberable": "^3.2",
         "yab/laravel-scout-mysql-driver": "2.40"
     },
     "require-dev": {

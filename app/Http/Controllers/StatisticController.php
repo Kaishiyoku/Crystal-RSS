@@ -44,12 +44,16 @@ class StatisticController extends Controller
             $currentItems = auth()->user()->feedItems(false)
                 ->where('date', '>=', $date->copy()->startOfDay())
                 ->where('date', '<=', $date->copy()->endOfDay())
-                ->orderBy('date');
+                ->orderBy('date')
+                ->remember(config('model_cache.statistics.feed_items.duration'))
+                ->prefix(config('model_cache.statistics.feed_items.prefix'));
 
             $currentReadItems = auth()->user()->feedItems(false)
                 ->where('read_at', '>=', $date->copy()->startOfDay())
                 ->where('read_at', '<=', $date->copy()->endOfDay())
-                ->whereNotNull('read_at');
+                ->whereNotNull('read_at')
+                ->remember(config('model_cache.statistics.feed_items.duration'))
+                ->prefix(config('model_cache.statistics.feed_items.prefix'));
 
             return [
                 'date' => $date->format(l(DATE)),

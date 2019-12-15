@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Watson\Rememberable\Rememberable;
 
 /**
  * App\Models\FeedItem
@@ -49,7 +50,7 @@ use Laravel\Scout\Searchable;
  */
 class FeedItem extends Model
 {
-    use Searchable;
+    use Searchable, Rememberable;
 
     public $asYouType = false;
 
