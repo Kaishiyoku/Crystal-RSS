@@ -19,7 +19,9 @@ if (! function_exists('getYearsFrom')) {
 if (! function_exists('getUnreadFeedItemCountForCategory')) {
     function getUnreadFeedItemCountForCategory($category)
     {
-        return $category->feeds()->get()->map(function ($feed) { return $feed->feedItems()->unread()->count(); })->sum();
+        return $category->feeds()->withCount(['feedItems' => function ($query) {
+            return $query->unread();
+        }])->get()->map(function ($a) { return $a->feed_items_count; })->sum();
     }
 }
 

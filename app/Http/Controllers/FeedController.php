@@ -185,7 +185,22 @@ class FeedController extends Controller
         $totalCountUnreadFeedItems = $categoryId == null ? $unreadFeedItemsBase->count() : $this->getUnreadFeedItems()->count();
         $unreadFeedItems = $unreadFeedItemsBase->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
-        $categories = auth()->user()->categories();
+        $categories = auth()->user()->categories()->with(['feeds' => function ($query) {
+            return $query->withCount(['feedItems' => function ($query) {
+                return $query->unread();
+            }]);
+        }])->get();
+
+        $categories = $categories->map(function (Category $category) {
+            $total_feed_items_count = $category->feeds->reduce(function ($carry, Feed $feed) {
+                return $carry + $feed->feed_items_count;
+            }, 0);
+
+            $category->total_feed_items_count = $total_feed_items_count;
+
+            return $category;
+        });
+
         $currentCategoryId = $categoryId;
         $latestUpdateLog = UpdateLog::orderBy('created_at', 'desc')->first();
 
@@ -196,13 +211,11 @@ class FeedController extends Controller
 
     private function getUnreadFeedItems($categoryId = null)
     {
-        $feedIds = Feed::when($categoryId == null, function ($query) {
-            return $query;
-        }, function ($query) use ($categoryId) {
-            return $query->whereCategoryId($categoryId);
-        })->pluck('id');
+        $feedItems = auth()->user()->feedItems()->unread();
 
-        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->with('categories');
+        if ($categoryId !== null) {
+            $feedItems = $feedItems->whereCategoryId($categoryId);
+        }
 
         return $feedItems;
     }

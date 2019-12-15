@@ -36,9 +36,9 @@
             <div class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="categoryDropdownMenuButton">
                 {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-dark">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'dropdown-item'. ($currentCategoryId == null ? ' active' : '')])) !!}
 
-                @foreach ($categories->get() as $category)
-                    @if (getUnreadFeedItemCountForCategory($category) > 0)
-                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . getUnreadFeedItemCountForCategory($category) . '</span>', [$category->id], ['class' => 'dropdown-item' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
+                @foreach ($categories as $category)
+                    @if ($category->total_feed_items_count > 0)
+                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . $category->total_feed_items_count . '</span>', [$category->id], ['class' => 'dropdown-item' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
                     @endif
                 @endforeach
             </div>
