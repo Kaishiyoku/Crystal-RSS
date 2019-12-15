@@ -32,7 +32,7 @@
         "spatie/flysystem-dropbox": "1.2.2",
         "spatie/laravel-backup": "6.7.6",
         "spatie/laravel-paginateroute": "2.7.0",
-        "watson/rememberable": "^3.2",
+        "watson/rememberable": "3.2.1",
         "yab/laravel-scout-mysql-driver": "2.40"
     },
     "require-dev": {
