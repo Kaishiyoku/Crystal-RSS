@@ -96,8 +96,8 @@ class FeedItem extends Model
     ];
 
     protected $casts = [
-        'date' => 'date',
-        'read_at' => 'date',
+        'date' => 'datetime',
+        'read_at' => 'datetime',
     ];
 
     public function scopeRead($query)
