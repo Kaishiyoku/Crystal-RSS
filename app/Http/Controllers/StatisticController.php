@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Charts\DailyArticlesChart;
+use App\Models\User;
 use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Khill\Duration\Duration;
 
 class StatisticController extends Controller
@@ -41,24 +44,16 @@ class StatisticController extends Controller
         $carbonPeriod = collect(CarbonPeriod::create($minDate, $maxDate)->toArray());
 
         $items = $carbonPeriod->map(function (Carbon $date) {
-            $currentItems = auth()->user()->feedItems(false)
-                ->where('date', '>=', $date->copy()->startOfDay())
-                ->where('date', '<=', $date->copy()->endOfDay())
-                ->orderBy('date')
-                ->remember(config('model_cache.statistics.feed_items.duration'))
-                ->prefix(config('model_cache.statistics.feed_items.prefix'));
+            /*** @var User $user */
+            $user = auth()->user();
 
-            $currentReadItems = auth()->user()->feedItems(false)
-                ->where('read_at', '>=', $date->copy()->startOfDay())
-                ->where('read_at', '<=', $date->copy()->endOfDay())
-                ->whereNotNull('read_at')
-                ->remember(config('model_cache.statistics.feed_items.duration'))
-                ->prefix(config('model_cache.statistics.feed_items.prefix'));
+            $currentItemsCount = self::getCurrentItemsForChartCount($user, $date);
+            $currentReadItemsCount = self::getCurrentReadItemsForChartCount($user, $date);
 
             return [
                 'date' => $date->format(l(DATE)),
-                'numberOfArticles' => $currentItems->count(),
-                'numberOfReadArticles' => $currentReadItems->count(),
+                'numberOfArticles' => $currentItemsCount,
+                'numberOfReadArticles' => $currentReadItemsCount,
             ];
         });
 
@@ -77,5 +72,45 @@ class StatisticController extends Controller
         ]);
 
         return $dailyArticlesChart;
+    }
+
+    /**
+     * @param User $user
+     * @param Carbon $date
+     * @return Relation
+     */
+    public static function getCurrentItemsForChartCount(User $user, Carbon $date)
+    {
+        $cacheKey = $user->id . '-' . config('model_cache.statistics.feed_items.prefix') . '-current_items_for_chart-' . $date;
+
+        return Cache::remember($cacheKey, config('model_cache.statistics.feed_items.duration'), function () use ($user, $date) {
+            return $user->feedItems(false)
+                ->where('date', '>=', $date->copy()->startOfDay())
+                ->where('date', '<=', $date->copy()->endOfDay())
+                ->orderBy('date')
+//                ->remember(config('model_cache.statistics.feed_items.duration'))
+                ->prefix(config('model_cache.statistics.feed_items.prefix'))
+                ->count();
+        });
+    }
+
+    /**
+     * @param User $user
+     * @param Carbon $date
+     * @return Relation
+     */
+    public static function getCurrentReadItemsForChartCount(User $user, Carbon $date)
+    {
+        $cacheKey = $user->id . '-' . config('model_cache.statistics.feed_items.prefix') . '-current_read_items_for_chart-' . $date;
+
+        return Cache::remember($cacheKey, config('model_cache.statistics.feed_items.duration'), function () use ($user, $date) {
+            return $user->feedItems(false)
+                ->where('read_at', '>=', $date->copy()->startOfDay())
+                ->where('read_at', '<=', $date->copy()->endOfDay())
+                ->whereNotNull('read_at')
+//                ->remember(config('model_cache.statistics.feed_items.duration'))
+                ->prefix(config('model_cache.statistics.feed_items.prefix'))
+                ->count();
+        });
     }
 }
