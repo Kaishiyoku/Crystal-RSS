@@ -24,7 +24,7 @@
         Artikel gesamt: {{ auth()->user()->feedItems()->count() }}
     </p>
 
-    @foreach (auth()->user()->categories as $category)
+    @foreach ($categories as $category)
         <div class="row mt-3">
             <div class="col-lg-6 col-12 border-bottom hoverable">
                 <div class="row">

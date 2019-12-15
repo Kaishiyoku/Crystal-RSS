@@ -31,7 +31,9 @@ class StatisticController extends Controller
 
         $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
 
-        return view('statistic.index', compact('dailyArticlesChart', 'averageDurationBetweenRetrievalAndRead'));
+        $categories = auth()->user()->categories()->with('feeds')->get();
+
+        return view('statistic.index', compact('dailyArticlesChart', 'averageDurationBetweenRetrievalAndRead', 'categories'));
     }
 
     private function getDailyArticlesChart($minDate, $maxDate)
