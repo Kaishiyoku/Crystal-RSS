@@ -22,9 +22,13 @@ class FeedController extends Controller
     public function category($id)
     {
         // check if there are any unread feed items
-        $feedItems = $this->getUnreadFeedItems($id);
+        $unreadFeedItemsCount = auth()->user()->feeds()->whereCategoryId($id)->withCount(['feedItems' => function ($query) {
+            return $query->unread();
+        }])->get()->reduce(function ($carry, Feed $feed) {
+            return $carry + $feed->feed_items_count;
+        }, 0);
 
-        if ($feedItems->count() == 0) {
+        if ($unreadFeedItemsCount == 0) {
             return redirect()->route('feed.index');
         }
 
@@ -211,11 +215,13 @@ class FeedController extends Controller
 
     private function getUnreadFeedItems($categoryId = null)
     {
-        $feedItems = auth()->user()->feedItems()->unread();
+        $feedIds = Feed::when($categoryId == null, function ($query) {
+            return $query;
+        }, function ($query) use ($categoryId) {
+            return $query->whereCategoryId($categoryId);
+        })->pluck('id');
 
-        if ($categoryId !== null) {
-            $feedItems = $feedItems->whereCategoryId($categoryId);
-        }
+        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->with('categories');
 
         return $feedItems;
     }
