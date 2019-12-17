@@ -30,9 +30,5 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->register(HorizonServiceProvider::class);
-
-        if (env('ENABLE_TELESCOPE')) {
-            $this->app->register(TelescopeServiceProvider::class);
-        }
     }
 }

@@ -14,7 +14,6 @@ nav:
   profile: Profile
   administration: Administration
   horizon: Horizon
-  telescope: Telescope
   statistics: Statistics
   update_errors: Update errors
 add: Add

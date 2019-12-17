@@ -47,6 +47,8 @@ use Watson\Rememberable\Rememberable;
  * @property string $vote_status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
  * @property-read int|null $categories_count
+ * @property \Illuminate\Support\Carbon|null $posted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem wherePostedAt($value)
  */
 class FeedItem extends Model
 {
