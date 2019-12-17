@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Watson\Rememberable\Rememberable;
 
 /**
  * App\Models\ReportFeedItem
@@ -14,6 +12,7 @@ use Watson\Rememberable\Rememberable;
  * @property int $total_count
  * @property int $read_count
  * @property \Illuminate\Support\Carbon $date
+ * @property-write mixed $raw
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem newQuery()

@@ -12,6 +12,8 @@ use Laravel\Scout\Searchable;
  * @property int $user_id
  * @property string $title
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
+ * @property-read int|null $categories_count
+ * @property-write mixed $raw
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory newQuery()
@@ -20,7 +22,6 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItemCategory whereUserId($value)
  * @mixin \Eloquent
- * @property-read int|null $categories_count
  */
 class FeedItemCategory extends Model
 {

@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon $created_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereId($value)
- * @mixin \Eloquent
  * @property int $duration_in_seconds
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereDurationInSeconds($value)
+ * @property-write mixed $raw
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereDurationInSeconds($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateLog whereId($value)
+ * @mixin \Eloquent
  */
 class UpdateLog extends Model
 {

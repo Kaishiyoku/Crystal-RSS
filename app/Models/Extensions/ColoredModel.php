@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Extensions\ColoredModel
  *
+ * @property-write mixed $raw
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Extensions\ColoredModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Extensions\ColoredModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Extensions\ColoredModel query()

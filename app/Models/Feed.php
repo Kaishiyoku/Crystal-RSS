@@ -12,34 +12,35 @@ use App\Models\Extensions\ColoredModel;
  * @property int $user_id
  * @property string $feed_url
  * @property string $title
- * @property string $last_checked_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon $last_checked_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $site_url
+ * @property int|null $category_id
+ * @property bool $is_enabled
+ * @property string|null $color
+ * @property-read \App\Models\Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
+ * @property-read int|null $feed_items_count
+ * @property-write mixed $raw
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
+ * @property-read int|null $update_errors_count
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereColor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereFeedUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereLastCheckedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereSiteUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUserId($value)
  * @mixin \Eloquent
- * @property string $site_url
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereSiteUrl($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
- * @property int|null $category_id
- * @property-read \App\Models\Category|null $category
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereCategoryId($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UpdateError[] $updateErrors
- * @property bool $is_enabled
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsEnabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed query()
- * @property string|null $color
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereColor($value)
- * @property-read int|null $feed_items_count
- * @property-read int|null $update_errors_count
  */
 class Feed extends ColoredModel
 {

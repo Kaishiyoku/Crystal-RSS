@@ -12,43 +12,40 @@ use Watson\Rememberable\Rememberable;
  * @property int $id
  * @property int $user_id
  * @property int $feed_id
- * @property int $is_read
  * @property string $url
  * @property string $title
  * @property string $author
- * @property string $content
+ * @property string|null $content
  * @property string|null $image_url
- * @property \Carbon\Carbon|null $date
- * @property-read \App\Models\Feed $feed
- * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem read()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unread()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereAuthor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFeedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereImageUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereIsRead($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
- * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $posted_at
  * @property string $checksum
- * @property string|null $read_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
+ * @property \Illuminate\Support\Carbon|null $read_at
+ * @property string|null $raw_json
+ * @property string $vote_status
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\Feed $feed
+ * @property-write mixed $raw
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem query()
- * @property string|null $raw_json
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereRawJson($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
- * @property string $vote_status
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
- * @property-read int|null $categories_count
- * @property \Illuminate\Support\Carbon|null $posted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem read()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unread()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereAuthor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFeedId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereImageUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem wherePostedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereRawJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
+ * @mixin \Eloquent
  */
 class FeedItem extends Model
 {
