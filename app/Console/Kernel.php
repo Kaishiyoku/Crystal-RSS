@@ -49,8 +49,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:clean')->daily()->at('04:00');
         $schedule->command('backup:run')->daily()->at('05:00');
 
-        $schedule->command('statistics:cache')->hourlyAt(0);
-
         $schedule->command('statistics:migrate --latest')->dailyAt('01:00');
     }
 
