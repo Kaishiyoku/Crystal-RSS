@@ -53,6 +53,8 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $feeds_count
  * @property-read int|null $notifications_count
  * @property-read int|null $update_errors_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ReportFeedItem[] $reportFeedItems
+ * @property-read int|null $report_feed_items_count
  */
 class User extends Authenticatable
 {
@@ -120,5 +122,10 @@ class User extends Authenticatable
     public function feedItemCategories()
     {
         return $this->hasMany(FeedItemCategory::class)->orderBy('title');
+    }
+
+    public function reportFeedItems()
+    {
+        return $this->hasMany(ReportFeedItem::class)->orderBy('date')->orderBy('date');
     }
 }
