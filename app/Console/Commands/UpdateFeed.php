@@ -98,7 +98,7 @@ class UpdateFeed extends Command
                                 $newFeedItem->title = $item->getTitle();
                                 $newFeedItem->author = $item->getAuthor();
                                 $newFeedItem->image_url = $item->getEnclosureUrl();
-                                $newFeedItem->date = $item->getDate();
+                                $newFeedItem->posted_at = $item->getDate();
                                 $newFeedItem->content = $item->getContent();
 
                                 $jsonDataList = collect(array_filter(json_decode(json_encode($item->getXml()), true)));

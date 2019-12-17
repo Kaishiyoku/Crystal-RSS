@@ -101,7 +101,7 @@ class User extends Authenticatable
         $data = $this->hasMany(FeedItem::class);
 
         if ($withOrder) {
-            $data = $data->orderBy('read_at', 'desc')->orderBy('date', 'desc');
+            $data = $data->orderBy('read_at', 'desc')->orderBy('posted_at', 'desc');
         }
 
         return $data;

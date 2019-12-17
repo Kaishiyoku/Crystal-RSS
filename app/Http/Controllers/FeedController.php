@@ -132,7 +132,7 @@ class FeedController extends Controller
 
         $foundFeedItemIdsFromIndex = FeedItem::search($request->get('term'))
             ->where('user_id', auth()->user()->id)
-            ->orderBy('date', 'desc')
+            ->orderBy('posted_at', 'desc')
             ->get()
             ->pluck('id');
 
@@ -140,11 +140,11 @@ class FeedController extends Controller
             ->whereIn('feed_id', $feedIds);
 
         if ($dateFrom) {
-            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('date', '>=', $dateFrom->startOfDay());
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '>=', $dateFrom->startOfDay());
         }
 
         if ($dateTill) {
-            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('date', '<=', $dateTill->endOfDay());
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '<=', $dateTill->endOfDay());
         }
 
         $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->paginate();

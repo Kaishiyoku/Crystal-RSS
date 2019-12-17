@@ -26,12 +26,12 @@
                     </span>
                 </div>
                 <div class="col-6 d-none-md d-lg-none d-xl-none text-right small">
-                    {{ $feedItem->date->format(l(DATETIME)) }}
+                    {{ $feedItem->posted_at->format(l(DATETIME)) }}
                 </div>
             </div>
         </div>
         <div class="col-lg-3 text-right d-none d-lg-block d-xl-block">
-            {{ $feedItem->date->format(l(DATETIME)) }}
+            {{ $feedItem->posted_at->format(l(DATETIME)) }}
 
             <br/>
 

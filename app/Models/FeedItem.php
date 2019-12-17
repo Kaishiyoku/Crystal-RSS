@@ -61,7 +61,7 @@ class FeedItem extends Model
         'title',
         'author',
         'content',
-        'date',
+        'posted_at',
         'read_at',
     ];
 
@@ -96,7 +96,7 @@ class FeedItem extends Model
     ];
 
     protected $casts = [
-        'date' => 'datetime',
+        'posted_at' => 'datetime',
         'read_at' => 'datetime',
     ];
 

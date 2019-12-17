@@ -29,6 +29,7 @@ search_result:
 search:
   importing: Importiere Feed-Artikel...
   feed_ids: Feeds
+  clearing: Entferne Indizes...
 categories: Kategorien
 date_from: Von
 date_till: Bis

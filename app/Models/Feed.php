@@ -83,7 +83,7 @@ class Feed extends ColoredModel
 
     public function feedItems()
     {
-        return $this->hasMany(FeedItem::class)->orderBy('read_at', 'desc')->orderBy('date', 'desc');
+        return $this->hasMany(FeedItem::class)->orderBy('read_at', 'desc')->orderBy('posted_at', 'desc');
     }
 
     public function category()

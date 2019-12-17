@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-10">
-            {{ $feedItem->date->format(l(DATETIME)) }}
+            {{ $feedItem->posted_at->format(l(DATETIME)) }}
         </div>
     </div>
 

@@ -20,16 +20,16 @@ class StatisticController extends Controller
         $dailyArticlesChart = $this->getDailyArticlesChart($minDate, $maxDate);
 
         $feedItems = auth()->user()->feedItems(false)
-            ->where('date', '>=', $minDate)
-            ->where('date', '<=', $maxDate)
+            ->where('posted_at', '>=', $minDate)
+            ->where('posted_at', '<=', $maxDate)
             ->whereNotNull('read_at')
             ->get([
-                'date',
+                'posted_at',
                 'read_at'
             ]);
 
         $averageTimeInSecondsBetweenRetrievalAndRead = round($feedItems->map(function ($feedItem) {
-            return $feedItem->date->diffInSeconds($feedItem->read_at);
+            return $feedItem->posted_at->diffInSeconds($feedItem->read_at);
         })->average());
 
         $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
@@ -51,7 +51,7 @@ class StatisticController extends Controller
             $currentReadItemsCount = self::getCurrentReadItemsForChartCount($user, $date);
 
             return [
-                'date' => $date->format(l(DATE)),
+                'posted_at' => $date->format(l(DATE)),
                 'numberOfArticles' => $currentItemsCount,
                 'numberOfReadArticles' => $currentReadItemsCount,
             ];
@@ -65,7 +65,7 @@ class StatisticController extends Controller
             ]
         ]);
 
-        $dailyArticlesChart->labels($items->pluck('date'));
+        $dailyArticlesChart->labels($items->pluck('posted_at'));
         $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->pluck('numberOfArticles'));
         $dailyArticlesChart->dataset(__('statistic.index.read_articles'), 'line', $items->pluck('numberOfReadArticles'))->options([
             'fill' => false,
@@ -85,9 +85,9 @@ class StatisticController extends Controller
 
         return Cache::remember($cacheKey, config('model_cache.statistics.feed_items.duration'), function () use ($user, $date) {
             return $user->feedItems(false)
-                ->where('date', '>=', $date->copy()->startOfDay())
-                ->where('date', '<=', $date->copy()->endOfDay())
-                ->orderBy('date')
+                ->where('posted_at', '>=', $date->copy()->startOfDay())
+                ->where('posted_at', '<=', $date->copy()->endOfDay())
+                ->orderBy('posted_at')
 //                ->remember(config('model_cache.statistics.feed_items.duration'))
                 ->prefix(config('model_cache.statistics.feed_items.prefix'))
                 ->count();
