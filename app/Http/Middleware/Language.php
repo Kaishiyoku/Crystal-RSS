@@ -46,6 +46,7 @@ class Language
         }
         app()->setLocale(Session::get('locale'));
         Carbon::setLocale(Session::get('locale'));
+        setLocale(LC_TIME, Session::get('locale'));
 
         return $next($request);
     }

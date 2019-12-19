@@ -2,6 +2,7 @@
 
 const DATETIME = 'datetime';
 const DATE = 'date';
+const DATE_WITH_DAY_OF_WEEK = 'date_with_day_of_week';
 
 if (! function_exists('l')) {
     function l($type) {

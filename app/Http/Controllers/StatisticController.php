@@ -48,7 +48,7 @@ class StatisticController extends Controller
 
         $items = $reportFeedItems->get()->map(function (ReportFeedItem $reportFeedItem) {
             return [
-                'posted_at' => $reportFeedItem->date->format(l(DATE)),
+                'posted_at' => $reportFeedItem->date->formatLocalized(__('common.localized_date_formats.date_with_day_of_week')),
                 'numberOfArticles' => $reportFeedItem->total_count,
                 'numberOfReadArticles' => $reportFeedItem->read_count,
             ];
@@ -58,8 +58,8 @@ class StatisticController extends Controller
         $dailyArticlesChart->type('bar');
         $dailyArticlesChart->options([
             'tooltips' => [
-                'mode' => 'point'
-            ]
+                'mode' => 'point',
+            ],
         ]);
 
         $dailyArticlesChart->labels($items->pluck('posted_at'));
