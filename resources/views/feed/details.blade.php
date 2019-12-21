@@ -137,6 +137,22 @@
                     data-vote-down-url="{{ route('feed.vote_down', $feedItem, false) }}"
                     data-vote-status="{{ $feedItem->vote_status }}"
             >
+            </span>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-2">
+            @lang('validation.attributes.favorited_at')
+        </div>
+
+        <div class="col-md-10">
+            <span
+                data-provide="favoriter"
+                data-url="{{ route('feed.toggle_favorite', $feedItem, false) }}"
+                data-favorited-at="{{ $feedItem->favorited_at }}"
+            >
+            </span>
         </div>
     </div>
 

@@ -149,3 +149,4 @@ attributes:
   date_till: Till
   created_at: Created at
   vote_status: Rating
+  favorited_at: Favorite
