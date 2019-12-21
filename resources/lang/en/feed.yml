@@ -35,3 +35,5 @@ date_from: From
 date_till: Till
 vote:
   success: Updated vote.
+toggle_favorite:
+  success: Updated favorite.

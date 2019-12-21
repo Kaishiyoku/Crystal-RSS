@@ -46,6 +46,10 @@ use Watson\Rememberable\Rememberable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $favorited_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem favorited()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unfavorited()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
  */
 class FeedItem extends Model
 {
@@ -60,8 +64,6 @@ class FeedItem extends Model
         'title',
         'author',
         'content',
-        'posted_at',
-        'read_at',
     ];
 
     /**
@@ -97,6 +99,7 @@ class FeedItem extends Model
     protected $casts = [
         'posted_at' => 'datetime',
         'read_at' => 'datetime',
+        'favorited_at' => 'datetime',
     ];
 
     public function scopeRead($query)
@@ -107,6 +110,16 @@ class FeedItem extends Model
     public function scopeUnread($query)
     {
         return $query->whereNull('read_at');
+    }
+
+    public function scopeFavorited($query)
+    {
+        return $query->whereNotNull('favorited_at');
+    }
+
+    public function scopeUnfavorited($query)
+    {
+        return $query->whereNull('favorited_at');
     }
 
     public function getJson()

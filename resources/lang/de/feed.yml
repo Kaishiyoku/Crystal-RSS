@@ -35,3 +35,5 @@ date_from: Von
 date_till: Bis
 vote:
   success: Wertung aktualisiert.
+toggle_favorite:
+  success: Favorisierung aktualisiert.

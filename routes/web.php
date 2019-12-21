@@ -22,6 +22,8 @@ Route::group(['middleware' => ['menus']], function () {
             Route::put('/{feedItem}/vote_up', 'FeedController@voteUp')->name('vote_up');
             Route::put('/{feedItem}/vote_down', 'FeedController@voteDown')->name('vote_down');
 
+            Route::put('/{feedItem}/toggle_favorite', 'FeedController@toggleFavorite')->name('toggle_favorite');
+
             // Manage feed
             Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
         });

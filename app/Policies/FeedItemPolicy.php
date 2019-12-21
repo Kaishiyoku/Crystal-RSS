@@ -33,4 +33,16 @@ class FeedItemPolicy
     {
         return $feedItem->user_id == $user->id;
     }
+
+    /**
+     * Determine whether the user can set the favorite status for the feed item.
+     *
+     * @param User $user
+     * @param FeedItem $feedItem
+     * @return bool
+     */
+    public function favorite(User $user, FeedItem $feedItem)
+    {
+        return $feedItem->user_id == $user->id;
+    }
 }

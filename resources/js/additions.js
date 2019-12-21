@@ -3,6 +3,7 @@ import baseTranslator from "./baseTranslator";
 import ReactDOM from "react-dom";
 import React from "react";
 import * as Logger from 'js-simple-logger';
+import Favoriter from './components/Favoriter';
 
 Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
@@ -50,12 +51,7 @@ $(document).ready(function () {
         const $formSelector = $this.attr('data-form');
         const $formElement = _.isEmpty($formSelector) ? $this.closest('form') : $($formSelector);
 
-        console.log($formSelector);
-        console.log($formElement);
-
         $formElement.submit();
-
-        console.log($('#vote_up_24887'));
     });
 
     $('[data-type="scroll-top"]').each(function () {
@@ -93,29 +89,6 @@ $(document).ready(function () {
             event.preventDefault();
 
             $($this.attr('data-click')).submit();
-        });
-    });
-
-    $(document).on('click', '[data-vote]', function (event) {
-        event.preventDefault();
-
-        const $this = $(this);
-
-        $.ajax({
-            method: 'PUT',
-            url: $this.attr('data-vote'),
-        }).done(function (response) {
-            const attrClasses = {
-                NONE: 'btn-outline-dark',
-                UP: 'btn-success',
-                DOWN: 'btn-danger',
-            };
-
-            $this.attr('class', `btn btn-xs ${_.get(attrClasses, response.vote_status)}`);
-
-            $($this.attr('data-other')).attr('class', 'btn btn-xs btn-outline-dark');
-        }).fail(function () {
-            console.error('Could vote for the given item.');
         });
     });
 
@@ -193,5 +166,13 @@ $(document).ready(function () {
         const dataVoteStatus = $(this).attr('data-vote-status');
 
         ReactDOM.render(<Voter voteUpUrl={dataVoteUpUrl} voteDownUrl={dataVoteDownUrl} token={dataToken} voteStatus={dataVoteStatus}/>, $(this)[0]);
+    });
+
+    $('[data-provide="favoriter"]').each(function () {
+        const dataUrl = $(this).attr('data-url');
+        const dataToken = $('meta[name="csrf-token"]').attr('content');
+        const dataFavoritedAt =$(this).attr('data-favorited-at');
+
+        ReactDOM.render(<Favoriter url={dataUrl} token={dataToken} favoritedAt={dataFavoritedAt}/>, $(this)[0]);
     });
 });

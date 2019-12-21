@@ -182,6 +182,27 @@ class FeedController extends Controller
         return redirect()->back();
     }
 
+    public function toggleFavorite(Request $request, FeedItem $feedItem)
+    {
+        $this->authorize('favorite', $feedItem);
+
+        if (empty($feedItem->favorited_at)) {
+            $feedItem->favorited_at = now();
+        } else {
+            $feedItem->favorited_at = null;
+        }
+
+        $feedItem->save();
+
+        if ($request->ajax()) {
+            return response()->json(['favorited_at' => $feedItem->favorited_at]);
+        }
+
+        flash(__('feed.toggle_favorite.success'))->success();
+
+        return redirect()->back();
+    }
+
     private function baseIndex($categoryId = null)
     {
         $unreadFeedItemsBase = $this->getUnreadFeedItems($categoryId);
