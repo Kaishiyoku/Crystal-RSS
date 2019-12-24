@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\FeedItem;
+use App\Models\User;
+use Illuminate\Support\Collection;
 const DATETIME = 'datetime';
 const DATE = 'date';
 const DATE_WITH_DAY_OF_WEEK = 'date_with_day_of_week';
@@ -122,11 +125,11 @@ if (! function_exists('removeNulls')) {
 }
 
 if (! function_exists('syncFeedItemCategories')) {
-    function syncFeedItemCategories(array $categoryTitles, \App\Models\User $user, \App\Models\FeedItem $feedItem)
+    function syncFeedItemCategories(Collection $categoryTitles, User $user, FeedItem $feedItem)
     {
         $categoryIds = [];
 
-        foreach ($categoryTitles as $categoryTitle) {
+        $categoryTitles->each(function ($categoryTitle) use ($user) {
             $currentCategory = $user->feedItemCategories()->whereTitle($categoryTitle)->first();
 
             // if category currently doesn't exist, create it
@@ -143,7 +146,7 @@ if (! function_exists('syncFeedItemCategories')) {
             } else {
                 $categoryIds[] = $currentCategory->id;
             }
-        }
+        });
 
         $feedItem->categories()->sync($categoryIds);
     }

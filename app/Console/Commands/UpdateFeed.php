@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
@@ -74,53 +75,56 @@ class UpdateFeed extends Command
 
             foreach ($user->enabledFeeds()->get() as $feed) {
                 try {
-                    $reader = new Reader($config);
-                    $resource = $reader->discover($feed->feed_url);
-                    $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
-                    $rssFeed = $parser->execute();
+                    $heraRssCrawler = new HeraRssCrawler();
+                    $rssFeed = $heraRssCrawler->parseFeed($feed->feed_url);
 
                     $numberOfNewUnreadFeedItems = 0;
 
-                    foreach ($rssFeed->getItems() as $item) {
-                        if ($item->getId() && $item->getUrl()) {
-                            try {
-                                $existingFeedItem = FeedItem::whereUserId($user->id)->whereFeedId($feed->id)->whereChecksum($item->getId())->first();
-                                $newFeedItem = $existingFeedItem == null ? new FeedItem() : $existingFeedItem;
+                    if ($rssFeed instanceof \Kaishiyoku\HeraRssCrawler\Models\Rss\Feed) {
+                        /** @var \Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem $item */
+                        foreach ($rssFeed->getFeedItems() as $item) {
+                            if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
+                                try {
+                                    $existingFeedItem = FeedItem::whereUserId($user->id)->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
+                                    $newFeedItem = $existingFeedItem ?? new FeedItem();
 
-                                if ($existingFeedItem == null) {
-                                    $newFeedItem->checksum = $item->getId();
+                                    if ($existingFeedItem === null) {
+                                        $newFeedItem->checksum = $item->getChecksum();
 
-                                    $numberOfNewUnreadFeedItems++;
+                                        $numberOfNewUnreadFeedItems++;
+                                    }
+
+                                    $newFeedItem->feed_id = $feed->id;
+                                    $newFeedItem->url = $item->getPermalink();
+                                    $newFeedItem->title = $item->getTitle();
+                                    $newFeedItem->author = $item->getAuthors()->first();
+                                    $newFeedItem->image_url = $item->getEnclosureUrl();
+                                    $newFeedItem->posted_at = $item->getCreatedAt();
+                                    $newFeedItem->content = $item->getContent();
+
+                                    $jsonDataList = collect(array_filter(json_decode(json_encode($item->getXml()), true)));
+                                    $jsonDataList = $jsonDataList->filter(function ($item, $key) {
+                                        return $key != 'category';
+                                    });
+                                    $newFeedItem->raw_json = json_encode($jsonDataList->toArray());
+
+                                    $user->feedItems()->save($newFeedItem);
+
+                                    syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
+                                } catch (QueryException $e) {
+                                    $updateError = new UpdateError();
+                                    $updateError->feed_id = $feed->id;
+                                    $updateError->url = $item->getPermalink();
+                                    $updateError->content = $e->getMessage();
+
+                                    Log::error($e);
+
+                                    $user->updateErrors()->save($updateError);
                                 }
-
-                                $newFeedItem->feed_id = $feed->id;
-                                $newFeedItem->url = $item->getUrl();
-                                $newFeedItem->title = $item->getTitle();
-                                $newFeedItem->author = $item->getAuthor();
-                                $newFeedItem->image_url = $item->getEnclosureUrl();
-                                $newFeedItem->posted_at = $item->getDate();
-                                $newFeedItem->content = $item->getContent();
-
-                                $jsonDataList = collect(array_filter(json_decode(json_encode($item->getXml()), true)));
-                                $jsonDataList = $jsonDataList->filter(function ($item, $key) {
-                                    return $key != 'category';
-                                });
-                                $newFeedItem->raw_json = json_encode($jsonDataList->toArray());
-
-                                $user->feedItems()->save($newFeedItem);
-
-                                syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
-                            } catch (QueryException $e) {
-                                $updateError = new UpdateError();
-                                $updateError->feed_id = $feed->id;
-                                $updateError->url = $item->getUrl();
-                                $updateError->content = $e->getMessage();
-
-                                Log::error($e);
-
-                                $user->updateErrors()->save($updateError);
                             }
                         }
+                    } else {
+                        $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
                     }
 
                     $totalNumberOfNewUnreadFeedItemsForUser = $totalNumberOfNewUnreadFeedItemsForUser + $numberOfNewUnreadFeedItems;
