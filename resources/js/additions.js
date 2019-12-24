@@ -105,7 +105,7 @@ $(document).ready(function () {
     });
 
     $('[data-provide="minicolors"]').each(function () {
-        let $this = $(this);
+        const $this = $(this);
 
         $this.minicolors({
             control: $this.attr('data-control') || 'hue',
@@ -117,7 +117,7 @@ $(document).ready(function () {
             opacity: $this.attr('data-opacity'),
             position: $this.attr('data-position') || 'bottom left',
             swatches: $this.attr('data-swatches') ? $this.attr('data-swatches').split('|') : [],
-            theme: 'bootstrap'
+            theme: 'bootstrap',
         });
     });
 

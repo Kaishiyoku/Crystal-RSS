@@ -11,7 +11,7 @@
 
     {{ Form::open(['route' => 'feed.manage.store', 'method' => 'post', 'role' => 'form']) }}
         <div class="form-group row">
-            {{ Form::label('site_or_feed_url', __('validation.attributes.site_or_feed_url'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('site_or_feed_url', __('validation.attributes.site_or_feed_url'), ['class' => 'col-lg-3 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::text('site_or_feed_url', old('site_or_feed_url', $feed->site_or_feed_url), ['class' => 'form-control' . ($errors->has('site_or_feed_url') ? ' is-invalid' : ''), 'required' => true]) }}
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group row">
-            {{ Form::label('category_id', __('validation.attributes.category_id'), ['class' => 'col-lg-2 col-form-label']) }}
+            {{ Form::label('category_id', __('validation.attributes.category_id'), ['class' => 'col-lg-3 col-form-label']) }}
 
             <div class="col-lg-5">
                 {{ Form::select('category_id', $categories, old('category_id', $feed->category_id), ['class' => 'form-control' . ($errors->has('category_id') ? ' is-invalid' : '')]) }}
