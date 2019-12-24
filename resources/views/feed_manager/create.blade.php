@@ -41,7 +41,7 @@
         @include('shared._form_color', ['item' => $feed])
 
         <div class="form-group row">
-            <div class="col-lg-10 ml-md-auto">
+            <div class="col-lg-9 ml-md-auto">
                 {{ Form::button(__('common.add'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
         </div>
