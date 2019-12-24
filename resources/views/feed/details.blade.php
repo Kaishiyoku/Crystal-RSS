@@ -162,7 +162,7 @@
         </div>
 
         <div class="col-md-10">
-            <pre class="prettyprint">{{ json_encode($feedItem->getJson(), JSON_PRETTY_PRINT) }}</pre>
+            <pre class="prettyprint">{{ json_encode($feedItem->getJson(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
         </div>
     </div>
 @endsection

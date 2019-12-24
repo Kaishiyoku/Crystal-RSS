@@ -50,6 +50,8 @@ use Watson\Rememberable\Rememberable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem favorited()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unfavorited()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
+ * @property string|null $object_json
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereObjectJson($value)
  */
 class FeedItem extends Model
 {
@@ -125,6 +127,11 @@ class FeedItem extends Model
     public function getJson()
     {
         return json_decode($this->raw_json);
+    }
+
+    public function getObjectJson()
+    {
+        return json_decode($this->object_json);
     }
 
     public function user()

@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
-use PicoFeed\Reader\Reader;
+use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
+use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 
 class UpdateFeed extends Command
 {
@@ -80,12 +81,11 @@ class UpdateFeed extends Command
 
                     $numberOfNewUnreadFeedItems = 0;
 
-                    if ($rssFeed instanceof \Kaishiyoku\HeraRssCrawler\Models\Rss\Feed) {
-                        /** @var \Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem $item */
-                        foreach ($rssFeed->getFeedItems() as $item) {
+                    if ($rssFeed instanceof RssFeed) {
+                        $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed) {
                             if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
                                 try {
-                                    $existingFeedItem = FeedItem::whereUserId($user->id)->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
+                                    $existingFeedItem = $user->feedItems()->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
                                     $newFeedItem = $existingFeedItem ?? new FeedItem();
 
                                     if ($existingFeedItem === null) {
@@ -102,11 +102,7 @@ class UpdateFeed extends Command
                                     $newFeedItem->posted_at = $item->getCreatedAt();
                                     $newFeedItem->content = $item->getContent();
 
-                                    $jsonDataList = collect(array_filter(json_decode(json_encode($item->getXml()), true)));
-                                    $jsonDataList = $jsonDataList->filter(function ($item, $key) {
-                                        return $key != 'category';
-                                    });
-                                    $newFeedItem->raw_json = json_encode($jsonDataList->toArray());
+                                    $newFeedItem->raw_json = $item->jsonSerialize();
 
                                     $user->feedItems()->save($newFeedItem);
 
@@ -122,9 +118,9 @@ class UpdateFeed extends Command
                                     $user->updateErrors()->save($updateError);
                                 }
                             }
-                        }
+                        });
                     } else {
-                        $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
+                        Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
                     }
 
                     $totalNumberOfNewUnreadFeedItemsForUser = $totalNumberOfNewUnreadFeedItemsForUser + $numberOfNewUnreadFeedItems;
