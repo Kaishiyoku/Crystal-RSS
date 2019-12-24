@@ -26,6 +26,7 @@ Route::group(['middleware' => ['menus']], function () {
 
             // Manage feed
             Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
+            Route::post('/manage/discover', 'FeedManagerController@discover')->name('manage.discover');
         });
 
         // Categories

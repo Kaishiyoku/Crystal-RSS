@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import * as Logger from 'js-simple-logger';
 import Favoriter from './components/Favoriter';
+import FeedDiscoverer from './components/FeedDiscoverer';
 
 Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
@@ -174,5 +175,24 @@ $(document).ready(function () {
         const dataFavoritedAt =$(this).attr('data-favorited-at');
 
         ReactDOM.render(<Favoriter url={dataUrl} token={dataToken} favoritedAt={dataFavoritedAt}/>, $(this)[0]);
+    });
+
+    $('[data-provide="feed-discoverer"]').each(function () {
+        const dataUrl = $(this).attr('data-url');
+        const dataToken = $('meta[name="csrf-token"]').attr('content');
+        const dataSiteInputId = $(this).attr('data-site-input-id');
+        const dataFeedInputId = $(this).attr('data-feed-input-id');
+        const dataFeedDiscoverButtonContainerId = $(this).attr('data-feed-discover-button-container-id');
+        const dataTranslations = JSON.parse($(this).attr('data-translations'));
+
+        ReactDOM.render(
+            <FeedDiscoverer
+                url={dataUrl}
+                token={dataToken}
+                siteInputId={dataSiteInputId}
+                feedInputId={dataFeedInputId}
+                feedDiscoverButtonContainerId={dataFeedDiscoverButtonContainerId}
+                translations={dataTranslations}
+            />, $(this)[0]);
     });
 });

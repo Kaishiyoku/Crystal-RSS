@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
-import fetchPut from '../core/request/fetchPut';
 import classNames from 'classnames';
 import * as Logger from 'js-simple-logger';
 import LoadingButton from "./LoadingButton";
 import {isEmpty} from 'lodash';
+import {put} from '../core/request/request';
 
 const logger = Logger.getLogger();
 
@@ -31,11 +31,10 @@ class Favoriter extends Component {
         this.setState((prevState, props) => {
             return Object.assign({}, prevState, {buttonIsLoading: true});
         }, () => {
-            fetchPut(this.props.url, this.props.token)
-                .then((response) => response.json())
-                .then((data) => {
+            put(this.props.url)
+                .then((response) => {
                     this.setState((prevState, props) => {
-                        return Object.assign({}, prevState, {favoritedAt: data.favorited_at, buttonIsLoading: false});
+                        return Object.assign({}, prevState, {favoritedAt: response.data.favorited_at, buttonIsLoading: false});
                     });
                 });
         });

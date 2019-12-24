@@ -11,14 +11,48 @@
 
     {{ Form::open(['route' => 'feed.manage.store', 'method' => 'post', 'role' => 'form']) }}
         <div class="form-group row">
-            {{ Form::label('site_or_feed_url', __('validation.attributes.site_or_feed_url'), ['class' => 'col-lg-3 col-form-label']) }}
+            {{ Form::label('site_url', __('validation.attributes.site_url'), ['class' => 'col-lg-3 col-form-label']) }}
 
             <div class="col-lg-5">
-                {{ Form::text('site_or_feed_url', old('site_or_feed_url', $feed->site_or_feed_url), ['class' => 'form-control' . ($errors->has('site_or_feed_url') ? ' is-invalid' : ''), 'required' => true]) }}
+                <div class="input-group">
+                    {{ Form::text('site_url', old('site_url', $feed->site_url), ['class' => 'form-control' . ($errors->has('site_url') ? ' is-invalid' : ''), 'required' => true]) }}
 
-                @if ($errors->has('site_or_feed_url'))
+                    <div class="input-group-append" id="feedDiscoverButtonContainer"></div>
+                </div>
+
+                @if ($errors->has('site_url'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('site_or_feed_url') }}
+                        {{ $errors->first('site_url') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-5">
+                <div
+                    data-provide="feed-discoverer"
+                    data-url="{{ route('feed.manage.discover') }}"
+                    data-site-input-id="site_url"
+                    data-feed-input-id="feed_url"
+                    data-feed-discover-button-container-id="feedDiscoverButtonContainer"
+                    data-translations="{{ json_encode(__('feed_manager.feed_discoverer'), JSON_THROW_ON_ERROR) }}"
+                >
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            {{ Form::label('feed_url', __('validation.attributes.feed_url'), ['class' => 'col-lg-3 col-form-label']) }}
+
+            <div class="col-lg-5">
+                {{ Form::text('feed_url', old('feed_url', $feed->feed_url), ['class' => 'form-control' . ($errors->has('feed_url') ? ' is-invalid' : ''), 'required' => true]) }}
+
+                @if ($errors->has('feed_url'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('feed_url') }}
                     </div>
                 @endif
             </div>

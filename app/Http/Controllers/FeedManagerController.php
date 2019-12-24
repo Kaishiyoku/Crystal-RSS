@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use PicoFeed\PicoFeedException;
-use PicoFeed\Reader\Reader;
+use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
 class FeedManagerController extends Controller
 {
@@ -52,31 +51,31 @@ class FeedManagerController extends Controller
     {
         $data = $request->validate($this->getValidationRules());
 
-        // discover feed
-        try {
-            $reader = new Reader();
-            $resource = $reader->discover($data['site_or_feed_url']);
-            $parser = $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
-            $rssFeed = $parser->execute();
+        // check feed
+        $heraRssCrawler = new HeraRssCrawler();
+        $feedIsConsumable = $heraRssCrawler->checkIfConsumableFeed($data['feed_url']);
 
-            $feed = new Feed();
-            $feed->site_url = $rssFeed->getSiteUrl();
-            $feed->feed_url = $rssFeed->getFeedUrl();
-            $feed->title = $rssFeed->getTitle();
-            $feed->color = $data['color'];
-            $feed->category_id = $data['category_id'];
-
-            auth()->user()->feeds()->save($feed);
-
-            flash()->success(__('feed_manager.create.success', ['url' => route('feed.manage.create')]));
-
-            return redirect()->route('feed.manage.edit', [$feed->id]);
-        } catch (PicoFeedException $e) {
+        if (!$feedIsConsumable) {
             $validator = Validator::make([], []);
-            $validator->getMessageBag()->add('site_or_feed_url', __('feed_manager.feed_exception'));
+            $validator->getMessageBag()->add('feed_url', __('feed_manager.feed_exception'));
 
             throw new ValidationException($validator);
         }
+
+        $rssFeed = $heraRssCrawler->parseFeed($data['feed_url']);
+
+        $feed = new Feed();
+        $feed->site_url = $data['site_url'];
+        $feed->feed_url = $rssFeed->getUrl();
+        $feed->title = $rssFeed->getTitle();
+        $feed->color = $data['color'];
+        $feed->category_id = $data['category_id'];
+
+        auth()->user()->feeds()->save($feed);
+
+        flash()->success(__('feed_manager.create.success', ['url' => route('feed.manage.create')]));
+
+        return redirect()->route('feed.manage.edit', [$feed->id]);
     }
 
     /**
@@ -107,31 +106,28 @@ class FeedManagerController extends Controller
         $data = $request->validate($this->getValidationRules($feed->id));
 
         // check feed
-        try {
-            $reader = new Reader();
-            $resource = $reader->download($data['feed_url']);
-            $reader->getParser($resource->getUrl(), $resource->getContent(), $resource->getEncoding());
+        $heraRssCrawler = new HeraRssCrawler();
+        $feedIsConsumable = $heraRssCrawler->checkIfConsumableFeed($data['feed_url']);
 
-            $feed->save();
-            $feed->title = $data['title'];
-            $feed->feed_url = $data['feed_url'];
-            $feed->site_url = $data['site_url'];
-            $feed->color = $data['color'];
-            $feed->category_id = $data['category_id'];
-            $feed->is_enabled = $data['is_enabled'];
-
-            $feed->save();
-
-            flash()->success(__('feed_manager.edit.success'));
-
-            return redirect()->route($this->redirectRoute);
-        }
-        catch (PicoFeedException $e) {
+        if (!$feedIsConsumable) {
             $validator = Validator::make([], []);
             $validator->getMessageBag()->add('feed_url', __('feed_manager.feed_exception'));
 
             throw new ValidationException($validator);
         }
+
+        $feed->title = $data['title'];
+        $feed->feed_url = $data['feed_url'];
+        $feed->site_url = $data['site_url'];
+        $feed->color = $data['color'];
+        $feed->category_id = $data['category_id'];
+        $feed->is_enabled = $data['is_enabled'];
+
+        $feed->save();
+
+        flash()->success(__('feed_manager.edit.success'));
+
+        return redirect()->route($this->redirectRoute);
     }
 
     /**
@@ -155,16 +151,29 @@ class FeedManagerController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discover(Request $request)
+    {
+        $heraRssCrawler = new HeraRssCrawler();
+        $feedUrls = $heraRssCrawler->discoverFeedUrls($request->get('url'));
+
+        return response()->json($feedUrls);
+    }
+
+    /**
      * @return array
      */
     private function getValidationRules($id = null)
     {
         return [
-            'site_or_feed_url' => ['sometimes', 'max:191'],
             'title' => ['sometimes', 'max:191'],
-            'site_url' => ['sometimes', 'url', 'max:191'],
+            'site_url' => ['required', 'url', 'max:191'],
             'feed_url' => [
-                'sometimes',
+                'required',
                 'url',
                 'max:191',
                 Rule::unique('feeds')->ignore($id)->where(function ($query) {

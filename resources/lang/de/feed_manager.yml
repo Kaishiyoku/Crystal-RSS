@@ -10,3 +10,6 @@ edit:
 feed_exception: Konnte keinen gültigen Feed untzer dieser URL finden.
 destroy:
   success: Feed gelöscht.
+feed_discoverer:
+  discover_feeds: Feeds finden
+  no_feeds_found: Keine Feeds gefunden.

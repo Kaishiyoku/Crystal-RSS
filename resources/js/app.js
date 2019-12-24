@@ -12,4 +12,8 @@ require('tablesorter/dist/js/jquery.tablesorter.combined');
 require('@claviska/jquery-minicolors');
 require('tempusdominus-bootstrap-4');
 
+window.axios = require('axios');
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 require('./additions');

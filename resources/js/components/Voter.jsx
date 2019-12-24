@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
-import fetchPut from '../core/request/fetchPut';
 import classNames from 'classnames';
 import * as Logger from 'js-simple-logger';
 import LoadingButton from "./LoadingButton";
+import {put} from '../core/request/request';
 
 const logger = Logger.getLogger();
 
@@ -40,11 +40,10 @@ class Voter extends Component {
         this.setState((prevState, props) => {
             return Object.assign({}, {[field]: true});
         }, () => {
-            return fetchPut(url, this.props.token)
-                .then((response) => response.json())
-                .then((data) => {
+            return put(url)
+                .then((response) => {
                     this.setState((prevState, props) => {
-                        return Object.assign({}, {voteStatus: data.vote_status, [field]: false});
+                        return Object.assign({}, {voteStatus: response.data.vote_status, [field]: false});
                     });
                 });
         });

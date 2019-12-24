@@ -125,7 +125,6 @@ attributes:
   size: Größe
   feed_url: Feed URL
   site_url: Website URL
-  site_or_feed_url: Website oder Feed URL
   last_checked_at: Zuletzt geprüft um
   category_id: Kategorie
   term: Begriff

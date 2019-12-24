@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
-use PicoFeed\Config\Config;
 
 class UpdateFeed extends Command
 {
@@ -53,10 +52,6 @@ class UpdateFeed extends Command
 
         $this->info(__('feed.updating_at', ['date' => Carbon::now()]));
         $this->info(null);
-
-        $config = new Config();
-        $config->setClientTimeout(120);
-        $config->setGrabberTimeout(120);
 
         $users = collect();
 
