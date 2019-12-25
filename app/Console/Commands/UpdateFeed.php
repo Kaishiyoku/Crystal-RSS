@@ -134,7 +134,7 @@ class UpdateFeed extends Command
                     $feed->save();
                 } catch (Exception $e) {
                     $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
-                    Log::error($e);
+                    Log::error($e, [$feed->feed_url]);
                 }
             });
 

@@ -105,17 +105,6 @@ class FeedManagerController extends Controller
 
         $data = $request->validate($this->getValidationRules($feed->id));
 
-        // check feed
-        $heraRssCrawler = new HeraRssCrawler();
-        $feedIsConsumable = $heraRssCrawler->checkIfConsumableFeed($data['feed_url']);
-
-        if (!$feedIsConsumable) {
-            $validator = Validator::make([], []);
-            $validator->getMessageBag()->add('feed_url', __('feed_manager.feed_exception'));
-
-            throw new ValidationException($validator);
-        }
-
         $feed->title = $data['title'];
         $feed->feed_url = $data['feed_url'];
         $feed->site_url = $data['site_url'];
