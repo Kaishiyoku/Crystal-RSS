@@ -44,6 +44,8 @@ use App\Models\Extensions\ColoredModel;
  * @property int $is_valid
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsValid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalid()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalidAndActive()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalidAndEnabled()
  */
 class Feed extends ColoredModel
 {
@@ -80,9 +82,9 @@ class Feed extends ColoredModel
         'last_checked_at'
     ];
 
-    public function scopeInvalid($query)
+    public function scopeInvalidAndEnabled($query)
     {
-        return $query->where('is_valid', false);
+        return $query->where('is_valid', false)->where('is_enabled', true);
     }
 
     public function user()
