@@ -121,13 +121,13 @@
         </div>
 
         <div class="col-md-10">
-            @include('feed._categories', ['categories' => $feedItem->categories])
+            @include('feed._categories', ['categories' => $feedItem->categories]):
         </div>
     </div>
 
     <div class="row mb-2">
         <div class="col-md-2">
-            @lang('validation.attributes.vote_status')
+            @lang('validation.attributes.vote_status'):
         </div>
 
         <div class="col-md-10">
@@ -143,7 +143,7 @@
 
     <div class="row mb-2">
         <div class="col-md-2">
-            @lang('validation.attributes.favorited_at')
+            @lang('validation.attributes.favorited_at'):
         </div>
 
         <div class="col-md-10">
@@ -165,4 +165,32 @@
             <pre class="prettyprint">{{ json_encode($feedItem->getJson(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
         </div>
     </div>
+
+    @if ($feedItem->hasDuplicates())
+        <hr/>
+
+        <div class="row mb-2">
+            <div class="col-md-2">
+                @lang('feed.duplicates'):
+            </div>
+
+            <div class="col-md-10">
+                <div class="list-group">
+                    @foreach ($feedItem->getDuplicates()->get() as $duplicateFeedItem)
+                        <a href="{{ route('feed.details', $duplicateFeedItem) }}" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-lg-9 col-8">
+                                    #{{ $duplicateFeedItem->id }} {{ $duplicateFeedItem->title }}
+                                </div>
+
+                                <div class="col-lg-3 col-4 text-right">
+                                    <small>{{ $duplicateFeedItem->posted_at->format(l(DATETIME)) }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection

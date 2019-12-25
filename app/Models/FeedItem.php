@@ -129,9 +129,14 @@ class FeedItem extends Model
         return json_decode($this->raw_json);
     }
 
-    public function getObjectJson()
+    public function hasDuplicates()
     {
-        return json_decode($this->object_json);
+        return $this->getDuplicates()->count() > 0;
+    }
+
+    public function getDuplicates()
+    {
+        return FeedItem::whereUserId($this->user_id)->whereFeedId($this->feed_id)->whereUrl($this->url)->where('id', '!=', $this->id);
     }
 
     public function user()
