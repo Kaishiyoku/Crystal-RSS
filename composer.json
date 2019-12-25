@@ -14,7 +14,7 @@
         "davejamesmiller/laravel-breadcrumbs": "5.3.1",
         "doctrine/dbal": "2.10.0",
         "fideloper/proxy": "4.2.2",
-        "kaishiyoku/hera-rss-crawler": "0.4.1",
+        "kaishiyoku/hera-rss-crawler": "0.5.1",
         "kaishiyoku/laravel-cli-create-user": "2.2.3",
         "kaishiyoku/laravel-color-validation": "1.2.0",
         "kaishiyoku/laravel-menu": "3.0.1",

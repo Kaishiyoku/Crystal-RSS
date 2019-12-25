@@ -8,6 +8,7 @@ use App\Models\UpdateError;
 use App\Models\UpdateLog;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
@@ -71,64 +72,70 @@ class UpdateFeed extends Command
 
             $user->enabledFeeds()->get()->each(function (Feed $feed) use (&$user, &$totalNumberOfNewUnreadFeedItemsForUser, $newLastCheckedAt) {
                 $heraRssCrawler = new HeraRssCrawler();
-                $rssFeed = $heraRssCrawler->parseFeed($feed->feed_url);
 
-                $numberOfNewUnreadFeedItems = 0;
+                try {
+                    $rssFeed = $heraRssCrawler->parseFeed($feed->feed_url);
 
-                if ($rssFeed instanceof RssFeed) {
-                    $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed) {
-                        if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
-                            try {
-                                $existingFeedItem = $user->feedItems()->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
-                                $newFeedItem = $existingFeedItem ?? new FeedItem();
+                    $numberOfNewUnreadFeedItems = 0;
 
-                                if ($existingFeedItem === null) {
-                                    $newFeedItem->checksum = $item->getChecksum();
+                    if ($rssFeed instanceof RssFeed) {
+                        $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed) {
+                            if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
+                                try {
+                                    $existingFeedItem = $user->feedItems()->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
+                                    $newFeedItem = $existingFeedItem ?? new FeedItem();
 
-                                    $numberOfNewUnreadFeedItems++;
+                                    if ($existingFeedItem === null) {
+                                        $newFeedItem->checksum = $item->getChecksum();
+
+                                        $numberOfNewUnreadFeedItems++;
+                                    }
+
+                                    $newFeedItem->feed_id = $feed->id;
+                                    $newFeedItem->url = $item->getPermalink();
+                                    $newFeedItem->title = $item->getTitle();
+                                    $newFeedItem->author = $item->getAuthors()->first();
+                                    $newFeedItem->image_url = $item->getEnclosureUrl();
+                                    $newFeedItem->posted_at = $item->getCreatedAt();
+                                    $newFeedItem->content = $item->getContent();
+
+                                    $newFeedItem->raw_json = $item->jsonSerialize();
+
+                                    $user->feedItems()->save($newFeedItem);
+
+                                    syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
+                                } catch (QueryException $e) {
+                                    $updateError = new UpdateError();
+                                    $updateError->feed_id = $feed->id;
+                                    $updateError->url = $item->getPermalink();
+                                    $updateError->content = $e->getMessage();
+
+                                    Log::error($e);
+
+                                    $user->updateErrors()->save($updateError);
                                 }
-
-                                $newFeedItem->feed_id = $feed->id;
-                                $newFeedItem->url = $item->getPermalink();
-                                $newFeedItem->title = $item->getTitle();
-                                $newFeedItem->author = $item->getAuthors()->first();
-                                $newFeedItem->image_url = $item->getEnclosureUrl();
-                                $newFeedItem->posted_at = $item->getCreatedAt();
-                                $newFeedItem->content = $item->getContent();
-
-                                $newFeedItem->raw_json = $item->jsonSerialize();
-
-                                $user->feedItems()->save($newFeedItem);
-
-                                syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
-                            } catch (QueryException $e) {
-                                $updateError = new UpdateError();
-                                $updateError->feed_id = $feed->id;
-                                $updateError->url = $item->getPermalink();
-                                $updateError->content = $e->getMessage();
-
-                                Log::error($e);
-
-                                $user->updateErrors()->save($updateError);
                             }
-                        }
-                    });
-                } else {
-                    Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
+                        });
+                    } else {
+                        Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
+                    }
+
+                    $totalNumberOfNewUnreadFeedItemsForUser += $numberOfNewUnreadFeedItems;
+
+                    $feedPrintOut = '  ' . $feed->title . ': ' . $numberOfNewUnreadFeedItems;
+
+                    if ($numberOfNewUnreadFeedItems === 0) {
+                        $this->line($feedPrintOut);
+                    } else {
+                        $this->info($feedPrintOut);
+                    }
+
+                    $feed->last_checked_at = $newLastCheckedAt;
+                    $feed->save();
+                } catch (Exception $e) {
+                    $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
+                    Log::error($e);
                 }
-
-                $totalNumberOfNewUnreadFeedItemsForUser += $numberOfNewUnreadFeedItems;
-
-                $feedPrintOut = '  ' . $feed->title . ': ' . $numberOfNewUnreadFeedItems;
-
-                if ($numberOfNewUnreadFeedItems === 0) {
-                    $this->line($feedPrintOut);
-                } else {
-                    $this->info($feedPrintOut);
-                }
-
-                $feed->last_checked_at = $newLastCheckedAt;
-                $feed->save();
             });
 
             $timeElapsedInSeconds = microtime(true) - $start;
