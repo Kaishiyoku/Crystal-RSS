@@ -149,3 +149,4 @@ attributes:
   created_at: Erstellt am
   vote_status: Bewertung
   favorited_at: Favorisiert
+  is_valid: Gültig

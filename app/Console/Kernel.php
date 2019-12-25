@@ -46,10 +46,12 @@ class Kernel extends ConsoleKernel
                 $schedule->command(UpdateFeed::class)->everyThirtyMinutes()->sendOutputTo('storage/logs/feed_updates.log');
         }
 
+        $schedule->command('statistics:migrate --latest')->dailyAt('01:00');
+
+        $schedule->command('feed:check')->dailyAt('02:00');
+
         $schedule->command('backup:clean')->daily()->at('04:00');
         $schedule->command('backup:run')->daily()->at('05:00');
-
-        $schedule->command('statistics:migrate --latest')->dailyAt('01:00');
     }
 
     /**

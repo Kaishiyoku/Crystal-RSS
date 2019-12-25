@@ -41,6 +41,9 @@ use App\Models\Extensions\ColoredModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUserId($value)
  * @mixin \Eloquent
+ * @property int $is_valid
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsValid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalid()
  */
 class Feed extends ColoredModel
 {
@@ -76,6 +79,11 @@ class Feed extends ColoredModel
     protected $dates = [
         'last_checked_at'
     ];
+
+    public function scopeInvalid($query)
+    {
+        return $query->where('is_valid', false);
+    }
 
     public function user()
     {

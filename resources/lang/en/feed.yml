@@ -39,3 +39,5 @@ toggle_favorite:
   success: Updated favorite.
 duplicate: Duplicate
 duplicates: Duplicates
+you_have_invalid_feeds: 'Some feeds are invalid.'
+check_feeds: Check feeds

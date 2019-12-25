@@ -3,6 +3,10 @@
 @section('title', __('feed.index.title'))
 
 @section('content')
+    @if (auth()->user()->feeds()->invalid()->count() > 0)
+        @include('shared._alert', ['content' => __('feed.you_have_invalid_feeds'), 'link' => Html::linkRoute('feed.manage.index', __('feed.check_feeds'), null, ['class' => 'btn btn-dark btn-sm']), 'type' => 'danger'])
+    @endif
+
     <h1>
         @lang('feed.index.title')
         <small class="text-muted">{{ $totalCountUnreadFeedItems }}</small>
