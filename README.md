@@ -8,8 +8,6 @@ Simple web-based RSS feed reader.
  <img src="https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Logo.svg" alt="Logo" width="125"/>
 </p>
 
-![Lettering](https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Lettering.svg)
-
 Table of contents
 =================
   * [Installation](#installation)
