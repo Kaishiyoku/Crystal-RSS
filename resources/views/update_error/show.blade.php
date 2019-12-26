@@ -9,7 +9,13 @@
 @section('content')
     <h1>@lang('update_error.show.title', ['id' => $updateError->id])</h1>
 
-    <div>
-        {{ $updateError->content }}
+    <div class="mb-4">
+        <code class="text-dark">
+            {{ $updateError->content }}
+        </code>
     </div>
+
+    <p>
+        {{ Html::linkRoute('update_errors.index', __('common.back')) }}
+    </p>
 @endsection
