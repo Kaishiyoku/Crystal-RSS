@@ -39,5 +39,6 @@ toggle_favorite:
   success: Favorisierung aktualisiert.
 duplicate: Duplikat
 duplicates: Duplikate
+duplicate_of: Duplikat von
 you_have_invalid_feeds: 'Manche Feeds sind ungültig.'
 check_feeds: Feeds prüfen

@@ -166,30 +166,30 @@
         </div>
     </div>
 
-    @if ($feedItem->hasDuplicates())
+    @if ($feedItem->isDuplicate() || $feedItem->hasDuplicates())
         <hr/>
+    @endif
 
+    @if ($feedItem->isDuplicate())
+        <div class="row mb-2">
+            <div class="col-md-2">
+                @lang('feed.duplicate_of'):
+            </div>
+
+            <div class="col-md-10">
+                @include('feed._duplicates_ist', ['feedItems' => collect([$feedItem->getFirstItemOfDuplicates()])])
+            </div>
+        </div>
+    @endif
+
+    @if ($feedItem->hasDuplicates())
         <div class="row mb-2">
             <div class="col-md-2">
                 @lang('feed.duplicates'):
             </div>
 
             <div class="col-md-10">
-                <div class="list-group">
-                    @foreach ($feedItem->getDuplicates()->get() as $duplicateFeedItem)
-                        <a href="{{ route('feed.details', $duplicateFeedItem) }}" class="list-group-item list-group-item-action">
-                            <div class="row">
-                                <div class="col-lg-9 col-8">
-                                    #{{ $duplicateFeedItem->id }} {{ $duplicateFeedItem->title }}
-                                </div>
-
-                                <div class="col-lg-3 col-4 text-right">
-                                    <small>{{ $duplicateFeedItem->posted_at->format(l(DATETIME)) }}</small>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                @include('feed._duplicates_ist', ['feedItems' => $feedItem->getDuplicates()])
             </div>
         </div>
     @endif

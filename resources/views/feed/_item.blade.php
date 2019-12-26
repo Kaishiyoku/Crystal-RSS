@@ -1,4 +1,4 @@
-<li class="list-group-item border-0 hoverable {{ $feedItem->hasDuplicates() ? 'list-group-item-warning' : '' }}" id="feed-item-{{ $feedItem->id }}">
+<li class="list-group-item border-0 hoverable {{ $feedItem->isDuplicate() > 0 ? 'list-group-item-warning' : '' }}" id="feed-item-{{ $feedItem->id }}">
     <div class="row">
         @if ($showActions)
             <div class="col-lg-1 col-2">
@@ -12,7 +12,7 @@
             <div>
                 {{ Html::link($feedItem->url, $feedItem->title) }}
 
-                @if ($feedItem->hasDuplicates())
+                @if ($feedItem->isDuplicate())
                     <small class="text-muted">[{{ __('feed.duplicate') }}]</small>
                 @endif
             </div>

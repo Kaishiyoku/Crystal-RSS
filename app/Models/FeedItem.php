@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
-use Watson\Rememberable\Rememberable;
 
 /**
  * App\Models\FeedItem
@@ -55,7 +55,7 @@ use Watson\Rememberable\Rememberable;
  */
 class FeedItem extends Model
 {
-    use Searchable, Rememberable;
+    use Searchable;
 
     public $asYouType = false;
 
@@ -129,6 +129,11 @@ class FeedItem extends Model
         return json_decode($this->raw_json);
     }
 
+    public function isDuplicate()
+    {
+        return $this->getFirstFeedItemForDuplicates()->id !== $this->id;
+    }
+
     public function hasDuplicates()
     {
         return $this->getDuplicates()->count() > 0;
@@ -136,7 +141,14 @@ class FeedItem extends Model
 
     public function getDuplicates()
     {
-        return FeedItem::whereUserId($this->user_id)->whereFeedId($this->feed_id)->whereUrl($this->url)->where('id', '!=', $this->id);
+        $firstFeedItemId = $this->getFirstFeedItemForDuplicates()->id;
+
+        return $this->getDuplicateBaseQuery()->whereNotIn('id', [$this->id, $firstFeedItemId])->get();
+    }
+
+    public function getFirstItemOfDuplicates()
+    {
+        return $this->getFirstFeedItemForDuplicates();
     }
 
     public function user()
@@ -152,5 +164,15 @@ class FeedItem extends Model
     public function categories()
     {
         return $this->belongsToMany(FeedItemCategory::class);
+    }
+
+    private function getDuplicateBaseQuery()
+    {
+        return FeedItem::whereUserId($this->user_id)->whereFeedId($this->feed_id)->whereUrl($this->url);
+    }
+
+    private function getFirstFeedItemForDuplicates()
+    {
+        return $this->getDuplicateBaseQuery()->orderBy('posted_at', 'asc')->first();
     }
 }
