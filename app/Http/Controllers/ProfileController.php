@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 class ProfileController extends Controller
 {
     /**
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -58,7 +58,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function editEmail()
     {
@@ -67,7 +67,7 @@ class ProfileController extends Controller
 
     /**
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updateEmail(Request $request)
     {
@@ -95,7 +95,7 @@ class ProfileController extends Controller
     /**
      * @param  \Illuminate\Http\Request $request
      * @param string $token
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function confirmNewEmail(Request $request, $token)
     {

@@ -2,6 +2,7 @@
 
 use App\Models\FeedItem;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 const DATETIME = 'datetime';
 const DATE = 'date';
@@ -155,12 +156,12 @@ if (! function_exists('syncFeedItemCategories')) {
 if (! function_exists('createDateFromStr')) {
     /**
      * @param string $str
-     * @return \Illuminate\Support\Carbon
+     * @return Carbon|null
      */
-    function createDateFromStr($str)
+    function createDateFromStr($str): ?Carbon
     {
         try {
-            return \Illuminate\Support\Carbon::createFromFormat(__('common.date_formats.date'), $str)->startOfDay();
+            return Carbon::createFromFormat(__('common.date_formats.date'), $str)->startOfDay();
         } catch (InvalidArgumentException $e) {
             return null;
         }

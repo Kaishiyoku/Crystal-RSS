@@ -23,7 +23,7 @@ class DailyArticlesChart extends Chart
      *
      * @param string $container
      *
-     * @return self
+     * @return self|View
      */
     public function container(string $container = null)
     {

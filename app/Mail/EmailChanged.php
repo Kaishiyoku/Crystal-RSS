@@ -12,6 +12,17 @@ class EmailChanged extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * @var string
+     */
+    private $newEmail;
+
+    /**
+     * @var string
+     */
+    private $newEmailToken;
+
+
+    /**
      * Create a new message instance.
      *
      * @param string $newEmail

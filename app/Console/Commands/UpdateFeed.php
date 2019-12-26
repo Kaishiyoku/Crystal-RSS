@@ -7,7 +7,7 @@ use App\Models\FeedItem;
 use App\Models\UpdateError;
 use App\Models\UpdateLog;
 use App\Models\User;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
@@ -52,7 +52,7 @@ class UpdateFeed extends Command
         $start = microtime(true);
 
         $this->info(__('feed.updating_at', ['date' => Carbon::now()]));
-        $this->info(null);
+        $this->info('');
 
         $users = collect();
 
@@ -68,7 +68,7 @@ class UpdateFeed extends Command
             $totalNumberOfNewUnreadFeedItemsForUser = 0;
 
             $this->comment(__('feed.updating_feed_for_user', ['name' => $user->name]));
-            $this->info(null);
+            $this->info('');
 
             $user->feeds()->enabled()->withTrashed()->orderBy('title')->get()->each(function (Feed $feed) use (&$user, &$totalNumberOfNewUnreadFeedItemsForUser, $newLastCheckedAt) {
                 $heraRssCrawler = new HeraRssCrawler();
@@ -141,14 +141,14 @@ class UpdateFeed extends Command
             $timeElapsedInSeconds = microtime(true) - $start;
 
             $updateLog = new UpdateLog();
-            $updateLog->duration_in_seconds = $timeElapsedInSeconds;
+            $updateLog->duration_in_seconds = (int) $timeElapsedInSeconds;
             $updateLog->save();
 
             $this->info('Total: ' . $totalNumberOfNewUnreadFeedItemsForUser . ' new items.');
 
-            $this->info(null);
+            $this->info('');
             $this->line('-----');
-            $this->info(null);
+            $this->info('');
         });
     }
 }

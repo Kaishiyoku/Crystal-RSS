@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereUserId($value)
  * @mixin \Eloquent
- * @property int $is_valid
+ * @property bool $is_valid
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereIsValid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalid()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalidAndActive()
@@ -82,6 +82,7 @@ class Feed extends ColoredModel
 
     protected $casts = [
         'is_enabled' => 'boolean',
+        'is_valid' => 'boolean',
     ];
 
     /**

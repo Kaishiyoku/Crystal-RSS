@@ -56,7 +56,7 @@ class UpdateError extends Model
 
     public function setUpdatedAt($value)
     {
-        //
+        return $this;
     }
 
     public function user()

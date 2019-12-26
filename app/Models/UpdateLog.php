@@ -41,6 +41,6 @@ class UpdateLog extends Model
 
     public function setUpdatedAt($value)
     {
-        //
+        return $this;
     }
 }

@@ -9,7 +9,7 @@ class LanguageController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function change(Request $request)
     {

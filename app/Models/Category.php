@@ -13,6 +13,7 @@ use App\Models\Extensions\ColoredModel;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $color
+ * @property int|null $total_feed_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
  * @property-read int|null $feeds_count
  * @property-write mixed $raw
