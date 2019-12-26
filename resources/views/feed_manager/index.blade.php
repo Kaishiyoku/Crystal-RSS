@@ -10,6 +10,8 @@
 
     <p>
         {{ Html::linkRoute('feed.manage.create', __('feed_manager.create.title'), [], ['class' => 'btn btn-primary']) }}
+
+        {{ Html::linkRoute('feed.manage.archived', __('feed_manager.archived.title'), [], ['class' => 'btn btn-outline-primary']) }}
     </p>
 
     @if ($feeds->count() == 0)
@@ -41,7 +43,7 @@
                         <td>{{ formatBoolean($feed->is_valid) }}</td>
                         <td>{{ $feed->last_checked_at->format(l(DATETIME)) }}</td>
                         <td>
-                            @include('shared._delete_link', ['route' => ['feed.manage.destroy', $feed->id]])
+                            @include('shared._delete_link', ['route' => ['feed.manage.destroy', $feed->id], 'title' => __('common.archive')])
                         </td>
                         <td>{{ Html::linkRoute('feed.manage.edit', __('common.edit'), [$feed->id]) }}</td>
                     </tr>

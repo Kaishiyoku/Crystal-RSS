@@ -41,7 +41,7 @@ class CheckFeeds extends Command
     public function handle()
     {
         $heraRssCrawler = new HeraRssCrawler();
-        $feeds = Feed::all();
+        $feeds = Feed::withTrashed()->get();
 
         $feeds->each(function (Feed $feed) use ($heraRssCrawler) {
             $isValid = $heraRssCrawler->checkIfConsumableFeed($feed->feed_url);

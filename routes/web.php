@@ -25,8 +25,11 @@ Route::group(['middleware' => ['menus']], function () {
             Route::put('/{feedItem}/toggle_favorite', 'FeedController@toggleFavorite')->name('toggle_favorite');
 
             // Manage feed
-            Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
+            Route::get('/manage/archived', 'FeedManagerController@archived')->name('manage.archived');
             Route::post('/manage/discover', 'FeedManagerController@discover')->name('manage.discover');
+            Route::put('/manage/archived/{manage}/restore', 'FeedManagerController@restore')->name('manage.restore');
+            Route::delete('/manage/archived/{manage}', 'FeedManagerController@destroyPermanently')->name('manage.destroy_permanently');
+            Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
         });
 
         // Categories

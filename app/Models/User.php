@@ -91,11 +91,6 @@ class User extends Authenticatable
         return $this->hasMany(Feed::class);
     }
 
-    public function enabledFeeds()
-    {
-        return $this->hasMany(Feed::class)->whereIsEnabled(true);
-    }
-
     public function feedItems($withOrder = true)
     {
         $data = $this->hasMany(FeedItem::class);

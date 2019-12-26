@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\VoteStatus;
 use App\Models\Extensions\ColoredModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Feed
@@ -46,9 +47,19 @@ use App\Models\Extensions\ColoredModel;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalid()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalidAndActive()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed invalidAndEnabled()
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Feed onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Feed withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Feed withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed enabled()
  */
 class Feed extends ColoredModel
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -81,6 +92,11 @@ class Feed extends ColoredModel
     protected $dates = [
         'last_checked_at'
     ];
+
+    public function scopeEnabled($query)
+    {
+        return $query->whereIsEnabled(true);
+    }
 
     public function scopeInvalidAndEnabled($query)
     {

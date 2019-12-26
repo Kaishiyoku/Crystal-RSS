@@ -9,6 +9,8 @@ edit:
   success: Feed edited.
 feed_exception: Couldn’t find a valid feed under that url.
 destroy:
+  success: Feed archived.
+destroy_permanently:
   success: Feed deleted.
 feed_discoverer:
   discover_feeds: Find feeds

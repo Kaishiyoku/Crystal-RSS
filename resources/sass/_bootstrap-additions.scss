@@ -66,6 +66,11 @@ a.unstyled {
             padding: 0 7px 1px;
             color: saturate(theme-color("danger"), 30%);
         }
+
+        &.btn-update {
+            margin-top: -2px;
+            padding: 0 7px 1px;
+        }
     }
 
     &.btn-plain {

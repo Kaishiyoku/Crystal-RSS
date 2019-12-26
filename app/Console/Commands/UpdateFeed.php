@@ -70,7 +70,7 @@ class UpdateFeed extends Command
             $this->comment(__('feed.updating_feed_for_user', ['name' => $user->name]));
             $this->info(null);
 
-            $user->enabledFeeds()->get()->each(function (Feed $feed) use (&$user, &$totalNumberOfNewUnreadFeedItemsForUser, $newLastCheckedAt) {
+            $user->feeds()->enabled()->withTrashed()->orderBy('title')->get()->each(function (Feed $feed) use (&$user, &$totalNumberOfNewUnreadFeedItemsForUser, $newLastCheckedAt) {
                 $heraRssCrawler = new HeraRssCrawler();
 
                 try {

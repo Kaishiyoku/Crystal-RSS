@@ -29,6 +29,18 @@ class FeedManagerController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archived()
+    {
+        $feeds = auth()->user()->feeds()->onlyTrashed()->with('category')->orderBy('title');
+
+        return view('feed_manager.archived', compact('feeds'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -66,7 +78,7 @@ class FeedManagerController extends Controller
 
         $feed = new Feed();
         $feed->site_url = $data['site_url'];
-        $feed->feed_url = $rssFeed->getUrl();
+        $feed->feed_url = $rssFeed->getFeedUrl();
         $feed->title = $rssFeed->getTitle();
         $feed->color = $data['color'];
         $feed->category_id = $data['category_id'];
@@ -121,6 +133,7 @@ class FeedManagerController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * They are only archived, not fully removed.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -129,12 +142,49 @@ class FeedManagerController extends Controller
     {
         $feed = auth()->user()->feeds()->findOrFail($id);
 
-        $feed->feedItems()->delete();
-        $feed->updateErrors()->delete();
+        //$feed->feedItems()->delete();
+        //$feed->updateErrors()->delete();
 
         $feed->delete();
 
         flash()->success(__('feed_manager.destroy.success'));
+
+        return redirect()->route($this->redirectRoute);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyPermanently($id)
+    {
+        $feed = auth()->user()->feeds()->onlyTrashed()->findOrFail($id);
+
+        $feed->feedItems()->delete();
+        $feed->updateErrors()->delete();
+
+        $feed->forceDelete();
+
+        flash()->success(__('feed_manager.destroy_permanently.success'));
+
+        return redirect()->route($this->redirectRoute);
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $feed = auth()->user()->feeds()->onlyTrashed()->findOrFail($id);
+
+        $feed->restore();
+
+        flash()->success(__('feed_manager.restore.success'));
 
         return redirect()->route($this->redirectRoute);
     }
