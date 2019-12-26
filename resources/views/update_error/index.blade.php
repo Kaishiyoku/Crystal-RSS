@@ -8,6 +8,12 @@
         <small class="text-muted">{{ $totalNumberOfUpdateErrors }}</small>
     </h1>
 
+    <p>
+        {{ Form::open(['route' => 'update_errors.clear', 'method' => 'delete', 'role' => 'form']) }}
+            {{ Form::button(__('update_error.index.clear'), ['type' => 'submit', 'class' => 'btn btn-danger', 'data-confirm' => '']) }}
+        {{ Form::close() }}
+    </p>
+
     @if ($updateErrors->count() == 0)
         <p class="lead">
             <i>@lang('update_error.index.none')</i>

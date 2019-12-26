@@ -54,6 +54,7 @@ Route::group(['middleware' => ['menus']], function () {
             Route::get('/feed/{feedItem}/details', 'FeedController@details')->name('feed.details');
 
             // UpdateError
+            Route::delete('/update_errors', 'UpdateErrorController@clear')->name('update_errors.clear');
             Route::resource('update_errors', 'UpdateErrorController')->only(['index', 'show']);
         });
     });
