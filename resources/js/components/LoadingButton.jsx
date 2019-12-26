@@ -18,10 +18,8 @@ class LoadingButton extends Component {
         const {isLoading, children, ...otherProps} = this.props;
         const component = isLoading ? (
             <Button className={otherProps.className} disabled>
-                <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>
                 <span className="sr-only">Loading...</span>
-
-                {children}
             </Button>
         ) : <Button {...otherProps}>{children}</Button>;
 
