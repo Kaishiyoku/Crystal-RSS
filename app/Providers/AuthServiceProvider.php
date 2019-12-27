@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\FilterKeyword;
 use App\Models\UpdateError;
 use App\Policies\CategoryPolicy;
 use App\Policies\FeedItemPolicy;
+use App\Policies\FeedPolicy;
 use App\Policies\FilterKeywordPolicy;
 use App\Policies\UpdateErrorPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         FeedItem::class => FeedItemPolicy::class,
         FilterKeyword::class => FilterKeywordPolicy::class,
         Category::class => CategoryPolicy::class,
+        Feed::class => FeedPolicy::class,
     ];
 
     /**

@@ -93,12 +93,13 @@ class FeedManagerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Feed $feed
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Feed $feed)
     {
-        $feed = auth()->user()->feeds()->findOrFail($id);
+        $this->authorize('update', $feed);
+
         $categories = $this->getCategories();
 
         return view('feed_manager.edit', compact('feed', 'categories'));
@@ -107,13 +108,14 @@ class FeedManagerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Feed $feed
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Feed $feed)
     {
-        $feed = auth()->user()->feeds()->findOrFail($id);
+        $this->authorize('update', $feed);
 
         $data = $request->validate($this->getValidationRules($feed->id));
 
@@ -135,15 +137,13 @@ class FeedManagerController extends Controller
      * Remove the specified resource from storage.
      * They are only archived, not fully removed.
      *
-     * @param  int  $id
+     * @param Feed $feed
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id)
+    public function destroy(Feed $feed)
     {
-        $feed = auth()->user()->feeds()->findOrFail($id);
-
-        //$feed->feedItems()->delete();
-        //$feed->updateErrors()->delete();
+        $this->authorize('delete', $feed);
 
         $feed->delete();
 
@@ -155,12 +155,13 @@ class FeedManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Feed $feed
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroyPermanently($id)
+    public function destroyPermanently(Feed $feed)
     {
-        $feed = auth()->user()->feeds()->onlyTrashed()->findOrFail($id);
+        $this->authorize('forceDelete', $feed);
 
         $feed->feedItems()->delete();
         $feed->updateErrors()->delete();
@@ -175,12 +176,15 @@ class FeedManagerController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $íd
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function restore($id)
+    public function restore(int $id)
     {
-        $feed = auth()->user()->feeds()->onlyTrashed()->findOrFail($id);
+        $feed = Feed::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $feed);
 
         $feed->restore();
 

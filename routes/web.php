@@ -27,9 +27,11 @@ Route::group(['middleware' => ['menus']], function () {
             // Manage feed
             Route::get('/manage/archived', 'FeedManagerController@archived')->name('manage.archived');
             Route::post('/manage/discover', 'FeedManagerController@discover')->name('manage.discover');
-            Route::put('/manage/archived/{manage}/restore', 'FeedManagerController@restore')->name('manage.restore');
-            Route::delete('/manage/archived/{manage}', 'FeedManagerController@destroyPermanently')->name('manage.destroy_permanently');
-            Route::resource('/manage', 'FeedManagerController', ['except' => 'show']);
+            Route::put('/manage/archived/{feed}/restore', 'FeedManagerController@restore')->name('manage.restore');
+            Route::delete('/manage/archived/{feed}', 'FeedManagerController@destroyPermanently')->name('manage.destroy_permanently');
+            Route::resource('/manage', 'FeedManagerController', ['except' => 'show'])->parameters([
+                'manage' => 'feed',
+            ]);
         });
 
         // Categories
