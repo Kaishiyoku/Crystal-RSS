@@ -6,8 +6,8 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "ext-pdo": "*",
         "ext-json": "*",
+        "ext-pdo": "*",
         "albertcht/invisible-recaptcha": "1.9.3",
         "bensampo/laravel-enum": "1.28.3",
         "consoletvs/charts": "6.5.3",
@@ -30,6 +30,7 @@
         "pda/pheanstalk": "4.0.0",
         "predis/predis": "1.1.1",
         "ramsey/uuid": "3.9.2",
+        "sentry/sentry-laravel": "1.5.0",
         "spatie/flysystem-dropbox": "1.2.2",
         "spatie/laravel-backup": "6.7.6",
         "spatie/laravel-paginateroute": "2.7.0",

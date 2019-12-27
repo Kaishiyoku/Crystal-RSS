@@ -45,6 +45,11 @@ return [
             'channels' => ['daily', 'slack'],
         ],
 
+        'stack_and_sentry' => [
+            'driver' => 'stack',
+            'channels' => ['daily', 'sentry'],
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
@@ -97,6 +102,12 @@ return [
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
+        ],
+
+        'sentry' => [
+            'driver' => 'sentry',
+            'level' => 'error',
+            'bubble' => true,
         ],
     ],
 
