@@ -73,6 +73,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->authorize('update', $category);
+
         return view('category.edit', compact('category'));
     }
 
@@ -85,6 +87,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->authorize('update', $category);
+
         $data = $request->validate($this->getValidationRulesWithTitleUniqueness($category->id));
 
         $category->fill($data);
@@ -103,6 +107,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
+
         if ($category->feeds()->count() > 0) {
             flash()->error(__('category.destroy.feeds_exist'));
         } else {
