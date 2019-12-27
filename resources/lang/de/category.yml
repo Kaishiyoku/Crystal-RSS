@@ -1,7 +1,7 @@
 index:
   title: Kategorien verwalten
   no_items: Noch keine Kategorien vorhanden.
-  number_of_feeds: Anzahl feeds
+  number_of_feeds: Anzahl Feeds
 create:
   title: Kategorie hinzufügen
   success: Kategorie erstellt.

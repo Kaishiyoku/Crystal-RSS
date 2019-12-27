@@ -64,6 +64,7 @@ class Menus
                     Menu::dropdownHeader(__('common.nav.manage')),
                     Menu::linkRoute('feed.manage.index', '<i class="fas fa-rss"></i></i> ' . __('common.nav.feed'), [], [], ['feed.manage.create', 'feed.manage.edit']),
                     Menu::linkRoute('categories.index', '<i class="fas fa-folder"></i> ' . __('common.nav.categories'), [], [], ['categories.create', 'categories.edit']),
+                    Menu::linkRoute('filter_keywords.index', '<i class="fas fa-filter"></i> ' . __('common.nav.filter_keywords'), [], [], ['filter_keywords.create', 'filter_keywords.edit']),
                 ], $administrationLinks, [
                     Menu::dropdownDivider(),
                     Menu::linkRoute('logout', '<i class="fas fa-sign-out-alt"></i> ' . __('common.nav.logout'), [], ['data-click' => '#logout-form']),

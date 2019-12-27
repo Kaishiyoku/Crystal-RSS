@@ -16,6 +16,7 @@ nav:
   horizon: Horizon
   statistics: Statistics
   update_errors: Update errors
+  filter_keywords: Filter keywords
 add: Add
 delete: Delete
 edit: Edit

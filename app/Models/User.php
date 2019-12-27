@@ -53,6 +53,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FilterKeyword[] $filterKeywords
+ * @property-read int|null $filter_keywords_count
  */
 class User extends Authenticatable
 {
@@ -120,5 +122,10 @@ class User extends Authenticatable
     public function reportFeedItems()
     {
         return $this->hasMany(ReportFeedItem::class)->orderBy('date')->orderBy('date');
+    }
+
+    public function filterKeywords()
+    {
+        return $this->hasMany(FilterKeyword::class)->orderBy('value');
     }
 }

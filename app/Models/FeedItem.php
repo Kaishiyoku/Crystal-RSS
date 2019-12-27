@@ -52,6 +52,7 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
  * @property string|null $object_json
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereObjectJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem keywordFiltered(\App\Models\User $user)
  */
 class FeedItem extends Model
 {
@@ -122,6 +123,17 @@ class FeedItem extends Model
     public function scopeUnfavorited($query)
     {
         return $query->whereNull('favorited_at');
+    }
+
+    public function scopeKeywordFiltered(Builder $query, User $user)
+    {
+        $filterKeywords = $user->filterKeywords;
+
+        $filterKeywords->each(function (FilterKeyword $filterKeyword) use ($query) {
+            $query->where('title', 'not like', '%' . $filterKeyword->value . '%');
+        });
+
+        return $query;
     }
 
     public function getJson()

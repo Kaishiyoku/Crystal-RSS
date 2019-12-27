@@ -150,3 +150,4 @@ attributes:
   vote_status: Rating
   favorited_at: Favorite
   is_valid: Valid
+  value: Value

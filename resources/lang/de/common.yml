@@ -16,12 +16,13 @@ nav:
   horizon: Horizon
   statistics: Statistiken
   update_errors: Update-Fehler
+  filter_keywords: Keyword-Filter
 add: Hinzufügen
 delete: Löschen
 edit: Ändern
 save: Speichern
 are_you_sure: Sind Sie sicher?
-create: Erstellenx
+create: Erstellen
 update: Speichern
 back_to_landing_page: Zurück zur Startseite
 load_more: Mehr laden

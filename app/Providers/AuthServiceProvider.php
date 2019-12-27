@@ -3,11 +3,12 @@
 namespace App\Providers;
 
 use App\Models\FeedItem;
+use App\Models\FilterKeyword;
 use App\Models\UpdateError;
 use App\Policies\FeedItemPolicy;
+use App\Policies\FilterKeywordPolicy;
 use App\Policies\UpdateErrorPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         UpdateError::class => UpdateErrorPolicy::class,
         FeedItem::class => FeedItemPolicy::class,
+        FilterKeyword::class => FilterKeywordPolicy::class,
     ];
 
     /**

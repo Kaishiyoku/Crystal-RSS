@@ -46,6 +46,9 @@ Route::group(['middleware' => ['menus']], function () {
         // Statistics
         Route::get('/statistics', 'StatisticController@index')->name('statistics.index');
 
+        // FilterKeywords
+        Route::resource('/filter_keywords', 'FilterKeywordController');
+
         /* ****************
          * Administrators *
          **************** */

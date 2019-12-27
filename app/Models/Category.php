@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Extensions\ColoredModel;
+use Watson\Rememberable\Rememberable;
 
 /**
  * App\Models\Category

@@ -28,12 +28,11 @@ Breadcrumbs::register('categories.create', function ($breadcrumbs) {
     $breadcrumbs->push(__('category.create.title'));
 });
 
-// Manage categories -> Create
+// Manage categories -> Edit
 Breadcrumbs::register('categories.edit', function ($breadcrumbs, \App\Models\Category $category) {
     $breadcrumbs->parent('categories.index');
     $breadcrumbs->push(__('category.edit.title', ['title' => $category->title]));
 });
-
 
 // Feed
 Breadcrumbs::register('feed.index', function ($breadcrumbs) {
@@ -55,4 +54,21 @@ Breadcrumbs::register('update_errors.index', function ($breadcrumbs) {
 Breadcrumbs::register('update_errors.show', function ($breadcrumbs) {
     $breadcrumbs->parent('update_errors.index');
     $breadcrumbs->push(__('common.details'));
+});
+
+// Filter keywords
+Breadcrumbs::register('filter_keywords.index', function ($breadcrumbs) {
+    $breadcrumbs->push(__('common.nav.filter_keywords'), route('filter_keywords.index'));
+});
+
+// Filter keywords -> Create
+Breadcrumbs::register('filter_keywords.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('filter_keywords.index');
+    $breadcrumbs->push(__('filter_keyword.create.title'));
+});
+
+// Filter keywords -> Edit
+Breadcrumbs::register('filter_keywords.edit', function ($breadcrumbs, \App\Models\FilterKeyword $filterKeyword) {
+    $breadcrumbs->parent('filter_keywords.index');
+    $breadcrumbs->push(__('filter_keyword.edit.title', ['value' => $filterKeyword->value]));
 });
