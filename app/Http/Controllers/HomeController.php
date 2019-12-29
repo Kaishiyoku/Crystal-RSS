@@ -19,4 +19,12 @@ class HomeController extends Controller
 
         return view('home.welcome');
     }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function imprint()
+    {
+        return view('home.imprint');
+    }
 }
