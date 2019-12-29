@@ -1161,5 +1161,5 @@ $print-page-size:                   a3 !default;
 $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 
 // Welcome page
-$welcome-link-color: $indigo;
-$welcome-link-color-light: #a9afd0;
+$welcome-link-color: darken(theme-color("primary"), 2.5%);
+$welcome-link-color-light: lighten(desaturate(theme-color("primary"), 30%), 25%);

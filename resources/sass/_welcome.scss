@@ -105,7 +105,7 @@ body {
             @extend .links;
 
             > a {
-                color: lighten($welcome-link-color-light, 10%);
+                color: lighten($welcome-link-color-light, 15%);
                 font-size: $font-size-base * 1.4;
 
                 &:hover {
