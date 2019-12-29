@@ -18,6 +18,7 @@ nav:
   update_errors: Update-Fehler
   filter_keywords: Keyword-Filter
   imprint: Impressum
+  contact: Kontakt
 add: Hinzufügen
 delete: Löschen
 edit: Ändern
@@ -45,3 +46,4 @@ details: Details
 archive: Archivieren
 restore: Wiederherstellen
 back: Zurück
+send: Senden

@@ -17,6 +17,8 @@ nav:
   statistics: Statistics
   update_errors: Update errors
   filter_keywords: Filter keywords
+  imprint: Imprint
+  contact: Contact
 add: Add
 delete: Delete
 edit: Edit
@@ -42,3 +44,4 @@ localized_date_formats:
 none: None
 details: Details
 archive: Archive
+send: Send
