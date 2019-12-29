@@ -17,6 +17,6 @@ class HomeController extends Controller
             return redirect()->route('feed.index');
         }
 
-        return view('home.index');
+        return view('home.welcome');
     }
 }
