@@ -147,7 +147,7 @@ class FeedController extends Controller
             $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '<=', $dateTill->endOfDay());
         }
 
-        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->paginate();
+        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->orderBy('posted_at', 'desc')->paginate();
 
         return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }
