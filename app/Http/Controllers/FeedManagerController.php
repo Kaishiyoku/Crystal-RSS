@@ -155,12 +155,14 @@ class FeedManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Feed $feed
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroyPermanently(Feed $feed)
+    public function destroyPermanently(int $id)
     {
+        $feed = Feed::withTrashed()->findOrFail($id);
+
         $this->authorize('forceDelete', $feed);
 
         $feed->feedItems()->delete();
