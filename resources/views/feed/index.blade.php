@@ -35,6 +35,8 @@
                 <i class="fas fa-filter"></i>
 
                 {{ $categoryDropdownTranslation }}
+                &nbsp;
+                <span class="badge badge-dark">{{ $unreadFeedItems->total() }}</span>
             </button>
 
             <div class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="categoryDropdownMenuButton">
