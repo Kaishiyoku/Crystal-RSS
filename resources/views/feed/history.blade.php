@@ -13,6 +13,6 @@
     @else
         @include('feed._list', ['feedItems' => $readFeedItems])
 
-        @include('shared._pagination', ['items' => $readFeedItems])
+        {{ $readFeedItems->links() }}
     @endif
 @endsection

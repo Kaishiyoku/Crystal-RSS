@@ -59,13 +59,13 @@
         </div>
     @else
         <div>
-            @include('shared._pagination', ['items' => $unreadFeedItems])
+            {{ $unreadFeedItems->links() }}
         </div>
 
         @include('feed._list', ['feedItems' => $unreadFeedItems, 'showActions' => true, 'categoryId' => $currentCategoryId])
 
         <div class="mt-4">
-            @include('shared._pagination', ['items' => $unreadFeedItems])
+            {{ $unreadFeedItems->links() }}
         </div>
     @endif
 @endsection

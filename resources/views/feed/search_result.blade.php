@@ -18,12 +18,12 @@
     @endif
 
     <div class="mt-4">
-        @include('shared._pagination', ['items' => $foundFeedItemsFromIndex])
+        {{ $foundFeedItemsFromIndex->links() }}
     </div>
 
     @include('feed._list', ['feedItems' => $foundFeedItemsFromIndex, 'showActions' => false, 'categoryId' => null, 'hasAnotherPage' => false])
 
     <div class="mt-4">
-        @include('shared._pagination', ['items' => $foundFeedItemsFromIndex])
+        {{ $foundFeedItemsFromIndex->links() }}
     </div>
 @endsection

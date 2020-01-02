@@ -43,7 +43,7 @@
         </div>
 
         <div>
-            @include('shared._pagination', ['items' => $updateErrors])
+            {{ $updateErrors->links() }}
         </div>
     @endif
 @endsection
