@@ -96,10 +96,10 @@ if (! function_exists('syncFeedItemCategories')) {
 
 if (! function_exists('createDateFromStr')) {
     /**
-     * @param string $str
+     * @param string|null $str
      * @return Carbon|null
      */
-    function createDateFromStr(string $str): ?Carbon
+    function createDateFromStr(?string $str): ?Carbon
     {
         try {
             return Carbon::createFromFormat(__('common.date_formats.date'), $str)->startOfDay();

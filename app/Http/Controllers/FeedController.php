@@ -23,7 +23,7 @@ class FeedController extends Controller
     {
         // check if there are any unread feed items
         $unreadFeedItemsCount = auth()->user()->feeds()->whereCategoryId($id)->withCount(['feedItems' => function ($query) {
-            return $query->unread();
+            return $query->unread()->keywordFiltered(auth()->user());
         }])->get()->reduce(function ($carry, Feed $feed) {
             return $carry + $feed->feed_items_count;
         }, 0);
@@ -37,7 +37,7 @@ class FeedController extends Controller
 
     public function history()
     {
-        $totalCountReadFeedItems = auth()->user()->feedItems()->read()->count();
+        $totalCountReadFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->count();
         $readFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->with('categories')->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
 
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
@@ -59,15 +59,15 @@ class FeedController extends Controller
         if (env('DEFERRED_MARK_AS_READ') && $unreadFeedItems->count() > $minNumber) {
             $unreadFeedItems = new ManualPaginator($unreadFeedItems->get(), (int) env('DEFERRED_PER_PAGE'));
 
-            foreach($unreadFeedItems->pages() as $items) {
+            $unreadFeedItems->pages()->each(function ($items) use ($date) {
                 ProcessFeedItems::dispatch($items, $date);
-            }
+            });
         } else {
-            foreach ($unreadFeedItems->get() as $feedItem) {
+            $unreadFeedItems->get()->each(function ($feedItem) use ($date) {
                 $feedItem->read_at = $date;
 
                 $feedItem->save();
-            }
+            });
         }
 
         flash()->success(__('feed.mark_all_as_read.success'));
@@ -136,7 +136,7 @@ class FeedController extends Controller
             ->get()
             ->pluck('id');
 
-        $foundFeedItemsFromIndex = FeedItem::whereIn('id', $foundFeedItemIdsFromIndex)
+        $foundFeedItemsFromIndex = FeedItem::keywordFiltered(auth()->user())->whereIn('id', $foundFeedItemIdsFromIndex)
             ->whereIn('feed_id', $feedIds);
 
         if ($dateFrom) {
@@ -212,7 +212,7 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories()->with(['feeds' => function ($query) {
             return $query->withCount(['feedItems' => function ($query) {
-                return $query->unread();
+                return $query->unread()->keywordFiltered(auth()->user());
             }]);
         }])->get();
 
