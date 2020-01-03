@@ -2,6 +2,10 @@
 
 @section('title', __('profile.edit_email.title'))
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('profile.edit_email') !!}
+@endsection
+
 @section('content')
     <h1>{{ __('profile.edit_email.title') }}</h1>
 

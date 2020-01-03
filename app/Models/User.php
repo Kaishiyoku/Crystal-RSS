@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Glorand\Model\Settings\Traits\HasSettingsTable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -55,10 +56,18 @@ use Illuminate\Notifications\Notifiable;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FilterKeyword[] $filterKeywords
  * @property-read int|null $filter_keywords_count
+ * @property-read \Glorand\Model\Settings\Models\ModelSettings $modelSettings
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasSettingsTable;
+
+    public function getDefaultSettings(): array
+    {
+        return [
+            'feed_items.per_page' => config('app.feed_items_per_page'),
+        ];
+    }
 
     /**
      * The attributes that are mass assignable.

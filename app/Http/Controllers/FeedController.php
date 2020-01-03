@@ -38,7 +38,7 @@ class FeedController extends Controller
     public function history()
     {
         $totalCountReadFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->count();
-        $readFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->with('categories')->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $readFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->with('categories')->paginate($this->getPerPage());
 
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
@@ -147,7 +147,7 @@ class FeedController extends Controller
             $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '<=', $dateTill->endOfDay());
         }
 
-        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->orderBy('posted_at', 'desc')->paginate();
+        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->orderBy('posted_at', 'desc')->paginate($this->getPerPage());
 
         return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }
@@ -208,7 +208,7 @@ class FeedController extends Controller
         $unreadFeedItemsBase = $this->getUnreadFeedItems($categoryId);
 
         $totalCountUnreadFeedItems = $categoryId == null ? $unreadFeedItemsBase->count() : $this->getUnreadFeedItems()->count();
-        $unreadFeedItems = $unreadFeedItemsBase->paginate(env('NUMBER_OF_ITEMS_PER_PAGE'));
+        $unreadFeedItems = $unreadFeedItemsBase->paginate($this->getPerPage());
 
         $categories = auth()->user()->categories()->with(['feeds' => function ($query) {
             return $query->withCount(['feedItems' => function ($query) {
@@ -256,5 +256,10 @@ class FeedController extends Controller
                 })->toArray(),
             ];
         })->toArray();
+    }
+
+    private function getPerPage()
+    {
+        return auth()->user()->settings()->get('feed_items.per_page');
     }
 }

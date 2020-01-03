@@ -151,3 +151,4 @@ attributes:
   favorited_at: Favorisiert
   is_valid: Gültig
   value: Wert
+  feed_items_per_page: Feed-Einträge pro Seite

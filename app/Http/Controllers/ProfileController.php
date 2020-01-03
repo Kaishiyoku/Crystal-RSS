@@ -122,6 +122,28 @@ class ProfileController extends Controller
         return redirect()->route('login');
     }
 
+    public function editSettings()
+    {
+        $settings = auth()->user()->settings()->all();
+
+        return view('profile.edit_settings', compact('settings'));
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $validatedData = $request->validate([
+            'feed_items_per_page' => ['digits_between:1,1000'],
+        ]);
+
+        auth()->user()->settings()->setMultiple([
+            'feed_items.per_page' => (int) $validatedData['feed_items_per_page'],
+        ]);
+
+        flash()->success(__('profile.update_settings.success'));
+
+        return redirect()->route('profile.index');
+    }
+
     /**
      * @param Request $request
      */

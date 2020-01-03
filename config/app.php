@@ -108,6 +108,8 @@ return [
 
     'faker_locale' => 'en_US',
 
+    'feed_items_per_page' => env('DEFAULT_FEED_ITEMS_PER_PAGE', 20),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

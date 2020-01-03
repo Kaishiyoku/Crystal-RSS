@@ -28,6 +28,10 @@
             <p class="lead">
                 {!! Html::decode(Html::linkRoute('profile.edit_password', '<i class="fas fa-key"></i> ' . __('profile.edit_password.title'))) !!}
             </p>
+
+            <p class="lead">
+                {!! Html::decode(Html::linkRoute('profile.edit_settings', '<i class="fas fa-sliders-h"></i> ' . __('profile.edit_settings.title'))) !!}
+            </p>
         </div>
     </div>
 @endsection

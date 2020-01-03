@@ -2,6 +2,10 @@
 
 @section('title', __('profile.edit_password.title'))
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('profile.edit_password') !!}
+@endsection
+
 @section('content')
     <h1>@lang('profile.edit_password.title')</h1>
 

@@ -19,3 +19,8 @@ emails:
     title: Confirm new email address
     you_have_changed_your_email_and_must_confirm_it: You have set a new email address for your account. Please confirm it by clicking on the following link.
     new_email_address: 'New email address: :email'
+edit_settings:
+  title: Settings
+  submit: Save
+update_settings:
+  success: Settings saved.

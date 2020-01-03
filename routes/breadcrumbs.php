@@ -72,3 +72,26 @@ Breadcrumbs::register('filter_keywords.edit', function ($breadcrumbs, \App\Model
     $breadcrumbs->parent('filter_keywords.index');
     $breadcrumbs->push(__('filter_keyword.edit.title', ['value' => $filterKeyword->value]));
 });
+
+// Profile
+Breadcrumbs::register('profile.index', function ($breadcrumbs) {
+    $breadcrumbs->push(__('profile.index.title'), route('profile.index'));
+});
+
+// Profile -> Change email address
+Breadcrumbs::register('profile.edit_email', function ($breadcrumbs) {
+    $breadcrumbs->parent('profile.index');
+    $breadcrumbs->push(__('profile.edit_email.title'));
+});
+
+// Profile -> Change password
+Breadcrumbs::register('profile.edit_password', function ($breadcrumbs) {
+    $breadcrumbs->parent('profile.index');
+    $breadcrumbs->push(__('profile.edit_password.title'));
+});
+
+// Profile -> Settings
+Breadcrumbs::register('profile.edit_settings', function ($breadcrumbs) {
+    $breadcrumbs->parent('profile.index');
+    $breadcrumbs->push(__('profile.edit_settings.title'));
+});

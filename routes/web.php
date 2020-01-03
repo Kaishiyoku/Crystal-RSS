@@ -47,6 +47,8 @@ Route::group(['middleware' => ['menus']], function () {
         Route::get('/profile/email/confirm/{token}', 'ProfileController@confirmNewEmail')->name('profile.confirm_new_email');
         Route::get('/profile/password/change', 'ProfileController@editPassword')->name('profile.edit_password');
         Route::put('/profile/password/change', 'ProfileController@updatePassword')->name('profile.update_password');
+        Route::get('/profile/settings/edit', 'ProfileController@editSettings')->name('profile.edit_settings');
+        Route::put('/profile/settings/edit', 'ProfileController@updateSettings')->name('profile.update_settings');
 
         // Statistics
         Route::get('/statistics', 'StatisticController@index')->name('statistics.index');
