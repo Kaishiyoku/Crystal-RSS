@@ -110,6 +110,8 @@ return [
 
     'feed_items_per_page' => env('DEFAULT_FEED_ITEMS_PER_PAGE', 20),
 
+    'feed_items_mark_duplicates_as_read_automatically' => false,
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

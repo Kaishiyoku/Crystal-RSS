@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UpdateLog;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

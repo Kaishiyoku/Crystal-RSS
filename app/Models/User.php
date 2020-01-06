@@ -5,6 +5,7 @@ namespace App\Models;
 use Glorand\Model\Settings\Traits\HasSettingsTable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 
 /**
  * App\Models\User
@@ -65,7 +66,10 @@ class User extends Authenticatable
     public function getDefaultSettings(): array
     {
         return [
-            'feed_items.per_page' => config('app.feed_items_per_page'),
+            'feed_items' => [
+                'per_page' => config('app.feed_items_per_page'),
+                'mark_duplicates_as_read_automatically' => config('app.feed_items_mark_duplicates_as_read_automatically'),
+            ],
         ];
     }
 

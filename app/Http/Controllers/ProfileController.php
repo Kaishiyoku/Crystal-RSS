@@ -133,10 +133,12 @@ class ProfileController extends Controller
     {
         $validatedData = $request->validate([
             'feed_items_per_page' => ['digits_between:1,1000'],
+            'feed_items_mark_duplicates_as_read_automatically' => ['boolean'],
         ]);
 
         auth()->user()->settings()->setMultiple([
             'feed_items.per_page' => (int) $validatedData['feed_items_per_page'],
+            'feed_items.mark_duplicates_as_read_automatically' => (bool) $validatedData['feed_items_mark_duplicates_as_read_automatically'],
         ]);
 
         flash()->success(__('profile.update_settings.success'));

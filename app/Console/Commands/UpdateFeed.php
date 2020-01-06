@@ -33,16 +33,6 @@ class UpdateFeed extends Command
     protected $description = 'Update all RSS feeds.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
@@ -79,7 +69,7 @@ class UpdateFeed extends Command
                     $numberOfNewUnreadFeedItems = 0;
 
                     if ($rssFeed instanceof RssFeed) {
-                        $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed) {
+                        $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed, $newLastCheckedAt) {
                             if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
                                 try {
                                     $existingFeedItem = $user->feedItems()->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
@@ -102,6 +92,11 @@ class UpdateFeed extends Command
                                     $newFeedItem->raw_json = $item->jsonSerialize();
 
                                     $user->feedItems()->save($newFeedItem);
+
+                                    if ($user->settings()->get('feed_items.mark_duplicates_as_read_automatically') && $newFeedItem->isDuplicate()) {
+                                        $newFeedItem->read_at = $newLastCheckedAt;
+                                        $newFeedItem->save();
+                                    }
 
                                     syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
                                 } catch (QueryException $e) {
