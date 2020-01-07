@@ -62,6 +62,7 @@ class UpdateFeed extends Command
 
             $user->feeds()->enabled()->withTrashed()->orderBy('title')->get()->each(function (Feed $feed) use (&$user, &$totalNumberOfNewUnreadFeedItemsForUser, $newLastCheckedAt) {
                 $heraRssCrawler = new HeraRssCrawler();
+                $heraRssCrawler->setRetryCount(env('CRAWLER_RETRY_COUNT', 0));
 
                 try {
                     $rssFeed = $heraRssCrawler->parseFeed($feed->feed_url);
