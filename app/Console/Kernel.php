@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\UpdateFeed;
+use App\Enums\Weekday;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -47,6 +48,7 @@ class Kernel extends ConsoleKernel
         }
 
         $schedule->command('statistics:migrate --latest')->dailyAt('01:00');
+        $schedule->command('statistics:migrate')->weeklyOn(Weekday::SUNDAY, '04:00');
 
         $schedule->command('feed:check')->dailyAt('02:00');
 

@@ -44,19 +44,22 @@ class MigrateReportFeedItems extends Command
     public function handle()
     {
         $latestOnly = $this->option('latest');
+        $yesterday = now()->subDay()->endOfDay();
+        $latestDays = 7;
 
         $users = User::all();
 
-        $users->each(function (User $user) use ($latestOnly) {
+        $users->each(function (User $user) use ($latestOnly, $yesterday, $latestDays) {
             $this->line('----- ' . $user->name . ' -----');
 
             $feedItems = $user->feedItems();
 
             if ($latestOnly) {
-                $feedItems = $feedItems->whereDate('posted_at', '>=', now()->subDays(2));
+                $feedItems = $feedItems->whereDate('posted_at', '>=', now()->subDays($latestDays));
             }
 
             $feedItems = $feedItems
+                ->whereDate('posted_at', '<=', $yesterday)
                 ->get()
                 ->sortBy('posted_at')
                 ->filter(function (FeedItem $feedItem) {
