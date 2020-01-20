@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'api_token' => Uuid::uuid4(),
         ]);
     }
 
@@ -96,7 +97,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $user = $this->create($request->all());
-        $user = self::createApiToken($user);
         $user = self::createDefaultCategory($user);
 
         event(new UserRegistered($user));
@@ -113,14 +113,6 @@ class RegisterController extends Controller
         $defaultCategory->title = __('category.default_title');
 
         $user->feedItemCategories()->save($defaultCategory);
-
-        return $user;
-    }
-
-    public static function createApiToken(User $user)
-    {
-        $user->api_token = Uuid::uuid4();
-        $user->save();
 
         return $user;
     }
