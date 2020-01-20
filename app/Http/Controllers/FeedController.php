@@ -38,8 +38,8 @@ class FeedController extends Controller
 
     public function history()
     {
-        $totalCountReadFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->count();
-        $readFeedItems = auth()->user()->feedItems()->read()->keywordFiltered(auth()->user())->with('categories')->paginate($this->getPerPage());
+        $totalCountReadFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->keywordFiltered(auth()->user())->count();
+        $readFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->keywordFiltered(auth()->user())->with('categories')->paginate($this->getPerPage());
 
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
