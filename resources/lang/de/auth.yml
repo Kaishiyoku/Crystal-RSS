@@ -1,6 +1,7 @@
 failed: Die Anmeldedaten konnten nicht gefunden werden.
 throttle: 'Zu viele Anmeldeversuche. Bitte versuchen Sie es in :seconds Sekunden wieder.'
-registered: Registrierung erfolgreich. Ein Administrator muss Ihren Account aktivieren, bevor Sie sich anmelden können. Sie werden eine E-Mail bekommen, sobald Sie sich anmelden können.
+registered: Ein Administrator muss Ihren Account aktivieren, bevor Sie sich anmelden können. Sie werden eine E-Mail bekommen, sobald Sie sich anmelden können.
+registered_title: Registrierung erfolgreich
 emails:
   register:
     title: Neuer Benutzer registriert

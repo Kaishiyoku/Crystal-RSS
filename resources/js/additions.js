@@ -9,6 +9,8 @@ import FeedDiscoverer from './components/FeedDiscoverer';
 Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
 $(document).ready(function () {
+    $('#flash-overlay-modal').modal();
+
     window.trans = baseTranslator(window.TRANSLATIONS);
 
     Waves.attach('.btn-primary', ['waves-light']);

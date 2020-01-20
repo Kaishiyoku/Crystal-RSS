@@ -101,7 +101,7 @@ class RegisterController extends Controller
 
         event(new UserRegistered($user));
 
-        flash()->success(__('auth.registered'));
+        flash()->overlay(__('auth.registered'), __('auth.registered_title'));
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());

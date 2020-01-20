@@ -20,6 +20,9 @@
     @include('shared._javascript_config')
 </head>
 <body class="welcome">
+
+@include('flash::message')
+
 <div class="flex-center position-ref full-height">
     <div class="top-left brands d-none d-sm-inline">
         {{ Html::link('/', config('app.name', 'Laravel')) }}
@@ -47,5 +50,6 @@
 
     @yield('content')
 </div>
+
 </body>
 </html>
