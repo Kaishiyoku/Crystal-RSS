@@ -178,7 +178,7 @@ return [
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Kaishiyoku\LaravelRecharts\LaravelRechartsServiceProvider::class,
 
         /*
          * Application Service Providers...

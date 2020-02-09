@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\ContactFormSubmitted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Vinelab\Rss\Rss;
 
 class HomeController extends Controller
 {

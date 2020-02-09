@@ -12,8 +12,8 @@
     </h1>
 
     <div>
-        {!! $dailyArticlesChart->container() !!}
-        {!! $dailyArticlesChart->script() !!}
+        {!! $dailyArticlesChart->assets() !!}
+        {!! $dailyArticlesChart->render() !!}
     </div>
 
     <p class="pt-5">

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\DailyArticlesChart;
 use App\Models\ReportFeedItem;
 use Illuminate\Support\Carbon;
+use Kaishiyoku\LaravelRecharts\LaravelRecharts;
 use Khill\Duration\Duration;
 
 class StatisticController extends Controller
@@ -50,19 +50,19 @@ class StatisticController extends Controller
             ];
         });
 
-        $dailyArticlesChart = new DailyArticlesChart();
-        $dailyArticlesChart->type('bar');
-        $dailyArticlesChart->options([
-            'tooltips' => [
-                'mode' => 'point',
-            ],
-        ]);
+        $elements = [
+            LaravelRecharts::element(__('statistic.index.articles'), LaravelRecharts::TYPE_BAR, 'rgba(7, 192, 224, .5)'),
+            LaravelRecharts::element(__('statistic.index.read_articles'), LaravelRecharts::TYPE_LINE, 'rgba(203, 78, 222, .5)'),
+        ];
+        $data = $items->map(function ($item) {
+            return LaravelRecharts::dataEntry($item['posted_at'], [
+                __('statistic.index.articles') => $item['numberOfArticles'],
+                __('statistic.index.read_articles') => $item['numberOfReadArticles'],
+            ]);
+        });
 
-        $dailyArticlesChart->labels($items->pluck('posted_at'));
-        $dailyArticlesChart->dataset(__('statistic.index.articles'), 'bar', $items->pluck('numberOfArticles'));
-        $dailyArticlesChart->dataset(__('statistic.index.read_articles'), 'line', $items->pluck('numberOfReadArticles'))->options([
-            'fill' => false,
-        ]);
+        $laravelRecharts = new LaravelRecharts();
+        $dailyArticlesChart = $laravelRecharts->makeChart($elements, $data->toArray(), 375);
 
         return $dailyArticlesChart;
     }
