@@ -288,3 +288,10 @@ footer {
 .btn-xs {
     @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $btn-font-size-xs, $btn-line-height-xs, $btn-border-radius-xs);
 }
+
+.list-group-item {
+    &.list-group-item-action {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

@@ -119,7 +119,7 @@ class FeedDiscoverer extends Component {
                     });
 
                     return (
-                        <Button key={url} className={classes} onClick={this.handleSelectUrlClick(url)}>
+                        <Button key={url} className={classes} onClick={this.handleSelectUrlClick(url)} title={url}>
                             {url}
                         </Button>
                     );
