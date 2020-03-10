@@ -78,7 +78,7 @@ class FeedManagerController extends Controller
 
         $feed = new Feed();
         $feed->site_url = $data['site_url'];
-        $feed->feed_url = $rssFeed->getFeedUrl();
+        $feed->feed_url = $rssFeed->getFeedUrl() ?? $data['feed_url'];
         $feed->title = $rssFeed->getTitle();
         $feed->color = $data['color'];
         $feed->category_id = $data['category_id'];
