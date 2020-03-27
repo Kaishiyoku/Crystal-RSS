@@ -36,16 +36,13 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\Language::class,
+            \App\Http\Middleware\Menus::class,
             \App\Http\Middleware\SentryContext::class,
         ],
 
         'api' => [
             'throttle:60,1',
             'bindings',
-        ],
-
-        'menus' => [
-            \App\Http\Middleware\Menus::class,
         ],
     ];
 

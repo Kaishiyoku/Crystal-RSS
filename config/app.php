@@ -171,7 +171,6 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Kaishiyoku\Menu\MenuServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
@@ -247,7 +246,6 @@ return [
          */
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Menu' => Kaishiyoku\Menu\Facades\Menu::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
     ],

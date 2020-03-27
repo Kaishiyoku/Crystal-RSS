@@ -40,13 +40,13 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                {!! Menu::render() !!}
+                {!! \LaravelMenu::render() !!}
 
                 <ul class="navbar-nav">
                     @include('shared._navbar_language_dropdown')
                 </ul>
 
-                {!! Menu::render('user') !!}
+                {!! \LaravelMenu::render('user') !!}
 
                 @auth
                     @include('shared._logout_form')
