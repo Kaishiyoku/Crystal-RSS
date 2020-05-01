@@ -47,10 +47,6 @@
                 </ul>
 
                 {!! \LaravelMenu::render('user') !!}
-
-                @auth
-                    @include('shared._logout_form')
-                @endauth
             </div>
         </div>
     </nav>
@@ -68,10 +64,20 @@
     </div>
 </div>
 
+@include('shared._logout_form')
+
 @yield('scripts')
 
 <script type="text/javascript">
     window.TRANSLATIONS = {!! json_encode(__('javascript')) !!}
+
+    const logoutAnchor = document.querySelector('a[href$="{{ url()->route('logout') }}"]');
+
+    logoutAnchor.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        document.querySelector('#logout-form').submit();
+    });
 </script>
 
 </body>

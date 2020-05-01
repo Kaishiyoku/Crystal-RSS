@@ -11,6 +11,7 @@ window.Prism = require('prismjs');
 require('tablesorter/dist/js/jquery.tablesorter.combined');
 require('@claviska/jquery-minicolors');
 require('tempusdominus-bootstrap-4');
+require('bootstrap-multiselect');
 
 window.axios = require('axios');
 

@@ -32,8 +32,6 @@
                 {!! Menu::render('administration') !!}
 
                 {!! Menu::render('administration-user') !!}
-
-                @include('shared._logout_form')
             </div>
         </div>
     </nav>
@@ -49,9 +47,22 @@
     </div>
 </div>
 
+@include('shared._logout_form')
+
 {{ Html::script('js/app.js') }}
 {{ Html::script('js/dist.js') }}
 
 @yield('scripts')
+
+<script type="text/javascript">
+    const logoutAnchor = document.querySelector('a[href$="{{ url()->route('logout') }}"]');
+
+    logoutAnchor.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        document.querySelector('#logout-form').submit();
+    });
+</script>
+
 </body>
 </html>

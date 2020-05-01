@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('/imprint', 'HomeController@imprint')->name('home.imprint');
 Route::get('/contact', 'HomeController@showContactForm')->name('home.contact');
