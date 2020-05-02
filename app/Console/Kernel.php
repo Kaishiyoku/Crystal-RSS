@@ -16,7 +16,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateFeed::class,
-        Commands\ImportDataForSearchEngine::class,
         Commands\MigrateReportFeedItems::class,
     ];
 

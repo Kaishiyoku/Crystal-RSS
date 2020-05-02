@@ -37,8 +37,7 @@
         "spatie/flysystem-dropbox": "1.2.2",
         "spatie/laravel-backup": "6.9.0",
         "spatie/laravel-paginateroute": "2.7.0",
-        "watson/rememberable": "4.0.0",
-        "yab/laravel-scout-mysql-driver": "3.0.0"
+        "watson/rememberable": "4.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "3.3.2",
