@@ -14,7 +14,7 @@ use Laravel\Scout\Searchable;
  * @property int $feed_id
  * @property string $url
  * @property string $title
- * @property string $author
+ * @property string|null $author
  * @property string|null $content
  * @property string|null $image_url
  * @property \Illuminate\Support\Carbon|null $posted_at
@@ -22,19 +22,23 @@ use Laravel\Scout\Searchable;
  * @property \Illuminate\Support\Carbon|null $read_at
  * @property string|null $raw_json
  * @property string $vote_status
+ * @property \Illuminate\Support\Carbon|null $favorited_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\Feed $feed
- * @property-write mixed $raw
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem favorited()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem keywordFiltered($user)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem read()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unfavorited()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unread()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereAuthor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFeedId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereImageUrl($value)
@@ -46,13 +50,6 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
  * @mixin \Eloquent
- * @property \Illuminate\Support\Carbon|null $favorited_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem favorited()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unfavorited()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
- * @property string|null $object_json
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereObjectJson($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem keywordFiltered(\App\Models\User $user)
  */
 class FeedItem extends Model
 {
@@ -63,6 +60,7 @@ class FeedItem extends Model
     public $timestamps = false;
 
     protected $searchableFields = [
+        'user_id',
         'url',
         'title',
         'author',
@@ -125,7 +123,7 @@ class FeedItem extends Model
         return $query->whereNull('favorited_at');
     }
 
-    public function scopeKeywordFiltered(Builder $query, User $user)
+    public function scopeKeywordFiltered(Builder $query, $user)
     {
         $filterKeywords = $user->filterKeywords;
 
