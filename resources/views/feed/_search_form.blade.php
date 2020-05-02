@@ -18,20 +18,8 @@
 
         <div class="col-lg-5">
             {{ Form::select('feed_ids[]', $feeds, request()->query('feed_ids') ?? $feedIds, ['multiple' => true, 'size' => 15, 'data-provide' => 'multiselect', 'class' => 'd-none']) }}
-
-            @if ($errors->has('feed_ids'))
-                <div class="small text-danger">
-                    {{ $errors->first('feed_ids') }}
-                </div>
-            @endif
         </div>
     </div>
-
-@if ($errors->has('feed_ids'))
-    <div class="invalid-feedback">
-        {{ $errors->first('feed_ids') }}
-    </div>
-@endif
 
     <div class="form-group row">
         {{ Form::label('date_from', __('feed.date_from'), ['class' => 'col-lg-2 col-form-label']) }}

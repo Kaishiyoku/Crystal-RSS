@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Models\FeedItem
@@ -55,7 +56,30 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FeedItem extends Model
 {
+    use Searchable;
+
+    public $asYouType = false;
+
     public $timestamps = false;
+
+    protected $searchableFields = [
+        'url',
+        'title',
+        'author',
+        'content',
+    ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $list = collect($this->toArray());
+
+        return $list->only($this->searchableFields)->toArray();
+    }
 
     /**
      * The attributes that are mass assignable.

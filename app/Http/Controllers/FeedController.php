@@ -12,9 +12,6 @@ use App\Models\UpdateLog;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class FeedController extends Controller
 {
@@ -110,15 +107,6 @@ class FeedController extends Controller
 
     public function searchResult(Request $request)
     {
-        /**
-         * @var Collection $feeds
-         */
-        $feeds = $this->getFeedsForSelect();
-
-        $allFeedIds = collect($feeds)->map(function ($item) {
-            return array_keys($item);
-        })->flatten();
-
         $rules = [
             'term' => ['required'],
             'feed_ids' => ['array'],
@@ -126,32 +114,43 @@ class FeedController extends Controller
             'date_till' => ['nullable', 'date_format:' . __('common.date_formats.date')],
         ];
 
-        $validatedData = $request->validate($rules);
+        $request->validate($rules);
 
-        $term = $validatedData['term'];
+        $dateFrom = createDateFromStr($request->get('date_from'));
+        $dateTill = createDateFromStr($request->get('date_till'));
 
-        // filter out invalid feed-IDs
-        $selectedFeedIds = $allFeedIds->filter(function ($feedId) use ($validatedData) {
-            return in_array($feedId, $validatedData['feed_ids']);
+        $feeds = $this->getFeedsForSelect();
+
+        $requestFeedIds = array_map(function ($feedId) {
+                return (int)$feedId;
+            }, $request->get('feed_ids')) ?? [];
+
+        $filteredFeedIds = auth()->user()->feeds()->pluck('id')->toArray();
+        $filteredFeedIds = array_filter($requestFeedIds, function ($requestFeedId) use ($filteredFeedIds) {
+            return in_array($requestFeedId, $filteredFeedIds);
         });
-        $dateFrom = createDateFromStr($validatedData['date_from']);
-        $dateTill = createDateFromStr($validatedData['date_till']);
+        $feedIds = $filteredFeedIds;
 
-        $feedItems = auth()->user()->feedItems()
-            ->whereIn('feed_id', $selectedFeedIds)
-            ->when($dateFrom, function ($query) use ($dateFrom) {
-                $query->whereDate('posted_at', '>=', $dateFrom);
-            })
-            ->when($dateTill, function ($query) use ($dateTill) {
-                $query->whereDate('posted_at', '<=', $dateTill);
-            })
-            ->where(function ($query) use ($term) {
-                $query->where('title', 'like', '%'.$term.'%');
-                $query->orWhere('content', 'like', '%'.$term.'%');
-            })
-            ->paginate();
+        $foundFeedItemIdsFromIndex = FeedItem::search($request->get('term'))
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('posted_at', 'desc')
+            ->get()
+            ->pluck('id');
 
-        return view('feed.search_result', ['feeds' => $feeds, 'feedItems' => $feedItems, 'feedIds' => $selectedFeedIds]);
+        $foundFeedItemsFromIndex = FeedItem::keywordFiltered(auth()->user())->whereIn('id', $foundFeedItemIdsFromIndex)
+            ->whereIn('feed_id', $feedIds);
+
+        if ($dateFrom) {
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '>=', $dateFrom->startOfDay());
+        }
+
+        if ($dateTill) {
+            $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->where('posted_at', '<=', $dateTill->endOfDay());
+        }
+
+        $foundFeedItemsFromIndex = $foundFeedItemsFromIndex->orderBy('posted_at', 'desc')->paginate($this->getPerPage());
+
+        return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'feedIds'));
     }
 
     public function voteUp(Request $request, FeedItem $feedItem)

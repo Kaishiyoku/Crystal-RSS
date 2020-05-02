@@ -166,6 +166,5 @@ return [
         'value' => 'Value',
         'feed_items_per_page' => 'Feed items per page',
         'feed_items_mark_duplicates_as_read_automatically' => 'Mark duplicates as read automatically',
-        'feed_ids' => 'Feeds',
     ],
 ];

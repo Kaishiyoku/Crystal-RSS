@@ -175,6 +175,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
         Kaishiyoku\LaravelRecharts\LaravelRechartsServiceProvider::class,
 

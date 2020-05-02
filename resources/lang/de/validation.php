@@ -166,6 +166,5 @@ return [
         'value' => 'Wert',
         'feed_items_per_page' => 'Feed-Einträge pro Seite',
         'feed_items_mark_duplicates_as_read_automatically' => 'Duplikate automatisch als gelesen markieren',
-        'feed_ids' => 'Feeds',
     ],
 ];
