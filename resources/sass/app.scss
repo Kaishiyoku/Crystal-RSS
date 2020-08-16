@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i');
 
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular";
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid";
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 
 @import "helpers";
 @import "bootstrap";
 
 $bs-datetimepicker-active-bg: theme-color("primary");
 
-@import "../../node_modules/tempusdominus-bootstrap-4/src/sass/_tempusdominus-bootstrap-4.scss";
+@import "~tempusdominus-bootstrap-4/src/sass/_tempusdominus-bootstrap-4.scss";
 
 @import "bootstrap-additions";
 @import "waves";
@@ -18,4 +18,4 @@ $bs-datetimepicker-active-bg: theme-color("primary");
 @import "bootstrap-multiselect";
 @import 'welcome';
 
-@import "../../node_modules/@claviska/jquery-minicolors/jquery.minicolors.css";
+@import "~@claviska/jquery-minicolors/jquery.minicolors.css";
