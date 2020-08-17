@@ -29,7 +29,7 @@
                 {{ Form::text('date_from', request()->query('date_from'), ['class' => 'form-control datetimepicker-input' . ($errors->has('date_from') ? ' is-invalid' : ''), 'data-target' => '#date_from_picker']) }}
 
                 <div class="input-group-append" data-target="#date_from_picker" data-toggle="datetimepicker">
-                    <button type="button" class="btn btn-outline-dark"><i class="fas fa-calendar"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-calendar"></i></button>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                 {{ Form::text('date_till', request()->query('date_till'), ['class' => 'form-control datetimepicker-input' . ($errors->has('date_till') ? ' is-invalid' : ''), 'data-target' => '#date_till_picker']) }}
 
                 <div class="input-group-append" data-target="#date_till_picker" data-toggle="datetimepicker">
-                    <button type="button" class="btn btn-outline-dark"><i class="fas fa-calendar"></i></button>
+                    <button type="button" class="btn btn-secondary"><i class="fas fa-calendar"></i></button>
                 </div>
             </div>
 

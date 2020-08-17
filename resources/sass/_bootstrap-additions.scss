@@ -309,3 +309,8 @@ footer {
     background: #914cd9;
     background: linear-gradient(90deg, #6927ff 0%, #914cd9 100%);
 }
+
+
+.btn-secondary {
+    background-color: rgba(theme-color("secondary"), .75);
+}
