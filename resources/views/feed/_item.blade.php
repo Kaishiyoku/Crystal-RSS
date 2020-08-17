@@ -1,4 +1,4 @@
-<li class="list-group-item border-0 hoverable {{ $feedItem->isDuplicate() > 0 ? 'list-group-item-warning' : '' }}" id="feed-item-{{ $feedItem->id }}">
+<li class="list-group-item border-0 hoverable {{ $feedItem->isDuplicate() > 0 ? 'list-group-item-warning' : '' }}" id="feed-item-{{ $feedItem->id }}" {!! $feedItem->feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
     <div class="row">
         @if ($showActions)
             <div class="col-lg-1 col-2">

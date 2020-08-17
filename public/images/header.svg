@@ -7,8 +7,8 @@
 </style>
 <title>header</title>
 <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-6.063867e-02" y1="919" x2="1920" y2="919" gradientTransform="matrix(1 0 0 1 0 -840)">
-	<stop  offset="0" style="stop-color:#16b3ce"/>
-    <stop  offset="1" style="stop-color:#139cb4"/>
+	<stop  offset="0" style="stop-color:#6927ff"/>
+    <stop  offset="1" style="stop-color:#914cd9"/>
 </linearGradient>
 <path class="st0" d="M1920,158C1324.1,60,639.9,121.9,0,75.9c-0.1,0,0-17,0-17.1V0.3C0,0.1,0.1,0,0.3,0c0,0,0,0,0,0H1920"/>
 </svg>

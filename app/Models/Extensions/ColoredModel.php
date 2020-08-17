@@ -2,6 +2,7 @@
 
 namespace App\Models\Extensions;
 
+use App\Enums\StyleType;
 use App\Models\Traits\RelationshipsTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,7 @@ class ColoredModel extends Model
         return $this->color ?? 'inherit';
     }
 
-    public function getStyle()
+    public function getStyle($styleType = null)
     {
         $coloredModelRelationships = array_filter($this->relationships(), function ($relationship) {
             return $relationship['type'] == 'BelongsTo' && new $relationship['model'] instanceof ColoredModel;
@@ -37,6 +38,12 @@ class ColoredModel extends Model
             $model = $this->{array_first(array_keys($coloredModelRelationships))};
         }
 
-        return 'style="color: ' . $model->getColor() . '"';
+        if ($styleType === null || $styleType->is(StyleType::COLOR)) {
+            return 'style="color: ' . $model->getColor() . '"';
+        }
+
+        if ($styleType->is(StyleType::BORDER)) {
+            return 'style="border-left: .25rem solid ' . $model->getColor() . ' !important"';
+        }
     }
 }

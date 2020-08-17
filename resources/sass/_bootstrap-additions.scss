@@ -14,6 +14,15 @@ a,
 
 .btn {
     margin-bottom: 5px;
+
+    &.btn-primary {
+        background: #914cd9;
+        background: linear-gradient(90deg, #6927ff 0%, #914cd9 100%);
+
+        &:hover {
+            opacity: .8;
+        }
+    }
 }
 
 .btn-bar {
@@ -218,15 +227,15 @@ footer {
 
     &.list-group-item-warning {
         &:nth-child(odd) {
-            background-color: lighten(theme-color('warning'), 42%) !important;
+            background-color: lighten(theme-color('warning'), 19%) !important;
         }
 
         &:nth-child(even) {
-            background-color: lighten(theme-color('warning'), 45%) !important;
+            background-color: lighten(theme-color('warning'), 21%) !important;
         }
 
         &:hover {
-            background-color: lighten(theme-color('warning'), 35%) !important;
+            background-color: lighten(theme-color('warning'), 15%) !important;
         }
     }
 
@@ -294,4 +303,9 @@ footer {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+}
+
+.bg-custom {
+    background: #914cd9;
+    background: linear-gradient(90deg, #6927ff 0%, #914cd9 100%);
 }

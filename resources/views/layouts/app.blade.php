@@ -29,7 +29,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary z-m-b-25">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom z-m-b-25">
         <div class="container">
             <a class="navbar-brand" href="{{ URL::route('home.index') }}">
                 <img src="{{ asset('img/logo_small.png') }}" height="30" class="d-inline-block align-top mr-1"/>
