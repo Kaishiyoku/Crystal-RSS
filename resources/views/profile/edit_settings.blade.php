@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group row">
-            <div class="col-lg-9 ml-md-auto">
+            <div class="col-lg-8 ml-md-auto">
                 {{ Form::button(__('profile.edit_settings.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
         </div>
