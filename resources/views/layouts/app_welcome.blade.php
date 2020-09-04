@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,35 +20,29 @@
 
     @include('shared._javascript_config')
 </head>
-<body class="welcome">
+<body class="welcome text-gray-700 tracking-wider">
 
 @include('flash::message')
 
-<div class="flex-center position-ref full-height">
-    <div class="top-left brands d-none d-sm-inline">
+<div class="flex justify-between">
+    <div class="text-white uppercase text-2xl pl-8 pt-4">
         {{ Html::link('/', config('app.name', 'Laravel')) }}
     </div>
 
     @if (Route::has('login'))
-        <div class="top-right links links-nav">
-            @auth
-                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            @else
-                {{ Html::linkRoute('login', __('common.nav.login')) }}
+        <div class="pr-8 pt-4">
+            @guest
+                {{ Html::linkRoute('login', __('common.nav.login'), null, ['class' => 'text-primary-light hover:text-white uppercase pr-4 transition-all duration-200']) }}
 
                 @if (Route::has('register'))
-                    {{ Html::linkRoute('register', __('common.nav.register')) }}
+                    {{ Html::linkRoute('register', __('common.nav.register'), null, ['class' => 'text-primary-light hover:text-white uppercase pl-4 transition-all duration-200']) }}
                 @endif
             @endauth
         </div>
     @endif
+</div>
 
+<div class="container mx-auto text-center mt-40">
     @yield('content')
 </div>
 

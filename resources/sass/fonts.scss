@@ -5,17 +5,4 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
-@import "helpers";
-@import "bootstrap";
-
-$bs-datetimepicker-active-bg: theme-color("primary");
-
-@import "~tempusdominus-bootstrap-4/src/sass/_tempusdominus-bootstrap-4.scss";
-
-@import "bootstrap-additions";
-@import "waves";
-@import "boostrap-tablesorter";
-@import "bootstrap-multiselect";
-@import 'welcome';
-
 @import "~@claviska/jquery-minicolors/jquery.minicolors.css";

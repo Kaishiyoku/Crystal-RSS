@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.welcome {
+    background-image: url('../img/header.svg');
+    background-repeat: no-repeat;
+    height: 100vh;
+}

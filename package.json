@@ -41,5 +41,8 @@
         "tempusdominus-bootstrap-4": "5.1.2",
         "vue-template-compiler": "2.6.11",
         "whatwg-fetch": "3.4.0"
+    },
+    "dependencies": {
+        "tailwindcss": "^1.8.0"
     }
 }

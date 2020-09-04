@@ -1,0 +1,40 @@
+module.exports = {
+  purge: [],
+  theme: {
+    extend: {
+        colors: {
+            primary: '#6927ff',
+            secondary: '#914cd9',
+            success: '#7ce61e',
+            info: '#19aad1',
+            warning: '#ffd581',
+            danger: '#ff2783',
+            'primary-light': '#cdb0e8',
+            'primary-dark': '#3f1845',
+        },
+        fontFamily: {
+            'sans': ['Nunito', 'sans-serif'],
+        },
+        fontSize: {
+            xs: '0.75rem',
+            sm: '0.875rem',
+            base: '1rem',
+            lg: '1.125rem',
+            xl: '1.25rem',
+            '2xl': '1.5rem',
+            '3xl': '1.875rem',
+            '4xl': '2.25rem',
+            '5xl': '3rem',
+            '6xl': '4rem',
+            '7xl': '5rem',
+            '8xl': '6rem',
+            '9xl': '7rem',
+            '10xl': '8rem',
+            '11xl': '9rem',
+            '12xl': '10rem',
+        },
+    },
+  },
+  variants: {},
+  plugins: [],
+}

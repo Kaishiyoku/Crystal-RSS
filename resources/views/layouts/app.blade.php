@@ -16,6 +16,7 @@
     @include('shared._favicon')
 
     {{ Html::style('css/app.css') }}
+    {{ Html::style('css/fonts.css') }}
 
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
@@ -51,11 +52,10 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mx-auto">
         @include('flash::message')
 
         @yield('breadcrumbs')
-
         @yield('content')
     </div>
 
