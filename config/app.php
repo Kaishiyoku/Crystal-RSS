@@ -173,8 +173,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
-        Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
         Kaishiyoku\LaravelRecharts\LaravelRechartsServiceProvider::class,
@@ -248,7 +246,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
     ],
 
 ];

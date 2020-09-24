@@ -7,8 +7,6 @@
         <div class="text-xl pb-4 text-gray-600 bg-gray-100 pt-4 pl-8">@lang('register.title')</div>
 
         {{ Form::open(['route' => 'register', 'method' => 'post', 'role' => 'form', 'class' => 'px-8 pt-6 pb-8 mb-4']) }}
-            @captcha
-
             <div class="mb-4">
                 {{ Form::label('name', __('register.name'), ['class' => 'block text-gray-700 text-sm font-bold mb-2']) }}
 
