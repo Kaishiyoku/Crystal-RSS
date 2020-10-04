@@ -107,6 +107,8 @@ class FeedController extends Controller
 
     public function searchResult(Request $request)
     {
+        $dateFormat = 'Y-m-d';
+
         /*** @var Collection $feeds */
         $feeds = $this->getFeedsForSelect();
 
@@ -117,8 +119,8 @@ class FeedController extends Controller
         $rules = [
             'term' => ['required'],
             'feed_ids' => ['array'],
-            'date_from' => ['nullable', 'date_format:' . __('common.date_formats.date')],
-            'date_till' => ['nullable', 'date_format:' . __('common.date_formats.date')],
+            'date_from' => ['nullable', 'date_format:' . $dateFormat],
+            'date_till' => ['nullable', 'date_format:' . $dateFormat],
         ];
 
         $validatedData = $request->validate($rules);
@@ -129,8 +131,8 @@ class FeedController extends Controller
         $selectedFeedIds = $allFeedIds->filter(function ($feedId) use ($validatedData) {
             return in_array($feedId, $validatedData['feed_ids']);
         });
-        $dateFrom = createDateFromStr($validatedData['date_from']);
-        $dateTill = createDateFromStr($validatedData['date_till']);
+        $dateFrom = createDateFromStr($validatedData['date_from'], $dateFormat);
+        $dateTill = createDateFromStr($validatedData['date_till'], $dateFormat);
 
         $foundFeedItemIdsFromIndex = FeedItem::search($request->get('term'))
             ->orderBy('posted_at', 'desc')

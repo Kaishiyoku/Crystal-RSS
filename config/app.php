@@ -175,7 +175,6 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
-        Kaishiyoku\LaravelRecharts\LaravelRechartsServiceProvider::class,
 
         /*
          * Application Service Providers...

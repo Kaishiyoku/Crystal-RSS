@@ -5,6 +5,7 @@ import React from "react";
 import * as Logger from 'js-simple-logger';
 import Favoriter from './components/Favoriter';
 import FeedDiscoverer from './components/FeedDiscoverer';
+import tippy from 'tippy.js';
 
 Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
@@ -97,16 +98,6 @@ $(document).ready(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('[data-provide="tablesorter"]').each(function () {
-        $(this).tablesorter({
-            theme: 'bootstrap-custom',
-            widgets: ['columns'],
-            widgetOptions: {
-                columns: ['primary', 'secondary', 'tertiary']
-            }
-        });
-    });
-
     $('[data-provide="minicolors"]').each(function () {
         const $this = $(this);
 
@@ -122,44 +113,6 @@ $(document).ready(function () {
             swatches: $this.attr('data-swatches') ? $this.attr('data-swatches').split('|') : [],
             theme: 'bootstrap',
         });
-    });
-
-    $('[data-provide="multiselect"]').multiselect({
-        enableClickableOptGroups: true,
-        includeSelectAllOption: true,
-        numberDisplayed: 1,
-        maxHeight: 350,
-        buttonClass: 'btn btn-secondary',
-        nonSelectedText: trans('multiselect.nonSelectedText'),
-        nSelectedText: trans('multiselect.nSelectedText'),
-        allSelectedText: trans('multiselect.allSelectedText'),
-        selectAllText: trans('multiselect.selectAllText'),
-        buttonContainer: '<div class="dropdown" />',
-        templates: {
-            li: '<li><a href="javascript:void(0);" class="dropdown-item"><label></label></a></li>',
-            liGroup: '<li><a href="javascript:void(0);" class="dropdown-item"><label></label></a></li>',
-            divider: '<li><div class="dropdown-divider"></div></li>',
-        },
-    });
-
-    $('[data-provide="datepicker"]').each(function () {
-        const $this = $(this);
-        const date = $this.find('input').val();
-        const dateFormat = trans('datepicker.formats.date');
-
-        const baseConfig = {
-            locale: $('html').attr('lang'),
-            format: dateFormat,
-            useCurrent: true,
-            calendarWeeks: true,
-            allowInputToggle: true,
-        };
-
-        const config = date ? _.merge(baseConfig, {
-            defaultDate: moment(date, dateFormat)
-        }) : baseConfig;
-
-        $this.datetimepicker(config);
     });
 
     $('[data-provide="voter"]').each(function () {
@@ -196,5 +149,22 @@ $(document).ready(function () {
                 feedDiscoverButtonContainerId={dataFeedDiscoverButtonContainerId}
                 translations={dataTranslations}
             />, $(this)[0]);
+    });
+
+    tippy('[data-provide-dropdown]', {
+        theme: 'dropdown',
+        allowHTML: true,
+        interactive: true,
+        arrow: 'false',
+        trigger: 'click',
+        placement: 'bottom-start',
+        offset: [0, -5],
+        animation: 'shift-away-subtle',
+        content(reference) {
+            let dropdown = document.querySelector(reference.getAttribute('data-dropdown-target'));
+            dropdown.classList.remove('hidden');
+
+            return dropdown;
+        },
     });
 });

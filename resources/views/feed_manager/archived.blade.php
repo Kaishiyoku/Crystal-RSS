@@ -5,47 +5,45 @@
 @section('content')
     <h1>
         @lang('feed_manager.archived.title')
-        <small class="text-muted">{{ $feeds->count() }}</small>
+        <span class="headline-info">{{ $feeds->count() }}</span>
     </h1>
 
-    <p>
-        {{ Html::linkRoute('feed.manage.index', __('common.back')) }}
+    <p class="mb-8">
+        {{ Html::linkRoute('feed.manage.index', __('common.back'), null, ['class' => 'btn btn-primary']) }}
     </p>
 
-    @if ($feeds->count() == 0)
-        <p class="lead">
-            <i>@lang('feed_manager.index.no_feeds_yet')</i>
+    @if ($feeds->count() === 0)
+        <p class="text-lg italic">
+            @lang('feed_manager.index.no_feeds_yet')
         </p>
     @else
-        <div class="table-responsive">
-            <table class="table table-striped" data-provide="tablesorter">
+        <div class="card">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>@lang('validation.attributes.title')</th>
-                        <th>@lang('validation.attributes.category_id')</th>
-                        <th width="7%">@lang('validation.attributes.is_enabled')</th>
-                        <th width="8%">@lang('validation.attributes.is_valid')</th>
-                        <th width="16%">@lang('validation.attributes.last_checked_at')</th>
-                        <th class="sorter-false"></th>
-                        <th class="sorter-false"></th>
+                        <th class="hidden md:table-cell">@lang('validation.attributes.category_id')</th>
+                        <th class="hidden lg:table-cell">@lang('validation.attributes.is_enabled')</th>
+                        <th class="hidden lg:table-cell">@lang('validation.attributes.is_valid')</th>
+                        <th class="hidden lg:table-cell">@lang('validation.attributes.last_checked_at')</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($feeds->get() as $feed)
-                        <tr class="{{ $feed->is_enabled && $feed->is_valid ? '' : 'table-warning' }} {{ !$feed->is_valid ? 'table-danger' : '' }}">
+                        <tr class="{{ $feed->is_enabled && $feed->is_valid ? '' : 'table-warning' }} {{ !$feed->is_valid ? 'table-danger' : '' }}" {!! $feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
                             <td {!! $feed->getStyle() !!}>
                                 {{ $feed->title }}
                             </td>
-                            <td>{{ $feed->category->title }}</td>
-                            <td>{{ formatBoolean($feed->is_enabled) }}</td>
-                            <td>{{ formatBoolean($feed->is_valid) }}</td>
-                            <td>{{ $feed->last_checked_at->format(l(DATETIME)) }}</td>
+                            <td class="hidden md:table-cell">{{ $feed->category->title }}</td>
+                            <td class="hidden lg:table-cell">{{ formatBoolean($feed->is_enabled) }}</td>
+                            <td class="hidden lg:table-cell">{{ formatBoolean($feed->is_valid) }}</td>
+                            <td class="hidden lg:table-cell">{{ $feed->last_checked_at->format(l(DATETIME)) }}</td>
                             <td>
                                 @include('shared._delete_link', ['route' => ['feed.manage.destroy_permanently', $feed->id], 'title' => __('common.delete')])
-                            </td>
-                            <td>
+
                                 {{ Form::open(['route' => ['feed.manage.restore', $feed], 'method' => 'put', 'role' => 'form']) }}
-                                    {{ Form::button(__('common.restore'), ['type' => 'submit', 'class' => 'btn btn-link btn-update', 'data-confirm' => '']) }}
+                                    {{ Form::button(__('common.restore'), ['type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'data-confirm' => '']) }}
                                 {{ Form::close() }}
                             </td>
                         </tr>
@@ -54,8 +52,8 @@
             </table>
         </div>
 
-        <p>
-            {{ Html::linkRoute('feed.manage.index', __('common.back')) }}
+        <p class="mt-5">
+            {{ Html::linkRoute('feed.manage.index', __('common.back'), null, ['class' => 'btn btn-primary']) }}
         </p>
     @endif
 @endsection

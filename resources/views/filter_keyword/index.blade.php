@@ -15,13 +15,12 @@
     @if ($filterKeywords->count() == 0)
         <p class="lead"><i>@lang('filter_keyword.index.no_items')</i></p>
     @else
-        <div class="table-responsive">
-            <table class="table table-striped" data-provide="tablesorter">
+        <div class="card mt-5">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>@lang('validation.attributes.value')</th>
-                        <th class="sorter-false"></th>
-                        <th class="sorter-false"></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,10 +29,10 @@
                             <td>
                                 {{ $filterKeyword->value }}
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @include('shared._delete_link', ['route' => ['filter_keywords.destroy', $filterKeyword]])
+                                {{ Html::linkRoute('filter_keywords.edit', __('common.edit'), $filterKeyword, ['class' => 'btn btn-sm btn-primary']) }}
                             </td>
-                            <td>{{ Html::linkRoute('filter_keywords.edit', __('common.edit'), [$filterKeyword]) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

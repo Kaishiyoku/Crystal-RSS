@@ -16,50 +16,41 @@
     @include('shared._favicon')
 
     {{ Html::style('css/app.css') }}
+    {{ Html::style('css/additions.css') }}
     {{ Html::style('css/fonts.css') }}
 
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
     {{ Html::script('js/app.js') }}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js" charset="utf-8"></script>
 
     @include('shared._javascript_config')
 </head>
-<body>
+<body class="bg-gray-100">
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom z-m-b-25">
-        <div class="container">
-            <a class="navbar-brand" href="{{ URL::route('home.index') }}">
-                <img src="{{ asset('img/logo_small.png') }}" height="30" class="d-inline-block align-top mr-1"/>
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div class="mb-6 bg-gradient-to-r from-primary-900 to-secondary-900 shadow">
+        <div class="container lg:px-20 mx-auto">
+            <div class="flex items-center">
+                <img src="{{ asset('img/logo_small.png') }}" class="h-8 mr-2"/>
+                <div class="text-white text-xl mr-2">{{ config('app.name', 'Laravel') }}</div>
+                <a href="{{ URL::route('home.index') }}">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {!! \LaravelMenu::render() !!}
 
-                <ul class="navbar-nav">
-                    @include('shared._navbar_language_dropdown')
-                </ul>
+                @include('shared._navbar_language_dropdown')
 
                 {!! \LaravelMenu::render('user') !!}
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="container mx-auto">
+    <div class="container px-4 lg:px-20 mx-auto">
         @include('flash::message')
 
         @yield('breadcrumbs')
         @yield('content')
     </div>
 
-    <div class="container">
+    <div class="container lg:px-20 mx-auto mt-20 text-gray-600 text-sm">
         @include('shared._footer')
     </div>
 </div>

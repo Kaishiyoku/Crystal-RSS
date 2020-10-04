@@ -1,21 +1,15 @@
-<div class="form-group row">
-    {{ Form::label('title', __('validation.attributes.title'), ['class' => 'col-lg-3 col-form-label']) }}
+{{ Form::label('title', __('validation.attributes.title'), ['class' => 'label']) }}
 
-    <div class="col-lg-3">
-        {{ Form::text('title', old('title', $category->title), ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'required' => true]) }}
+<div class="mb-4">
+    {{ Form::text('title', old('title', $category->title), ['class' => 'input' . ($errors->has('title') ? ' has-error' : ''), 'required' => true]) }}
 
-        @if ($errors->has('title'))
-            <div class="invalid-feedback">
-                {{ $errors->first('title') }}
-            </div>
-        @endif
-    </div>
+    @if ($errors->has('title'))
+        <div class="invalid-feedback">
+            {{ $errors->first('title') }}
+        </div>
+    @endif
 </div>
 
 @include('shared._form_color', ['item' => $category])
 
-<div class="form-group row">
-    <div class="col-lg-9 ml-md-auto">
-        {{ Form::button($submitTitle, ['type' => 'submit', 'class' => 'btn btn-primary']) }}
-    </div>
-</div>
+{{ Form::button($submitTitle, ['type' => 'submit', 'class' => 'btn btn-primary']) }}

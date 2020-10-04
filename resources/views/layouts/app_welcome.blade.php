@@ -32,10 +32,10 @@
     @if (Route::has('login'))
         <div class="pr-8 pt-4">
             @guest
-                {{ Html::linkRoute('login', __('common.nav.login'), null, ['class' => 'text-primary-light hover:text-white uppercase pr-4 transition-all duration-200']) }}
+                {{ Html::linkRoute('login', __('common.nav.login'), null, ['class' => 'text-primary-300 hover:text-white uppercase pr-4 transition-all duration-200']) }}
 
                 @if (Route::has('register'))
-                    {{ Html::linkRoute('register', __('common.nav.register'), null, ['class' => 'text-primary-light hover:text-white uppercase pl-4 transition-all duration-200']) }}
+                    {{ Html::linkRoute('register', __('common.nav.register'), null, ['class' => 'text-primary-300 hover:text-white uppercase pl-4 transition-all duration-200']) }}
                 @endif
             @endauth
         </div>

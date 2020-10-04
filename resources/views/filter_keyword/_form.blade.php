@@ -1,19 +1,13 @@
-<div class="form-group row">
-    {{ Form::label('value', __('validation.attributes.value'), ['class' => 'col-lg-2 col-form-label']) }}
+{{ Form::label('value', __('validation.attributes.value'), ['class' => 'label']) }}
 
-    <div class="col-lg-3">
-        {{ Form::text('value', old('value', $filterKeyword->value), ['class' => 'form-control' . ($errors->has('value') ? ' is-invalid' : ''), 'required' => true]) }}
+<div class="mb-4">
+    {{ Form::text('value', old('value', $filterKeyword->value), ['class' => 'input' . ($errors->has('value') ? ' has-error' : ''), 'required' => true]) }}
 
-        @if ($errors->has('value'))
-            <div class="invalid-feedback">
-                {{ $errors->first('value') }}
-            </div>
-        @endif
-    </div>
+    @if ($errors->has('value'))
+        <div class="invalid-feedback">
+            {{ $errors->first('value') }}
+        </div>
+    @endif
 </div>
 
-<div class="form-group row">
-    <div class="col-lg-10 ml-md-auto">
-        {{ Form::button($submitTitle, ['type' => 'submit', 'class' => 'btn btn-primary']) }}
-    </div>
-</div>
+{{ Form::button($submitTitle, ['type' => 'submit', 'class' => 'btn btn-primary']) }}

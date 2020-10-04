@@ -50,13 +50,13 @@ class Voter extends Component {
     };
 
     render() {
-        const upBtnClass = classNames('btn btn-xs', {
-            'btn-outline-dark': ['NONE', 'DOWN'].includes(this.state.voteStatus),
+        const upBtnClass = classNames('btn btn-sm', {
+            'btn-outline-primary-dark': ['NONE', 'DOWN'].includes(this.state.voteStatus),
             'btn-success': this.state.voteStatus === 'UP',
         });
 
-        const downBtnClass = classNames('btn btn-xs', {
-            'btn-outline-dark': ['NONE', 'UP'].includes(this.state.voteStatus),
+        const downBtnClass = classNames('btn btn-sm', {
+            'btn-outline-primary-dark': ['NONE', 'UP'].includes(this.state.voteStatus),
             'btn-danger': this.state.voteStatus === 'DOWN',
         });
 

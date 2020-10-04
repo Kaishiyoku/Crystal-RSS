@@ -6,15 +6,15 @@
     <h1>
         @lang('feed.search_result.title')
 
-        <small class="text-muted">
-            {{ $foundFeedItemsFromIndex->total() }}
-        </small>
+        <span class="headline-info">{{ $foundFeedItemsFromIndex->total() }}</span>
     </h1>
 
-    @include('feed._search_form')
+    <div class="mb-5">
+        @include('feed._search_form')
+    </div>
 
     @if($foundFeedItemsFromIndex->count() == 0)
-        <p class="lead font-italic">@lang('feed.search_result.no_entries_found')</p>
+        <p class="text-lg italic">@lang('feed.search_result.no_entries_found')</p>
     @endif
 
     <div class="mt-4">

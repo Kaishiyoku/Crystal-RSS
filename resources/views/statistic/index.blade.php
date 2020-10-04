@@ -6,65 +6,63 @@
     <h1>
         @lang('statistic.index.title')
 
-        <small class="text-muted">
-            @lang('statistic.index.last_month')
-        </small>
+        <span class="headline-info">@lang('statistic.index.last_month')</span>
     </h1>
 
-    <div>
+    <div class="card">
         {!! $dailyArticlesChart->assets() !!}
         {!! $dailyArticlesChart->render() !!}
     </div>
 
-    <p class="pt-5">
-        @lang('statistic.index.average_time_between_retrieval_and_read'): {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
-    </p>
+    <div class="card my-5 px-2 py-3">
+        <p class="mb-5">
+            @lang('statistic.index.average_time_between_retrieval_and_read'): {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
+        </p>
 
-    <p>
-        Artikel gesamt: {{ auth()->user()->feedItems()->count() }}
-    </p>
+        <p>
+            @lang('statistic.index.total_number_of_feed_items'): {{ auth()->user()->feedItems()->count() }}
+        </p>
+    </div>
 
-    @foreach ($categories as $category)
-        <div class="row mt-3">
-            <div class="col-xl-6 col-lg-8 col-12 border-bottom hoverable">
-                <div class="row">
-                    <div class="col-7 font-weight-bold" {!! $category->getStyle() !!}>{{ $category->title }}</div>
-                    <div class="col-3">
-                        <span class="text-success">
+    <div class="card">
+        @foreach ($categories as $category)
+            <div class="mb-5">
+                <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">
+                    <div class="w-full text-lg" {!! $category->getStyle() !!}>{{ $category->title }}</div>
+                    <div class="w-24 text-right">
+                        <span class="text-success-900">
                             <i class="fas fa-chevron-up"></i>
                             {{ $category->getTotalUpVoteCount() }}
                         </span>
 
-                        <span class="text-danger">
+                        <span class="text-danger-900">
                             <i class="fas fa-chevron-down"></i>
                             {{ $category->getTotalDownVoteCount() }}
                         </span>
                     </div>
-                    <div class="col-2 text-right font-weight-bold">{{ $category->getTotalFeedCount() }}</div>
+                    <div class="w-32 text-lg text-right">{{ $category->getTotalFeedCount() }}</div>
                 </div>
-            </div>
-        </div>
 
-        @foreach ($category->feeds as $feed)
-            <div class="row">
-                <div class="col-xl-6 col-lg-8 col-12 hoverable">
-                    <div class="row">
-                        <div class="col-7" {!! $feed->getStyle() !!}>{{ $feed->title }}</div>
-                        <div class="col-3">
-                            <span class="text-success">
+                @foreach ($category->feeds as $feed)
+                    <div class="flex px-2 pb-1 hover:bg-gray-200 transition-all duration-200">
+                        <div class="w-full" {!! $feed->getStyle() !!}>{{ $feed->title }}</div>
+                        <div class="w-24 text-right">
+                            <span class="text-success-900">
                                 <i class="fas fa-chevron-up"></i>
                                 {{ $feed->getTotalUpVoteCount() }}
                             </span>
 
-                            <span class="text-danger">
+                            <span class="text-danger-900">
                                 <i class="fas fa-chevron-down"></i>
                                 {{ $feed->getTotalDownVoteCount() }}
                             </span>
                         </div>
-                        <div class="col-2 text-right">{{ $feed->feedItems()->count() }}</div>
+                        <div class="w-32 text-right">{{ $feed->feedItems()->count() }}</div>
                     </div>
-                </div>
+                @endforeach
             </div>
+
+            <hr/>
         @endforeach
-    @endforeach
+    </div>
 @endsection

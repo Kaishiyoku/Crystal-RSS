@@ -1,19 +1,23 @@
-<li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<div class="relative navbar-link cursor-pointer select-none" data-provide-dropdown data-dropdown-target="#language-dropdown">
+    <a>
         <i class="fas fa-globe-europe"></i>
-        <span class="d-sm-inline d-lg-none d-xl-inline">{{ upper(Session::get('locale')) }}</span>
-        <span class="caret"></span>
+        {{ upper(Session::get('locale')) }}
+        <i class="fas fa-caret-down mt-1"></i>
     </a>
 
-    <div class="dropdown-menu" role="menu">
+    <div id="language-dropdown" class="dropdown hidden rounded-md shadow-xl">
         @foreach (config('app.available_locales') as $locale)
-            <a class="dropdown-item{{ Session::get('locale') == $locale ? ' active' : '' }}" href="{{ route('language.change') }}" onclick="event.preventDefault(); document.getElementById('lang-form-{{ $locale }}').submit();">
+            <a
+                id="lang-link-{{ $locale }}"
+                class="block dropdown-item {{ (Session::get('locale') === $locale ? ' dropdown-item-active' : '') }}"
+                onclick="event.preventDefault(); document.getElementById('lang-form-{{ $locale }}').submit();"
+            >
                 {{ __('common.languages.' . $locale) }}
             </a>
 
             {{ Form::open(['route' => 'language.change', 'method' => 'post', 'id' => 'lang-form-' . $locale, 'style' => 'display: none;']) }}
-            {{ Form::hidden('locale', $locale) }}
+                {{ Form::hidden('locale', $locale) }}
             {{ Form::close() }}
         @endforeach
     </div>
-</li>
+</div>

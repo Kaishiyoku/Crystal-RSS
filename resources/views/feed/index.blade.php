@@ -9,7 +9,7 @@
 
     <h1>
         @lang('feed.index.title')
-        <small class="text-muted">{{ $totalCountUnreadFeedItems }}</small>
+        <span class="headline-info">{{ $totalCountUnreadFeedItems }}</span>
     </h1>
 
     <p class="text-muted">
@@ -20,7 +20,7 @@
         @endif
     </p>
 
-    <p>
+    <p class="my-5">
         @if ($unreadFeedItems->count() > 0)
             {{ Form::open(['route' => ['feed.mark_all_as_read', $currentCategoryId], 'method' => 'put', 'role' => 'form', 'class' => 'd-inline']) }}
                 {{ Form::button('<i class="fas fa-eye"></i> ' . __('feed.index.mark_all_as_read'), ['type' => 'submit', 'class' => 'btn btn-outline-primary', 'data-confirm' => true]) }}
@@ -30,35 +30,33 @@
 
 
     @if ($totalCountUnreadFeedItems > 0)
-        <div class="dropdown mt-5">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="my-5">
+            <button class="btn btn-secondary" type="button" data-provide-dropdown="true" data-dropdown-target="#categoryDropdownMenuButton">
                 <i class="fas fa-filter"></i>
 
                 {{ $categoryDropdownTranslation }}
                 &nbsp;
                 <span class="badge badge-dark">{{ $unreadFeedItems->total() }}</span>
+
+                <i class="fas fa-caret-down mt-1"></i>
             </button>
 
-            <div class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="categoryDropdownMenuButton">
-                {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-dark">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'dropdown-item'. ($currentCategoryId == null ? ' active' : '')])) !!}
+            <div id="categoryDropdownMenuButton" class="dropdown flex flex-col hidden rounded-md shadow-xl">
+                {!! Html::decode(Html::linkRoute('feed.index', __('feed.index.all_categories') . ' <span class="badge badge-dark">' . $totalCountUnreadFeedItems . '</span>', [], ['class' => 'dropdown-item'. ($currentCategoryId == null ? ' dropdown-item-active' : '')])) !!}
 
                 @foreach ($categories as $category)
                     @if ($category->total_feed_items_count > 0)
-                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . $category->total_feed_items_count . '</span>', [$category->id], ['class' => 'dropdown-item' . ($currentCategoryId == $category->id ? ' active' : '')])) !!}
+                        {!! Html::decode(Html::linkRoute('feed.category', $category->title . ' <span class="badge badge-dark">' . $category->total_feed_items_count . '</span>', [$category->id], ['class' => 'dropdown-item' . ($currentCategoryId == $category->id ? ' dropdown-item-active' : '')])) !!}
                     @endif
                 @endforeach
             </div>
         </div>
     @endif
 
-    @if ($unreadFeedItems->count() == 0)
-        <div class="row pt-3">
-            <div class="col-md-4 offset-md-4">
-                {{ Html::image('img/no_unread_items.svg', __('feed.index.no_unread_items'), ['class' => 'img-fluid']) }}
+    @if ($unreadFeedItems->count() === 0)
+        {{ Html::image('img/no_unread_items.svg', __('feed.index.no_unread_items'), ['class' => 'h-64 mx-auto']) }}
 
-                <p class="lead font-italic mt-3 text-center"><i>@lang('feed.index.no_unread_items')</i></p>
-            </div>
-        </div>
+        <p class="italic mt-3 text-center"><i>@lang('feed.index.no_unread_items')</i></p>
     @else
         <div>
             {{ $unreadFeedItems->links() }}

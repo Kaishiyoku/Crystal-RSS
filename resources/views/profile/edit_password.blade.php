@@ -10,11 +10,10 @@
     <h1>@lang('profile.edit_password.title')</h1>
 
     {{ Form::open(['route' => 'profile.update_password', 'method' => 'put', 'role' => 'form']) }}
-    <div class="form-group row">
-        {{ Form::label('current_password', __('validation.attributes.current_password'), ['class' => 'col-lg-3 col-form-label']) }}
+        <div class="mb-4">
+            {{ Form::label('current_password', __('validation.attributes.current_password'), ['class' => 'label']) }}
 
-        <div class="col-lg-3">
-            {{ Form::password('current_password', ['class' => 'form-control' . ($errors->has('current_password') ? ' is-invalid' : ''), 'required' => true]) }}
+            {{ Form::password('current_password', ['class' => 'input' . ($errors->has('current_password') ? ' has-error' : ''), 'required' => true]) }}
 
             @if ($errors->has('current_password'))
                 <div class="invalid-feedback">
@@ -22,15 +21,13 @@
                 </div>
             @endif
         </div>
-    </div>
 
-    <hr/>
+        <hr/>
 
-    <div class="form-group row">
-        {{ Form::label('new_password', __('validation.attributes.new_password'), ['class' => 'col-lg-3 col-form-label']) }}
+        <div class="mb-4">
+            {{ Form::label('new_password', __('validation.attributes.new_password'), ['class' => 'label']) }}
 
-        <div class="col-lg-3">
-            {{ Form::password('new_password', ['class' => 'form-control' . ($errors->has('new_password') ? ' is-invalid' : ''), 'required' => true, 'data-provide' => 'password-strength']) }}
+            {{ Form::password('new_password', ['class' => 'input' . ($errors->has('new_password') ? ' has-error' : ''), 'required' => true, 'data-provide' => 'password-strength']) }}
 
             @if ($errors->has('new_password'))
                 <div class="invalid-feedback">
@@ -38,13 +35,11 @@
                 </div>
             @endif
         </div>
-    </div>
 
-    <div class="form-group row">
-        {{ Form::label('new_password_confirmation', __('validation.attributes.new_password_confirmation'), ['class' => 'col-lg-3 col-form-label']) }}
+        <div class="mb-4">
+            {{ Form::label('new_password_confirmation', __('validation.attributes.new_password_confirmation'), ['class' => 'label']) }}
 
-        <div class="col-lg-3">
-            {{ Form::password('new_password_confirmation', ['class' => 'form-control' . ($errors->has('new_password_confirmation') ? ' is-invalid' : ''), 'required' => true]) }}
+            {{ Form::password('new_password_confirmation', ['class' => 'input' . ($errors->has('new_password_confirmation') ? ' has-error' : ''), 'required' => true]) }}
 
             @if ($errors->has('new_password_confirmation'))
                 <div class="invalid-feedback">
@@ -52,12 +47,7 @@
                 </div>
             @endif
         </div>
-    </div>
 
-    <div class="form-group row">
-        <div class="col-lg-9 ml-md-auto">
-            {{ Form::button(__('profile.edit_password.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
-        </div>
-    </div>
+        {{ Form::button(__('profile.edit_password.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
     {{ Form::close() }}
 @endsection

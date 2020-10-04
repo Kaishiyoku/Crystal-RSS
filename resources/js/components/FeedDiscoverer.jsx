@@ -53,7 +53,7 @@ class FeedDiscoverer extends Component {
                 isLoading={this.state.isLoading}
                 disabled={this.state.isButtonDisabled}
                 onClick={this.handleDiscoverFeedClick}
-                className="btn btn-outline-dark"
+                className="btn btn-secondary btn-with-input"
             >
                 {this.props.translations.discover_feeds}
             </LoadingButton>, document.getElementById(this.props.feedDiscoverButtonContainerId));
@@ -112,10 +112,10 @@ class FeedDiscoverer extends Component {
         }
 
         return (
-            <div className="list-group">
+            <div className="card py-1">
                 {this.state.discoveredFeedUrls.map((url) => {
-                    const classes = classNames('list-group-item list-group-item-action list-group-item-dark', {
-                        active: this.state.feedInputElement.value === url,
+                    const classes = classNames('dropdown-item w-full text-left', {
+                        'dropdown-item-active': this.state.feedInputElement.value === url,
                     });
 
                     return (
