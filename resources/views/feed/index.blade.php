@@ -36,7 +36,7 @@
 
                 {{ $categoryDropdownTranslation }}
                 &nbsp;
-                <span class="badge badge-dark">{{ $unreadFeedItems->total() }}</span>
+                <span class="rounded-full bg-primary-dark-900 uppercase px-2 py-1 text-xs font-bold mr-3">{{ $unreadFeedItems->total() }}</span>
 
                 <i class="fas fa-caret-down mt-1"></i>
             </button>

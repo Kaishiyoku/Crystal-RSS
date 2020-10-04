@@ -7,106 +7,108 @@
 @endsection
 
 @section('content')
-    <h1 class="mb-5">
+    <h1>
         @lang('feed.details.title', ['title' => $feedItem->id])
     </h1>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.id'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             {{ $feedItem->id }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.feed_id'):
         </div>
 
-        <div class="col-md-10" {!! $feedItem->feed->getStyle() !!}>
+        <div {!! $feedItem->feed->getStyle() !!}>
             {{ $feedItem->feed->title }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.url'):
         </div>
 
-        <div class="col-md-10">
-            {{ $feedItem->url }}
+        <div>
+            {{ Html::link($feedItem->url, null, ['class' => 'link']) }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.title'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             {{ $feedItem->title }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.author'):
         </div>
 
-        <div class="col-md-10">
-            {{ $feedItem->author }}
+        <div>
+            {{ $feedItem->author ?? '/' }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.content'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             {{ $feedItem->content }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.image_url'):
         </div>
 
-        <div class="col-md-10">
-            {{ $feedItem->image_url }}
+        <div class="overflow-hidden">
+            {{ Html::link($feedItem->image_url, null, ['class' => 'link']) }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.date'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             {{ $feedItem->posted_at->format(l(DATETIME)) }}
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.checksum'):
         </div>
 
-        <div class="col-md-10">
-            {{ $feedItem->checksum }}
+        <div class="overflow-auto py-2">
+            <code>
+                {{ $feedItem->checksum }}
+            </code>
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.read_at'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             @if ($feedItem->read_at)
                 {{ $feedItem->read_at->format(l(DATETIME)) }}
             @else
@@ -115,38 +117,38 @@
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('feed.categories'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             @include('feed._categories', ['categories' => $feedItem->categories]):
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.vote_status'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             <span
-                    data-provide="voter"
-                    data-vote-up-url="{{ route('feed.vote_up', $feedItem, false) }}"
-                    data-vote-down-url="{{ route('feed.vote_down', $feedItem, false) }}"
-                    data-vote-status="{{ $feedItem->vote_status }}"
+                data-provide="voter"
+                data-vote-up-url="{{ route('feed.vote_up', $feedItem, false) }}"
+                data-vote-down-url="{{ route('feed.vote_down', $feedItem, false) }}"
+                data-vote-status="{{ $feedItem->vote_status }}"
             >
             </span>
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.favorited_at'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             <span
                 data-provide="favoriter"
                 data-url="{{ route('feed.toggle_favorite', $feedItem, false) }}"
@@ -156,39 +158,39 @@
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2">
+    <div class="mb-3">
+        <div class="font-bold text-xs text-gray-800 uppercase">
             @lang('validation.attributes.raw_json'):
         </div>
 
-        <div class="col-md-10">
+        <div>
             <pre class="prettyprint">{{ json_encode($feedItem->getJson(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
         </div>
     </div>
 
     @if ($feedItem->isDuplicate() || $feedItem->hasDuplicates())
-        <hr/>
+        <hr class="mb-3"/>
     @endif
 
     @if ($feedItem->isDuplicate())
-        <div class="row mb-2">
-            <div class="col-md-2">
+        <div class="mb-3">
+            <div class="font-bold text-xs text-gray-800 uppercase">
                 @lang('feed.duplicate_of'):
             </div>
 
-            <div class="col-md-10">
+            <div>
                 @include('feed._duplicates_ist', ['feedItems' => collect([$feedItem->getFirstItemOfDuplicates()])])
             </div>
         </div>
     @endif
 
     @if ($feedItem->hasDuplicates())
-        <div class="row mb-2">
-            <div class="col-md-2">
+        <div class="mb-3">
+            <div class="font-bold text-xs text-gray-800 uppercase">
                 @lang('feed.duplicates'):
             </div>
 
-            <div class="col-md-10">
+            <div>
                 @include('feed._duplicates_ist', ['feedItems' => $feedItem->getDuplicates()])
             </div>
         </div>
