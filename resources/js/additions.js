@@ -6,6 +6,7 @@ import * as Logger from 'js-simple-logger';
 import Favoriter from './components/Favoriter';
 import FeedDiscoverer from './components/FeedDiscoverer';
 import tippy from 'tippy.js';
+import Multiselect from './components/Multiselect';
 
 Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
@@ -117,6 +118,20 @@ $(document).ready(function () {
                 feedDiscoverButtonContainerId={dataFeedDiscoverButtonContainerId}
                 translations={dataTranslations}
             />, $(this)[0]);
+    });
+
+    $('[data-provide="multiselect"]').each(function () {
+        const buttonTitle = $(this).data('button-title');
+        const name = $(this).data('name');
+        const entries = $(this).data('entries');
+
+        ReactDOM.render(
+            <Multiselect
+                buttonTitle={buttonTitle}
+                name={name}
+                entries={entries}
+            />, $(this)[0]
+        );
     });
 
     tippy('[data-provide-dropdown]', {

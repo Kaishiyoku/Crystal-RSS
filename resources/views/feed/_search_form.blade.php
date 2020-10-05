@@ -12,15 +12,21 @@
     </div>
 
     <div class="mb-4">
-        <div class="flex">
-            <div class="mr-5">
+        <div class="md:flex md:justify-between">
+            <div class="md:mr-5 mb-4 md:mb-0">
                 {{ Form::label('feed_ids', __('feed.search.feed_ids'), ['class' => 'label']) }}
 
-                {{ Form::select('feed_ids[]', $feeds, request()->query('feed_ids') ?? $feedIds, ['multiple' => true, 'size' => 15]) }}
+                <div
+                    data-provide="multiselect"
+                    data-name="feed_ids"
+                    data-button-title="{{ __('feed.search.feed_ids') }}"
+                    data-entries="{{ json_encode($feeds) }}"
+                >
+                </div>
             </div>
 
-            <div>
-                <div class="mb-4">
+            <div class="md:flex">
+                <div class="mb-4 md:mr-5">
                     {{ Form::label('date_from', __('feed.date_from'), ['class' => 'label']) }}
 
                     {{ Form::date('date_from', request()->query('date_from'), ['class' => 'input' . ($errors->has('date_from') ? ' has-error' : '')]) }}

@@ -114,6 +114,10 @@ module.exports = {
                 '11xl': '9rem',
                 '12xl': '10rem',
             },
+            maxHeight: {
+                16: '16rem',
+                32: '32rem',
+            },
         },
     },
     variants: {},

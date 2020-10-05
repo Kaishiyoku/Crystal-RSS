@@ -249,11 +249,15 @@ class FeedController extends Controller
 
     private function getFeedsForSelect()
     {
-        return auth()->user()->categories()->with('feeds')->get()->mapWithKeys(function (Category $category) {
+        return auth()->user()->categories()->with('feeds')->get()->map(function (Category $category) {
             return [
-                $category->title => $category->feeds()->orderBy('title')->get()->mapWithKeys(function (Feed $feed) {
-                    return [$feed->id =>  $feed->title];
-                })->toArray(),
+                'title' => $category->title,
+                'subEntries' => $category->feeds()->orderBy('title')->get()->map(function (Feed $feed) {
+                    return [
+                        'id' => $feed->id,
+                        'title' => $feed->title,
+                    ];
+                })->toArray()
             ];
         })->toArray();
     }

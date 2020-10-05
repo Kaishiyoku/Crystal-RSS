@@ -52,10 +52,11 @@ h2 {
 /* Dropdown
 ---------------------------------------------------------------------------- */
 .dropdown {
-    @apply rounded-md bg-white shadow-xl py-1;
+    @apply rounded-md bg-white shadow-xl py-1 overflow-auto;
 }
+
 .dropdown-item {
-    @apply px-4 py-2 leading-5 text-gray-700 cursor-pointer transition-all duration-200;
+    @apply text-left px-4 py-2 leading-5 text-gray-700 cursor-pointer transition-all duration-200;
 }
 .dropdown-item:hover {
     @apply bg-gray-200 text-gray-900;
@@ -69,6 +70,10 @@ h2 {
 }
 .dropdown-item.dropdown-item-active:hover {
     @apply text-white bg-primary-700;
+}
+
+.dropdown-header {
+    @apply px-4 py-2 font-bold text-xs text-gray-800 uppercase tracking-wide;
 }
 
 /* Forms & input
@@ -150,7 +155,7 @@ select.input {
 /* Buttons
 ---------------------------------------------------------------------------- */
 .btn {
-    @apply inline-block shadow border transition-all duration-200;
+    @apply inline-block cursor-pointer shadow border transition-all duration-200;
 }
 .btn:not(.btn-sm):not(.btn-with-input) {
     @apply py-2 px-4 font-bold;
