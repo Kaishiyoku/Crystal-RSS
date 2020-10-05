@@ -1,7 +1,7 @@
 <div class="relative navbar-link cursor-pointer select-none" data-provide-dropdown data-dropdown-target="#language-dropdown">
     <a>
         <i class="fas fa-globe-europe"></i>
-        {{ upper(Session::get('locale')) }}
+        <span class="hidden md:inline">{{ upper(Session::get('locale')) }}</span>
         <i class="fas fa-caret-down mt-1"></i>
     </a>
 
