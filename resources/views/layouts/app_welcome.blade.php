@@ -20,17 +20,17 @@
 
     @include('shared._javascript_config')
 </head>
-<body class="welcome text-gray-700 tracking-wider">
+<body class="text-gray-700 tracking-wider">
 
 @include('flash::message')
 
-<div class="flex justify-between">
+<div class="md:flex md:justify-between bg-gradient-to-r from-primary-900 to-secondary-900 h-48 md:h-32">
     <div class="text-white uppercase text-2xl pl-8 pt-4">
         {{ Html::link('/', config('app.name', 'Laravel')) }}
     </div>
 
     @if (Route::has('login'))
-        <div class="pr-8 pt-4">
+        <div class="pl-8 md:pl-0 pr-8 pt-20 md:pt-4">
             @guest
                 {{ Html::linkRoute('login', __('common.nav.login'), null, ['class' => 'text-primary-300 hover:text-white uppercase pr-4 transition-all duration-200']) }}
 

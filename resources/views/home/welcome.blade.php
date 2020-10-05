@@ -8,7 +8,7 @@
             {{ config('app.name', 'Laravel') }}
         </div>
 
-        <div class="pt-8">
+        <div class="py-8">
             <span class="pl-2 pr-2">v{{ env('VERSION_NUMBER') }}</span>
             {{ Html::link('https://github.com/kaishiyoku/Crystal-RSS', 'GitHub', ['class' => 'text-primary-900 hover:text-black uppercase pl-2 pr-2 transition-all duration-200']) }}
             {{ Html::linkRoute('home.imprint', __('common.nav.imprint'), null, ['class' => 'text-primary-900 hover:text-black uppercase pl-2 pr-2 transition-all duration-200']) }}
