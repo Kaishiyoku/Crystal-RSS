@@ -30,7 +30,7 @@
     <div class="mb-6 bg-gradient-to-r from-primary-900 to-secondary-900 shadow">
         <div class="container lg:px-20 mx-auto">
             <div class="md:flex md:items-center">
-                <div class="flex items-center pt-3 md:pt-0">
+                <div class="flex items-center py-3 md:py-0">
                     <img src="{{ asset('img/logo_small.png') }}" class="h-8 pl-2 lg:pl-0 mr-2" alt="Logo"/>
                     <div class="text-white text-xl mr-2"><a href="{{ URL::route('home.index') }}">{{ config('app.name', 'Laravel') }}</a></div>
                 </div>

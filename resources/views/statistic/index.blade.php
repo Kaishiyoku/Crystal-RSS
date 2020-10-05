@@ -24,7 +24,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card text-sm md:text-base">
         @foreach ($categories as $category)
             <div class="mb-5">
                 <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">

@@ -6,7 +6,7 @@
             </label>
         @endif
 
-        <div class="flex-grow pl-5">
+        <div class="flex-grow px-5">
             <div>
                 {{ Html::link($feedItem->url, $feedItem->title, ['class' => 'link']) }}
 
