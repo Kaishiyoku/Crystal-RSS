@@ -56,7 +56,7 @@
     @if ($unreadFeedItems->count() === 0)
         {{ Html::image('img/no_unread_items.svg', __('feed.index.no_unread_items'), ['class' => 'h-64 mx-auto']) }}
 
-        <p class="italic mt-3 text-center"><i>@lang('feed.index.no_unread_items')</i></p>
+        <p class="italic mt-3 text-center">@lang('feed.index.no_unread_items')</p>
     @else
         <div>
             {{ $unreadFeedItems->links() }}

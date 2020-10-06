@@ -6,18 +6,52 @@
     <h1>
         @lang('statistic.index.title')
 
-        <span class="headline-info">@lang('statistic.index.last_month')</span>
+        <span class="headline-info">
+            @if ($endingDate->isCurrentMonth())
+                @lang('statistic.index.last_month')
+            @else
+                {{ utf8_encode($endingDate->formatLocalized(__('common.localized_date_formats.month_and_year'))) }}
+            @endif
+        </span>
     </h1>
 
-    <div class="card">
-        {!! $dailyArticlesChart->assets() !!}
-        {!! $dailyArticlesChart->render() !!}
+    <div class="mb-5 text-right">
+        <a
+            href="{{ route('statistics.index', ['startingYear' => $previousDate->year, 'startingMonth' => $previousDate->month]) }}"
+            class="flex btn btn-outline-primary"
+        >
+            <i class="fas fa-angle-left"></i>
+            {{ __('pagination.previous') }}
+        </a>
+
+        @if ($nextDate->isBefore(now()))
+            <a
+                href="{{ route('statistics.index', ['startingYear' => $nextDate->year, 'startingMonth' => $nextDate->month]) }}"
+                class="btn btn-outline-primary"
+            >
+                {{ __('pagination.next') }}
+                <i class="fas fa-angle-right"></i>
+            </a>
+        @endif
     </div>
 
+    @if ($feedItemsCount === 0)
+        {{ Html::image('img/no_unread_items.svg', __('feed.index.no_unread_items'), ['class' => 'h-64 mx-auto']) }}
+
+        <p class="italic mt-3 text-center">{{ __('statistic.index.no_data_available') }}</p>
+    @else
+        <div class="card">
+            {!! $dailyArticlesChart->assets() !!}
+            {!! $dailyArticlesChart->render() !!}
+        </div>
+    @endif
+
     <div class="card my-5 px-2 py-3">
-        <p class="mb-5">
-            @lang('statistic.index.average_time_between_retrieval_and_read'): {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
-        </p>
+        @if ($feedItemsCount > 0)
+            <p class="mb-5">
+                @lang('statistic.index.average_time_between_retrieval_and_read'): {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
+            </p>
+        @endif
 
         <p>
             @lang('statistic.index.total_number_of_feed_items'): {{ auth()->user()->feedItems()->count() }}

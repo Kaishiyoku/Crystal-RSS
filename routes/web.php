@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/profile/settings/edit', [ProfileController::class, 'updateSettings'])->name('profile.update_settings');
 
     // Statistics
-    Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics.index');
+    Route::get('/statistics/{startingYear?}/{startingMonth?}', [StatisticController::class, 'index'])->name('statistics.index');
 
     // FilterKeywords
     Route::resource('/filter_keywords', FilterKeywordController::class);

@@ -17,6 +17,10 @@ return [
         'title' => 'Page Expired',
         'message' => 'Sorry, your session has expired. Please refresh and try again.',
     ],
+    422 => [
+        'title' => 'Unprocessable Entity',
+        'message' => 'Sorry, your request is malformed.',
+    ],
     429 => [
         'title' => 'Too Many Requests',
         'message' => 'Sorry, you are making too many requests to our servers.',

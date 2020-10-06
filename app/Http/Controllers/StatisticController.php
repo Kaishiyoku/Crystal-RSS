@@ -9,21 +9,38 @@ use Khill\Duration\Duration;
 
 class StatisticController extends Controller
 {
-    public function index()
+    public function index($startingYear = null, $startingMonth = null)
     {
-        $minDate = Carbon::now()->subMonth()->startOfDay();
-        $maxDate = Carbon::now()->endOfDay();
+        if (($startingYear && !$startingMonth) || ($startingMonth && ($startingYear < 2000 || $startingMonth < 1 || $startingMonth > 12))) {
+            abort(422);
+        }
 
-        $dailyArticlesChart = $this->getDailyArticlesChart($minDate, $maxDate);
+        if ($startingYear == now()->year && $startingMonth == now()->month) {
+            $startingYear = null;
+            $startingMonth = null;
+        }
+
+        $startingDate = $startingYear !== null ? Carbon::create($startingYear, $startingMonth) : now()->subMonth()->startOfDay();
+        $endingDate = $startingYear !== null ? $startingDate->copy()->endOfMonth()->endOfDay() : now()->endOfDay();
+
+        if ($startingDate->isAfter(now())) {
+            abort(422);
+        }
+
+        $previousDate = $startingYear !== null ? $startingDate->copy()->subMonth()->startOfMonth() : now()->subMonth()->startOfMonth();
+        $nextDate = $startingYear !== null ? $startingDate->copy()->addMonth()->startOfMonth() : now()->addMonth()->startOfMonth();
+
+        $dailyArticlesChart = $this->getDailyArticlesChart($startingDate, $endingDate);
 
         $feedItems = auth()->user()->feedItems(false)
-            ->where('posted_at', '>=', $minDate)
-            ->where('posted_at', '<=', $maxDate)
+            ->where('posted_at', '>=', $startingDate)
+            ->where('posted_at', '<=', $endingDate)
             ->whereNotNull('read_at')
             ->get([
                 'posted_at',
                 'read_at'
             ]);
+        $feedItemsCount = $feedItems->count();
 
         $averageTimeInSecondsBetweenRetrievalAndRead = round($feedItems->map(function ($feedItem) {
             return $feedItem->posted_at->diffInSeconds($feedItem->read_at);
@@ -33,14 +50,23 @@ class StatisticController extends Controller
 
         $categories = auth()->user()->categories()->with('feeds')->get();
 
-        return view('statistic.index', compact('dailyArticlesChart', 'averageDurationBetweenRetrievalAndRead', 'categories'));
+        return view('statistic.index', compact(
+            'feedItemsCount',
+            'dailyArticlesChart',
+            'averageDurationBetweenRetrievalAndRead',
+            'categories',
+            'startingDate',
+            'endingDate',
+            'previousDate',
+            'nextDate',
+        ));
     }
 
-    private function getDailyArticlesChart($minDate, $maxDate)
+    private function getDailyArticlesChart($startingDate, $endingDate)
     {
         $reportFeedItems = auth()->user()->reportFeedItems()
-            ->where('date', '>=', $minDate)
-            ->where('date', '<=', $maxDate);
+            ->where('date', '>=', $startingDate)
+            ->where('date', '<=', $endingDate);
 
         $items = $reportFeedItems->get()->map(function (ReportFeedItem $reportFeedItem) {
             return [

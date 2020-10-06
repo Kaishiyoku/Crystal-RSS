@@ -49,6 +49,7 @@ return [
     ],
     'localized_date_formats' => [
         'date_with_day_of_week' => '%a %Y-%m-%d',
+        "month_and_year" => "%B %Y",
     ],
     'none' => 'None',
     'details' => 'Details',

@@ -2,5 +2,5 @@
 
 return [
     'previous' => 'Zurück',
-    'next' => 'Vor &raquo;',
+    'next' => 'Vor',
 ];

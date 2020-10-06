@@ -45,10 +45,11 @@ return [
     ],
     "date_formats" => [
         "datetime" => "d.m.Y H:i",
-        "date" => "d.m.Y"
+        "date" => "d.m.Y",
     ],
     "localized_date_formats" => [
-        "date_with_day_of_week" => "%a %d.%m.%Y"
+        "date_with_day_of_week" => "%a %d.%m.%Y",
+        "month_and_year" => "%B %Y",
     ],
     "none" => "Keine",
     "details" => "Details",
