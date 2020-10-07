@@ -61,24 +61,24 @@ class Category extends ColoredModel
         return $this->hasMany(Feed::class);
     }
 
-    public function getTotalFeedCount()
+    public function getTotalFeedItemsCount()
     {
         return $this->feeds->map(function (Feed $feed) {
-            return $feed->feedItems()->count();
+            return $feed->reportFeeds->sum('feed_items_count');
         })->sum();
     }
 
     public function getTotalUpVoteCount()
     {
         return $this->feeds->map(function (Feed $feed) {
-            return $feed->getTotalUpVoteCount();
+            return $feed->reportFeeds->sum('upvotes');
         })->sum();
     }
 
     public function getTotalDownVoteCount()
     {
         return $this->feeds->map(function (Feed $feed) {
-            return $feed->getTotalDownVoteCount();
+            return $feed->reportFeeds->sum('downvotes');
         })->sum();
     }
 }

@@ -74,7 +74,7 @@
                             {{ $category->getTotalDownVoteCount() }}
                         </span>
                     </div>
-                    <div class="w-32 text-lg text-right">{{ $category->getTotalFeedCount() }}</div>
+                    <div class="w-32 text-lg text-right">{{ $category->getTotalFeedItemsCount() }}</div>
                 </div>
 
                 @foreach ($category->feeds as $feed)
@@ -83,15 +83,15 @@
                         <div class="w-24 text-right">
                             <span class="text-success-900">
                                 <i class="fas fa-chevron-up"></i>
-                                {{ $feed->getTotalUpVoteCount() }}
+                                {{ $feed->reportFeeds->sum('upvotes') }}
                             </span>
 
                             <span class="text-danger-900">
                                 <i class="fas fa-chevron-down"></i>
-                                {{ $feed->getTotalDownVoteCount() }}
+                                {{ $feed->reportFeeds->sum('downvotes') }}
                             </span>
                         </div>
-                        <div class="w-32 text-right">{{ $feed->feedItems()->count() }}</div>
+                        <div class="w-32 text-right">{{ $feed->reportFeeds->sum('feed_items_count') }}</div>
                     </div>
                 @endforeach
             </div>

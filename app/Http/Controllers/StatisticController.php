@@ -48,7 +48,7 @@ class StatisticController extends Controller
 
         $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
 
-        $categories = auth()->user()->categories()->with('feeds')->get();
+        $categories = auth()->user()->categories()->with('feeds', 'feeds.reportFeeds')->get();
 
         return view('statistic.index', compact(
             'feedItemsCount',

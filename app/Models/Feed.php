@@ -55,6 +55,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Feed withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Feed withoutTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feed enabled()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ReportFeed[] $reportFeeds
+ * @property-read int|null $report_feeds_count
  */
 class Feed extends ColoredModel
 {
@@ -124,13 +126,8 @@ class Feed extends ColoredModel
         return $this->hasMany(UpdateError::class)->orderBy('created_at', 'desc');
     }
 
-    public function getTotalUpVoteCount()
+    public function reportFeeds()
     {
-        return $this->feedItems()->whereVoteStatus(VoteStatus::Up)->count();
-    }
-
-    public function getTotalDownVoteCount()
-    {
-        return $this->feedItems()->whereVoteStatus(VoteStatus::Down)->count();
+        return $this->hasMany(ReportFeed::class);
     }
 }

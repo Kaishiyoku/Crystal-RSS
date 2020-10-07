@@ -17,7 +17,7 @@ class MigrateReportFeedItems extends Command
      *
      * @var string
      */
-    protected $signature = 'statistics:migrate {--latest}';
+    protected $signature = 'reports:feed-items {--latest}';
 
     /**
      * The console command description.
@@ -97,5 +97,7 @@ class MigrateReportFeedItems extends Command
 
             $this->line('');
         });
+
+        return 0;
     }
 }

@@ -58,6 +58,8 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FilterKeyword[] $filterKeywords
  * @property-read int|null $filter_keywords_count
  * @property-read \Glorand\Model\Settings\Models\ModelSettings $modelSettings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ReportFeed[] $reportFeeds
+ * @property-read int|null $report_feeds_count
  */
 class User extends Authenticatable
 {
@@ -134,7 +136,12 @@ class User extends Authenticatable
 
     public function reportFeedItems()
     {
-        return $this->hasMany(ReportFeedItem::class)->orderBy('date')->orderBy('date');
+        return $this->hasMany(ReportFeedItem::class)->orderBy('date');
+    }
+
+    public function reportFeeds()
+    {
+        return $this->hasMany(ReportFeed::class);
     }
 
     public function filterKeywords()
