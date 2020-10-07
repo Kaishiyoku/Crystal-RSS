@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\ReportFeedItem;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Kaishiyoku\LaravelRecharts\LaravelRecharts;
 use Khill\Duration\Duration;
 
 class StatisticController extends Controller
 {
+    public const CATEGORIES_CACHE_KEY = 'statistic_categories';
+
     public function index($startingYear = null, $startingMonth = null)
     {
         if (($startingYear && !$startingMonth) || ($startingMonth && ($startingYear < 2000 || $startingMonth < 1 || $startingMonth > 12))) {
@@ -48,7 +51,7 @@ class StatisticController extends Controller
 
         $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
 
-        $categories = auth()->user()->categories()->with('feeds', 'feeds.reportFeeds')->get();
+        $categories = self::getCategoriesWithFeedData(auth()->user());
 
         return view('statistic.index', compact(
             'feedItemsCount',
@@ -91,5 +94,15 @@ class StatisticController extends Controller
         $dailyArticlesChart = $laravelRecharts->makeChart($elements, $data->toArray(), 375);
 
         return $dailyArticlesChart;
+    }
+
+    public static function getCategoriesWithFeedData($user)
+    {
+        return Cache::get(self::getCategoriesCacheKeyFor($user));
+    }
+
+    public static function getCategoriesCacheKeyFor($user)
+    {
+        return self::CATEGORIES_CACHE_KEY . '.' . $user->id;
     }
 }

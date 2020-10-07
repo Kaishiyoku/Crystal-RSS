@@ -62,36 +62,36 @@
         @foreach ($categories as $category)
             <div class="mb-5">
                 <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">
-                    <div class="w-full text-lg" {!! $category->getStyle() !!}>{{ $category->title }}</div>
+                    <div class="w-full text-lg" {!! $category->style !!}>{{ $category->title }}</div>
                     <div class="w-24 text-right">
                         <span class="text-success-900">
                             <i class="fas fa-chevron-up"></i>
-                            {{ $category->getTotalUpVoteCount() }}
+                            {{ $category->total_upvote_count }}
                         </span>
 
                         <span class="text-danger-900">
                             <i class="fas fa-chevron-down"></i>
-                            {{ $category->getTotalDownVoteCount() }}
+                            {{ $category->total_downvote_count }}
                         </span>
                     </div>
-                    <div class="w-32 text-lg text-right">{{ $category->getTotalFeedItemsCount() }}</div>
+                    <div class="w-32 text-lg text-right">{{ $category->total_feed_items_count }}</div>
                 </div>
 
                 @foreach ($category->feeds as $feed)
                     <div class="flex px-2 pb-1 hover:bg-gray-200 transition-all duration-200">
-                        <div class="w-full" {!! $feed->getStyle() !!}>{{ $feed->title }}</div>
+                        <div class="w-full" {!! $feed->style !!}>{{ $feed->title }}</div>
                         <div class="w-24 text-right">
                             <span class="text-success-900">
                                 <i class="fas fa-chevron-up"></i>
-                                {{ $feed->reportFeeds->sum('upvotes') }}
+                                {{ $feed->total_upvote_count }}
                             </span>
 
                             <span class="text-danger-900">
                                 <i class="fas fa-chevron-down"></i>
-                                {{ $feed->reportFeeds->sum('downvotes') }}
+                                {{ $feed->total_downvote_count }}
                             </span>
                         </div>
-                        <div class="w-32 text-right">{{ $feed->reportFeeds->sum('feed_items_count') }}</div>
+                        <div class="w-32 text-right">{{ $feed->total_feed_items_count }}</div>
                     </div>
                 @endforeach
             </div>

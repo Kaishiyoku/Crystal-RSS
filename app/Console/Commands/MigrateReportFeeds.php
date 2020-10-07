@@ -3,11 +3,14 @@
 namespace App\Console\Commands;
 
 use App\Enums\VoteStatus;
+use App\Http\Controllers\StatisticController;
+use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\ReportFeed;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class MigrateReportFeeds extends Command
 {
@@ -92,6 +95,29 @@ class MigrateReportFeeds extends Command
                 }
 
                 $user->reportFeeds()->save($existingReportFeed);
+            });
+
+            Cache::rememberForever(StatisticController::getCategoriesCacheKeyFor($user), function () use ($user) {
+                return $user->categories()
+                    ->with('feeds', 'feeds.reportFeeds')
+                    ->get()
+                    ->map(function (Category $category) use ($user) {
+                        $category->total_feed_items_count = $category->getTotalFeedItemsCount();
+                        $category->total_upvote_count = $category->getTotalUpVoteCount();
+                        $category->total_downvote_count = $category->getTotaldownVoteCount();
+                        $category->style = $category->getStyle();
+
+                        $category->feeds->map(function (Feed $feed) use ($user) {
+                            $feed->total_feed_items_count = $feed->reportFeeds->sum('feed_items_count');
+                            $feed->total_upvote_count = $feed->reportFeeds->sum('upvotes');
+                            $feed->total_downvote_count = $feed->reportFeeds->sum('downvotes');
+                            $feed->style = $feed->getStyle();
+
+                            return $feed;
+                        });
+
+                        return $category;
+                    });
             });
         });
 
