@@ -57,5 +57,5 @@ return [
     "restore" => "Wiederherstellen",
     "back" => "Zurück",
     "send" => "Senden",
-    "close" => "Schließen"
+    "close" => "Schließen",
 ];

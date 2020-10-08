@@ -6,11 +6,12 @@ use App\Models\ReportFeedItem;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Kaishiyoku\LaravelRecharts\LaravelRecharts;
-use Khill\Duration\Duration;
 
 class StatisticController extends Controller
 {
     public const CATEGORIES_CACHE_KEY = 'statistic_categories';
+
+    public const AVERAGE_DURATION_BETWEEN_RETRIEVAL_AND_READ_CACHE_KEY = 'average_duration_between_retrieval_and_read_cache_key';
 
     public function index($startingYear = null, $startingMonth = null)
     {
@@ -33,25 +34,16 @@ class StatisticController extends Controller
         $previousDate = $startingYear !== null ? $startingDate->copy()->subMonth()->startOfMonth() : now()->subMonth()->startOfMonth();
         $nextDate = $startingYear !== null ? $startingDate->copy()->addMonth()->startOfMonth() : now()->addMonth()->startOfMonth();
 
-        $dailyArticlesChart = $this->getDailyArticlesChart($startingDate, $endingDate);
+        $reportFeedItems = auth()->user()->reportFeedItems()
+            ->where('date', '>=', $startingDate)
+            ->where('date', '<=', $endingDate);
+        $feedItemsCount = $reportFeedItems->count();
 
-        $feedItems = auth()->user()->feedItems(false)
-            ->where('posted_at', '>=', $startingDate)
-            ->where('posted_at', '<=', $endingDate)
-            ->whereNotNull('read_at')
-            ->get([
-                'posted_at',
-                'read_at'
-            ]);
-        $feedItemsCount = $feedItems->count();
+        $dailyArticlesChart = $this->getDailyArticlesChart($reportFeedItems, $startingDate, $endingDate);
 
-        $averageTimeInSecondsBetweenRetrievalAndRead = round($feedItems->map(function ($feedItem) {
-            return $feedItem->posted_at->diffInSeconds($feedItem->read_at);
-        })->average());
+        $categories = self::getCategoriesWithFeedData(auth()->user()) ?? collect();
 
-        $averageDurationBetweenRetrievalAndRead = new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
-
-        $categories = self::getCategoriesWithFeedData(auth()->user());
+        $averageDurationBetweenRetrievalAndRead = self::getAverageDurationBetweenRetrievalAndRead(auth()->user());
 
         return view('statistic.index', compact(
             'feedItemsCount',
@@ -65,12 +57,8 @@ class StatisticController extends Controller
         ));
     }
 
-    private function getDailyArticlesChart($startingDate, $endingDate)
+    private function getDailyArticlesChart($reportFeedItems, $startingDate, $endingDate)
     {
-        $reportFeedItems = auth()->user()->reportFeedItems()
-            ->where('date', '>=', $startingDate)
-            ->where('date', '<=', $endingDate);
-
         $items = $reportFeedItems->get()->map(function (ReportFeedItem $reportFeedItem) {
             return [
                 'posted_at' => $reportFeedItem->date->formatLocalized(__('common.localized_date_formats.date_with_day_of_week')),
@@ -104,5 +92,15 @@ class StatisticController extends Controller
     public static function getCategoriesCacheKeyFor($user)
     {
         return self::CATEGORIES_CACHE_KEY . '.' . $user->id;
+    }
+
+    public static function getAverageDurationBetweenRetrievalAndRead($user)
+    {
+        return Cache::get(self::getAverageDurationBetweenRetrievalAndReadCacheKeyFor($user));
+    }
+
+    public static function getAverageDurationBetweenRetrievalAndReadCacheKeyFor($user)
+    {
+        return self::AVERAGE_DURATION_BETWEEN_RETRIEVAL_AND_READ_CACHE_KEY . '.' . $user->id;
     }
 }

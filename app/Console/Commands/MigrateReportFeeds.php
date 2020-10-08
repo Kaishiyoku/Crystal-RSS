@@ -11,6 +11,7 @@ use App\Models\ReportFeed;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Khill\Duration\Duration;
 
 class MigrateReportFeeds extends Command
 {
@@ -95,6 +96,21 @@ class MigrateReportFeeds extends Command
                 }
 
                 $user->reportFeeds()->save($existingReportFeed);
+            });
+
+            Cache::rememberForever(StatisticController::getAverageDurationBetweenRetrievalAndReadCacheKeyFor($user), function () use ($user) {
+                $feedItems = $user->feedItems(false)
+                    ->whereNotNull('read_at')
+                    ->get([
+                        'posted_at',
+                        'read_at'
+                    ]);
+
+                $averageTimeInSecondsBetweenRetrievalAndRead = round($feedItems->map(function ($feedItem) {
+                    return $feedItem->posted_at->diffInSeconds($feedItem->read_at);
+                })->average());
+
+                return new Duration($averageTimeInSecondsBetweenRetrievalAndRead);
             });
 
             Cache::rememberForever(StatisticController::getCategoriesCacheKeyFor($user), function () use ($user) {

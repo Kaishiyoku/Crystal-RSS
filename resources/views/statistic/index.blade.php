@@ -47,9 +47,10 @@
     @endif
 
     <div class="card my-5 px-2 py-3">
-        @if ($feedItemsCount > 0)
+        @if ($averageDurationBetweenRetrievalAndRead)
             <p class="mb-5">
-                @lang('statistic.index.average_time_between_retrieval_and_read'): {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
+                @lang('statistic.index.average_time_between_retrieval_and_read'):
+                {{ $averageDurationBetweenRetrievalAndRead->humanize() }}
             </p>
         @endif
 
@@ -58,45 +59,47 @@
         </p>
     </div>
 
-    <div class="card text-sm md:text-base">
-        @foreach ($categories as $category)
-            <div class="mb-5">
-                <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">
-                    <div class="w-full text-lg" {!! $category->style !!}>{{ $category->title }}</div>
-                    <div class="w-24 text-right">
-                        <span class="text-success-900">
-                            <i class="fas fa-chevron-up"></i>
-                            {{ $category->total_upvote_count }}
-                        </span>
-
-                        <span class="text-danger-900">
-                            <i class="fas fa-chevron-down"></i>
-                            {{ $category->total_downvote_count }}
-                        </span>
-                    </div>
-                    <div class="w-32 text-lg text-right">{{ $category->total_feed_items_count }}</div>
-                </div>
-
-                @foreach ($category->feeds as $feed)
-                    <div class="flex px-2 pb-1 hover:bg-gray-200 transition-all duration-200">
-                        <div class="w-full" {!! $feed->style !!}>{{ $feed->title }}</div>
+    @if ($categories->isNotEmpty())
+        <div class="card text-sm md:text-base">
+            @foreach ($categories as $category)
+                <div class="mb-5">
+                    <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">
+                        <div class="w-full text-lg" {!! $category->style !!}>{{ $category->title }}</div>
                         <div class="w-24 text-right">
                             <span class="text-success-900">
                                 <i class="fas fa-chevron-up"></i>
-                                {{ $feed->total_upvote_count }}
+                                {{ $category->total_upvote_count }}
                             </span>
 
                             <span class="text-danger-900">
                                 <i class="fas fa-chevron-down"></i>
-                                {{ $feed->total_downvote_count }}
+                                {{ $category->total_downvote_count }}
                             </span>
                         </div>
-                        <div class="w-32 text-right">{{ $feed->total_feed_items_count }}</div>
+                        <div class="w-32 text-lg text-right">{{ $category->total_feed_items_count }}</div>
                     </div>
-                @endforeach
-            </div>
 
-            <hr/>
-        @endforeach
-    </div>
+                    @foreach ($category->feeds as $feed)
+                        <div class="flex px-2 pb-1 hover:bg-gray-200 transition-all duration-200">
+                            <div class="w-full" {!! $feed->style !!}>{{ $feed->title }}</div>
+                            <div class="w-24 text-right">
+                                <span class="text-success-900">
+                                    <i class="fas fa-chevron-up"></i>
+                                    {{ $feed->total_upvote_count }}
+                                </span>
+
+                                <span class="text-danger-900">
+                                    <i class="fas fa-chevron-down"></i>
+                                    {{ $feed->total_downvote_count }}
+                                </span>
+                            </div>
+                            <div class="w-32 text-right">{{ $feed->total_feed_items_count }}</div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <hr/>
+            @endforeach
+        </div>
+    @endif
 @endsection
