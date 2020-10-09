@@ -57,7 +57,7 @@ class HomeController extends Controller
         $name = $validatedData['name'];
         $content = $validatedData['content'];
 
-        Mail::to(env('CONTACT_MAIL_ADDRESS'))->send(new ContactFormSubmitted($email, $name, $content));
+        Mail::to(config('app.contact_mail_address'))->send(new ContactFormSubmitted($email, $name, $content));
 
         flash(__('home.contact.success'))->success();
 
