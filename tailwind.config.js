@@ -122,6 +122,10 @@ module.exports = {
                 16: '16rem',
                 32: '32rem',
             },
+            shadowOutline: {
+                'shadow': '0 0 0 .2em',
+                'alpha': '.25'
+            },
         },
     },
     variants: {},
