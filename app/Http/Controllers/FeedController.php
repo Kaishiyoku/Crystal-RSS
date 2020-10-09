@@ -100,7 +100,6 @@ class FeedController extends Controller
     public function searchShow()
     {
         $feeds = $this->getFeedsForSelect();
-        $feedIds = auth()->user()->feeds()->pluck('id');
 
         return view('feed.search_show', compact('feeds', 'feedIds'));
     }
@@ -109,12 +108,7 @@ class FeedController extends Controller
     {
         $dateFormat = 'Y-m-d';
 
-        /*** @var Collection $feeds */
-        $feeds = $this->getFeedsForSelect();
-
-        $allFeedIds = collect($feeds)->map(function ($item) {
-            return array_keys($item);
-        })->flatten();
+        $allFeedIds = auth()->user()->feeds()->pluck('id');
 
         $rules = [
             'term' => ['required'],
@@ -125,16 +119,21 @@ class FeedController extends Controller
 
         $validatedData = $request->validate($rules);
 
+        $feeds = $this->getFeedsForSelect();
+
         $term = $validatedData['term'];
+        $feedIds = collect($validatedData['feed_ids'])->map(function ($feedId) {
+            return (int) $feedId;
+        })->toArray();
 
         // filter out invalid feed-IDs
-        $selectedFeedIds = $allFeedIds->filter(function ($feedId) use ($validatedData) {
-            return in_array($feedId, $validatedData['feed_ids']);
+        $selectedFeedIds = $allFeedIds->filter(function ($feedId) use ($feedIds) {
+            return in_array($feedId, $feedIds, true);
         });
         $dateFrom = createDateFromStr($validatedData['date_from'], $dateFormat);
         $dateTill = createDateFromStr($validatedData['date_till'], $dateFormat);
 
-        $foundFeedItemIdsFromIndex = FeedItem::search($request->get('term'))
+        $foundFeedItemIdsFromIndex = FeedItem::search($term)
             ->orderBy('posted_at', 'desc')
             ->keys();
 
