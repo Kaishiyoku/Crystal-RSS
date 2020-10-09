@@ -43,7 +43,8 @@ return [
     ],
 
     'post_creation_fn' => function (\App\Models\User $user) {
-        $user = \App\Http\Controllers\Auth\RegisterController::createApiToken($user);
+        $user->api_token = Uuid::uuid4();
+        $user->save();
 
         return \App\Http\Controllers\Auth\RegisterController::createDefaultCategory($user);
     },

@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
 
 class AddApiTokenToUsersTable extends Migration
 {
@@ -15,14 +16,15 @@ class AddApiTokenToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('api_token', 60);
+            $table->string('api_token', 60)->nullable();
         });
 
         // create unique tokens for existing users
         $users = User::all();
 
         $users->each(function (User $user) {
-            \App\Http\Controllers\Auth\RegisterController::createApiToken($user);
+            $user->api_token = Uuid::uuid4();
+            $user->save();
         });
 
         Schema::table('users', function (Blueprint $table) {
