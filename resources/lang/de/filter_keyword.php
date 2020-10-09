@@ -9,10 +9,6 @@ return [
         'title' => 'Keyword hinzufügen',
         'success' => 'Keyword erstellt.',
     ],
-    'edit' => [
-        'title' => 'Keyword „:value” ändern',
-        'success' => 'Keyword geändert.',
-    ],
     'destroy' => [
         'success' => 'Keyword gelöscht.',
     ],

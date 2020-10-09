@@ -24,7 +24,7 @@ class FeedController extends Controller
     {
         // check if there are any unread feed items
         $unreadFeedItemsCount = auth()->user()->feeds()->whereCategoryId($id)->withCount(['feedItems' => function ($query) {
-            return $query->unread()->keywordFiltered(auth()->user());
+            return $query->unread()->unhidden();
         }])->get()->reduce(function ($carry, Feed $feed) {
             return $carry + $feed->feed_items_count;
         }, 0);
@@ -38,8 +38,8 @@ class FeedController extends Controller
 
     public function history()
     {
-        $totalCountReadFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->keywordFiltered(auth()->user())->count();
-        $readFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->keywordFiltered(auth()->user())->with('categories')->paginate($this->getPerPage());
+        $totalCountReadFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->unhidden()->count();
+        $readFeedItems = auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->unhidden()->with('categories')->paginate($this->getPerPage());
 
         return view('feed.history', compact('totalCountReadFeedItems', 'readFeedItems'));
     }
@@ -137,7 +137,7 @@ class FeedController extends Controller
             ->orderBy('posted_at', 'desc')
             ->keys();
 
-        $foundFeedItemsFromIndex = FeedItem::keywordFiltered(auth()->user())
+        $foundFeedItemsFromIndex = FeedItem::unhidden()
             ->whereIn('id', $foundFeedItemIdsFromIndex)
             ->whereIn('feed_id', $allFeedIds)
             ->when($dateFrom, function ($query) use ($dateFrom) {
@@ -211,7 +211,7 @@ class FeedController extends Controller
 
         $categories = auth()->user()->categories()->with(['feeds' => function ($query) {
             return $query->withCount(['feedItems' => function ($query) {
-                return $query->unread()->keywordFiltered(auth()->user());
+                return $query->unread()->unhidden();
             }]);
         }])->get();
 
@@ -241,7 +241,7 @@ class FeedController extends Controller
             return $query->whereCategoryId($categoryId);
         })->pluck('id');
 
-        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->keywordFiltered(auth()->user())->with('categories');
+        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->unhidden()->with('categories');
 
         return $feedItems;
     }

@@ -52,47 +52,15 @@ class FilterKeywordController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->getValidationRulesWithValueUniqueness());
+        $data = $request->validate($this->getValidationRules());
 
         $filterKeyword = new FilterKeyword($data);
 
         auth()->user()->filterKeywords()->save($filterKeyword);
 
+        markFeedItemsAsHiddenByKeywords(auth()->user());
+
         flash()->success(__('filter_keyword.create.success'));
-
-        return redirect()->route($this->redirectRoute);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\FilterKeyword  $filterKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FilterKeyword $filterKeyword)
-    {
-        $this->authorize('update', $filterKeyword);
-
-        return view('filter_keyword.edit', compact('filterKeyword'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FilterKeyword  $filterKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, FilterKeyword $filterKeyword)
-    {
-        $this->authorize('update', $filterKeyword);
-
-        $data = $request->validate($this->getValidationRulesWithValueUniqueness($filterKeyword->id));
-
-        $filterKeyword->fill($data);
-        $filterKeyword->save();
-
-        flash()->success(__('filter_keyword.edit.success'));
 
         return redirect()->route($this->redirectRoute);
     }
@@ -113,16 +81,11 @@ class FilterKeywordController extends Controller
     }
 
     /**
-     * @param int|null $id
      * @return array
      */
-    protected function getValidationRulesWithValueUniqueness($id = null)
+    protected function getValidationRules()
     {
         $valueUniquessRule = Rule::unique('filter_keywords', 'value')->where('user_id', auth()->user()->id);
-
-        if ($id != null) {
-            $valueUniquessRule = $valueUniquessRule->ignore($id);
-        }
 
         $validationRules = $this->validationRules;
         $validationRules['value'][] = $valueUniquessRule;

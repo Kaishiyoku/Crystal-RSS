@@ -23,32 +23,35 @@ use Laravel\Scout\Searchable;
  * @property string|null $raw_json
  * @property string $vote_status
  * @property \Illuminate\Support\Carbon|null $favorited_at
+ * @property \Illuminate\Support\Carbon|null $hidden_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\Feed $feed
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem favorited()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem keywordFiltered($user)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem read()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unfavorited()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem unread()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereAuthor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereChecksum($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFavoritedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereFeedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereImageUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem wherePostedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereRawJson($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereReadAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedItem whereVoteStatus($value)
+ * @method static Builder|FeedItem favorited()
+ * @method static Builder|FeedItem includesKeywords($user)
+ * @method static Builder|FeedItem newModelQuery()
+ * @method static Builder|FeedItem newQuery()
+ * @method static Builder|FeedItem query()
+ * @method static Builder|FeedItem read()
+ * @method static Builder|FeedItem unfavorited()
+ * @method static Builder|FeedItem unhidden()
+ * @method static Builder|FeedItem unread()
+ * @method static Builder|FeedItem whereAuthor($value)
+ * @method static Builder|FeedItem whereChecksum($value)
+ * @method static Builder|FeedItem whereContent($value)
+ * @method static Builder|FeedItem whereFavoritedAt($value)
+ * @method static Builder|FeedItem whereFeedId($value)
+ * @method static Builder|FeedItem whereHiddenAt($value)
+ * @method static Builder|FeedItem whereId($value)
+ * @method static Builder|FeedItem whereImageUrl($value)
+ * @method static Builder|FeedItem wherePostedAt($value)
+ * @method static Builder|FeedItem whereRawJson($value)
+ * @method static Builder|FeedItem whereReadAt($value)
+ * @method static Builder|FeedItem whereTitle($value)
+ * @method static Builder|FeedItem whereUrl($value)
+ * @method static Builder|FeedItem whereUserId($value)
+ * @method static Builder|FeedItem whereVoteStatus($value)
  * @mixin \Eloquent
  */
 class FeedItem extends Model
@@ -101,6 +104,7 @@ class FeedItem extends Model
         'posted_at' => 'datetime',
         'read_at' => 'datetime',
         'favorited_at' => 'datetime',
+        'hidden_at' => 'datetime',
     ];
 
     public function scopeRead($query)
@@ -123,12 +127,19 @@ class FeedItem extends Model
         return $query->whereNull('favorited_at');
     }
 
-    public function scopeKeywordFiltered(Builder $query, $user)
+    public function scopeUnhidden(Builder $query)
+    {
+        return $query->whereNull('hidden_at');
+    }
+
+    public function scopeIncludesKeywords(Builder $query, $user)
     {
         $filterKeywords = $user->filterKeywords;
 
-        $filterKeywords->each(function (FilterKeyword $filterKeyword) use ($query) {
-            $query->where('title', 'not like', '%' . $filterKeyword->value . '%');
+        $filterKeywords->each(function (FilterKeyword $filterKeyword, $i) use ($query) {
+            $queryMethod = $i === 0 ? 'where' : 'orWhere';
+
+            $query->{$queryMethod}('title', 'like', '%' . $filterKeyword->value . '%');
         });
 
         return $query;

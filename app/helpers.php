@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ProcessMarkFeedItemsAsHidden;
 use App\Models\Category;
 use App\Models\FeedItem;
 use App\Models\FeedItemCategory;
@@ -107,5 +108,16 @@ if (! function_exists('createDateFromStr')) {
         } catch (InvalidArgumentException $e) {
             return null;
         }
+    }
+}
+
+if (! function_exists('markFeedItemsAsHiddenByKeywords')) {
+    function markFeedItemsAsHiddenByKeywords($user): int
+    {
+        $feedItems = $user->feedItems()->unhidden()->includesKeywords($user)->whereNull('hidden_at')->get();
+
+        ProcessMarkFeedItemsAsHidden::dispatch($feedItems);
+
+        return $feedItems->count();
     }
 }

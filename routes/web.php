@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/statistics/{startingYear?}/{startingMonth?}', [StatisticController::class, 'index'])->name('statistics.index');
 
     // FilterKeywords
-    Route::resource('/filter_keywords', FilterKeywordController::class);
+    Route::resource('/filter_keywords', FilterKeywordController::class)->only(['index', 'create', 'store', 'destroy']);
 
     /* ****************
      * Administrators *

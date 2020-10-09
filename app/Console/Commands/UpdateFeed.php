@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
@@ -146,5 +147,7 @@ class UpdateFeed extends Command
             $this->line('-----');
             $this->info('');
         });
+
+        Artisan::call(MarkKeywordFilteredFeedItems::class);
     }
 }
