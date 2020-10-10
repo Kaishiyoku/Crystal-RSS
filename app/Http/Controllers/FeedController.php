@@ -241,7 +241,7 @@ class FeedController extends Controller
             return $query->whereCategoryId($categoryId);
         })->pluck('id');
 
-        $feedItems = auth()->user()->feedItems()->unread()->whereIn('feed_id', $feedIds)->unhidden()->with('categories');
+        $feedItems = auth()->user()->feedItems()->unread()->unhidden()->whereIn('feed_id', $feedIds)->with('categories');
 
         return $feedItems;
     }
