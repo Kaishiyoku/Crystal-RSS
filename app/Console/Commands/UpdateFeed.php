@@ -95,7 +95,8 @@ class UpdateFeed extends Command
 
                                     $user->feedItems()->save($newFeedItem);
 
-                                    if ($user->settings()->get('feed_items.mark_duplicates_as_read_automatically') && $newFeedItem->isDuplicate()) {
+                                    if ($user->settings()->get('feed_items.mark_duplicates_as_read_automatically')
+                                        && ($newFeedItem->isDuplicate() || $newFeedItem->hasDuplicates())) {
                                         $newFeedItem->read_at = $newLastCheckedAt;
                                         $newFeedItem->save();
                                     }
