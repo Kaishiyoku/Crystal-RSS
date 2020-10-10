@@ -91,7 +91,7 @@ return [
                 'connection' => 'redis',
                 'queue' => ['feed'],
                 'balance' => 'simple',
-                'processes' => 1,
+                'processes' => 10,
                 'tries' => 3,
             ],
         ],
