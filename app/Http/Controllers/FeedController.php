@@ -101,7 +101,7 @@ class FeedController extends Controller
     {
         $feeds = $this->getFeedsForSelect();
 
-        return view('feed.search_show', compact('feeds', 'feedIds'));
+        return view('feed.search_show', compact('feeds'));
     }
 
     public function searchResult(Request $request)
