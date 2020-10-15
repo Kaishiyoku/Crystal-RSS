@@ -4,7 +4,7 @@
 
 @section('content')
     @if (auth()->user()->feeds()->invalidAndEnabled()->count() > 0)
-        @include('shared._alert', ['content' => __('feed.you_have_invalid_feeds'), 'link' => Html::linkRoute('feed.manage.index', __('feed.check_feeds'), null, ['class' => 'btn btn-dark btn-sm']), 'type' => 'danger'])
+        @include('shared._alert', ['content' => __('feed.you_have_invalid_feeds'), 'link' => Html::linkRoute('feed.manage.index', __('feed.check_feeds'), null, ['class' => 'btn btn-sm btn-outline-primary-dark']), 'type' => 'danger'])
     @endif
 
     <h1>

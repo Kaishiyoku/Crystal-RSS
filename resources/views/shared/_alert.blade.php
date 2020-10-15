@@ -2,7 +2,7 @@
     {{ $content }}
 
     @if (isset($link))
-        <div>
+        <div class="pt-3">
             {{ $link }}
         </div>
     @endif
