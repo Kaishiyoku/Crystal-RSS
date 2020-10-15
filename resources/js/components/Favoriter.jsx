@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import classNames from 'classnames';
-import * as Logger from 'js-simple-logger';
 import LoadingButton from "./LoadingButton";
 import {isEmpty} from 'lodash';
 import {put} from '../core/request/request';
-
-const logger = Logger.getLogger();
 
 class Favoriter extends Component {
     static propTyes = {

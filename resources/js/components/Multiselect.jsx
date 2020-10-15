@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import * as Logger from 'js-simple-logger';
-import detach from '../core/request/array/detach';
-import concat from '../core/request/array/concat';
-
-const logger = Logger.getLogger();
+import detach from '../core/array/detach';
+import concat from '../core/array/concat';
 
 class Multiselect extends Component {
-    static propTyes = {
+    static propTypes = {
         buttonTitle: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         entries: PropTypes.arrayOf(
@@ -20,6 +17,7 @@ class Multiselect extends Component {
                 })),
             })
         ).isRequired,
+        selectedEntryIds: PropTypes.arrayOf(PropTypes.number).isRequired,
     };
 
     state = {
@@ -28,21 +26,9 @@ class Multiselect extends Component {
 
     componentDidMount() {
         this.setState((prevState, props) => {
-            const selectedEntryIds = this.props.entries.reduce((accum, entry) => {
-                return accum.concat(entry.subEntries.map((subEntry) => subEntry.id));
-            }, []);
-
-            return {selectedEntryIds};
+            return {selectedEntryIds: props.selectedEntryIds};
         });
     }
-
-    handleToggleEntry = (id) => () => {
-        this.setState(({selectedEntryIds}, props) => {
-            const arrFn = selectedEntryIds.includes(id) ? detach : concat;
-
-            return {selectedEntryIds: arrFn(id, selectedEntryIds)};
-        });
-    };
 
     renderDropdownItems() {
         return this.props.entries.map((entry) => {
@@ -69,6 +55,14 @@ class Multiselect extends Component {
         });
     }
 
+    handleToggleEntry = (id) => () => {
+        this.setState(({selectedEntryIds}, props) => {
+            const arrFn = selectedEntryIds.includes(id) ? detach : concat;
+
+            return {selectedEntryIds: arrFn(id, selectedEntryIds)};
+        });
+    };
+
     handleSelectChange = (event) => {
         const selectedEntryIds = [...event.target.options].filter(({selected}) => selected).map(({value}) => value);
 
@@ -77,8 +71,28 @@ class Multiselect extends Component {
         })
     };
 
+    handleToggleMarkAll = () => {
+        this.setState((prevState, props) => {
+            const allEntryIds = this.getAllEntryIds();
+
+            const selectedEntryIds = allEntryIds.length === prevState.selectedEntryIds.length ? [] : allEntryIds;
+
+            return {selectedEntryIds};
+        });
+    };
+
+    getAllEntryIds() {
+        return this.props.entries.reduce((accum, entry) => {
+            return accum.concat(entry.subEntries.map((subEntry) => subEntry.id));
+        }, []);
+    }
+
     getSelectName() {
         return `${this.props.name}[]`;
+    }
+
+    getMarkAllButtonTranslation() {
+        return this.getAllEntryIds().length === this.state.selectedEntryIds.length ? window.trans('select_none') : window.trans('select_all');
     }
 
     renderSelect() {
@@ -120,6 +134,16 @@ class Multiselect extends Component {
                 </a>
 
                 <div id={`${this.props.id}-dropdown`} className="dropdown flex flex-col hidden rounded-md shadow-xl max-h-16 lg:max-h-32">
+                    <button
+                        type="button"
+                        className="dropdown-item"
+                        onClick={this.handleToggleMarkAll}
+                    >
+                        {this.getMarkAllButtonTranslation()}
+                    </button>
+
+                    <div className="dropdown-divider"/>
+
                     {this.renderDropdownItems()}
                 </div>
 

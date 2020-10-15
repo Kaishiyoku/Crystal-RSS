@@ -139,7 +139,7 @@ return [
         'site_url' => 'Site URL',
         'last_checked_at' => 'Last checked at',
         'category_id' => 'Category',
-        'term' => 'Term',
+        'term' => 'Search term',
         'is_enabled' => 'Enabled',
         'current_password' => 'Current password',
         'new_password' => 'New password',

@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import classNames from 'classnames';
-import * as Logger from 'js-simple-logger';
 import LoadingButton from "./LoadingButton";
 import {put} from '../core/request/request';
-
-const logger = Logger.getLogger();
 
 class Voter extends Component {
     static propTyes = {

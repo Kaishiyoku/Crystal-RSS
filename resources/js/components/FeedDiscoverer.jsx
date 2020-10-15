@@ -2,13 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
-import * as Logger from 'js-simple-logger';
 import LoadingButton from "./LoadingButton";
 import {post} from '../core/request/request';
 import Button from './Button';
 import classNames from 'classnames';
-
-const logger = Logger.getLogger();
 
 class FeedDiscoverer extends Component {
     static propTyes = {

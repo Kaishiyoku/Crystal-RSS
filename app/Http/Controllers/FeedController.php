@@ -100,8 +100,9 @@ class FeedController extends Controller
     public function searchShow()
     {
         $feeds = $this->getFeedsForSelect();
+        $selectedFeedIds = auth()->user()->feeds()->pluck('id');
 
-        return view('feed.search_show', compact('feeds'));
+        return view('feed.search_show', compact('feeds', 'selectedFeedIds'));
     }
 
     public function searchResult(Request $request)
@@ -122,14 +123,14 @@ class FeedController extends Controller
         $feeds = $this->getFeedsForSelect();
 
         $term = $validatedData['term'];
-        $feedIds = collect($validatedData['feed_ids'])->map(function ($feedId) {
+        $feedIds = collect($validatedData['feed_ids'] ?? $allFeedIds)->map(function ($feedId) {
             return (int) $feedId;
         })->toArray();
 
         // filter out invalid feed-IDs
         $selectedFeedIds = $allFeedIds->filter(function ($feedId) use ($feedIds) {
             return in_array($feedId, $feedIds, true);
-        });
+        })->values();
         $dateFrom = createDateFromStr($validatedData['date_from'], $dateFormat);
         $dateTill = createDateFromStr($validatedData['date_till'], $dateFormat);
 
@@ -148,7 +149,7 @@ class FeedController extends Controller
             })
             ->paginate($this->getPerPage());
 
-        return view('feed.search_result', ['feeds' => $feeds, 'foundFeedItemsFromIndex' => $foundFeedItemsFromIndex, 'feedIds' => $selectedFeedIds]);
+        return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'selectedFeedIds'));
     }
 
     public function voteUp(Request $request, FeedItem $feedItem)

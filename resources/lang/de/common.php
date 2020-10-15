@@ -58,4 +58,7 @@ return [
     "back" => "Zurück",
     "send" => "Senden",
     "close" => "Schließen",
+    "multiselect" => [
+        'select_all' => 'Alle auswählen',
+    ],
 ];

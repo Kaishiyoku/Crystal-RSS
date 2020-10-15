@@ -2,7 +2,7 @@
     <div class="mb-4">
         {{ Form::label('term', __('validation.attributes.term'), ['class' => 'label']) }}
 
-        {{ Form::text('term', request()->query('term'), ['class' => 'input' . ($errors->has('term') ? ' has-error' : ''), 'required' => true]) }}
+        {{ Form::text('term', request()->query('term'), ['class' => 'input' . ($errors->has('term') ? ' has-error' : ''), 'required' => true, 'placeholder' => __('validation.attributes.term')]) }}
 
         @if ($errors->has('term'))
             <div class="invalid-feedback">
@@ -21,6 +21,7 @@
                     data-name="feed_ids"
                     data-button-title="{{ __('feed.search.feed_ids') }}"
                     data-entries="{{ json_encode($feeds) }}"
+                    data-selected-ids="{{ $selectedFeedIds->toJson() }}"
                 >
                 </div>
             </div>

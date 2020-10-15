@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import * as Logger from 'js-simple-logger';
 import Button from "./Button";
-
-const logger = Logger.getLogger();
 
 class LoadingButton extends Component {
     static propTypes = {

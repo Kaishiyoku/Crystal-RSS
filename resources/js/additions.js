@@ -2,13 +2,10 @@ import Voter from "./components/Voter";
 import baseTranslator from "./baseTranslator";
 import ReactDOM from "react-dom";
 import React from "react";
-import * as Logger from 'js-simple-logger';
 import Favoriter from './components/Favoriter';
 import FeedDiscoverer from './components/FeedDiscoverer';
 import tippy from 'tippy.js';
 import Multiselect from './components/Multiselect';
-
-Logger.setMinimumLogLevel(Logger.getLogLevels().WARN);
 
 $(document).ready(function () {
     window.trans = baseTranslator(window.TRANSLATIONS);
@@ -124,12 +121,14 @@ $(document).ready(function () {
         const buttonTitle = $(this).data('button-title');
         const name = $(this).data('name');
         const entries = $(this).data('entries');
+        const selectedEntryIds = $(this).data('selected-ids');
 
         ReactDOM.render(
             <Multiselect
                 buttonTitle={buttonTitle}
                 name={name}
                 entries={entries}
+                selectedEntryIds={selectedEntryIds}
             />, $(this)[0]
         );
     });

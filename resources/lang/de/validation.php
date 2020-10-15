@@ -140,7 +140,7 @@ return [
         'site_url' => 'Website URL',
         'last_checked_at' => 'Zuletzt geprüft um',
         'category_id' => 'Kategorie',
-        'term' => 'Begriff',
+        'term' => 'Suchbegriff',
         'is_enabled' => 'Aktiv',
         'current_password' => 'Derzeitiges Passwort',
         'new_password' => 'Neues Passwort',
