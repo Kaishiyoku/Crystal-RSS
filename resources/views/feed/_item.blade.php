@@ -1,33 +1,43 @@
 <div class="list-item {{ $feedItem->isDuplicate() > 0 ? 'list-item-duplicate' : '' }}" id="feed-item-{{ $feedItem->id }}" {!! $feedItem->feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
-    <div class="flex items-start py-3 pr-3">
-        @if ($showActions)
-            <label for="feedIds-{{ $feedItem->id }}" class="label-checkbox pl-5">
-                {{ Form::checkbox('feedIds[]', $feedItem->id, false, ['class' => 'checkbox', 'id' => 'feedIds-' . $feedItem->id]) }}
-            </label>
-        @endif
+    <div class="md:flex md:items-start py-3 pr-3">
+        <div class="flex flex-grow">
+            @if ($showActions)
+                <label for="feedIds-{{ $feedItem->id }}" class="label-checkbox pl-5">
+                    {{ Form::checkbox('feedIds[]', $feedItem->id, false, ['class' => 'checkbox', 'id' => 'feedIds-' . $feedItem->id]) }}
+                </label>
+            @endif
 
-        <div class="flex-grow px-5">
-            <div>
-                {{ Html::link($feedItem->url, $feedItem->title, ['class' => 'link']) }}
+            <div class="flex-growpl-5">
+                <div>
+                    {{ Html::link($feedItem->url, $feedItem->title, ['class' => 'link']) }}
 
-                @if ($feedItem->isDuplicate())
-                    <span class="text-muted text-xs">[{{ __('feed.duplicate') }}]</span>
-                @endif
-            </div>
+                    @if ($feedItem->isDuplicate())
+                        <span class="text-muted text-xs">[{{ __('feed.duplicate') }}]</span>
+                    @endif
+                </div>
 
-            <div class="text-sm">
-                <i class="fas fa-rss"></i>
-                <span class="pr-2" {!! $feedItem->feed->getStyle() !!}>
-                    {{ $feedItem->feed->title }}
-                </span>
+                <div class="flex md:block justify-between text-xs md:text-sm">
+                    <span>
+                        <i class="fas fa-rss"></i>
+                        <span class="pr-2" {!! $feedItem->feed->getStyle() !!}>
+                            {{ $feedItem->feed->title }}
+                        </span>
+                    </span>
 
-                <i class="fas fa-tags"></i>
-                @include('feed._categories', ['categories' => $feedItem->categories])
+                    <span class="md:hidden text-right">
+                        {{ $feedItem->posted_at->format(l(DATETIME)) }}
+                    </span>
+
+                    <span class="hidden md:inline-block">
+                        <i class="fas fa-tags"></i>
+                        @include('feed._categories', ['categories' => $feedItem->categories])
+                    </span>
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-3 text-right d-none d-lg-block d-xl-block">
-            <div>{{ $feedItem->posted_at->format(l(DATETIME)) }}</div>
+        <div class="text-right md:w-48 pt-1 md:pt-0">
+            <div class="hidden md:block">{{ $feedItem->posted_at->format(l(DATETIME)) }}</div>
 
             <div>
                 @if (auth()->user()->is_administrator)
