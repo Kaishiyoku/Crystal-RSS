@@ -43,7 +43,7 @@ class Menus
             ->linkIf(!$this->auth->check(), 'home.index', '<i class="fas fa-home"></i> ' . '<span class="d-lg-none d-xl-inline">' . __('common.nav.landing_page') . '</span>');
 
         \LaravelMenu::register('user')
-            ->dropdownIf($this->auth->check(), '<i class="fas fa-user"></i> <span class="hidden md:inline">' . optional($this->auth->user())->name . '</span> ', \LaravelMenu::dropdownContainer()
+            ->dropdownIf($this->auth->check(), '<i class="fas fa-user"></i> ' . optional($this->auth->user())->name, \LaravelMenu::dropdownContainer()
                 ->header(__('common.nav.general'))
                 ->link('feed.history', '<i class="fas fa-history"></i> ' . __('common.nav.history'))
                 ->link('profile.index,profile.edit_password,profile.edit_email,profile.confirm_new_email', '<i class="fas fa-user"></i> ' . __('common.nav.profile'))

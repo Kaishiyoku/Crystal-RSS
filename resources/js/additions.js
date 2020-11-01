@@ -6,6 +6,7 @@ import Favoriter from './components/Favoriter';
 import FeedDiscoverer from './components/FeedDiscoverer';
 import tippy from 'tippy.js';
 import Multiselect from './components/Multiselect';
+import navbarCollapser from './navbarCollapser';
 
 $(document).ready(function () {
     window.trans = baseTranslator(window.TRANSLATIONS);
@@ -149,4 +150,6 @@ $(document).ready(function () {
             return dropdown;
         },
     });
+
+    navbarCollapser();
 });
