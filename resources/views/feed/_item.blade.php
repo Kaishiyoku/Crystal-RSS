@@ -1,5 +1,5 @@
 <div class="list-item {{ $feedItem->isDuplicate() > 0 ? 'list-item-duplicate' : '' }}" id="feed-item-{{ $feedItem->id }}" {!! $feedItem->feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
-    <div class="md:flex md:items-start py-3 pr-3">
+    <div class="{{ classNames('md:flex md:items-start py-3 pr-3', ['pl-3' => !$showActions]) }}">
         <div class="flex flex-grow">
             @if ($showActions)
                 <label for="feedIds-{{ $feedItem->id }}" class="label-checkbox pl-5">
