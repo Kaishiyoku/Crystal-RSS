@@ -178,7 +178,7 @@ class FeedManagerController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param int $íd
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */

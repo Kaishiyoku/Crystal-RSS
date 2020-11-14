@@ -23,7 +23,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function imprint()
     {
@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function showContactForm()
     {
@@ -42,7 +42,7 @@ class HomeController extends Controller
      * Send the contact form via mail.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sendContactForm(Request $request)
     {

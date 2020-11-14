@@ -37,7 +37,7 @@ if (! function_exists('getUnreadFeedItemCountForCategory')) {
 if (! function_exists('formatBoolean')) {
     function formatBoolean(bool $bool): string
     {
-        if ($bool === true || $bool === 1) {
+        if ($bool) {
             $str = __('common.lists.boolean.1');
         } else {
             $str = __('common.lists.boolean.0');

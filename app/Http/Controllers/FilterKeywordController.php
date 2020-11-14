@@ -23,7 +23,7 @@ class FilterKeywordController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -35,7 +35,7 @@ class FilterKeywordController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -48,7 +48,7 @@ class FilterKeywordController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -69,7 +69,7 @@ class FilterKeywordController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\FilterKeyword  $filterKeyword
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(FilterKeyword $filterKeyword)
     {

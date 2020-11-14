@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\ForwardsCalls;
 use IteratorAggregate;
 use JsonSerializable;
+use Traversable;
 
 class ManualPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggregate, JsonSerializable, Jsonable
 {
@@ -94,7 +95,7 @@ class ManualPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggr
     }
 
     /**
-     * @return \ArrayIterator
+     * @return Traversable
      */
     public function getIterator()
     {

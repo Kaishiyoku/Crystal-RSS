@@ -29,9 +29,9 @@ class ContactFormSubmitted extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param $email
-     * @param $name
-     * @param $content
+     * @param string $email
+     * @param string $name
+     * @param string $content
      */
     public function __construct($email, $name, $content)
     {

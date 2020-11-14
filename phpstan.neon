@@ -13,7 +13,6 @@ parameters:
         - '#Unsafe usage of new static#'
 
     excludes_analyse:
-        - ./*/*/FileToBeExcluded.php
         - ./*/*/LoginController.php
         - ./*/*/DailyArticlesChart.php
 
