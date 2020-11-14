@@ -1,9 +1,17 @@
 module.exports = {
-    purge: [
-        './resources/views/**/*.blade.php',
-        './resources/css/**/*.css',
-        './resources/js/**/*.jsx',
-    ],
+    future: {
+        purgeLayersByDefault: true,
+        defaultLineHeights: true,
+        standardFontWeights: true,
+    },
+    purge: {
+        layers: ['utilities'],
+        content: [
+            './resources/views/**/*.blade.php',
+            './resources/css/**/*.css',
+            './resources/js/**/*.jsx',
+        ],
+    },
     theme: {
         extend: {
             colors: {
