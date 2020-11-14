@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 
 return [
+
+    /*
+     * Whether or not the Opis Closure serialization is enabled
+     */
+    'enable_serialization' => true,
+
     /*
     * The class name of the user model to be used.
     */
@@ -26,9 +32,9 @@ return [
         'password' => [
             'validation_rules' => 'string|min:6',
             'secret' => true,
-            'modifier_fn' => function ($value) {
+            'modifier_fn' => \Opis\Closure\serialize(function ($value) {
                 return Hash::make($value);
-            },
+            }),
         ],
         'is_active' => [
             'validation_rules' => 'boolean',
@@ -42,11 +48,11 @@ return [
         ],
     ],
 
-    'post_creation_fn' => function (\App\Models\User $user) {
+    'post_creation_fn' => \Opis\Closure\serialize(function ($user) {
         $user->api_token = Uuid::uuid4();
         $user->save();
 
         return \App\Http\Controllers\Auth\RegisterController::createDefaultCategory($user);
-    },
+    }),
 
 ];
