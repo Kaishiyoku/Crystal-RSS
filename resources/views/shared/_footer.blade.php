@@ -2,8 +2,8 @@
     <div class="text-muted">
         {{ getYearsFrom(2017) }},
 
-        {{ env('AUTHOR') }},
+        {{ config('app.author') }},
 
-        v{{ env('VERSION_NUMBER') }}
+        v{{ config('app.version_number') }}
     </div>
 </footer>

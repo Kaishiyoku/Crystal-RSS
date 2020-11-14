@@ -17,6 +17,10 @@ return [
 
     'contact_mail_address' => env('CONTACT_MAIL_ADDRESS'),
 
+    'author' => env('AUTHOR'),
+
+    'version_number' => env('VERSION_NUMBER'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

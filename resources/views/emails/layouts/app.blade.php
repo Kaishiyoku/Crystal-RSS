@@ -43,9 +43,9 @@
 <div class="footer">
     {{ getYearsFrom(2017) }},
 
-    {{ env('AUTHOR') }},
+    {{ config('app.author') }},
 
-    v{{ env('VERSION_NUMBER') }}
+    v{{ config('app.version_number') }}
 
     @yield('footer')
 </div>
