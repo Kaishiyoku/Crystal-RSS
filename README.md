@@ -10,11 +10,20 @@ Simple web-based RSS feed reader.
 
 Table of contents
 =================
+  * [Upgrade notices](#upgrade-notices)
   * [Installation](#installation)
   * [Screenshots](#screenshots)
   * [License](#license)
   * [Author](#author)
-  
+
+Upgrade notices
+===============
+
+Upgrading from 1.8.* to 2.0
+---------------------------
+During the migration process all entries of the `feed_item_feed_item_category` table are being deleted.
+If you want to keep the data please export them as SQL statements first, so you can re-import them after migration is finished. 
+
 Installation
 ============
 1. Download the latest release: https://github.com/Kaishiyoku/Crystal-RSS/releases/latest
