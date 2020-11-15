@@ -19,7 +19,7 @@ Table of contents
 Upgrade notices
 ===============
 
-Upgrading from 1.8.* to 2.0
+Upgrading from 1.8.* to 2.0.*
 ---------------------------
 During the migration process all entries of the `feed_item_feed_item_category` table are being deleted.
 If you want to keep the data please export them as SQL statements first, so you can re-import them after migration is finished. 
