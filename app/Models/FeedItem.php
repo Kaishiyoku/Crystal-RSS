@@ -107,6 +107,22 @@ class FeedItem extends Model
         'hidden_at' => 'datetime',
     ];
 
+    public const COMMON_COLUMNS = [
+        'id',
+        'user_id',
+        'feed_id',
+        'url',
+        'title',
+        'author',
+        'image_url',
+        'posted_at',
+        'checksum',
+        'read_at',
+        'vote_status',
+        'favorited_at',
+        'hidden_at'
+    ];
+
     public function scopeRead($query)
     {
         return $query->whereNotNull('read_at');
