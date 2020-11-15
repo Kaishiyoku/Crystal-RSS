@@ -5,7 +5,7 @@
 Simple web-based RSS feed reader.
 
 <p align="center">
- <img src="https://main.andreas-wiedel.de/myfiles/other/crystal-rss/Crystal_RSS_Logo.svg" alt="Logo" width="125"/>
+ <img src="https://crystal-rss.rocks/img/logo.svg" alt="Logo" width="125"/>
 </p>
 
 Table of contents
@@ -19,7 +19,7 @@ Table of contents
 Upgrade notices
 ===============
 
-Upgrading from 1.8.* to 2.0
+Upgrading from 1.8.* to 2.0.*
 ---------------------------
 During the migration process all entries of the `feed_item_feed_item_category` table are being deleted.
 If you want to keep the data please export them as SQL statements first, so you can re-import them after migration is finished. 
