@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\VoteStatus;
-use App\Jobs\ProcessFeedItems;
-use App\Libraries\ManualPaginator;
+use App\Jobs\ProcessMarkFeedItemAsRead;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UpdateLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
 class FeedController extends Controller
 {
@@ -53,17 +51,15 @@ class FeedController extends Controller
 
     public function markAllAsRead($categoryId = null)
     {
-        $unreadFeedItems = $this->getUnreadFeedItems($categoryId);
+        $unreadFeedItems = $this->getUnreadFeedItems($categoryId)->get();
         $minNumber = (int) config('feed.deferred_min_number');
-        $date = Carbon::now();
-
         if (config('feed.deferred_mark_as_read') && $unreadFeedItems->count() > $minNumber) {
-            $unreadFeedItems = new ManualPaginator($unreadFeedItems->get(), (int) config('feed.deferred_per_page'));
-
-            $unreadFeedItems->pages()->each(function ($items) use ($date) {
-                ProcessFeedItems::dispatch($items, $date);
+            $unreadFeedItems->each(function (FeedItem $feedItem) {
+                ProcessMarkFeedItemAsRead::dispatch($feedItem);
             });
         } else {
+            $date = now();
+
             $unreadFeedItems->get()->each(function ($feedItem) use ($date) {
                 $feedItem->read_at = $date;
 

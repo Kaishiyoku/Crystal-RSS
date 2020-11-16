@@ -9,25 +9,25 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
-class ProcessFeedItems implements ShouldQueue
+class ProcessMarkFeedItemAsRead implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $feedItems;
-    protected $date;
+    /**
+     * @var FeedItem
+     */
+    protected $feedItem;
 
     /**
      * Create a new job instance.
      *
-     * @param  Collection  $feedItems
-     * @param  Carbon  $date
+     * @param FeedItem $feedItem
+     * @return void
      */
-    public function __construct(Collection $feedItems, Carbon $date)
+    public function __construct(FeedItem $feedItem)
     {
-        $this->feedItems = $feedItems;
-        $this->date = $date;
+        $this->feedItem = $feedItem;
     }
 
     /**
@@ -37,10 +37,12 @@ class ProcessFeedItems implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->feedItems as $feedItem) {
-            $feedItem->read_at = $this->date;
-
-            $feedItem->save();
+        if ($this->feedItem->read_at) {
+            return;
         }
+
+        $this->feedItem->read_at = now();
+
+        $this->feedItem->save();
     }
 }
