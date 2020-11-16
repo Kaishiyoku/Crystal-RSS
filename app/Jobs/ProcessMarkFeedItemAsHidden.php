@@ -8,7 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Carbon;
 
 class ProcessMarkFeedItemAsHidden implements ShouldQueue
 {
@@ -20,21 +19,14 @@ class ProcessMarkFeedItemAsHidden implements ShouldQueue
     protected $feedItem;
 
     /**
-     * @var Carbon
-     */
-    protected $date;
-
-    /**
      * Create a new job instance.
      *
      * @param FeedItem $feedItem
-     * @param Carbon $date
      * @return void
      */
-    public function __construct(FeedItem $feedItem, Carbon $date)
+    public function __construct(FeedItem $feedItem)
     {
         $this->feedItem = $feedItem;
-        $this->date = $date;
     }
 
     /**
@@ -44,7 +36,11 @@ class ProcessMarkFeedItemAsHidden implements ShouldQueue
      */
     public function handle()
     {
-        $this->feedItem->hidden_at = $this->date;
+        if ($this->feedItem->hidden_at) {
+            return;
+        }
+
+        $this->feedItem->hidden_at = now();
 
         $this->feedItem->save();
     }
