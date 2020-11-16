@@ -2,15 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ProcessRssFeedItem;
 use App\Models\Feed;
-use App\Models\FeedItem;
-use App\Models\UpdateError;
 use App\Models\UpdateLog;
 use App\Models\User;
-use Illuminate\Support\Carbon;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Database\QueryException;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
@@ -53,7 +51,7 @@ class UpdateFeed extends Command
             $users->push(User::findOrFail($this->argument('user')));
         }
 
-        $newLastCheckedAt = Carbon::now();
+        $newLastCheckedAt = now();
 
         $users->each(function (User $user) use ($start, $newLastCheckedAt) {
             $totalNumberOfNewUnreadFeedItemsForUser = 0;
@@ -68,51 +66,11 @@ class UpdateFeed extends Command
                 try {
                     $rssFeed = $heraRssCrawler->parseFeed($feed->feed_url);
 
-                    $numberOfNewUnreadFeedItems = 0;
+                    $numberOfNewUnreadFeedItems = $rssFeed->getFeedItems()->count();
 
                     if ($rssFeed instanceof RssFeed) {
-                        $rssFeed->getFeedItems()->map(function (RssFeedItem $item) use (&$user, &$numberOfNewUnreadFeedItems, $feed, $newLastCheckedAt) {
-                            if ($item->getChecksum() && $item->getPermalink() && $item->getCreatedAt()) {
-                                try {
-                                    $existingFeedItem = $user->feedItems()->whereFeedId($feed->id)->whereChecksum($item->getChecksum())->first();
-                                    $newFeedItem = $existingFeedItem ?? new FeedItem();
-
-                                    if ($existingFeedItem === null) {
-                                        $newFeedItem->checksum = $item->getChecksum();
-
-                                        $numberOfNewUnreadFeedItems++;
-                                    }
-
-                                    $newFeedItem->feed_id = $feed->id;
-                                    $newFeedItem->url = $item->getPermalink();
-                                    $newFeedItem->title = $item->getTitle();
-                                    $newFeedItem->author = $item->getAuthors()->first();
-                                    $newFeedItem->image_url = $item->getEnclosureUrl();
-                                    $newFeedItem->posted_at = $item->getCreatedAt();
-                                    $newFeedItem->content = $item->getContent();
-
-                                    $newFeedItem->raw_json = $item->jsonSerialize();
-
-                                    $user->feedItems()->save($newFeedItem);
-
-                                    if ($user->settings()->get('feed_items.mark_duplicates_as_read_automatically')
-                                        && ($newFeedItem->isDuplicate() || $newFeedItem->hasDuplicates())) {
-                                        $newFeedItem->read_at = $newLastCheckedAt;
-                                        $newFeedItem->save();
-                                    }
-
-                                    syncFeedItemCategories($item->getCategories(), $user, $newFeedItem);
-                                } catch (QueryException $e) {
-                                    $updateError = new UpdateError();
-                                    $updateError->feed_id = $feed->id;
-                                    $updateError->url = $item->getPermalink();
-                                    $updateError->content = $e->getMessage();
-
-                                    Log::error($e);
-
-                                    $user->updateErrors()->save($updateError);
-                                }
-                            }
+                        $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($user, $feed, $newLastCheckedAt) {
+                            ProcessRssFeedItem::dispatch($rssFeedItem, $user, $feed, $newLastCheckedAt);
                         });
                     } else {
                         Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');

@@ -15,7 +15,7 @@
         "fruitcake/laravel-cors": "2.0.3",
         "glorand/laravel-model-settings": "4.0.0",
         "guzzlehttp/guzzle": "7.2.0",
-        "kaishiyoku/hera-rss-crawler": "0.8.0",
+        "kaishiyoku/hera-rss-crawler": "0.9.0",
         "kaishiyoku/laravel-cli-create-user": "3.1.0",
         "kaishiyoku/laravel-color-validation": "1.5.0",
         "kaishiyoku/laravel-menu": "4.5.2",
