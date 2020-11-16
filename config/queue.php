@@ -64,7 +64,7 @@ return [
             'connection' => 'default',
             'queue' => 'feed',
             'retry_after' => 90,
-            'block_for' => null,
+            'block_for' => 5,
         ],
 
     ],
