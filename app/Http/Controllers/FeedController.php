@@ -60,7 +60,7 @@ class FeedController extends Controller
         } else {
             $date = now();
 
-            $unreadFeedItems->get()->each(function ($feedItem) use ($date) {
+            $unreadFeedItems->each(function ($feedItem) use ($date) {
                 $feedItem->read_at = $date;
 
                 $feedItem->save();
