@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\VoteStatus;
-use App\Jobs\ProcessMarkFeedItemAsRead;
+use App\Jobs\MarkFeedItemAsRead;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
@@ -55,7 +55,7 @@ class FeedController extends Controller
         $minNumber = (int) config('feed.deferred_min_number');
         if (config('feed.deferred_mark_as_read') && $unreadFeedItems->count() > $minNumber) {
             $unreadFeedItems->each(function (FeedItem $feedItem) {
-                ProcessMarkFeedItemAsRead::dispatch($feedItem);
+                MarkFeedItemAsRead::dispatch($feedItem);
             });
         } else {
             $date = now();

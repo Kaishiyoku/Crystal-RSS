@@ -8,9 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Carbon;
 
-class ProcessMarkFeedItemAsRead implements ShouldQueue
+class MarkFeedItemAsHidden implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,11 +36,11 @@ class ProcessMarkFeedItemAsRead implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->feedItem->read_at) {
+        if ($this->feedItem->hidden_at) {
             return;
         }
 
-        $this->feedItem->read_at = now();
+        $this->feedItem->hidden_at = now();
 
         $this->feedItem->save();
     }

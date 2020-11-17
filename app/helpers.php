@@ -1,6 +1,6 @@
 <?php
 
-use App\Jobs\ProcessMarkFeedItemAsHidden;
+use App\Jobs\MarkFeedItemAsHidden;
 use App\Jobs\ProcessMarkFeedItemsAsHidden;
 use App\Models\Category;
 use App\Models\FeedItem;
@@ -118,7 +118,7 @@ if (! function_exists('markFeedItemsAsHiddenByKeywords')) {
         $feedItems = $user->feedItems()->unhidden()->includesKeywords($user)->whereNull('hidden_at')->get();
 
         $feedItems->each(function (FeedItem $feedItem) {
-            ProcessMarkFeedItemAsHidden::dispatch($feedItem);
+            MarkFeedItemAsHidden::dispatch($feedItem);
         });
 
         return $feedItems->count();

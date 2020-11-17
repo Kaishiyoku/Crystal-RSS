@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\ProcessRssFeedItem;
+use App\Jobs\StoreRssFeedItem;
 use App\Models\Feed;
 use App\Models\UpdateLog;
 use App\Models\User;
@@ -70,7 +70,7 @@ class UpdateFeed extends Command
 
                     if ($rssFeed instanceof RssFeed) {
                         $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($user, $feed, $newLastCheckedAt) {
-                            ProcessRssFeedItem::dispatch($rssFeedItem, $user, $feed, $newLastCheckedAt);
+                            StoreRssFeedItem::dispatch($rssFeedItem, $user, $feed, $newLastCheckedAt);
                         });
                     } else {
                         Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
