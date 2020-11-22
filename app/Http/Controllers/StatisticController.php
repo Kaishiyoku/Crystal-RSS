@@ -68,8 +68,8 @@ class StatisticController extends Controller
         });
 
         $elements = [
-            LaravelRecharts::element(__('statistic.index.articles'), LaravelRecharts::TYPE_BAR, 'rgba(105, 39, 255, .5)'),
-            LaravelRecharts::element(__('statistic.index.read_articles'), LaravelRecharts::TYPE_LINE, 'rgba(213, 64, 98, .5)'),
+            LaravelRecharts::element(__('statistic.index.articles'), LaravelRecharts::TYPE_BAR, 'rgba(105, 39, 255, .6)'),
+            LaravelRecharts::element(__('statistic.index.read_articles'), LaravelRecharts::TYPE_AREA, 'rgba(219, 23, 255, .4)'),
         ];
         $data = $items->map(function ($item) {
             return LaravelRecharts::dataEntry($item['posted_at'], [
