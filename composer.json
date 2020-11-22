@@ -33,8 +33,8 @@
         "ramsey/uuid": "4.1.1",
         "sentry/sentry-laravel": "2.2.0",
         "spatie/flysystem-dropbox": "1.2.2",
-        "spatie/laravel-backup": "6.11.6",
-        "watson/rememberable": "5.0.0",
+        "spatie/laravel-backup": "6.12.0",
+        "watson/rememberable": "5.0.1",
         "yab/laravel-scout-mysql-driver": "3.0.0"
     },
     "require-dev": {
