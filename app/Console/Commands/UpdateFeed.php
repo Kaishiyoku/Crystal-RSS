@@ -7,6 +7,8 @@ use App\Models\Feed;
 use App\Models\UpdateLog;
 use App\Models\User;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -88,6 +90,9 @@ class UpdateFeed extends Command
 
                     $feed->last_checked_at = $newLastCheckedAt;
                     $feed->save();
+                } catch (ClientException $e) {
+                    $this->error('Couldn\'t get feed "' . $feed->feed_url . '". It seems that the address isn\t reachable.');
+                    Log::info($e, [$feed->feed_url]);
                 } catch (Exception $e) {
                     $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
                     Log::error($e, [$feed->feed_url]);
