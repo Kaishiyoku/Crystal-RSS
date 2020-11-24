@@ -92,7 +92,7 @@ class UpdateFeed extends Command
                     $feed->save();
                 } catch (ClientException $e) {
                     $this->error('Couldn\'t get feed "' . $feed->feed_url . '". It seems that the address isn\t reachable.');
-                    Log::info($e, [$feed->feed_url]);
+                    Log::error($e, [$feed->feed_url]);
                 } catch (Exception $e) {
                     $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
                     Log::error($e, [$feed->feed_url]);
