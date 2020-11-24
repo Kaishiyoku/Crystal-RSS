@@ -4,18 +4,21 @@ namespace App\Console\Commands;
 
 use App\Jobs\StoreRssFeedItem;
 use App\Models\Feed;
+use App\Models\UpdateError;
 use App\Models\UpdateLog;
 use App\Models\User;
 use Exception;
 use ForceUTF8\Encoding;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
+use Illuminate\Queue\InvalidPayloadException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
+use Throwable;
 
 class UpdateFeed extends Command
 {
@@ -77,7 +80,11 @@ class UpdateFeed extends Command
                             $convertedRssFeedItem->setDescription(Encoding::toUTF8($rssFeedItem->getDescription()));
                             $convertedRssFeedItem->setXml(Encoding::toUTF8($rssFeedItem->getXml()));
 
-                            StoreRssFeedItem::dispatch($convertedRssFeedItem, $user, $feed, $newLastCheckedAt);
+                            try {
+                                StoreRssFeedItem::dispatch($convertedRssFeedItem, $user, $feed, $newLastCheckedAt);
+                            } catch (InvalidPayloadException $e) {
+                                $this->createUpdateError($user, $feed, $convertedRssFeedItem->getPermalink(), $e);
+                            }
                         });
                     } else {
                         Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
@@ -98,9 +105,13 @@ class UpdateFeed extends Command
                 } catch (ClientException $e) {
                     $this->error('Couldn\'t get feed "' . $feed->feed_url . '". It seems that the address isn\t reachable.');
                     Log::error($e, [$feed->feed_url]);
+
+                    $this->createUpdateError($user, $feed, $feed->feed_url, $e);
                 } catch (Exception $e) {
                     $this->error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
                     Log::error($e, [$feed->feed_url]);
+
+                    $this->createUpdateError($user, $feed, $feed->feed_url, $e);
                 }
             });
 
@@ -118,5 +129,15 @@ class UpdateFeed extends Command
         });
 
         Artisan::call(MarkKeywordFilteredFeedItems::class);
+    }
+
+    private function createUpdateError(User $user, Feed $feed, string $url, Throwable $e)
+    {
+        $updateError = new UpdateError();
+        $updateError->feed_id = $feed->id;
+        $updateError->url = $url;
+        $updateError->content = $e->getMessage();
+
+        $user->updateErrors()->save($updateError);
     }
 }
