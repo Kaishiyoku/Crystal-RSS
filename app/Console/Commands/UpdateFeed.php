@@ -7,8 +7,8 @@ use App\Models\Feed;
 use App\Models\UpdateLog;
 use App\Models\User;
 use Exception;
+use ForceUTF8\Encoding;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -72,7 +72,12 @@ class UpdateFeed extends Command
 
                     if ($rssFeed instanceof RssFeed) {
                         $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($user, $feed, $newLastCheckedAt) {
-                            StoreRssFeedItem::dispatch($rssFeedItem, $user, $feed, $newLastCheckedAt);
+                            $convertedRssFeedItem = clone $rssFeedItem;
+                            $convertedRssFeedItem->setContent(Encoding::toUTF8($rssFeedItem->getContent()));
+                            $convertedRssFeedItem->setDescription(Encoding::toUTF8($rssFeedItem->getDescription()));
+                            $convertedRssFeedItem->setXml(Encoding::toUTF8($rssFeedItem->getXml()));
+
+                            StoreRssFeedItem::dispatch($convertedRssFeedItem, $user, $feed, $newLastCheckedAt);
                         });
                     } else {
                         Log::error('Couldn\'t parse feed "' . $feed->feed_url . '". Maybe it\'s not a valid XML file.');
