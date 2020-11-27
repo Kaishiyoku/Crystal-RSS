@@ -55,7 +55,7 @@
         @endif
 
         <p>
-            @lang('statistic.index.total_number_of_feed_items'): {{ auth()->user()->feedItems()->count() }}
+            @lang('statistic.index.total_number_of_feed_items'): {{ auth()->user()->feedItems()->with('feed')->whereHas('feed')->read()->unhidden()->count() }}
         </p>
     </div>
 
