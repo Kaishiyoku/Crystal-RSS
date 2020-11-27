@@ -52,7 +52,7 @@ class MigrateReportFeedItems extends Command
         $users->each(function (User $user) use ($latestOnly, $yesterday, $latestDays) {
             $this->line('----- ' . $user->name . ' -----');
 
-            $feedItems = $user->feedItems();
+            $feedItems = $user->feedItems()->select(['user_id', 'posted_at', 'read_at']);
 
             if ($latestOnly) {
                 $feedItems = $feedItems->whereDate('posted_at', '>=', now()->subDays($latestDays));
@@ -66,17 +66,24 @@ class MigrateReportFeedItems extends Command
                     return $feedItem->posted_at->format(self::DATE) !== now()->format(self::DATE);
                 });
 
-            $totalCounts = $feedItems->groupBy(function (FeedItem $feedItem) {
-                return $feedItem->posted_at->format(self::DATE);
-            })->map(function (Collection $feedItems) {
-                return $feedItems->count();
-            });
+            $totalCounts = $feedItems
+                ->groupBy(function (FeedItem $feedItem) {
+                    return $feedItem->posted_at->format(self::DATE);
+                })
+                ->map(function (Collection $feedItems) {
+                    return $feedItems->count();
+                });
 
-            $readCounts = $feedItems->filter(function (FeedItem $feedItem) { return $feedItem->read_at !== null; })->groupBy(function (FeedItem $feedItem) {
-                return $feedItem->read_at->format(self::DATE);
-            })->map(function (Collection $feedItems) {
-                return $feedItems->count();
-            });
+            $readCounts = $feedItems
+                ->filter(function (FeedItem $feedItem) {
+                    return $feedItem->read_at !== null;
+                })
+                ->groupBy(function (FeedItem $feedItem) {
+                    return $feedItem->read_at->format(self::DATE);
+                })
+                ->map(function (Collection $feedItems) {
+                    return $feedItems->count();
+                });
 
             $totalCounts->each(function ($totalCount, $date) use ($readCounts, $user) {
                 $readCount = $readCounts->get($date) ?: 0;
