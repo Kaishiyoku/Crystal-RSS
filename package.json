@@ -19,7 +19,7 @@
         "browser-sync": "2.26.13",
         "browser-sync-webpack-plugin": "2.2.2",
         "classnames": "2.2.6",
-        "cross-env": "7.0.2",
+        "cross-env": "7.0.3",
         "date-fns": "2.16.1",
         "deepmerge": "4.2.2",
         "is-plain-object": "5.0.0",
