@@ -82,10 +82,10 @@ select.input {
     padding-bottom: .3rem;
 }
 .input {
-    @apply px-3 shadow border w-full text-gray-700 leading-tight transition-all duration-200;
+    @apply outline-none px-3 shadow border w-full text-gray-700 leading-tight transition-all duration-200;
 }
 .input:focus {
-    @apply outline-none shadow-outline-primary-900;
+    @apply shadow-outline-primary-900;
 }
 
 .input:not(.input-with-btn) {
