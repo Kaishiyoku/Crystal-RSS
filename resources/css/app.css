@@ -9,12 +9,27 @@
 .navbar-link {
     @apply cursor-pointer block transition-all duration-200 px-4 py-4 text-white text-opacity-50;
 }
+
 .navbar-link:hover {
     @apply text-white bg-primary-dark-900 bg-opacity-25;
 }
 
 .navbar-link-active {
     @apply text-white;
+}
+
+@screen lg {
+    .navbar-link {
+        @apply text-gray-700 border-b-4 border-transparent rounded;
+    }
+
+    .navbar-link:hover {
+        @apply text-black bg-transparent;
+    }
+
+    .navbar-link-active {
+        @apply text-black border-primary-900;
+    }
 }
 
 /* Typograhpy
@@ -247,14 +262,13 @@ select.input {
 /* List items
 ---------------------------------------------------------------------------- */
 .list-item {
-    @apply transition-all duration-300;
+    @apply transition-all duration-300 border-b-2 border-transparent;
 }
 .list-item:nth-child(odd) {
     @apply bg-gray-200 bg-opacity-75;
 }
-.list-item:hover,
-.list-item:nth-child(odd):hover {
-    @apply bg-primary-100 bg-opacity-50;
+.list-item:hover {
+    @apply bg-primary-100 bg-opacity-50 border-primary-900 border-opacity-20;
 }
 .list-item-duplicate {
     @apply bg-warning-500 bg-opacity-25;
@@ -263,10 +277,10 @@ select.input {
     @apply bg-warning-900 bg-opacity-25;
 }
 .list-item-duplicate:hover {
-    @apply bg-warning-500 bg-opacity-50;
+    @apply bg-warning-500 bg-opacity-50 border-warning-500;
 }
 .list-item-duplicate:nth-child(odd):hover {
-    @apply bg-warning-900 bg-opacity-50;
+    @apply bg-warning-900 bg-opacity-50 border-warning-900;
 }
 
 /* Tables
