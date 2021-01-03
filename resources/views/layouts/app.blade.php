@@ -33,7 +33,9 @@
                 <div class="flex justify-between items-center">
                     <div class="text-xl mr-2 ml-2 md:ml-0 py-4">
                         <a href="{{ URL::route('home.index') }}" class="text-white lg:text-gray-700 transition-all duration-200 hover:text-black">
-                            {{ config('app.name', 'Laravel') }}
+                            <span class="text-gradient bg-gradient-to-r from-primary-900 via-success-900 to-info-900">
+                                {{ config('app.name', 'Laravel') }}
+                            </span>
                         </a>
                     </div>
 
