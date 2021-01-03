@@ -109,7 +109,7 @@ select.input {
     @apply outline-none px-3 shadow border w-full text-gray-700 leading-tight transition-all duration-200;
 }
 .input:focus {
-    @apply shadow-outline-primary-900;
+    @apply ring-2 ring-primary-200;
 }
 
 .input:not(.input-with-btn) {
@@ -152,7 +152,7 @@ select.input {
     content: "\f00c";
 }
 .checkbox:focus {
-    @apply shadow-outline-primary-900;
+    @apply ring-4 ring-primary-200;
 }
 
 /* Breadcrumbs
