@@ -68,7 +68,7 @@ h2 {
 /* Dropdown
 ---------------------------------------------------------------------------- */
 .dropdown {
-    @apply rounded-md bg-white shadow-xl py-1 overflow-auto;
+    @apply border border-gray-100 rounded-md bg-white shadow-xl py-1 overflow-auto;
 }
 
 .dropdown-item {
@@ -82,10 +82,10 @@ h2 {
 }
 
 .dropdown-item.dropdown-item-active {
-    @apply text-white bg-primary-500;
+    @apply text-white bg-primary-400;
 }
 .dropdown-item.dropdown-item-active:hover {
-    @apply text-white bg-primary-700;
+    @apply text-white bg-primary-600;
 }
 
 .dropdown-header {
@@ -93,7 +93,7 @@ h2 {
 }
 
 .dropdown-divider {
-    @apply pt-2 mb-2 border-b;
+    @apply pt-2 mb-2 border-b border-gray-100;
 }
 
 /* Forms & input
