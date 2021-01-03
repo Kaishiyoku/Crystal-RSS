@@ -32,7 +32,13 @@
                 <tbody>
                     @foreach ($updateErrors as $updateError)
                         <tr>
-                            <td>{{ $updateError->feed->title }}</td>
+                            <td>
+                                @if ($updateError->feed)
+                                    {{ $updateError->feed->title }}
+                                @else
+                                    /
+                                @endif
+                            </td>
                             <td>{{ $updateError->url }}</td>
                             <td>{{ $updateError->created_at->format(l(DATETIME)) }}</td>
                             <td>{{ Html::linkRoute('update_errors.show', __('common.details'), $updateError, ['class' => 'btn btn-sm btn-primary']) }}</td>
