@@ -18,7 +18,7 @@
     <div class="mb-5 text-right">
         <a
             href="{{ route('statistics.index', ['startingYear' => $previousDate->year, 'startingMonth' => $previousDate->month]) }}"
-            class="flex btn btn-outline-primary"
+            class="flex btn btn-primary"
         >
             <i class="fas fa-angle-left"></i>
             {{ __('pagination.previous') }}
@@ -27,7 +27,7 @@
         @if ($nextDate->isBefore(now()))
             <a
                 href="{{ route('statistics.index', ['startingYear' => $nextDate->year, 'startingMonth' => $nextDate->month]) }}"
-                class="btn btn-outline-primary"
+                class="btn btn-primary"
             >
                 {{ __('pagination.next') }}
                 <i class="fas fa-angle-right"></i>

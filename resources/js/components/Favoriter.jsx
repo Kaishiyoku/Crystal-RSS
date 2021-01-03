@@ -39,7 +39,7 @@ class Favoriter extends Component {
 
     render() {
         const btnClass = classNames('btn btn-sm', {
-            'btn-outline-primary-dark': isEmpty(this.state.favoritedAt),
+            'btn-primary-dark': isEmpty(this.state.favoritedAt),
             'btn-primary': !isEmpty(this.state.favoritedAt),
         });
 

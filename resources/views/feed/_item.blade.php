@@ -41,7 +41,7 @@
 
             <div>
                 @if (auth()->user()->is_administrator)
-                    {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem, ['class' => 'btn btn-sm btn-outline-primary-dark']) }}
+                    {{ Html::linkRoute('feed.details', __('feed.index.details'), $feedItem, ['class' => 'btn btn-sm btn-primary-dark']) }}
                 @endif
 
                 @include('feed._additional_item_actions')

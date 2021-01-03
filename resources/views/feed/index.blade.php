@@ -4,7 +4,7 @@
 
 @section('content')
     @if (auth()->user()->feeds()->invalidAndEnabled()->count() > 0)
-        @include('shared._alert', ['content' => __('feed.you_have_invalid_feeds'), 'link' => Html::linkRoute('feed.manage.index', __('feed.check_feeds'), null, ['class' => 'btn btn-sm btn-outline-primary-dark']), 'type' => 'danger'])
+        @include('shared._alert', ['content' => __('feed.you_have_invalid_feeds'), 'link' => Html::linkRoute('feed.manage.index', __('feed.check_feeds'), null, ['class' => 'btn btn-sm btn-primary-dark']), 'type' => 'danger'])
     @endif
 
     <h1>
@@ -23,7 +23,7 @@
     <p class="my-5">
         @if ($unreadFeedItems->count() > 0)
             {{ Form::open(['route' => ['feed.mark_all_as_read', $currentCategoryId], 'method' => 'put', 'role' => 'form', 'class' => 'd-inline']) }}
-                {{ Form::button('<i class="fas fa-eye"></i> ' . __('feed.index.mark_all_as_read'), ['type' => 'submit', 'class' => 'btn btn-outline-primary', 'data-confirm' => true]) }}
+                {{ Form::button('<i class="fas fa-eye"></i> ' . __('feed.index.mark_all_as_read'), ['type' => 'submit', 'class' => 'btn btn-primary', 'data-confirm' => true]) }}
             {{ Form::close() }}
         @endif
     </p>
@@ -36,7 +36,7 @@
 
                 {{ $categoryDropdownTranslation }}
                 &nbsp;
-                <span class="rounded-full bg-primary-dark-900 uppercase px-2 py-1 text-xs font-bold mr-3">{{ $unreadFeedItems->total() }}</span>
+                <span class="rounded-full bg-primary-400 text-white uppercase px-2 py-1 text-xs font-bold mr-3">{{ $unreadFeedItems->total() }}</span>
 
                 <i class="fas fa-caret-down mt-1"></i>
             </button>

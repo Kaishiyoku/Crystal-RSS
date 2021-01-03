@@ -11,7 +11,7 @@
     <p class="mb-5">
         {{ Html::linkRoute('feed.manage.create', __('feed_manager.create.title'), [], ['class' => 'btn btn-primary']) }}
 
-        {{ Html::linkRoute('feed.manage.archived', __('feed_manager.archived.title'), [], ['class' => 'btn btn-outline-primary']) }}
+        {{ Html::linkRoute('feed.manage.archived', __('feed_manager.archived.title'), [], ['class' => 'btn btn-primary']) }}
     </p>
 
     @if ($feeds->count() === 0)

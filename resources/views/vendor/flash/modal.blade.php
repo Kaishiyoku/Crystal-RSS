@@ -11,7 +11,7 @@
                 <p>{!! $body !!}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">{{ __('common.close') }}</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal">{{ __('common.close') }}</button>
             </div>
         </div>
     </div>
