@@ -12,20 +12,20 @@
 /* Navbar
 ---------------------------------------------------------------------------- */
 .navbar-link {
-    @apply cursor-pointer block transition-all duration-200 p-4 text-white text-opacity-50;
+    @apply cursor-pointer block transition-all duration-200 p-4 text-gray-700 border-l-4 border-transparent;
 }
 
 .navbar-link:hover {
-    @apply text-white bg-primary-dark-900 bg-opacity-25;
+    @apply text-black bg-gray-50;
 }
 
 .navbar-link-active {
-    @apply text-white;
+    @apply text-black border-primary-500;
 }
 
 @screen lg {
     .navbar-link {
-        @apply text-gray-700 border-t-4 border-transparent;
+        @apply text-gray-700 border-l-0 border-t-4 border-transparent;
     }
 
     .navbar-link:hover {

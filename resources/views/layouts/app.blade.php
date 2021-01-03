@@ -39,7 +39,7 @@
                         </a>
                     </div>
 
-                    <button class="lg:hidden py-4 px-6 text-xl transition-all duration-200 text-white text-opacity-50 hover:text-white hover:bg-pink-900 hover:bg-opacity-25" data-navbar-control>
+                    <button class="lg:hidden py-4 px-6 text-xl transition-all outline-none duration-200 text-gray-500 hover:text-black hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-primary-200 focus:ring-inset" data-navbar-control>
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
