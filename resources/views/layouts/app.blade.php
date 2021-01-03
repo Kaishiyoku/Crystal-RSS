@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="container px-4 lg:px-20 mx-auto">
+    <div class="container mt-8 px-4 lg:px-20 mx-auto">
         @include('flash::message')
 
         @yield('breadcrumbs')

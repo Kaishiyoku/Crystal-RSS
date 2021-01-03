@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                 @foreach ($feeds->get() as $feed)
-                    <tr class="{{ $feed->is_enabled && $feed->is_valid ? '' : 'bg-orange-200' }} {{ !$feed->is_valid ? 'bg-red-200' : '' }}" {!! $feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
+                    <tr class="{{ $feed->is_enabled && $feed->is_valid ? '' : 'bg-orange-100' }} {{ !$feed->is_valid ? 'bg-red-100' : '' }}" {!! $feed->getStyle(\App\Enums\StyleType::BORDER()) !!}>
                         <td {!! $feed->getStyle() !!}>
                             {{ $feed->title }}
                         </td>
