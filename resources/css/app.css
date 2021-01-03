@@ -7,7 +7,7 @@
 /* Navbar
 ---------------------------------------------------------------------------- */
 .navbar-link {
-    @apply cursor-pointer block transition-all duration-200 px-4 py-4 text-white text-opacity-50;
+    @apply cursor-pointer block transition-all duration-200 p-4 text-white text-opacity-50;
 }
 
 .navbar-link:hover {
@@ -20,15 +20,19 @@
 
 @screen lg {
     .navbar-link {
-        @apply text-gray-700 border-b-4 border-transparent rounded;
+        @apply text-gray-700 border-t-4 border-transparent;
     }
 
     .navbar-link:hover {
-        @apply text-black bg-transparent;
+        @apply text-black bg-gray-50;
     }
 
     .navbar-link-active {
-        @apply text-black border-primary-900;
+        @apply text-black border-primary-500;
+    }
+
+    .navbar-link-active:hover {
+        @apply border-primary-900;
     }
 }
 
@@ -66,7 +70,7 @@ h2 {
     @apply text-left px-4 py-2 leading-5 text-gray-700 cursor-pointer transition-all duration-200;
 }
 .dropdown-item:hover {
-    @apply bg-gray-200 text-gray-900;
+    @apply bg-gray-50 text-gray-700;
 }
 .dropdown-item:focus {
     @apply outline-none bg-gray-100 text-gray-900;
@@ -149,7 +153,7 @@ select.input {
 /* Breadcrumbs
 ---------------------------------------------------------------------------- */
 .breadcrumb {
-    @apply bg-gray-200 my-4 py-2 px-4 rounded;
+    @apply bg-gray-100 my-4 py-2 px-4 rounded;
 }
 .breadcrumb-item {
     @apply inline-block text-gray-600;
@@ -265,7 +269,7 @@ select.input {
     @apply transition-all duration-300 border-b-2 border-transparent;
 }
 .list-item:nth-child(odd) {
-    @apply bg-gray-200 bg-opacity-75;
+    @apply bg-gray-50;
 }
 .list-item:hover {
     @apply bg-primary-100 bg-opacity-50 border-primary-900 border-opacity-20;
@@ -289,13 +293,13 @@ select.input {
     @apply w-full text-left;
 }
 .table th {
-    @apply bg-gray-100 font-bold text-xs text-gray-800 uppercase border-b-2 border-gray-200 py-3 px-3 tracking-wide align-middle;
+    @apply bg-gray-50 font-bold text-xs text-gray-800 uppercase border-b-2 border-gray-200 py-3 px-3 tracking-wide align-middle;
 }
 .table td {
     @apply border-b border-gray-200 py-4 px-3 align-middle;
 }
 .table-hover tr:hover {
-    @apply bg-gray-200 transition-colors duration-150 ease-out;
+    @apply bg-gray-50 transition-colors duration-150 ease-out;
 }
 
 /* Alerts

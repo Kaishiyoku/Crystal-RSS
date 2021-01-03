@@ -25,15 +25,17 @@
 
     @include('shared._javascript_config')
 </head>
-<body class="bg-gray-100 antialiased">
+<body class="bg-gray-50 bg-opacity-25 antialiased">
 <div id="app">
-    <div class="bg-gradient-to-r from-primary-900 to-secondary-900 h-1"></div>
-
-    <div class="mb-6 bg-gradient-to-r from-primary-900 to-secondary-900 lg:from-white lg:to-white shadow">
+    <div class="bg-white shadow">
         <div class="container lg:px-20 mx-auto">
             <div class="lg:flex lg:items-center">
                 <div class="flex justify-between items-center">
-                    <div class="text-xl mr-2 ml-2 md:ml-0 py-2"><a href="{{ URL::route('home.index') }}" class="text-white lg:text-gray-700 transition-all duration-200 hover:text-black">{{ config('app.name', 'Laravel') }}</a></div>
+                    <div class="text-xl mr-2 ml-2 md:ml-0 py-4">
+                        <a href="{{ URL::route('home.index') }}" class="text-white lg:text-gray-700 transition-all duration-200 hover:text-black">
+                            {{ config('app.name', 'Laravel') }}
+                        </a>
+                    </div>
 
                     <button class="lg:hidden py-4 px-6 text-xl transition-all duration-200 text-white text-opacity-50 hover:text-white hover:bg-pink-900 hover:bg-opacity-25" data-navbar-control>
                         <i class="fas fa-bars"></i>
