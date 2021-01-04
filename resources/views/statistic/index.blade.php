@@ -16,19 +16,13 @@
     </h1>
 
     <div class="mb-5 text-right">
-        <a
-            href="{{ route('statistics.index', ['startingYear' => $previousDate->year, 'startingMonth' => $previousDate->month]) }}"
-            class="flex btn btn-primary"
-        >
+        <a href="{{ route('statistics.index', ['startingYear' => $previousDate->year, 'startingMonth' => $previousDate->month]) }}" class="flex btn btn-primary">
             <i class="fas fa-angle-left"></i>
             {{ __('pagination.previous') }}
         </a>
 
         @if ($nextDate->isBefore(now()))
-            <a
-                href="{{ route('statistics.index', ['startingYear' => $nextDate->year, 'startingMonth' => $nextDate->month]) }}"
-                class="btn btn-primary"
-            >
+            <a href="{{ route('statistics.index', ['startingYear' => $nextDate->year, 'startingMonth' => $nextDate->month]) }}" class="btn btn-primary">
                 {{ __('pagination.next') }}
                 <i class="fas fa-angle-right"></i>
             </a>
@@ -62,43 +56,43 @@
     @if ($categories->isNotEmpty())
         <div class="card text-sm md:text-base">
             @foreach ($categories as $category)
-                <div class="mb-5">
-                    <div class="flex font-bold p-2 hover:bg-gray-200 transition-all duration-200">
-                        <div class="w-full text-lg" {!! $category->style !!}>{{ $category->title }}</div>
-                        <div class="w-24 text-right">
-                            <span class="text-success-900">
-                                <i class="fas fa-chevron-up"></i>
-                                {{ $category->total_upvote_count }}
-                            </span>
-
-                            <span class="text-danger-900">
-                                <i class="fas fa-chevron-down"></i>
-                                {{ $category->total_downvote_count }}
-                            </span>
-                        </div>
-                        <div class="w-32 text-lg text-right">{{ $category->total_feed_items_count }}</div>
-                    </div>
-
-                    @foreach ($category->feeds as $feed)
-                        <div class="flex px-2 pb-1 hover:bg-gray-200 transition-all duration-200">
-                            <div class="w-full" {!! $feed->style !!}>{{ $feed->title }}</div>
-                            <div class="w-24 text-right">
-                                <span class="text-success-900">
+                @if ($category->feeds->isNotEmpty())
+                    <div class="mb-5 border-t border-gray-100">
+                        <div class="flex font-bold p-2 hover:bg-gray-50 transition-all duration-200">
+                            <div class="w-full text-base md:text-lg" {!! $category->style !!}>{{ $category->title }}</div>
+                            <div class="w-40 md:w-48 text-right">
+                                <span class="text-success-900 mr-2">
                                     <i class="fas fa-chevron-up"></i>
-                                    {{ $feed->total_upvote_count }}
+                                    {{ $category->total_upvote_count }}
                                 </span>
 
                                 <span class="text-danger-900">
                                     <i class="fas fa-chevron-down"></i>
-                                    {{ $feed->total_downvote_count }}
+                                    {{ $category->total_downvote_count }}
                                 </span>
                             </div>
-                            <div class="w-32 text-right">{{ $feed->total_feed_items_count }}</div>
+                            <div class="w-32 md:text-lg text-right">{{ $category->total_feed_items_count }}</div>
                         </div>
-                    @endforeach
-                </div>
 
-                <hr/>
+                        @foreach ($category->feeds as $feed)
+                            <div class="flex px-2 pb-1 hover:bg-gray-50 transition-all duration-200">
+                                <div class="w-full" {!! $feed->style !!}>{{ $feed->title }}</div>
+                                <div class="w-40 md:w-48 text-right">
+                                    <span class="text-success-900 mr-2">
+                                        <i class="fas fa-chevron-up"></i>
+                                        {{ $feed->total_upvote_count }}
+                                    </span>
+
+                                    <span class="text-danger-900">
+                                        <i class="fas fa-chevron-down"></i>
+                                        {{ $feed->total_downvote_count }}
+                                    </span>
+                                </div>
+                                <div class="w-32 text-right">{{ $feed->total_feed_items_count }}</div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             @endforeach
         </div>
     @endif
