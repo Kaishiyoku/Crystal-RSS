@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\FeedItem;
 use Illuminate\Console\Command;
 
 class ImportDataForSearchEngine extends Command
@@ -18,7 +19,7 @@ class ImportDataForSearchEngine extends Command
      *
      * @var string
      */
-    protected $description = 'Import existing database data to MySQL FULLTEXT.';
+    protected $description = 'Import existing database data to TNTSearch.';
 
     /**
      * Create a new command instance.
@@ -39,6 +40,6 @@ class ImportDataForSearchEngine extends Command
     {
         $this->info(__('feed.search.importing'));
 
-        $this->call('scout:mysql-index', ['model' => 'App\Models\FeedItem']);
+        $this->call('scout:import', ['model' => FeedItem::class]);
     }
 }

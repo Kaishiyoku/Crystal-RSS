@@ -63,11 +63,11 @@ class FeedItem extends Model
     public $timestamps = false;
 
     protected $searchableFields = [
+        'id',
         'user_id',
         'url',
         'title',
         'author',
-        'content',
     ];
 
     /**
@@ -97,7 +97,7 @@ class FeedItem extends Model
      * @var array
      */
     protected $hidden = [
-        'checksum', 'user_id', 'feed_id',
+        'checksum', 'feed_id',
     ];
 
     protected $casts = [
