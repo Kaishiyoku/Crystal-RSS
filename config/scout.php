@@ -76,7 +76,7 @@ return [
     ],
 
     'tntsearch' => [
-        'storage'  => storage_path() . '/app/tnt-search',
+        'storage'  => storage_path() . '/tnt-search',
         'fuzziness' => env('TNTSEARCH_FUZZINESS', false),
         'fuzzy' => [
             'prefix_length' => 2,
