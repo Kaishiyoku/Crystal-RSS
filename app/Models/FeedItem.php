@@ -65,9 +65,7 @@ class FeedItem extends Model
     protected $searchableFields = [
         'id',
         'user_id',
-        'url',
         'title',
-        'author',
     ];
 
     /**
