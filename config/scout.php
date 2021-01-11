@@ -75,16 +75,13 @@ return [
         'secret' => env('ALGOLIA_SECRET', ''),
     ],
 
-    'tntsearch' => [
-        'storage'  => storage_path() . '/tnt-search',
-        'fuzziness' => env('TNTSEARCH_FUZZINESS', false),
-        'fuzzy' => [
-            'prefix_length' => 2,
-            'max_expansions' => 50,
-            'distance' => 2
-        ],
-        'asYouType' => false,
-        'searchBoolean' => env('TNTSEARCH_BOOLEAN', false),
-    ],
+    'mysql' => [
+        'mode' => 'BOOLEAN',
+        'model_directories' => [app_path() . '/Models/'],
+        'min_search_length' => 0,
+        'min_fulltext_search_length' => 4,
+        'min_fulltext_search_fallback' => 'LIKE',
+        'query_expansion' => false,
+    ]
 
 ];

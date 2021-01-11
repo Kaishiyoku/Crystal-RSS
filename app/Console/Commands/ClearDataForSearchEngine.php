@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\FeedItem;
 use Illuminate\Console\Command;
 
 class ClearDataForSearchEngine extends Command
@@ -19,7 +18,7 @@ class ClearDataForSearchEngine extends Command
      *
      * @var string
      */
-    protected $description = 'Clear all TNTSearch records.';
+    protected $description = 'Clear all MySQL FULLTEXT.';
 
     /**
      * Create a new command instance.
@@ -40,6 +39,6 @@ class ClearDataForSearchEngine extends Command
     {
         $this->info(__('feed.search.clearing'));
 
-        $this->call('scout:flush', ['model' => FeedItem::class]);
+        $this->call('scout:mysql-index', ['model' => 'App\Models\FeedItem', '--drop' => true]);
     }
 }

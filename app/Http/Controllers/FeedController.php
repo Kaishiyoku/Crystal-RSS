@@ -52,7 +52,7 @@ class FeedController extends Controller
     public function markAllAsRead($categoryId = null)
     {
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId)->get();
-        $minNumber = (int)config('feed.deferred_min_number');
+        $minNumber = (int) config('feed.deferred_min_number');
         if (config('feed.deferred_mark_as_read') && $unreadFeedItems->count() > $minNumber) {
             $unreadFeedItems->each(function (FeedItem $feedItem) {
                 MarkFeedItemAsRead::dispatch($feedItem);
@@ -120,7 +120,7 @@ class FeedController extends Controller
 
         $term = $validatedData['term'];
         $feedIds = collect($validatedData['feed_ids'] ?? $allFeedIds)->map(function ($feedId) {
-            return (int)$feedId;
+            return (int) $feedId;
         })->toArray();
 
         // filter out invalid feed-IDs
@@ -130,23 +130,22 @@ class FeedController extends Controller
         $dateFrom = createDateFromStr($validatedData['date_from'], $dateFormat);
         $dateTill = createDateFromStr($validatedData['date_till'], $dateFormat);
 
-        $constraints = (new FeedItem())
-            ->where('user_id', auth()->user()->id)
+        $foundFeedItemIdsFromIndex = FeedItem::search($term)
+            ->orderBy('posted_at', 'desc')
+            ->keys();
+
+        $foundFeedItemsFromIndex = FeedItem::unhidden()
+            ->whereIn('id', $foundFeedItemIdsFromIndex)
             ->whereIn('feed_id', $allFeedIds)
-            ->whereNull('hidden_at')
             ->when($dateFrom, function ($query) use ($dateFrom) {
                 $query->whereDate('posted_at', '>=', $dateFrom);
             })
             ->when($dateTill, function ($query) use ($dateTill) {
                 $query->whereDate('posted_at', '<=', $dateTill);
-            });
-
-        $foundFeedItems = FeedItem::search($term)
-            ->constrain($constraints)
-            ->orderBy('posted_at', 'desc')
+            })
             ->paginate($this->getPerPage());
 
-        return view('feed.search_result', compact('feeds', 'foundFeedItems', 'selectedFeedIds'));
+        return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'selectedFeedIds'));
     }
 
     public function voteUp(Request $request, FeedItem $feedItem)
