@@ -109,6 +109,13 @@ return [
             'level' => 'error',
             'bubble' => true,
         ],
+
+        'hera_rss_crawler' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/hera_rss_crawler.log'),
+            'level' => 'info',
+            'days' => 14,
+        ],
     ],
 
 ];

@@ -179,7 +179,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class,
         Kaishiyoku\CreateUser\CreateUserServiceProvider::class,
 
         /*

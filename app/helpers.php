@@ -1,32 +1,32 @@
 <?php
 
 use App\Jobs\MarkFeedItemAsHidden;
-use App\Jobs\ProcessMarkFeedItemsAsHidden;
 use App\Models\Category;
 use App\Models\FeedItem;
 use App\Models\FeedItemCategory;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
 const DATETIME = 'datetime';
 const DATE = 'date';
 const DATE_WITH_DAY_OF_WEEK = 'date_with_day_of_week';
 
-if (! function_exists('l')) {
+if (!function_exists('l')) {
     function l(string $type): string {
         return __('common.date_formats.' . $type);
     }
 }
 
-if (! function_exists('getYearsFrom')) {
+if (!function_exists('getYearsFrom')) {
     function getYearsFrom(int $year): string
     {
         return $year < date('Y') ? $year . '-' . date('Y') : date('Y');
     }
 }
 
-if (! function_exists('getUnreadFeedItemCountForCategory')) {
+if (!function_exists('getUnreadFeedItemCountForCategory')) {
     function getUnreadFeedItemCountForCategory(Category $category): int
     {
         return $category->feeds()->withCount(['feedItems' => function ($query) {
@@ -35,7 +35,7 @@ if (! function_exists('getUnreadFeedItemCountForCategory')) {
     }
 }
 
-if (! function_exists('formatBoolean')) {
+if (!function_exists('formatBoolean')) {
     function formatBoolean(bool $bool): string
     {
         if ($bool) {
@@ -48,19 +48,19 @@ if (! function_exists('formatBoolean')) {
     }
 }
 
-if (! function_exists('upper')) {
+if (!function_exists('upper')) {
     function upper(string $string): string {
         return Str::upper($string);
     }
 }
 
-if (! function_exists('itemIf')) {
+if (!function_exists('itemIf')) {
     function itemIf($item, bool $isVisible, $default = null) {
         return $isVisible ? $item : $default;
     }
 }
 
-if (! function_exists('removeNulls')) {
+if (!function_exists('removeNulls')) {
     function removeNulls(array $arr): array {
         return array_filter($arr, function ($item) {
             return $item !== null;
@@ -68,7 +68,7 @@ if (! function_exists('removeNulls')) {
     }
 }
 
-if (! function_exists('syncFeedItemCategories')) {
+if (!function_exists('syncFeedItemCategories')) {
     function syncFeedItemCategories(Collection $categoryTitles, User $user, FeedItem $feedItem): void
     {
         $categoryIds = [];
@@ -96,7 +96,7 @@ if (! function_exists('syncFeedItemCategories')) {
     }
 }
 
-if (! function_exists('createDateFromStr')) {
+if (!function_exists('createDateFromStr')) {
     /**
      * @param string|null $str
      * @param string|null $format
@@ -112,7 +112,7 @@ if (! function_exists('createDateFromStr')) {
     }
 }
 
-if (! function_exists('markFeedItemsAsHiddenByKeywords')) {
+if (!function_exists('markFeedItemsAsHiddenByKeywords')) {
     function markFeedItemsAsHiddenByKeywords($user): int
     {
         $feedItems = $user->feedItems()->unhidden()->includesKeywords($user)->whereNull('hidden_at')->get();
@@ -122,5 +122,15 @@ if (! function_exists('markFeedItemsAsHiddenByKeywords')) {
         });
 
         return $feedItems->count();
+    }
+}
+
+if (!function_exists('getHeraRssCrawler')) {
+    function getHeraRssCrawler(): HeraRssCrawler
+    {
+        $heraRssCrawler = new HeraRssCrawler();
+        $heraRssCrawler->setLogger(Log::channel('hera_rss_crawler'));
+
+        return $heraRssCrawler;
     }
 }

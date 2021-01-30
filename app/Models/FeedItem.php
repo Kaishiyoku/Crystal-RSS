@@ -56,29 +56,7 @@ use Laravel\Scout\Searchable;
  */
 class FeedItem extends Model
 {
-    use Searchable;
-
-    public $asYouType = false;
-
     public $timestamps = false;
-
-    protected $searchableFields = [
-        'id',
-        'user_id',
-        'title',
-    ];
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        $list = collect($this->toArray());
-
-        return $list->only($this->searchableFields)->toArray();
-    }
 
     /**
      * The attributes that are mass assignable.

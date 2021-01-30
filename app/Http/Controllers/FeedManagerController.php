@@ -64,7 +64,7 @@ class FeedManagerController extends Controller
         $data = $request->validate($this->getValidationRules());
 
         // check feed
-        $heraRssCrawler = new HeraRssCrawler();
+        $heraRssCrawler = getHeraRssCrawler();
         $feedIsConsumable = $heraRssCrawler->checkIfConsumableFeed($data['feed_url']);
 
         if (!$feedIsConsumable) {
@@ -203,8 +203,7 @@ class FeedManagerController extends Controller
      */
     public function discover(Request $request)
     {
-        $heraRssCrawler = new HeraRssCrawler();
-        $feedUrls = $heraRssCrawler->discoverFeedUrls($request->get('url'));
+        $feedUrls = getHeraRssCrawler()->discoverFeedUrls($request->get('url'));
 
         return response()->json($feedUrls);
     }

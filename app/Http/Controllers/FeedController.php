@@ -52,7 +52,7 @@ class FeedController extends Controller
     public function markAllAsRead($categoryId = null)
     {
         $unreadFeedItems = $this->getUnreadFeedItems($categoryId)->get();
-        $minNumber = (int) config('feed.deferred_min_number');
+        $minNumber = (int)config('feed.deferred_min_number');
         if (config('feed.deferred_mark_as_read') && $unreadFeedItems->count() > $minNumber) {
             $unreadFeedItems->each(function (FeedItem $feedItem) {
                 MarkFeedItemAsRead::dispatch($feedItem);
@@ -105,10 +105,8 @@ class FeedController extends Controller
     {
         $dateFormat = 'Y-m-d';
 
-        $allFeedIds = auth()->user()->feeds()->pluck('id');
-
         $rules = [
-            'term' => ['required'],
+            'term' => ['required', 'min:4'],
             'feed_ids' => ['array'],
             'date_from' => ['nullable', 'date_format:' . $dateFormat],
             'date_till' => ['nullable', 'date_format:' . $dateFormat],
@@ -117,10 +115,11 @@ class FeedController extends Controller
         $validatedData = $request->validate($rules);
 
         $feeds = $this->getFeedsForSelect();
+        $allFeedIds = auth()->user()->feeds()->pluck('id');
 
         $term = $validatedData['term'];
         $feedIds = collect($validatedData['feed_ids'] ?? $allFeedIds)->map(function ($feedId) {
-            return (int) $feedId;
+            return (int)$feedId;
         })->toArray();
 
         // filter out invalid feed-IDs
@@ -130,22 +129,20 @@ class FeedController extends Controller
         $dateFrom = createDateFromStr($validatedData['date_from'], $dateFormat);
         $dateTill = createDateFromStr($validatedData['date_till'], $dateFormat);
 
-        $foundFeedItemIdsFromIndex = FeedItem::search($term)
-            ->orderBy('posted_at', 'desc')
-            ->keys();
-
-        $foundFeedItemsFromIndex = FeedItem::unhidden()
-            ->whereIn('id', $foundFeedItemIdsFromIndex)
-            ->whereIn('feed_id', $allFeedIds)
+        $foundFeedItems = auth()->user()->feedItems()
+            ->unhidden()
+            ->whereIn('feed_id', $selectedFeedIds)
             ->when($dateFrom, function ($query) use ($dateFrom) {
                 $query->whereDate('posted_at', '>=', $dateFrom);
             })
             ->when($dateTill, function ($query) use ($dateTill) {
                 $query->whereDate('posted_at', '<=', $dateTill);
             })
+            ->where('title', 'like', '%' . $term . '%')
+            ->with(['feed', 'categories'])
             ->paginate($this->getPerPage());
 
-        return view('feed.search_result', compact('feeds', 'foundFeedItemsFromIndex', 'selectedFeedIds'));
+        return view('feed.search_result', compact('feeds', 'foundFeedItems', 'selectedFeedIds'));
     }
 
     public function voteUp(Request $request, FeedItem $feedItem)

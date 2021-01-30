@@ -40,7 +40,7 @@ class CheckFeeds extends Command
      */
     public function handle()
     {
-        $heraRssCrawler = new HeraRssCrawler();
+        $heraRssCrawler = getHeraRssCrawler();
         $feeds = Feed::withTrashed()->get();
 
         $feeds->each(function (Feed $feed) use ($heraRssCrawler) {
