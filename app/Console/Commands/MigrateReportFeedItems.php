@@ -12,6 +12,8 @@ class MigrateReportFeedItems extends Command
 {
     private const DATE = 'Y-m-d';
 
+    private const LATEST_DAYS = 7;
+
     /**
      * The name and signature of the console command.
      *
@@ -45,17 +47,16 @@ class MigrateReportFeedItems extends Command
     {
         $latestOnly = $this->option('latest');
         $yesterday = now()->subDay()->endOfDay();
-        $latestDays = 7;
 
         $users = User::all();
 
-        $users->each(function (User $user) use ($latestOnly, $yesterday, $latestDays) {
+        $users->each(function (User $user) use ($latestOnly, $yesterday) {
             $this->line('----- ' . $user->name . ' -----');
 
-            $feedItems = $user->feedItems()->select(['user_id', 'posted_at', 'read_at']);
+            $feedItems = $user->feedItems()->unhidden()->select(['user_id', 'posted_at', 'read_at']);
 
             if ($latestOnly) {
-                $feedItems = $feedItems->whereDate('posted_at', '>=', now()->subDays($latestDays));
+                $feedItems = $feedItems->whereDate('posted_at', '>=', now()->subDays(static::LATEST_DAYS));
             }
 
             $feedItems = $feedItems
