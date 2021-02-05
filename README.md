@@ -19,8 +19,16 @@ Table of contents
 Upgrade notices
 ===============
 
+Upgrading from 2.* to 3.*
+-------------------------
+During the migration process all values of the columns `content` and `raw_json` of the `feed_items` table are being copied to a new table `feed_item_details` and then deleted from the `feed_items` table.
+
+*Please make a backup copy of the `feed_items` table.*
+
+No other breaking changes were introduced.
+
 Upgrading from 1.8.* to 2.0.*
----------------------------
+-----------------------------
 During the migration process all entries of the `feed_item_feed_item_category` table are being deleted.
 If you want to keep the data please export them as SQL statements first, so you can re-import them after migration is finished. 
 
