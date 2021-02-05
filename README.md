@@ -23,6 +23,8 @@ Upgrading from 2.* to 3.*
 -------------------------
 During the migration process all values of the columns `content` and `raw_json` of the `feed_items` table are being copied to a new table `feed_item_details` and then deleted from the `feed_items` table.
 
+The migration process might take a while, depending on how many feed items are present.
+
 *Please make a backup copy of the `feed_items` table.*
 
 No other breaking changes were introduced.
