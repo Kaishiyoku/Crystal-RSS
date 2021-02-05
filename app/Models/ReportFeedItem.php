@@ -12,16 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $total_count
  * @property int $read_count
  * @property \Illuminate\Support\Carbon $date
- * @property-write mixed $raw
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem whereReadCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem whereTotalCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ReportFeedItem whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem whereReadCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem whereTotalCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReportFeedItem whereUserId($value)
  * @mixin \Eloquent
  */
 class ReportFeedItem extends Model

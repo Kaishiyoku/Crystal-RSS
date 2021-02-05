@@ -16,7 +16,7 @@ class AddCategoryIdToFeeds extends Migration
     public function up()
     {
         Schema::table('feeds', function (Blueprint $table) {
-            $table->integer('category_id')->nullable()->unsigned();
+            $table->foreignId('category_id')->nullable();
         });
 
         // create a default category for each user to select this as the default one for existing feeds
@@ -36,7 +36,7 @@ class AddCategoryIdToFeeds extends Migration
         }
 
         Schema::table('feeds', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned()->change();
+            $table->foreignId('category_id')->change();
 
             $table->foreign('category_id')->references('id')->on('categories');
         });

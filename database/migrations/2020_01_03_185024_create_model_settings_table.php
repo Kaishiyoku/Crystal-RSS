@@ -10,7 +10,7 @@ class CreateModelSettingsTable extends Migration
     {
         if (!Schema::hasTable('model_settings')) {
             Schema::create('model_settings', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->bigInteger('model_id');
                 $table->string('model_type');
                 $table->json('settings');

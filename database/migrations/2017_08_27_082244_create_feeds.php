@@ -16,8 +16,8 @@ class CreateFeeds extends Migration
         Schema::defaultStringLength(191);
 
         Schema::create('feeds', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
             $table->string('feed_url');
             $table->string('title');
             $table->timestamp('last_checked_at');

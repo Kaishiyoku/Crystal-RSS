@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
+use LogicException;
 
 /**
  * App\Models\FeedItem
@@ -15,18 +15,17 @@ use Laravel\Scout\Searchable;
  * @property string $url
  * @property string $title
  * @property string|null $author
- * @property string|null $content
  * @property string|null $image_url
  * @property \Illuminate\Support\Carbon|null $posted_at
  * @property string $checksum
  * @property \Illuminate\Support\Carbon|null $read_at
- * @property string|null $raw_json
  * @property string $vote_status
  * @property \Illuminate\Support\Carbon|null $favorited_at
  * @property \Illuminate\Support\Carbon|null $hidden_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItemCategory[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\Feed $feed
+ * @property-read \App\Models\FeedItemDetail|null $feedItemDetail
  * @property-read \App\Models\User $user
  * @method static Builder|FeedItem favorited()
  * @method static Builder|FeedItem includesKeywords($user)
@@ -39,14 +38,12 @@ use Laravel\Scout\Searchable;
  * @method static Builder|FeedItem unread()
  * @method static Builder|FeedItem whereAuthor($value)
  * @method static Builder|FeedItem whereChecksum($value)
- * @method static Builder|FeedItem whereContent($value)
  * @method static Builder|FeedItem whereFavoritedAt($value)
  * @method static Builder|FeedItem whereFeedId($value)
  * @method static Builder|FeedItem whereHiddenAt($value)
  * @method static Builder|FeedItem whereId($value)
  * @method static Builder|FeedItem whereImageUrl($value)
  * @method static Builder|FeedItem wherePostedAt($value)
- * @method static Builder|FeedItem whereRawJson($value)
  * @method static Builder|FeedItem whereReadAt($value)
  * @method static Builder|FeedItem whereTitle($value)
  * @method static Builder|FeedItem whereUrl($value)
@@ -96,7 +93,7 @@ class FeedItem extends Model
         'read_at',
         'vote_status',
         'favorited_at',
-        'hidden_at'
+        'hidden_at',
     ];
 
     public function scopeRead($query)
@@ -128,6 +125,10 @@ class FeedItem extends Model
     {
         $filterKeywords = $user->filterKeywords;
 
+        if ($filterKeywords->isEmpty()) {
+            throw new LogicException('No keywords to filter.');
+        }
+
         $filterKeywords->each(function (FilterKeyword $filterKeyword, $i) use ($query) {
             $queryMethod = $i === 0 ? 'where' : 'orWhere';
 
@@ -135,11 +136,6 @@ class FeedItem extends Model
         });
 
         return $query;
-    }
-
-    public function getJson()
-    {
-        return json_decode($this->raw_json);
     }
 
     public function isDuplicate()
@@ -177,6 +173,11 @@ class FeedItem extends Model
     public function categories()
     {
         return $this->belongsToMany(FeedItemCategory::class);
+    }
+
+    public function feedItemDetail()
+    {
+        return $this->hasOne(FeedItemDetail::class);
     }
 
     private function getDuplicateBaseQuery()

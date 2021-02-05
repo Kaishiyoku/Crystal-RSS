@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
+use App\Models\FeedItemDetail;
 use App\Models\UpdateError;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -67,6 +68,7 @@ class StoreRssFeedItem implements ShouldQueue
         if ($this->rssFeedItem->getChecksum() && $this->rssFeedItem->getPermalink() && $this->rssFeedItem->getCreatedAt()) {
             try {
                 $existingFeedItem = $this->user->feedItems()->whereFeedId($this->feed->id)->whereChecksum($this->rssFeedItem->getChecksum())->first();
+                $feedItemDetail = optional($existingFeedItem)->feedItemDetail ?? new FeedItemDetail;
                 $newFeedItem = $existingFeedItem ?? new FeedItem();
 
                 if ($existingFeedItem === null) {
@@ -79,11 +81,14 @@ class StoreRssFeedItem implements ShouldQueue
                 $newFeedItem->author = $this->rssFeedItem->getAuthors()->first();
                 $newFeedItem->image_url = $this->rssFeedItem->getEnclosureUrl();
                 $newFeedItem->posted_at = $this->rssFeedItem->getCreatedAt();
-                $newFeedItem->content = $this->rssFeedItem->getContent();
-
-                $newFeedItem->raw_json = $this->rssFeedItem->jsonSerialize();
 
                 $this->user->feedItems()->save($newFeedItem);
+
+                $feedItemDetail->feed_item_id = $newFeedItem->id;
+                $feedItemDetail->content = $this->rssFeedItem->getContent();
+                $feedItemDetail->raw_json = $this->rssFeedItem->jsonSerialize();
+
+                $feedItemDetail->save();
 
                 if ($this->user->settings()->get('feed_items.mark_duplicates_as_read_automatically')
                     && ($newFeedItem->isDuplicate() || $newFeedItem->hasDuplicates())) {

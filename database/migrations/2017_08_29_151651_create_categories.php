@@ -16,8 +16,8 @@ class CreateCategories extends Migration
         Schema::defaultStringLength(191);
 
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
             $table->string('title');
 
             $table->timestamps();

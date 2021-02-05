@@ -14,17 +14,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property string $url
  * @property-read \App\Models\Feed $feed
- * @property-write mixed $raw
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereFeedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UpdateError whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereFeedId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UpdateError whereUserId($value)
  * @mixin \Eloquent
  */
 class UpdateError extends Model

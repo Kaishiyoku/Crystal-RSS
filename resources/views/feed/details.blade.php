@@ -67,7 +67,7 @@
         </div>
 
         <div>
-            {{ $feedItem->content }}
+            {{ $feedItem->feedItemDetail->content }}
         </div>
     </div>
 
@@ -164,7 +164,7 @@
         </div>
 
         <div>
-            <pre class="prettyprint">{{ json_encode($feedItem->getJson(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
+            <pre class="prettyprint">{{ json_encode($feedItem->feedItemDetail->getJson(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }}</pre>
         </div>
     </div>
 

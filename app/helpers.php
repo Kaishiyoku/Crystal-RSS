@@ -115,6 +115,12 @@ if (!function_exists('createDateFromStr')) {
 if (!function_exists('markFeedItemsAsHiddenByKeywords')) {
     function markFeedItemsAsHiddenByKeywords($user): int
     {
+        $filterKeywords = $user->filterKeywords;
+
+        if ($filterKeywords->isEmpty()) {
+            return 0;
+        }
+
         $feedItems = $user->feedItems()->unhidden()->includesKeywords($user)->whereNull('hidden_at')->get();
 
         $feedItems->each(function (FeedItem $feedItem) {

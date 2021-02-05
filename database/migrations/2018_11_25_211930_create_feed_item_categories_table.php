@@ -14,8 +14,8 @@ class CreateFeedItemCategoriesTable extends Migration
     public function up()
     {
         Schema::create('feed_item_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
             $table->string('title')->unique();
 
             $table->foreign('user_id')->references('id')->on('users');

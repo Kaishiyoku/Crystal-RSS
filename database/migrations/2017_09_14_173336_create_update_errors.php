@@ -14,9 +14,9 @@ class CreateUpdateErrors extends Migration
     public function up()
     {
         Schema::create('update_errors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('feed_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('feed_id');
             $table->text('content');
 
             $table->timestamp('created_at')->nullable();

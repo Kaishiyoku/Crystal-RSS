@@ -14,8 +14,8 @@ class CreateReportFeedItemsTable extends Migration
     public function up()
     {
         Schema::create('report_feed_items', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
             $table->integer('total_count')->unsigned();
             $table->integer('read_count')->unsigned();
             $table->date('date');

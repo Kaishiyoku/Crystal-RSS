@@ -14,8 +14,8 @@ class CreateFilterKeywordsTable extends Migration
     public function up()
     {
         Schema::create('filter_keywords', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
+            $table->id();
+            $table->foreignId('user_id');
             $table->string('value');
             $table->timestamps();
 
